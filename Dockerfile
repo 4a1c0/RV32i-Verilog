@@ -1,9 +1,9 @@
-FROM ubuntu:latest
+FROM alpine:latest
 WORKDIR /RiscV/
 COPY . /RiscV/
 RUN mkdir -p bin
-RUN apt-get update && apt-get install -y iverilog
-
+#RUN apt-get update && apt-get install -y iverilog
+RUN apk update && apk add iverilog
 
 #RUN iverilog -o bin/test tb/testbench.v 
 #CMD [ "bin/test" ]
