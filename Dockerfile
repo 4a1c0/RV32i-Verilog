@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 WORKDIR /RiscV/
 COPY . /RiscV/
 RUN mkdir -p bin
