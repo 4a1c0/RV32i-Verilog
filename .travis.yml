@@ -5,11 +5,6 @@ services:
 
 before_install:
   - docker build -t icarus-verilog .
-  - docker run -d icarus-verilog /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test;"
-  - docker ps -a
-  - docker run icarus-verilog /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test;"
-
-
 
 script:
-- bin/test
+  - docker run icarus-verilog /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test;"
