@@ -5,13 +5,13 @@
 
 
 `include "src/defines.vh"
-`include "src/dataMem.v"
-`include "src/controlUnit.v"
-`include "src/progMem.v"
-`include "src/programCounter.v"
-`include "src/regFile.v"
-`include "src/execution_unit/executionUnit.v"
-`include "src/multiplexer.v"
+`include "src/mem/mem_data.v"
+`include "src/core/core_control_unit.v"
+`include "src/mem/mem_prog.v"
+`include "src/core/core_program_counter.v"
+`include "src/core/core_regfile.v"
+`include "src/core/core_execution_unit/core_execution_unit.v"
+`include "src/core/core_multiplexer2x32.v"
 
 
 

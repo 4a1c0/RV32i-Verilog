@@ -33,9 +33,10 @@ module alu (
   input [`ALU_OP_WIDTH-1:0]       ALU_op,
   input [`REG_DATA_WIDTH-1:0]      s1,
   input [`REG_DATA_WIDTH-1:0]      s2,
-  output reg [`REG_DATA_WIDTH-1:0] d
+  output [`REG_DATA_WIDTH-1:0] d
             );
   wire [4:0] shift = s2[4:0];
+  reg [`REG_DATA_WIDTH-1:0] d;
   always @ *
     case(ALU_op)
       `ALU_OP_ADD:  d = s1 + s2;               // Add s2 to s1 and place the result into d

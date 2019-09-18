@@ -37,27 +37,29 @@ module regFile(
 	
 	// Internal
 	reg [`REG_DATA_WIDTH-1:0] regFile[0:`REG_DEPTH-1];
+
 	
 	// Code
 
 	
 	assign rs1 = (r1_num_read == `REG_ADDR_WIDTH'd0) ? `REG_DATA_WIDTH'd0 : regFile[r1_num_read];
+	assign rs2 = (r2_num_read == `REG_ADDR_WIDTH'd0) ? `REG_DATA_WIDTH'd0 : regFile[r2_num_read];
 	
 
 		
-	always @ (posedge clk or negedge rst_n)
-	begin : MEM_WRITE
-	integer j;
+	always @ (posedge clk or negedge rst_n) begin : REG
+		integer j;
 		// Async Reset
 		if ( !rst_n ) begin
 			for (j=0; j < `REG_DEPTH; j=j+1) begin
-				regFile[j] <= 0; //reset array
+				regFile[j] <= `REG_DATA_WIDTH'd0; //reset array
 			end
 		end 
 		// Write Operation (we = 1, cs = 1)
 		else if ( we ) begin
 			regFile[r_num_write] <= data_in;
 		end
+
 	end
 	
 endmodule

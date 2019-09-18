@@ -4,7 +4,7 @@
 
 `include "src/defines.vh"
 
-`include"src/core.v"
+`include"src/core/core.v"
 
 module tb();
 	
