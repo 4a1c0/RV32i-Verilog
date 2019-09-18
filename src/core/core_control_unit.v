@@ -1,3 +1,4 @@
+`default_nettype none
 `timescale 1ns/1ps
 
 `include "src/defines.vh"
@@ -125,7 +126,12 @@ module controlUnit (
 
         `OPCODE_U_LUI: begin
 
-              //s2 <= {imm20, 12'd0};
+        is_imm = 1'b1;
+        imm_val = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+
+        reg_addr = rd;
+
+        //s2 <= {imm20, 12'd0};
 
           //s2_imm <= 1'b1;
 
@@ -187,7 +193,7 @@ module controlUnit (
 
       `OPCODE_I_IMM: begin
             is_imm = 1'b1;
-            imm_val = imm12;
+            imm_val = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
             reg_r = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;
@@ -254,3 +260,4 @@ module controlUnit (
 
  
 endmodule
+`default_nettype wire
