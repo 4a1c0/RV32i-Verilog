@@ -4,9 +4,11 @@ services:
   - docker
 
 before_install:
-- docker pull pauapplecat/icarus-verilog:latest
-- docker run pauapplecat/icarus-verilog:latest /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test"
-- docker ps -a
+  - docker build -t icarus-verilog .
+  - docker run -d icarus-verilog /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test;"
+  - docker ps -a
+  - docker run icarus-verilog /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test;"
+
 
 
 script:
