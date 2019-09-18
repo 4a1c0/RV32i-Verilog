@@ -1,0 +1,13 @@
+language: verilog
+
+services:
+  - docker
+
+before_install:
+- docker pull pauapplecat/icarus-verilog:latest
+- docker run pauapplecat/icarus-verilog:latest /bin/sh -c "iverilog -o bin/test tb/testbench.v ; bin/test"
+- docker ps -a
+
+
+script:
+- bin/test
