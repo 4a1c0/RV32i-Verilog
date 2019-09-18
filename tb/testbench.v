@@ -82,7 +82,7 @@ always @ (negedge clk) begin
 		// $display("reg3 = %d", Core_inst.reg_file_inst.regFile[3]);
 		// $display("rs2_exec_unit_t = %d", Core_inst.rs2_exec_unit_t);
 		// $display("ALU_op_t = %d", Core_inst.ALU_op_t);
-		// $display("is_imm_t = %d", Core_inst.is_imm_t);
+		$display("is_imm_t = %d", Core_inst.is_imm_t);
 		// $display("r_num_write_reg_file = %d", Core_inst.r_num_write_reg_file);
 
 end
