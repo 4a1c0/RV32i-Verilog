@@ -194,6 +194,12 @@ module controlUnit (
 
         `OPCODE_I_LOAD: begin  // Loads
 
+
+
+            case(funct3)
+                0: ALU_op = 3'd0;
+            endcase
+
       
 
         end
@@ -201,6 +207,11 @@ module controlUnit (
       
 
         `OPCODE_S_STORES: begin  // Stores
+
+
+            case(funct3)
+                0: ALU_op = 3'd0;
+            endcase
 
       
 
