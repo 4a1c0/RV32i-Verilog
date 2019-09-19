@@ -8,10 +8,10 @@
 module dataMem(
     rst_n	,  // Reset Neg
     we		,  // Write Enable
-    oe		,  // Output Enable
     clk		,  // Clk
     addr	,  // Address
-    data	  // Input Data
+    data_in	,  // Input Data
+    data_out	   // Output Data
 );
  
     
@@ -20,16 +20,17 @@ module dataMem(
     // Inputs
     input rst_n;
     input we;  
-    input oe;  
     input clk;  
     
     input [`MEM_ADDR_WIDTH-1:0]	addr;
-    
-    inout [`MEM_DATA_WIDTH-1:0]	data;
+    input [`MEM_DATA_WIDTH-1:0]	data_in;
+
+    output [`MEM_DATA_WIDTH-1:0] data_out;
 
     
     // Internal
     reg [`MEM_DATA_WIDTH-1:0] dataArray[0:`MEM_DEPTH-1];
+    reg [`MEM_DATA_WIDTH-1:0] data_out;
     //reg [`MEM_DATA_WIDTH-1:0] data ;
     
     // Code
@@ -37,7 +38,6 @@ module dataMem(
     // Tristate output
     //assign data_out = (cs && oe && !we) ? data_out : MEM_DATA_WIDTH'bz;
     
-    assign data = (!we)? dataArray[addr] : data;
     
     
     always @ (posedge clk or negedge rst_n)
@@ -51,13 +51,12 @@ module dataMem(
         end 
         // Write Operation (we = 1, cs = 1)
         else if ( we ) begin
-            dataArray[addr] = data;
+            dataArray[addr] <= data_in;
         end
         // Read Operation
-            //to assign
-        // else if ( !we && oe ) begin
-        //     data = dataArray[addr];
-        // end
+        else if ( !we ) begin
+            data_out <= dataArray[addr];
+        end
     end
     
     

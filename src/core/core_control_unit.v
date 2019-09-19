@@ -6,9 +6,12 @@
 // Module Declaration
 module controlUnit (
     instruction,
+    pc_i,
     ALU_op,
-    is_imm,  //execution unit imm
-    imm_val,  //execution unit imm val
+    is_imm_rs1_o,  //execution unit imm rs1
+    imm_val_rs1_o,  //execution unit imm val rs1
+    is_imm_rs2_o,  //execution unit imm rs2
+    imm_val_rs2_o,  //execution unit imm val rs2
     is_load_store,  // execution_unit 
     mem_w,
     mem_r,
@@ -20,9 +23,12 @@ module controlUnit (
     );
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
+    input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [`ALU_OP_WIDTH-1:0] ALU_op;
-    output is_imm;
-    output [`MEM_DATA_WIDTH-1:0] imm_val;
+    output is_imm_rs1_o;
+    output is_imm_rs2_o;
+    output [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
+    output [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     output is_load_store;
     output mem_w;
     output mem_r;
@@ -33,10 +39,12 @@ module controlUnit (
     output [`REG_ADDR_WIDTH-1:0]reg_addr;
 
 
-    reg is_imm;
+    reg is_imm_rs1_o;
+    reg is_imm_rs2_o;
 
     reg reg_r;
-    reg [`MEM_DATA_WIDTH-1:0] imm_val;
+    reg [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
+    reg [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     reg [`REG_ADDR_WIDTH-1:0]r1_addr;
     reg [`REG_ADDR_WIDTH-1:0]r2_addr;
     reg [`REG_ADDR_WIDTH-1:0]reg_addr;
@@ -93,7 +101,8 @@ module controlUnit (
 
   
     always@(*) begin
-        is_imm = 1'b0;
+        is_imm_rs1_o = 1'b0;
+        is_imm_rs2_o = 1'b0;
 
     
 
@@ -124,76 +133,84 @@ module controlUnit (
   
     case(opcode)
 
-        `OPCODE_U_LUI: begin
+        `OPCODE_U_LUI: begin  // Set and sign extend the 20-bit immediate (shited 12 bits left) and zero the bottom 12 bits into rd
 
-        is_imm = 1'b1;
-        imm_val = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+            reg_r = 1'b1;
+            reg_addr = rd;
 
-        reg_addr = rd;
+            ALU_op = `ALU_OP_ADD;
+            r1_addr = 5'd0;
 
-        //s2 <= {imm20, 12'd0};
-
-          //s2_imm <= 1'b1;
-
-          //s1_imm <= 1'b1;
-
-      end
+        end
 
       
 
-      `OPCODE_U_AUIPC: begin
+        `OPCODE_U_AUIPC: begin  // Place the PC plus the 20-bit signed immediate (shited 12 bits left) into rd (used before JALR)
 
-          //s1 <= {imm20, 12'd0};
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
 
-          //s2 <= pc;
 
-      end
+            // Need to output 2 imm vals of the control unit to add the PC and a imm val
+
+            is_imm_rs1_o = 1'b1;
+            imm_val_rs1_o = pc_i;
+
+            ALU_op = `ALU_OP_ADD;
+
+            reg_r = 1'b1;
+            reg_addr = rd;
+
+
+        end
 
       
 
-      `OPCODE_J_JAL: begin
+        `OPCODE_J_JAL: begin
 
           //pc <= {{11{imm20j[19]}}, imm20j, 1'b0};
 
-      end
+        end
 
       
 
-      `OPCODE_I_JALR: begin
+        `OPCODE_I_JALR: begin
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_B_BRANCH: begin
+        `OPCODE_B_BRANCH: begin
 
       
 
-      end
+         end
 
       
 
-      `OPCODE_I_LOAD: begin
+        `OPCODE_I_LOAD: begin  // Loads
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_S_STORES: begin
+        `OPCODE_S_STORES: begin  // Stores
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_I_IMM: begin
-            is_imm = 1'b1;
-            imm_val = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
+        `OPCODE_I_IMM: begin
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
             reg_r = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;
@@ -210,11 +227,11 @@ module controlUnit (
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_R_ALU: begin
+        `OPCODE_R_ALU: begin
             reg_r = 1'b1;
             r1_addr = rs1;
             r2_addr = rs2;
@@ -232,25 +249,25 @@ module controlUnit (
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_I_FENCE: begin
+        `OPCODE_I_FENCE: begin
 
       
 
-      end
+        end
 
       
 
-      `OPCODE_I_SYSTEM: begin
+        `OPCODE_I_SYSTEM: begin
 
       
 
       
 
-      end
+        end
 
       
 
