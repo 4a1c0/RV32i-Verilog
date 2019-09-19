@@ -33,7 +33,7 @@ module core(
     output we_mem_data_o;
     output [ADDR_WIDTH-1 : 0] addr_mem_data_o;
     input [DATA_WITDTH-1 : 0] val_mem_data_i;
-    input [DATA_WITDTH-1 : 0] val_mem_data_o;
+    output [DATA_WITDTH-1 : 0] val_mem_data_o;
     output [ADDR_WIDTH-1 : 0] addr_mem_prog_o;
     input [DATA_WITDTH-1 : 0] val_mem_prog_i;
 
@@ -56,7 +56,6 @@ module core(
     wire is_load_store_t;
     wire is_branch_t;
     wire mem_w_t;
-    wire mem_r_t;
     wire mem_to_reg_t;
     //wire reg_r_t;
     wire [`REG_ADDR_WIDTH-1:0]r1_addr_t;
@@ -78,6 +77,8 @@ module core(
     wire [`REG_DATA_WIDTH-1:0]	rs2_exec_unit_t;
     wire [`REG_DATA_WIDTH-1:0]	rs1_exec_unit_t;
 
+    wire [`REG_DATA_WIDTH-1:0]	data_out_exec;
+
 
     controlUnit controlUnit_inst(
         .instruction (val_mem_prog_i),
@@ -89,7 +90,6 @@ module core(
         .imm_val_rs2_o (imm_val_rs2),
         .is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (mem_w_t),
-        .mem_r (mem_r_t),
         .mem_to_reg (mem_to_reg_t),
         .reg_r (we_reg_file),
         .r1_addr (r1_num_read_reg_file),
@@ -121,7 +121,7 @@ module core(
         .ALU_op(ALU_op_t),
         .s1(rs1_exec_unit_t),
         .s2(rs2_exec_unit_t),
-        .d(data_in_reg_file),//data_in_reg_file),
+        .d(data_out_exec),//data_in_reg_file),
         .is_branch(is_branch_t),
         .is_loadstore(is_load_store_t)
     );
@@ -138,6 +138,13 @@ module core(
         .b(imm_val_rs2),
         .out(rs2_exec_unit_t),
         .select(is_imm_rs2)
+    );
+
+    multiplexer2 mux_exec_mem_inst(
+        .a(data_out_exec),
+        .b(val_mem_data_i),
+        .out(data_in_reg_file),
+        .select(mem_to_reg_t)
     );
 
 
