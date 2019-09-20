@@ -30,8 +30,8 @@ core core_inst(
         .rst_n (rst_n),
         .we_mem_data_o (we_mem_data),
         .addr_mem_data_o (addr_mem_data),
-        .val_mem_data_i (val_mem_data_read),
-        .val_mem_data_o (val_mem_data_write),
+        .val_mem_data_read_i (val_mem_data_read),
+        .val_mem_data_write_o (val_mem_data_write),
         .addr_mem_prog_o (addr_mem_prog),
         .val_mem_prog_i (val_mem_prog)
     );

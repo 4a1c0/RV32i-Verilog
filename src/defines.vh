@@ -118,4 +118,17 @@
 `define ALU_OP_OR 		8
 `define ALU_OP_AND		9
 
+// LIS_OPERATIONS
+`define LIS_OP_WIDTH		3
+
+`define LIS_LB		0		
+`define LIS_LH		1
+`define LIS_LW		2
+`define LIS_LBU 		3
+`define LIS_LHU		4
+`define LIS_OP_XOR		5
+`define LIS_OP_SRL		6
+`define LIS_OP_SRA		7
+
+
 `endif

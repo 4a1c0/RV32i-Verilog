@@ -18,34 +18,34 @@ module core(
     rst_n,
     we_mem_data_o,
     addr_mem_data_o,
-    val_mem_data_i,
-    val_mem_data_o,
+    val_mem_data_read_i,
+    val_mem_data_write_o,
     addr_mem_prog_o,
     val_mem_prog_i
     );
     
     parameter ADDR_WIDTH = 10;
-    parameter DATA_WITDTH = 32;
+    parameter DATA_WIDTH = 32;
 
     input 	clk;
     input 	rst_n;
 
     output we_mem_data_o;
     output [ADDR_WIDTH-1 : 0] addr_mem_data_o;
-    input [DATA_WITDTH-1 : 0] val_mem_data_i;
-    output [DATA_WITDTH-1 : 0] val_mem_data_o;
+    input [DATA_WIDTH-1 : 0] val_mem_data_read_i;
+    output [DATA_WIDTH-1 : 0] val_mem_data_write_o;
     output [ADDR_WIDTH-1 : 0] addr_mem_prog_o;
-    input [DATA_WITDTH-1 : 0] val_mem_prog_i;
+    input [DATA_WIDTH-1 : 0] val_mem_prog_i;
 
 
     wire is_load_store; 
     //wire we_dataMem;
     //wire oe_DataMem;
     //wire[ADDR_WIDTH-1 : 0] addr_DataMem;
-    //wire[DATA_WITDTH-1 : 0] data_DataMem;
+    //wire[DATA_WIDTH-1 : 0] data_DataMem;
 
     //wire oe_progmem;
-    //wire[DATA_WITDTH-1 : 0] instruction_progmem;
+    //wire[DATA_WIDTH-1 : 0] instruction_progmem;
     //wire[ADDR_WIDTH-1 : 0] addr_progMem;
 
     wire [`ALU_OP_WIDTH-1:0] ALU_op_t;
@@ -77,7 +77,7 @@ module core(
     wire [`REG_DATA_WIDTH-1:0]	rs2_exec_unit_t;
     wire [`REG_DATA_WIDTH-1:0]	rs1_exec_unit_t;
 
-    wire [`REG_DATA_WIDTH-1:0]	data_out_exec;
+
 
 
     controlUnit controlUnit_inst(
@@ -121,7 +121,10 @@ module core(
         .ALU_op(ALU_op_t),
         .s1(rs1_exec_unit_t),
         .s2(rs2_exec_unit_t),
-        .d(data_out_exec),//data_in_reg_file),
+        .d(data_in_reg_file), // data_out_exec),//data_in_reg_file),
+        .val_mem_data_write_o (val_mem_data_write_o),
+        .val_mem_data_read_i (val_mem_data_read_i),
+        .addr_mem_data_o (addr_mem_data_o),
         .is_branch(is_branch_t),
         .is_loadstore(is_load_store_t)
     );
@@ -140,12 +143,11 @@ module core(
         .select(is_imm_rs2)
     );
 
-    multiplexer2 mux_exec_mem_inst(
-        .a(data_out_exec),
-        .b(val_mem_data_i),
-        .out(data_in_reg_file),
-        .select(mem_to_reg_t)
-    );
+    // multiplexer2 mux_exec_mem_inst(
+    //     .a(val_mem_data_write_o),
+    //     .b(val_mem_data_read_i),
+    //     .select(mem_to_reg_t)
+    // );
 
 
 

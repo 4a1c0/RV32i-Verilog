@@ -146,8 +146,6 @@ module controlUnit (
 // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
 // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
 
-// lwu        "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
-
 // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
 // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
 // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
@@ -233,7 +231,7 @@ module controlUnit (
                 `FUNCT3_LH: ;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
                 `FUNCT3_LW: ;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
                 `FUNCT3_LBU: ;  // lbu        "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
-                `FUNCT3_LHU: ;  // lhu        "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
+                `FUNCT3_LHU: ;  // lhu        "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
                                 
             endcase
 
