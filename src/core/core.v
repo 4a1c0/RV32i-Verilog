@@ -106,7 +106,7 @@ module core(
         .rst_n (rst_n),
         .clk (clk),
         .is_branch_i (is_branch_t),
-        .new_addr_i (new_pc),
+        .new_addr_i (new_pc[ADDR_WIDTH-1:0]),
         .addr (addr_mem_prog_o)
     );
 

@@ -153,6 +153,7 @@ module controlUnit (
 
 // jal        "Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd"
 // jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
+
 // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
 // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
 // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
@@ -232,6 +233,14 @@ module controlUnit (
 
         `OPCODE_B_BRANCH: begin
 
+
+
+            // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
+            // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
+            // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
+            // bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
+            // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
+            // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
       
 
          end
