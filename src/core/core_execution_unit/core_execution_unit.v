@@ -12,10 +12,10 @@ module executionUnit(
 		d,
 		is_branch,
 		is_loadstore,
-        val_mem_data_write_o,
-        val_mem_data_read_i,
-        addr_mem_data_o
-    );
+				val_mem_data_write_o,
+				val_mem_data_read_i,
+				addr_mem_data_o
+		);
 
 	input [`ALU_OP_WIDTH-1:0]       ALU_op;
 	input [`REG_DATA_WIDTH-1:0]      s1;
@@ -26,7 +26,7 @@ module executionUnit(
     output[`MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
 
 	input       is_branch;
-	input		    is_loadstore;
+	input		is_loadstore;
 
     wire [`REG_DATA_WIDTH-1:0]      alu_o;
     wire [`REG_DATA_WIDTH-1:0]      mem_o;

@@ -106,6 +106,7 @@ module controlUnit (
         is_imm_rs2_o = 1'b0;
         mem_w = 1'b0;
         mem_to_reg = 1'b0;
+        is_load_store = 1'b0;
 
     
 
