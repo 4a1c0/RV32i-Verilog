@@ -78,7 +78,7 @@ module core(
     wire [`REG_DATA_WIDTH-1:0]	rs2_exec_unit_t;
     wire [`REG_DATA_WIDTH-1:0]	rs1_exec_unit_t;
 
-    output [DATA_WIDTH-1 : 0] new_pc;
+    wire [DATA_WIDTH-1 : 0] new_pc;
 
 
 
