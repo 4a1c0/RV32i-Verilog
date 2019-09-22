@@ -78,6 +78,8 @@ module core(
     wire [`REG_DATA_WIDTH-1:0]	rs2_exec_unit_t;
     wire [`REG_DATA_WIDTH-1:0]	rs1_exec_unit_t;
 
+    output [DATA_WIDTH-1 : 0] new_pc;
+
 
 
 
@@ -96,12 +98,15 @@ module core(
         .reg_r (we_reg_file),
         .r1_addr (r1_num_read_reg_file),
         .r2_addr (r2_num_read_reg_file),
-        .reg_addr (r_num_write_reg_file)
+        .reg_addr (r_num_write_reg_file),
+        .is_branch_o (is_branch_t)
     );
 
     programCounter program_counter_inst (
         .rst_n (rst_n),
         .clk (clk),
+        .is_branch_i (is_branch_t),
+        .new_addr_i (new_pc),
         .addr (addr_mem_prog_o)
     );
 
@@ -129,8 +134,9 @@ module core(
         .val_mem_data_write_o (val_mem_data_write_o),
         .val_mem_data_read_i (val_mem_data_read_i),
         .addr_mem_data_o (addr_mem_data_o),
-        .is_branch (is_branch_t),
-        .is_loadstore (is_load_store_t)
+        .is_branch_i (is_branch_t),
+        .is_loadstore (is_load_store_t),
+        .new_pc_o (new_pc)
     );
 
     multiplexer2 mux_rs1_exec_inst(

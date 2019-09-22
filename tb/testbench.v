@@ -44,7 +44,8 @@ module tb();
 		//test_lui;
 		//test_auipc;
         //test_load;
-        test_store;
+        //test_store;
+        test_jal;
 
 		rst_n		= 1'b1;
 		#1100
@@ -105,6 +106,15 @@ task test_store;
 
    encodeLW(5'h0, 5'h5, 12'd10);
   end
+endtask
+
+task test_jal;  // Not sure if the JAL works as intended
+    begin
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'hFFF); 
+        encodeAddi(5'h0, 5'h4, 12'hFFF);
+        encodeJal(5'h5, {20'hFFFF9});
+    end
 endtask
 
 task encodeAddi;
@@ -237,7 +247,7 @@ task encodeSH;
     end
  endtask
 
- task encodeSW;
+task encodeSW;
     input [4:0] rs1;
     input [4:0] rs2;
     input [11:0] offset;
@@ -247,7 +257,18 @@ task encodeSH;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
- endtask
+endtask
+
+task encodeJal;
+    input [4:0] rd;
+    input [20:0] immediate;
+    begin
+        instruction = {immediate[20], immediate[10:1], immediate[11], immediate[19:12], rd, `OPCODE_J_JAL};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
 
 
 always @ (negedge clk) begin

@@ -15,18 +15,18 @@ module controlUnit (
     imm_val_rs2_o,  //execution unit imm val rs2
     is_load_store,  // execution_unit 
     mem_w,  // mem_write
-
     mem_to_reg,
     reg_r,
     r1_addr,
     r2_addr,
-    reg_addr
+    reg_addr,
+    is_branch_o  // branch indicator
     );
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
     input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [`ALU_OP_WIDTH-1:0] ALU_op;
-    output [`LIS_OP_WIDTH-1:0]       LIS_op;
+    output [`LIS_OP_WIDTH-1:0] LIS_op;
     output is_imm_rs1_o;
     output is_imm_rs2_o;
     output [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
@@ -38,6 +38,7 @@ module controlUnit (
     output [`REG_ADDR_WIDTH-1:0]r1_addr;
     output [`REG_ADDR_WIDTH-1:0]r2_addr;
     output [`REG_ADDR_WIDTH-1:0]reg_addr;
+    output is_branch_o;  // branch indicator
 
 
     reg is_imm_rs1_o;
@@ -94,7 +95,9 @@ module controlUnit (
 
     reg[19:0] imm20j;
 
+    // Type J
 
+    reg is_branch_o;
 
     // Decode
 
@@ -113,6 +116,7 @@ module controlUnit (
         mem_to_reg = 1'b0;
         is_load_store = 1'b0;
         reg_r = 1'b0;
+        is_branch_o = 1'b0;
         
 
     
@@ -156,10 +160,6 @@ module controlUnit (
 // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
 // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
 
-// sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-// sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-// sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-
 
 // fence      "Order device I/O and memory accesses viewed by other threads and devices"
 // fence.i    "Synchronize the instruction and data streams
@@ -199,9 +199,24 @@ module controlUnit (
 
       
 
-        `OPCODE_J_JAL: begin
+        `OPCODE_J_JAL: begin  // Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd
 
           //pc <= {{11{imm20j[19]}}, imm20j, 1'b0};
+            is_imm_rs1_o = 1'b1;
+            imm_val_rs1_o = pc_i;
+
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
+
+            reg_r = 1'b1;
+            reg_addr = rd;
+
+            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
+
+
+            is_branch_o = 1'b1;
+
+                
 
         end
 
