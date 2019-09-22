@@ -49,13 +49,14 @@ module core(
     //wire[ADDR_WIDTH-1 : 0] addr_progMem;
 
     wire [`ALU_OP_WIDTH-1:0] ALU_op_t;
+    wire [`LIS_OP_WIDTH-1:0] LIS_op_t;
     wire is_imm_rs2;
     wire [`MEM_DATA_WIDTH-1:0] imm_val_rs2;
     wire is_imm_rs1;
     wire [`MEM_DATA_WIDTH-1:0] imm_val_rs1;
     wire is_load_store_t;
     wire is_branch_t;
-    wire mem_w_t;
+    //wire mem_w_t;
     wire mem_to_reg_t;
     //wire reg_r_t;
     wire [`REG_ADDR_WIDTH-1:0]r1_addr_t;
@@ -84,12 +85,13 @@ module core(
         .instruction (val_mem_prog_i),
         .pc_i (addr_mem_prog_o),
         .ALU_op (ALU_op_t),
+        .LIS_op (LIS_op_t),
         .is_imm_rs1_o(is_imm_rs1),  //execution unit imm rs1
         .imm_val_rs1_o(imm_val_rs1),  //execution unit imm val rs1
         .is_imm_rs2_o (is_imm_rs2),  //execution unit imm rs2
         .imm_val_rs2_o (imm_val_rs2),
         .is_load_store (is_load_store_t),  // execution_unit 
-        .mem_w (mem_w_t),
+        .mem_w (we_mem_data_o),
         .mem_to_reg (mem_to_reg_t),
         .reg_r (we_reg_file),
         .r1_addr (r1_num_read_reg_file),
@@ -118,15 +120,16 @@ module core(
 
 //assign data_in_reg_file = 32'h55555555;
     executionUnit exec_unit_inst(
-        .ALU_op(ALU_op_t),
-        .s1(rs1_exec_unit_t),
-        .s2(rs2_exec_unit_t),
-        .d(data_in_reg_file), // data_out_exec),//data_in_reg_file),
+        .ALU_op (ALU_op_t),
+        .LIS_op (LIS_op_t),
+        .s1 (rs1_exec_unit_t),
+        .s2 (rs2_exec_unit_t),
+        .d (data_in_reg_file), // data_out_exec),//data_in_reg_file),
         .val_mem_data_write_o (val_mem_data_write_o),
         .val_mem_data_read_i (val_mem_data_read_i),
         .addr_mem_data_o (addr_mem_data_o),
-        .is_branch(is_branch_t),
-        .is_loadstore(is_load_store_t)
+        .is_branch (is_branch_t),
+        .is_loadstore (is_load_store_t)
     );
 
     multiplexer2 mux_rs1_exec_inst(

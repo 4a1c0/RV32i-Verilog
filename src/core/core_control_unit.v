@@ -8,6 +8,7 @@ module controlUnit (
     instruction,
     pc_i,
     ALU_op,
+    LIS_op,
     is_imm_rs1_o,  //execution unit imm rs1
     imm_val_rs1_o,  //execution unit imm val rs1
     is_imm_rs2_o,  //execution unit imm rs2
@@ -25,6 +26,7 @@ module controlUnit (
     input [`MEM_DATA_WIDTH-1:0] instruction;
     input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [`ALU_OP_WIDTH-1:0] ALU_op;
+    output [`LIS_OP_WIDTH-1:0]       LIS_op;
     output is_imm_rs1_o;
     output is_imm_rs2_o;
     output [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
@@ -99,6 +101,7 @@ module controlUnit (
 
 
   reg[`ALU_OP_WIDTH-1:0] ALU_op;
+  reg[`LIS_OP_WIDTH-1:0] LIS_op;
 
   
     always@(*) begin
@@ -107,6 +110,8 @@ module controlUnit (
         mem_w = 1'b0;
         mem_to_reg = 1'b0;
         is_load_store = 1'b0;
+        reg_r = 1'b0;
+        
 
     
 
@@ -217,22 +222,25 @@ module controlUnit (
         `OPCODE_I_LOAD: begin  // Loads
 
             is_load_store = 1'b1;
-            mem_to_reg = 1'b1;
+            mem_to_reg = 1'b1;  // not in use
 
             reg_r = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;
 
+            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
+
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
+
 
 
             case(funct3)
-                `FUNCT3_LB: begin  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                    
-                end
-                `FUNCT3_LH: ;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                `FUNCT3_LW: ;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                `FUNCT3_LBU: ;  // lbu        "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
-                `FUNCT3_LHU: ;  // lhu        "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
+                `FUNCT3_LB: LIS_op = `LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                `FUNCT3_LH: LIS_op = `LIS_LH;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                `FUNCT3_LW: LIS_op = `LIS_LW;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                `FUNCT3_LBU: LIS_op = `LIS_LBU;  // lbu        "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
+                `FUNCT3_LHU: LIS_op = `LIS_LHU;  // lhu        "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
                                 
             endcase
 

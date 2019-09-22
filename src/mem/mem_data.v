@@ -30,13 +30,13 @@ module dataMem(
     
     // Internal
     reg [`MEM_DATA_WIDTH-1:0] dataArray[0:`MEM_DEPTH-1];
-    reg [`MEM_DATA_WIDTH-1:0] data_out;
+    //reg [`MEM_DATA_WIDTH-1:0] data_out;
     //reg [`MEM_DATA_WIDTH-1:0] data ;
     
     // Code
     
     // Tristate output
-    //assign data_out = (cs && oe && !we) ? data_out : MEM_DATA_WIDTH'bz;
+    assign data_out = (!we) ? dataArray[addr] : `MEM_DATA_WIDTH'bz;
     
     
     
@@ -54,9 +54,9 @@ module dataMem(
             dataArray[addr] <= data_in;
         end
         // Read Operation
-        else if ( !we ) begin
-            data_out <= dataArray[addr];
-        end
+        // else if ( !we ) begin
+        //     data_out <= dataArray[addr];
+        // end
     end
     
     

@@ -7,6 +7,7 @@
 
 module executionUnit(
 		ALU_op,
+		LIS_op,
 		s1,
 		s2,
 		d,
@@ -18,6 +19,7 @@ module executionUnit(
 		);
 
 	input [`ALU_OP_WIDTH-1:0]       ALU_op;
+	input [`LIS_OP_WIDTH-1:0]       LIS_op;
 	input [`REG_DATA_WIDTH-1:0]      s1;
 	input [`REG_DATA_WIDTH-1:0]      s2;
 	output[`REG_DATA_WIDTH-1:0]      d;
@@ -31,7 +33,7 @@ module executionUnit(
     wire [`REG_DATA_WIDTH-1:0]      alu_o;
     wire [`REG_DATA_WIDTH-1:0]      mem_o;
 
-    assign d = (is_loadstore == 1'b0) ? alu_o: mem_o;  // mux at the end
+    assign d = (is_loadstore == 1'b0) ? alu_o : mem_o;  // mux at the end
 
 	alu ALU (
 		.ALU_op    (ALU_op),
@@ -41,7 +43,7 @@ module executionUnit(
 	);
 
     lis LIS(
-        .LIS_op (ALU_op),
+        .LIS_op (LIS_op),
         .val_mem_write_i (s2),
         .val_mem_write_o(val_mem_data_write_o),
         .val_mem_read_i(val_mem_data_read_i),
