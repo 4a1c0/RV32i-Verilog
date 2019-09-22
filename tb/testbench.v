@@ -80,11 +80,11 @@ endtask
 task test_load;
     begin
         pc = 32'b0;
-        //encodeLoadW(5'h0, 5'h3, 12'h0);
-        //encodeLoadH(5'h0, 5'h4, 12'h1);
-        //encodeLoadHU(5'h0, 5'h5, 12'h1);
-        encodeLoadB(5'h0, 5'h6, 12'h1);
-        //encodeLoadBU(5'h0, 5'h7, 12'h1);
+        encodeLB(5'h0, 5'h3, 12'h1);
+        encodeLH(5'h0, 5'h4, 12'h1);
+        encodeLW(5'h0, 5'h5, 12'h1);
+        encodeLHU(5'h0, 5'h6, 12'h1);
+        encodeLBU(5'h0, 5'h7, 12'h1);
     end
  endtask
 
@@ -134,7 +134,7 @@ task encodeAuipc;
     end
 endtask
 
- task encodeLoadB;
+task encodeLB;
     input [4:0] rs1;
     input [4:0] rd;
     input [11:0] immediate;
@@ -146,10 +146,58 @@ endtask
     end
  endtask
 
+task encodeLH;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, `FUNCT3_LH, rd, `OPCODE_I_LOAD};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
+ task encodeLW;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, `FUNCT3_LW, rd, `OPCODE_I_LOAD};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
+ task encodeLBU;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, `FUNCT3_LBU, rd, `OPCODE_I_LOAD};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
+  task encodeLHU;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, `FUNCT3_LHU, rd, `OPCODE_I_LOAD};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
 
 always @ (negedge clk) begin
 		// $display("reg5 = %d\npc = %d\ninst = %b", package_inst.reg_file_inst.regFile[5], package_inst.addr_progMem, package_inst.instruction_progmem);
-		$display("reg6 = %d", package_inst.core_inst.reg_file_inst.regFile[6]);
+		$display("reg5 = %d", package_inst.core_inst.reg_file_inst.regFile[5]);
 		// $display("rs2_exec_unit_t = %d", package_inst.rs2_exec_unit_t);
 		// $display("ALU_op_t = %d", package_inst.ALU_op_t);
 		//$display("is_imm_t = %d", package_inst.is_imm_t);
