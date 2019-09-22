@@ -53,57 +53,59 @@ module controlUnit (
     reg [`REG_ADDR_WIDTH-1:0]r2_addr;
     reg [`REG_ADDR_WIDTH-1:0]reg_addr;
   
- // Temp
+    // Temp
 
     wire[`MEM_DATA_WIDTH-1:0] instruction;
 
-  
+    
 
-  reg[6:0]	opcode; 
+    reg[6:0]	opcode; 
 
-  
+    
 
-  //  Type R
+    //  Type R
 
-  reg[2:0]	funct3;
+    reg[2:0]	funct3;
 
-  reg[6:0]	funct7;
+    reg[6:0]	funct7;
 
-  
+    
 
-  //  Type U
+    //  Type U
 
-  reg[19:0]	imm20;
+    reg[19:0]	imm20;
 
-  
+    
 
-  // Type I
+    // Type I
 
-  reg[11:0] imm12;
-  reg is_load_store;
+    reg[11:0] imm12;
+    reg is_load_store;
 
-  
+    // Type S
 
-  // Type B
+    reg [11:0] imm12s;
 
-  
+    // Type B
 
-  reg[11:0] imm12b;
+    
 
-  reg[19:0] imm20j;
+    reg[11:0] imm12b;
 
-
-
-  // Decode
-
-  reg[4:0]	rs1, rs2, rd;
+    reg[19:0] imm20j;
 
 
 
-  reg[`ALU_OP_WIDTH-1:0] ALU_op;
-  reg[`LIS_OP_WIDTH-1:0] LIS_op;
+    // Decode
 
-  
+    reg[4:0]	rs1, rs2, rd;
+
+
+
+    reg[`ALU_OP_WIDTH-1:0] ALU_op;
+    reg[`LIS_OP_WIDTH-1:0] LIS_op;
+
+    
     always@(*) begin
         is_imm_rs1_o = 1'b0;
         is_imm_rs2_o = 1'b0;
@@ -132,6 +134,8 @@ module controlUnit (
         imm20j 	= {instruction[31], instruction[19:12], instruction[20], instruction[30:21]};
 
         imm12b 	= {instruction[31], instruction[7], instruction[30:25], instruction[11:8]};
+
+        imm12s = {instruction[31:25], instruction[11:7]};
 
         rs1 = instruction[19:15];
 
@@ -233,8 +237,6 @@ module controlUnit (
             is_imm_rs2_o = 1'b1;
             imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
 
-
-
             case(funct3)
                 `FUNCT3_LB: LIS_op = `LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
                 `FUNCT3_LH: LIS_op = `LIS_LH;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
@@ -250,11 +252,26 @@ module controlUnit (
 
       
 
-        `OPCODE_S_STORES: begin  // Stores
+        `OPCODE_S_STORE: begin  // Store
 
+            is_load_store = 1'b1;
+
+
+            r1_addr = rs1;
+            r2_addr = rs2;
+
+
+            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
+
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12s[11]}},  imm12s[11:0]  };
+
+            mem_w = 1'b1;  // Set the bit to write to memory
 
             case(funct3)
-                0: ALU_op = 3'd0;
+                `FUNCT3_SB: LIS_op = `LIS_SB;  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                `FUNCT3_SH: LIS_op = `LIS_SH;  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                `FUNCT3_SW: LIS_op = `LIS_SW;  // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
             endcase
 
       

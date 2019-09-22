@@ -24,7 +24,7 @@
 `define OPCODE_I_JALR   	7'b1100111
 `define OPCODE_B_BRANCH		7'b1100011
 `define OPCODE_I_LOAD		7'b0000011  //
-`define OPCODE_S_STORES		7'b0100011  //
+`define OPCODE_S_STORE		7'b0100011  //
 `define OPCODE_I_IMM		7'b0010011
 `define OPCODE_R_ALU		7'b0110011  // PROV NAME
 `define OPCODE_I_FENCE		7'b0001111  //
@@ -126,9 +126,9 @@
 `define LIS_LW		2
 `define LIS_LBU 		3
 `define LIS_LHU		4
-`define LIS_OP_XOR		5
-`define LIS_OP_SRL		6
-`define LIS_OP_SRA		7
+`define LIS_SB		5
+`define LIS_SH		6
+`define LIS_SW		7
 
 
 `endif

@@ -36,7 +36,7 @@ module dataMem(
     // Code
     
     // Tristate output
-    assign data_out = (!we) ? dataArray[addr] : `MEM_DATA_WIDTH'bz;
+    assign data_out = (we == 1'b0) ? dataArray[addr] : `MEM_DATA_WIDTH'b0;
     
     
     

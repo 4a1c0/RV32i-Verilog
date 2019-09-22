@@ -124,6 +124,7 @@ module core(
         .LIS_op (LIS_op_t),
         .s1 (rs1_exec_unit_t),
         .s2 (rs2_exec_unit_t),
+        .rs2 (rs2_reg_file), // in use to store a value and add the immidiate value
         .d (data_in_reg_file), // data_out_exec),//data_in_reg_file),
         .val_mem_data_write_o (val_mem_data_write_o),
         .val_mem_data_read_i (val_mem_data_read_i),

@@ -43,10 +43,11 @@ module tb();
 		//test_add;
 		//test_lui;
 		//test_auipc;
-        test_load;
+        //test_load;
+        test_store;
 
 		rst_n		= 1'b1;
-		#500
+		#1100
 		//forever #10 clk = ~clk; // generate a clock
 		$finish;
 	end
@@ -86,7 +87,25 @@ task test_load;
         encodeLHU(5'h0, 5'h6, 12'h1);
         encodeLBU(5'h0, 5'h7, 12'h1);
     end
- endtask
+endtask
+
+task test_store;
+  begin
+   pc = 32'b0;
+   //Load data from memory to reg file
+   encodeLW(5'h0, 5'h1, 12'h0);
+   encodeLW(5'h0, 5'h2, 12'h1);
+   encodeLW(5'h0, 5'h3, 12'h2);
+   encodeLW(5'h0, 5'h4, 12'h3);
+
+   encodeSH(5'h0, 5'h1, 12'd10);
+   encodeSB(5'h0, 5'h2, 12'd11);
+   encodeSB(5'h0, 5'h3, 12'd12);
+   encodeSW(5'h0, 5'h4, 12'd13);
+
+   encodeLW(5'h0, 5'h5, 12'd10);
+  end
+endtask
 
 task encodeAddi;
 	input [4:0] rs1;
@@ -194,14 +213,55 @@ task encodeLH;
     end
  endtask
 
+task encodeSB;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [11:0] offset;
+    begin
+        instruction = {offset[11:5], rs2, rs1, `FUNCT3_SB, offset[4:0], `OPCODE_S_STORE};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
+task encodeSH;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [11:0] offset;
+    begin
+        instruction = {offset[11:5], rs2, rs1, `FUNCT3_SH, offset[4:0], `OPCODE_S_STORE};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
+ task encodeSW;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [11:0] offset;
+    begin
+        instruction = {offset[11:5], rs2, rs1, `FUNCT3_SW, offset[4:0], `OPCODE_S_STORE};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+ endtask
+
 
 always @ (negedge clk) begin
 		// $display("reg5 = %d\npc = %d\ninst = %b", package_inst.reg_file_inst.regFile[5], package_inst.addr_progMem, package_inst.instruction_progmem);
-		$display("reg5 = %d", package_inst.core_inst.reg_file_inst.regFile[5]);
+		// $display("reg1 = %h", package_inst.core_inst.reg_file_inst.regFile[1]);
+        // $display("reg2 = %h", package_inst.core_inst.reg_file_inst.regFile[2]);
+         $display("reg3 = %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+        // $display("reg4 = %h", package_inst.core_inst.reg_file_inst.regFile[4]);
+        $display("reg5 = %h", package_inst.core_inst.reg_file_inst.regFile[5]);
 		// $display("rs2_exec_unit_t = %d", package_inst.rs2_exec_unit_t);
 		// $display("ALU_op_t = %d", package_inst.ALU_op_t);
 		//$display("is_imm_t = %d", package_inst.is_imm_t);
 		// $display("r_num_write_reg_file = %d", package_inst.r_num_write_reg_file);
+        $display("pc = %d", package_inst.core_inst.program_counter_inst.addr);
 
 end
 
