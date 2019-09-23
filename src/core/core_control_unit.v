@@ -9,6 +9,7 @@ module controlUnit (
     pc_i,
     ALU_op,
     LIS_op,
+    BR_op_o,
     is_imm_rs1_o,  //execution unit imm rs1
     imm_val_rs1_o,  //execution unit imm val rs1
     is_imm_rs2_o,  //execution unit imm rs2
@@ -20,13 +21,16 @@ module controlUnit (
     r1_addr,
     r2_addr,
     reg_addr,
-    is_branch_o  // branch indicator
+    is_branch_o,  // branch indicator
+    is_absolute_o,  // 
+    is_conditional_o,
     );
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
     input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [`ALU_OP_WIDTH-1:0] ALU_op;
     output [`LIS_OP_WIDTH-1:0] LIS_op;
+    output [`BR_OP_WIDTH-1:0]  BR_op_o;
     output is_imm_rs1_o;
     output is_imm_rs2_o;
     output [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
@@ -39,6 +43,8 @@ module controlUnit (
     output [`REG_ADDR_WIDTH-1:0]r2_addr;
     output [`REG_ADDR_WIDTH-1:0]reg_addr;
     output is_branch_o;  // branch indicator
+    output is_absolute_o;
+    output is_conditional_o;
 
 
     reg is_imm_rs1_o;
@@ -75,6 +81,7 @@ module controlUnit (
     //  Type U
 
     reg[19:0]	imm20;
+    reg is_absolute_o;
 
     
 
@@ -88,6 +95,8 @@ module controlUnit (
     reg [11:0] imm12s;
 
     // Type B
+
+    reg is_conditional_o;
 
     
 
@@ -107,7 +116,7 @@ module controlUnit (
 
     reg[`ALU_OP_WIDTH-1:0] ALU_op;
     reg[`LIS_OP_WIDTH-1:0] LIS_op;
-
+    reg[`BR_OP_WIDTH-1:0] BR_op_o;
     
     always@(*) begin
         is_imm_rs1_o = 1'b0;
@@ -117,6 +126,7 @@ module controlUnit (
         is_load_store = 1'b0;
         reg_r = 1'b0;
         is_branch_o = 1'b0;
+        is_absolute_o =1'b0;
         
 
     
@@ -150,16 +160,6 @@ module controlUnit (
   
     case(opcode)
 
-
-// jal        "Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd"
-// jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
-
-// beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
-// bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
-// blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
-// bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
-// bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
-// bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
 
 
 // fence      "Order device I/O and memory accesses viewed by other threads and devices"
@@ -202,9 +202,13 @@ module controlUnit (
 
         `OPCODE_J_JAL: begin  // Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd
 
-          //pc <= {{11{imm20j[19]}}, imm20j, 1'b0};
-            is_imm_rs1_o = 1'b1;
-            imm_val_rs1_o = pc_i;
+
+            //is_imm_rs1_o = 1'b1;
+            //imm_val_rs1_o = pc_i;
+
+            is_branch_o = 1'b1;
+
+            r1_addr = `REG_ADDR_WIDTH'd0;
 
             is_imm_rs2_o = 1'b1;
             imm_val_rs2_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
@@ -215,16 +219,22 @@ module controlUnit (
             ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
 
 
-            is_branch_o = 1'b1;
-
-                
-
         end
 
       
 
-        `OPCODE_I_JALR: begin
+        `OPCODE_I_JALR: begin  // jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
+            is_branch_o = 1'b1;
+            is_absolute_o = 1'b1; 
 
+            r1_addr = rs1;
+
+            ALU_op = `ALU_OP_ADD;  
+
+            is_imm_rs2_o = 1'b1;
+            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
+            reg_r = 1'b1;
+            reg_addr = rd;
       
 
         end
@@ -232,15 +242,36 @@ module controlUnit (
       
 
         `OPCODE_B_BRANCH: begin
+            is_branch_o = 1'b1;
+            is_conditional_o = 1'b1;
 
+            is_imm_rs2_o = 1'b1;    
+            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
 
+            r1_addr = rs1;
+            r2_addr = rs2;
+            ALU_op = `ALU_OP_SUB;
 
-            // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
-            // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
-            // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
-            // bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
-            // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
-            // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
+            case(funct3)
+                `FUNCT3_BEQ: BR_op_o = `BR_EQ; // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
+                `FUNCT3_BNE: BR_op_o = `BR_NE;  // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
+                `FUNCT3_BLT:begin  // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
+                    ALU_op = `ALU_OP_SLT;
+                    BR_op_o = `BR_LT;  
+                 end
+                `FUNCT3_BGE: begin  // bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
+                    ALU_op = `ALU_OP_SLT;
+                    BR_op_o = `BR_GE; 
+                end 
+                `FUNCT3_BLTU: begin  // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
+                    ALU_op = `ALU_OP_SLTU;
+                    BR_op_o = `BR_LT;
+                end
+                `FUNCT3_BGEU:begin  // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
+                    ALU_op = `ALU_OP_SLTU;
+                    BR_op_o = `BR_GE;
+                end            
+            endcase
       
 
          end

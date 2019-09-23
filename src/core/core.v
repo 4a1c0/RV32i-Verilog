@@ -50,12 +50,15 @@ module core(
 
     wire [`ALU_OP_WIDTH-1:0] ALU_op_t;
     wire [`LIS_OP_WIDTH-1:0] LIS_op_t;
+    wire [`BR_OP_WIDTH-1:0] BR_op_t;
     wire is_imm_rs2;
     wire [`MEM_DATA_WIDTH-1:0] imm_val_rs2;
     wire is_imm_rs1;
     wire [`MEM_DATA_WIDTH-1:0] imm_val_rs1;
     wire is_load_store_t;
     wire is_branch_t;
+    wire is_absolute_t;
+    wire is_conditional_t;
     //wire mem_w_t;
     wire mem_to_reg_t;
     //wire reg_r_t;
@@ -88,6 +91,7 @@ module core(
         .pc_i (addr_mem_prog_o),
         .ALU_op (ALU_op_t),
         .LIS_op (LIS_op_t),
+        .BR_op_o (BR_op_t),
         .is_imm_rs1_o(is_imm_rs1),  //execution unit imm rs1
         .imm_val_rs1_o(imm_val_rs1),  //execution unit imm val rs1
         .is_imm_rs2_o (is_imm_rs2),  //execution unit imm rs2
@@ -99,14 +103,17 @@ module core(
         .r1_addr (r1_num_read_reg_file),
         .r2_addr (r2_num_read_reg_file),
         .reg_addr (r_num_write_reg_file),
-        .is_branch_o (is_branch_t)
+        .is_branch_o (is_branch_t),
+        .is_absolute_o (is_absolute_t),
+        .is_conditional_o (is_conditional_t) 
     );
 
     programCounter program_counter_inst (
         .rst_n (rst_n),
         .clk (clk),
         .is_branch_i (is_branch_t),
-        .new_addr_i (new_pc[ADDR_WIDTH-1:0]),
+        .is_absolute_i (is_absolute_t),
+        .offset_i (new_pc[ADDR_WIDTH-1:0]),
         .addr (addr_mem_prog_o)
     );
 
@@ -127,6 +134,7 @@ module core(
     executionUnit exec_unit_inst(
         .ALU_op (ALU_op_t),
         .LIS_op (LIS_op_t),
+        .BR_op (BR_op_t),
         .s1 (rs1_exec_unit_t),
         .s2 (rs2_exec_unit_t),
         .rs2 (rs2_reg_file), // in use to store a value and add the immidiate value
@@ -136,7 +144,9 @@ module core(
         .addr_mem_data_o (addr_mem_data_o),
         .is_branch_i (is_branch_t),
         .is_loadstore (is_load_store_t),
-        .new_pc_o (new_pc)
+        .new_pc_offset_o (new_pc),
+        .old_pc_i (addr_mem_prog_o),
+        .is_conditional_i (is_conditional_t)
     );
 
     multiplexer2 mux_rs1_exec_inst(

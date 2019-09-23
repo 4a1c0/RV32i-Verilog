@@ -45,7 +45,9 @@ module tb();
 		//test_auipc;
         //test_load;
         //test_store;
-        test_jal;
+        //test_jal;
+
+        test_beq;
 
 		rst_n		= 1'b1;
 		#1100
@@ -115,6 +117,16 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeAddi(5'h0, 5'h4, 12'hFFF);
         encodeJal(5'h5, {20'hFFFF9});
     end
+endtask
+
+
+task test_beq;
+  begin
+   pc = 32'b0;
+   encodeAddi(5'h0, 5'h3, 12'hFFF);
+   encodeAddi(5'h0, 5'h4, 12'hFFF);
+   encodeBeq(5'h3, 5'h4, 13'h00F0);
+  end
 endtask
 
 task encodeAddi;
@@ -187,7 +199,7 @@ task encodeLH;
     end
  endtask
 
- task encodeLW;
+task encodeLW;
     input [4:0] rs1;
     input [4:0] rd;
     input [11:0] immediate;
@@ -197,9 +209,9 @@ task encodeLH;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
- endtask
+endtask
 
- task encodeLBU;
+task encodeLBU;
     input [4:0] rs1;
     input [4:0] rd;
     input [11:0] immediate;
@@ -209,9 +221,9 @@ task encodeLH;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
- endtask
+endtask
 
-  task encodeLHU;
+task encodeLHU;
     input [4:0] rs1;
     input [4:0] rd;
     input [11:0] immediate;
@@ -221,7 +233,7 @@ task encodeLH;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
- endtask
+endtask
 
 task encodeSB;
     input [4:0] rs1;
@@ -264,6 +276,20 @@ task encodeJal;
     input [20:0] immediate;
     begin
         instruction = {immediate[20], immediate[10:1], immediate[11], immediate[19:12], rd, `OPCODE_J_JAL};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+
+task encodeBeq;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+`define OPCODE_B_BRANCH		7'b1100011
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b0, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
         package_inst.mem_prog_inst.progArray[pc] = instruction;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;

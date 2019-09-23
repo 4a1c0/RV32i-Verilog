@@ -130,5 +130,12 @@
 `define LIS_SH		6
 `define LIS_SW		7
 
+// BR_OPERATIONS
+`define BR_OP_WIDTH		2
+
+`define BR_EQ		0		
+`define BR_NE		1
+`define BR_LT		2
+`define BR_GE 		3
 
 `endif
