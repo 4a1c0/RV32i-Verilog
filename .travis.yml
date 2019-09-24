@@ -10,10 +10,10 @@ jobs:
   include:
     - stage: Unit Tests                # naming the Tests stage
       name: "Arithmeticologic Tests"            # names the first Tests stage job
-      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/al tb/arithmeticologic.v ; bin/al| tee /dev/tty | grep -q 'FATAL' && exit 1 || exit 0;"
+      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/al tb/arithmeticologic.v ; bin/al| tee >(grep -q 'FATAL' && exit 1 || exit 0);"
     - stage: Unit Tests                # naming the Tests stage
       name: "Some Tests"     # names the second Tests stage job
-      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/ls tb/load_store.v ; bin/ls| tee /dev/tty | grep -q 'FATAL' && exit 1 || exit 0;"
+      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/ls tb/load_store.v ; bin/ls| tee >(grep -q 'FATAL' && exit 1 || exit 0);"
     - stage: Unit Tests                # naming the Tests stage
       name: "Error example"     # names the second Tests stage job
-      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/er tb/error_test.v ; bin/er | tee /dev/tty | grep -q 'FATAL' && exit 1 || exit 0;"
+      script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/er tb/error_test.v ; bin/er | tee >(grep -q 'FATAL' && exit 1 || exit 0);"
