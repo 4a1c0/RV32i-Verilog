@@ -4,7 +4,7 @@
 
 `include"tb/testbench.v"
 
-module load_store_test();
+module arithmeticologic_test();
 
 	tb TB();
 	
@@ -25,16 +25,11 @@ module load_store_test();
 		// Load memory
 		$readmemb("data/programMem_b.mem", TB.package_inst.mem_prog_inst.progArray, 0, 3);
 		$readmemh("data/dataMem_h.mem", TB.package_inst.mem_data_inst.dataArray, 0, 3);
-		
-
-		//test_lui;
-		//test_auipc;
-		//test_load;
-		//test_store;
-		TB.test_jal;
-		TB.rst_n = 1'b0;
+		TB.rst_n = 1'b1;
 		#100
-		TB.test_beq;
+
+		TB.test_jal;
+
 
 	$finish;
 end
