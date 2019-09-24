@@ -132,8 +132,8 @@ task test_jal;  // Not sure if the JAL works as intended
         if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("OK");
         else begin
             $display ("ERROR: PC has to be 0 but is: %d", package_inst.core_inst.program_counter_inst.addr);
-            $system("exit 1");
-            $fatal;
+            //$system("exit 1");
+            $fatal (2);
         end
     end
 endtask
