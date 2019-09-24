@@ -127,6 +127,7 @@ module controlUnit (
         reg_r = 1'b0;
         is_branch_o = 1'b0;
         is_absolute_o =1'b0;
+        is_conditional_o = 1'b0;
         
 
     

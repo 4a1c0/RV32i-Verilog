@@ -56,10 +56,14 @@ module executionUnit(
 		else d = { {`REG_DATA_WIDTH - `MEM_ADDR_WIDTH{1'b0}}, old_pc_i};
 	end
 
+	wire [`REG_DATA_WIDTH-1:0]      s2_ALU;
+
+	assign s2_ALU = (is_conditional_i == 1'b0)? s2: rs2;
+
 	alu ALU (
 		.ALU_op    (ALU_op),
 		.s1        (s1),
-		.s2        (s2),
+		.s2        (s2_ALU),
 		.d         (alu_o),
 		.zero_o    (zero_alu_result)
 	);

@@ -29,10 +29,10 @@ module 	br (
 
 always @* begin
     case (BR_op_i)
-        `BR_EQ: offset = (ALU_zero_i == `REG_DATA_WIDTH'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_NE: offset = (ALU_zero_i == `REG_DATA_WIDTH'd1)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_LT: offset = (ALU_zero_i == `REG_DATA_WIDTH'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_GE: offset = (ALU_zero_i == `REG_DATA_WIDTH'd1)? new_pc_i: `REG_DATA_WIDTH'd4; 
+        `BR_EQ: offset = (ALU_zero_i == 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_NE: offset = (ALU_zero_i == 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_LT: offset = (ALU_zero_i == 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_GE: offset = (ALU_zero_i == 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4; 
     endcase
 end
 
