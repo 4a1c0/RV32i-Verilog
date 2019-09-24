@@ -11,5 +11,5 @@ jobs:
     - stage: "Unit Tests"                # naming the Tests stage
       name: "Arithmeticologic Tests"            # names the first Tests stage job
       script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/al tb/arithmeticologic.v ; bin/al;"
-      name: "Integration Tests"     # names the second Tests stage job
+      #name: "Integration Tests"     # names the second Tests stage job
       script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/ls tb/load_store.v ; bin/ls;"
