@@ -4,7 +4,7 @@
 
 `include"tb/testbench.v"
 
-module load_store_test();
+module arithmeticologic_test();
 
 	tb TB();
 	
@@ -29,14 +29,6 @@ module load_store_test();
 		TB.test_add;
 		TB.rst_n = 1'b0;
 		#100
-		//test_lui;
-		//test_auipc;
-		//test_load;
-		//test_store;
-		TB.test_jal;
-		TB.rst_n = 1'b0;
-		#100
-		TB.test_beq;
 
 	$finish;
 end

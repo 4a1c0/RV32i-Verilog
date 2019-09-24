@@ -23,47 +23,57 @@ module tb();
 	);
 
 	always #50 clk = !clk;
-	initial begin 
 
-		$dumpfile("vcd/riscV.vcd");
-		$dumpvars(0, package_inst);
-		// Load memory
-		$readmemb("data/programMem_b.mem", package_inst.mem_prog_inst.progArray, 0, 3);
-		$readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
+    // Old way to test
+
+	// initial begin 
+
+	// 	$dumpfile("vcd/riscV.vcd");
+	// 	$dumpvars(0, package_inst);
+	// 	// Load memory
+	// 	$readmemb("data/programMem_b.mem", package_inst.mem_prog_inst.progArray, 0, 3);
+	// 	$readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
 		
-		pc = 32'b0;
+	// 	pc = 32'b0;
 
-		// Initialize registers
-		clk = 1'b0;
-		rst_n = 1'b0;
-		#100
+	// 	// Initialize registers
+	// 	clk = 1'b0;
+	// 	rst_n = 1'b0;
+	// 	#100
 		
-        $readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
-        //package_inst.mem_data_inst.dataArray[1] = 32'hff04a1c0;
-		//test_add;
-		//test_lui;
-		//test_auipc;
-        //test_load;
-        //test_store;
-        //test_jal;
+    //     $readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
+    //     //package_inst.mem_data_inst.dataArray[1] = 32'hff04a1c0;
+	// 	//test_add;
+	// 	//test_lui;
+	// 	//test_auipc;
+    //     //test_load;
+    //     //test_store;
+    //     test_jal;
+    //     rst_n = 1'b0;
+    //     #100
+    //     test_beq;
 
-        test_beq;
-
-		rst_n		= 1'b1;
-		#1100
-		//forever #10 clk = ~clk; // generate a clock
-		$finish;
-	end
+	// 	$finish;
+	// end
 
 
 task test_add; 
-		begin
-				pc = 32'b0;
-				encodeAddi(5'h0, 5'h3, 12'd5);
-				encodeAddi(5'h0, 5'h4, 12'd2);
-				encodeAdd(5'h3, 5'h4, 5'h5);
-		end
- endtask
+    begin
+        $display ("ADD Test");
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'd5);
+        encodeAddi(5'h0, 5'h4, 12'd2);
+        encodeAdd(5'h3, 5'h4, 5'h5);
+
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("OK");
+        else begin
+            $display ("ERROR: reg5 has to be 7 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+    end
+endtask
 
 task test_lui;
 	begin
@@ -112,22 +122,46 @@ endtask
 
 task test_jal;  // Not sure if the JAL works as intended
     begin
+        $display ("JAL Test");
         pc = 32'b0;
         encodeAddi(5'h0, 5'h3, 12'hFFF); 
         encodeAddi(5'h0, 5'h4, 12'hFFF);
-        encodeJal(5'h5, {20'hFFFF9});
+        encodeJal(5'h5, {20'hFFFF4});
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("OK");
+        else begin
+            $display ("ERROR: PC has to be 0 but is: %d", package_inst.core_inst.program_counter_inst.addr);
+            $fatal;
+        end
     end
 endtask
 
 
 task test_beq;
-  begin
-   pc = 32'b0;
-   encodeAddi(5'h0, 5'h3, 12'hFFF);
-   encodeAddi(5'h0, 5'h4, 12'hFFF);
-   encodeBeq(5'h3, 5'h4, 13'h00F0);
-  end
+    begin
+        $display ("BEQ Test");
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'hFFF);
+        encodeAddi(5'h0, 5'h4, 12'hFFF);
+        encodeBeq(5'h3, 5'h4, 13'h00F0);
+        
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.program_counter_inst.addr == 252) $display ("OK");
+        else begin
+            $display ("ERROR: PC has to be 252 but is: %d", package_inst.core_inst.program_counter_inst.addr);
+            $fatal;
+        end
+    end
 endtask
+
+
+
+
+
+
+
 
 task encodeAddi;
 	input [4:0] rs1;
@@ -288,7 +322,6 @@ task encodeBeq;
     input [4:0] rs2;
     input [12:0] immediate;
     begin
-`define OPCODE_B_BRANCH		7'b1100011
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b0, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
         package_inst.mem_prog_inst.progArray[pc] = instruction;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
@@ -297,19 +330,19 @@ task encodeBeq;
 endtask
 
 
-always @ (negedge clk) begin
+//always @ (negedge clk) begin
 		// $display("reg5 = %d\npc = %d\ninst = %b", package_inst.reg_file_inst.regFile[5], package_inst.addr_progMem, package_inst.instruction_progmem);
 		// $display("reg1 = %h", package_inst.core_inst.reg_file_inst.regFile[1]);
         // $display("reg2 = %h", package_inst.core_inst.reg_file_inst.regFile[2]);
-         $display("reg3 = %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+        //$display("reg3 = %h", package_inst.core_inst.reg_file_inst.regFile[3]);
         // $display("reg4 = %h", package_inst.core_inst.reg_file_inst.regFile[4]);
-        $display("reg5 = %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        //$display("reg5 = %h", package_inst.core_inst.reg_file_inst.regFile[5]);
 		// $display("rs2_exec_unit_t = %d", package_inst.rs2_exec_unit_t);
 		// $display("ALU_op_t = %d", package_inst.ALU_op_t);
 		//$display("is_imm_t = %d", package_inst.is_imm_t);
 		// $display("r_num_write_reg_file = %d", package_inst.r_num_write_reg_file);
-        $display("pc = %d", package_inst.core_inst.program_counter_inst.addr);
+        //$display("pc = %d", package_inst.core_inst.program_counter_inst.addr);
 
-end
+//end
 
 endmodule   
