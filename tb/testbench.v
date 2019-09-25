@@ -57,6 +57,42 @@ module tb();
 	// end
 
 
+task test_andi;
+    begin
+        pc = 32'b0;
+        encodeLW(5'h0, 5'h3, 12'h1);
+        encodeAndi(5'h3, 5'h4, 12'hFFF);
+        encodeAddi(5'h0, 5'h3, 12'h7FF);
+        encodeAndi(5'h3, 5'h4, 32'hFFFFFFFF);
+    end
+endtask
+ 
+task test_slli;
+    begin
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'd5);
+        encodeSlli(5'h3, 5'h4, 5'h2);
+    end
+endtask
+ 
+task test_slti;
+    begin
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'd5);
+        encodeSlti(5'h3, 5'h4, 12'h8);
+    end
+endtask
+ 
+task test_sltiu;
+    begin
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'd5);
+        encodeSltiu(5'h3, 5'h4, 12'h8);
+        encodeAddi(5'h0, 5'h3, 12'd24);
+        encodeSltiu(5'h3, 5'h4, 12'h8);
+    end
+endtask
+
 task test_add; 
     begin
         $display ("ADD Test");
@@ -70,6 +106,24 @@ task test_add;
         if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("OK");
         else begin
             $display ("ERROR: reg5 has to be 7 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+    end
+endtask
+
+task test_and;
+    begin
+        $display ("AND Test");
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'hFFF);
+        encodeAddi(5'h0, 5'h4, 12'hFF);
+        encodeAnd(5'h3, 5'h4, 5'h5);
+        //TEST
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h00000FF0) $display ("OK");
+        else begin
+            $display ("ERROR: reg5 has to be h00000FF0 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
@@ -175,6 +229,54 @@ task encodeAddi;
 	end
 endtask
 
+task encodeAndi;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, 3'b111, rd, `OPCODE_I_IMM};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+ 
+task encodeSlti;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, 3'b010, rd, `OPCODE_I_IMM};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeSltiu;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, 3'b011, rd, `OPCODE_I_IMM};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeSlli;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [4:0] immediate;
+    begin
+        instruction = {7'h0, immediate, rs1, 3'b001, rd, `OPCODE_I_IMM};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
 task encodeAdd;
 	input [4:0] rs1;
 	input [4:0] rs2;
@@ -185,7 +287,55 @@ task encodeAdd;
 	 $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
 	 pc = pc + 32'd4;
 	end
- endtask
+endtask
+
+task encodeAnd;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [4:0] rd;
+    begin
+        instruction = {7'b0, rs2, rs1, 3'b111, rd, `OPCODE_R_ALU};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+	    $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeSlt;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, 3'b010, rd, `OPCODE_R_ALU};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeSltu;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [11:0] immediate;
+    begin
+        instruction = {immediate, rs1, 3'b011, rd, `OPCODE_R_ALU};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeSll;
+    input [4:0] rs1;
+    input [4:0] rd;
+    input [4:0] immediate;
+    begin
+        instruction = {7'h0, immediate, rs1, 3'b001, rd, `OPCODE_R_ALU};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
 
 task encodeLui;
 	input [4:0] rd;
@@ -323,6 +473,66 @@ task encodeBeq;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b0, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
+task encodeBne;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b1, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+ 
+task encodeBlt;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b100, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+ 
+task encodeBge;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b101, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+ 
+task encodeBltu;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b110, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
+        package_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+ 
+task encodeBgeu;
+    input [4:0] rs1;
+    input [4:0] rs2;
+    input [12:0] immediate;
+    begin
+        instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b11, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
         package_inst.mem_prog_inst.progArray[pc] = instruction;
         $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;

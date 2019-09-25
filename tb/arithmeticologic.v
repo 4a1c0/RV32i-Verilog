@@ -29,6 +29,7 @@ module arithmeticologic_test();
 		TB.test_add;
 		TB.rst_n = 1'b0;
 		#100
+		TB.test_and;
 
 	$finish;
 end
