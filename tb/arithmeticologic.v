@@ -10,8 +10,8 @@ module arithmeticologic_test();
 	
 	initial begin 
 
-		//$dumpfile("vcd/riscV.vcd");
-		//$dumpvars(0, TB.package_inst);
+		$dumpfile("vcd/riscV.vcd");
+		$dumpvars(0, TB.package_inst);
 
 		
 		
@@ -27,9 +27,17 @@ module arithmeticologic_test();
 		$readmemh("data/dataMem_h.mem", TB.package_inst.mem_data_inst.dataArray, 0, 3);
 		
 		TB.test_add;
+		
 		TB.rst_n = 1'b0;
 		#100
+		
 		TB.test_and;
+		TB.rst_n = 1'b0;
+		#100
+
+		TB.test_slli;
+		TB.rst_n = 1'b0;
+		#100
 
 	$finish;
 end

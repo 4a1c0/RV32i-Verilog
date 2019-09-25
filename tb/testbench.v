@@ -69,9 +69,18 @@ endtask
  
 task test_slli;
     begin
+        $display ("SLLI Test");
         pc = 32'b0;
-        encodeAddi(5'h0, 5'h3, 12'd5);
-        encodeSlli(5'h3, 5'h4, 5'h2);
+        encodeAddi(5'h0, 5'h3, 12'd3);
+        encodeSlli(5'h3, 5'h5, 5'h2);
+        
+        rst_n		= 1'b1;
+        #200;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h000000C but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
     end
 endtask
  
@@ -102,8 +111,8 @@ task test_add;
         encodeAdd(5'h3, 5'h4, 5'h5);
 
         rst_n		= 1'b1;
-        #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("OK");
+        #300;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be 7 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
@@ -121,7 +130,7 @@ task test_and;
         //TEST
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("OK");
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h000000FF but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
@@ -180,10 +189,10 @@ task test_jal;  // Not sure if the JAL works as intended
         pc = 32'b0;
         encodeAddi(5'h0, 5'h3, 12'hFFF); 
         encodeAddi(5'h0, 5'h4, 12'hFFF);
-        encodeJal(5'h5, {20'hFFFF4});
+        encodeJal(5'h5, {20'hFFFF4}); // -12
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("OK");
+        if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("  OK: PC is: %d", package_inst.core_inst.program_counter_inst.addr);
         else begin
             $display ("ERROR: PC has to be 0 but is: %d", package_inst.core_inst.program_counter_inst.addr);
             $fatal;
@@ -202,7 +211,7 @@ task test_beq;
         
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.program_counter_inst.addr == 252) $display ("OK");
+        if (package_inst.core_inst.program_counter_inst.addr == 252) $display ("    OK: PC is: %d", package_inst.core_inst.program_counter_inst.addr);
         else begin
             $display ("ERROR: PC has to be 252 but is: %d", package_inst.core_inst.program_counter_inst.addr);
             $fatal;
@@ -270,7 +279,7 @@ task encodeSlli;
     input [4:0] rd;
     input [4:0] immediate;
     begin
-        instruction = {7'h0, immediate, rs1, 3'b001, rd, `OPCODE_I_IMM};
+        instruction = {7'h0, immediate, rs1, `FUNCT3_SLLI, rd, `OPCODE_I_IMM}; // 3'b001
         package_inst.mem_prog_inst.progArray[pc] = instruction;
 		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
