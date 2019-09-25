@@ -27,7 +27,6 @@ module arithmeticologic_test();
 		$readmemh("data/dataMem_h.mem", TB.package_inst.mem_data_inst.dataArray, 0, 3);
 		
 		TB.test_add;
-		
 		TB.rst_n = 1'b0;
 		#100
 		

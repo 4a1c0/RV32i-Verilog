@@ -75,7 +75,7 @@ task test_slli;
         encodeSlli(5'h3, 5'h5, 5'h2);
         
         rst_n		= 1'b1;
-        #200;
+        #300;
         if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h000000C but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
@@ -111,7 +111,7 @@ task test_add;
         encodeAdd(5'h3, 5'h4, 5'h5);
 
         rst_n		= 1'b1;
-        #300;
+        #400;
         if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be 7 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
