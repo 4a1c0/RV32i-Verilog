@@ -17,3 +17,11 @@ jobs:
     # - stage: Unit Tests                # naming the Tests stage
     #   name: "Error example"     # names the second Tests stage job
     #   script: docker run icarus-verilog /bin/sh -c "iverilog -o bin/er tb/error_test.v ; bin/er | tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+    
+    # - stage: build docker image
+    #   script:
+    #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #   - docker build -t icarus-verilog .
+    #   - docker images
+    #   - docker tag icarus-verilog $DOCKER_USERNAME/icarus-verilog
+    #   - docker push $DOCKER_USERNAME/icarus-verilog

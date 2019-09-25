@@ -121,9 +121,9 @@ task test_and;
         //TEST
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h00000FF0) $display ("OK");
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("OK");
         else begin
-            $display ("ERROR: reg5 has to be h00000FF0 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h000000FF but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
