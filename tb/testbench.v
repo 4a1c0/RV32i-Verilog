@@ -59,11 +59,21 @@ module tb();
 
 task test_andi;
     begin
+        $display ("ANDI Test");
         pc = 32'b0;
-        encodeLW(5'h0, 5'h3, 12'h1);
-        encodeAndi(5'h3, 5'h4, 12'hFFF);
-        encodeAddi(5'h0, 5'h3, 12'h7FF);
-        encodeAndi(5'h3, 5'h4, 32'hFFFFFFFF);
+        //encodeLW(5'h0, 5'h3, 12'h1);
+        //encodeAndi(5'h3, 5'h4, 12'hFFF);
+        encodeAddi(5'h0, 5'h3, 12'h444);
+        encodeAndi(5'h3, 5'h5, 12'hF0F);
+
+        rst_n		= 1'b1;
+        #300;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000404) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h0000404 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+
     end
 endtask
  
@@ -86,19 +96,47 @@ endtask
  
 task test_slti;
     begin
+        $display ("SLTI Test");
         pc = 32'b0;
-        encodeAddi(5'h0, 5'h3, 12'd5);
-        encodeSlti(5'h3, 5'h4, 12'h8);
+        encodeAddi(5'h0, 5'h3, 12'hFFC); //-12
+        encodeSlti(5'h3, 5'h5, 12'h8); //1
+        encodeSlti(5'h3, 5'h6, 12'hFFF); //-1
+        
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+        if (package_inst.core_inst.reg_file_inst.regFile[6] == 32'h0000001) $display ("    OK: reg6 is : %h", package_inst.core_inst.reg_file_inst.regFile[6]);
+        else begin
+            $display ("ERROR: reg6 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[6]);
+            $fatal;
+        end
     end
 endtask
  
 task test_sltiu;
     begin
+    $display ("SLTIU Test");
         pc = 32'b0;
-        encodeAddi(5'h0, 5'h3, 12'd5);
-        encodeSltiu(5'h3, 5'h4, 12'h8);
-        encodeAddi(5'h0, 5'h3, 12'd24);
-        encodeSltiu(5'h3, 5'h4, 12'h8);
+        encodeAddi(5'h0, 5'h3, 12'hFFC); // 4092
+        encodeSltiu(5'h3, 5'h5, 12'hFFF); // 4095
+        encodeSltiu(5'h3, 5'h3, 12'h8);  // 8
+
+        rst_n		= 1'b1;
+        #400;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+        if (package_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000000) $display ("    OK: reg3 is : %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+        else begin
+            $display ("ERROR: reg3 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+            $fatal;
+        end
     end
 endtask
 

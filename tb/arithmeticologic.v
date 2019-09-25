@@ -34,9 +34,19 @@ module arithmeticologic_test();
 		TB.rst_n = 1'b0;
 		#100
 
+		TB.test_andi;
+		TB.rst_n = 1'b0;
+		#100
+
 		TB.test_slli;
 		TB.rst_n = 1'b0;
 		#100
+
+		TB.test_slti;
+		TB.rst_n = 1'b0;
+		#100
+
+		TB.test_sltiu;
 
 	$finish;
 end
