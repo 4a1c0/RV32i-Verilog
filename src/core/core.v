@@ -9,7 +9,6 @@
 `include "src/core/core_program_counter.v"
 `include "src/core/core_regfile.v"
 `include "src/core/core_execution_unit/core_execution_unit.v"
-`include "src/core/core_multiplexer2x32.v"
 
 
 
@@ -140,26 +139,6 @@ module core(
         .old_pc_i (addr_mem_prog_o),
         .is_absolute_o (is_absolute_t)
     );
-
-    // multiplexer2 mux_rs1_exec_inst(
-    //     .a(rs1_reg_file),
-    //     .b(imm_val_rs1),
-    //     .out(rs1_exec_unit_t),
-    //     .select(is_imm_rs1)
-    // );
-
-    // multiplexer2 mux_rs2_exec_inst(
-    //     .a(rs2_reg_file),
-    //     .b(imm_val_rs2),
-    //     .out(rs2_exec_unit_t),
-    //     .select(is_imm_rs2)
-    // );
-
-    // multiplexer2 mux_exec_mem_inst(
-    //     .a(val_mem_data_write_o),
-    //     .b(val_mem_data_read_i),
-    //     .select(mem_to_reg_t)
-    // );
 
 
 
