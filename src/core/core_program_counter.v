@@ -22,14 +22,14 @@ module programCounter (
 
     wire [`MEM_ADDR_WIDTH-1:0] offset;
 
-    assign offset = (is_branch_i == 1'b1)? offset_i : `MEM_ADDR_WIDTH'd4;  // decide to add 4 or offset if is branch
+    assign offset = (is_branch_i === 1'b1)? offset_i : `MEM_ADDR_WIDTH'd4;  // decide to add 4 or offset if is branch
 
     always@(posedge clk or negedge rst_n)
     begin
         if (!rst_n) begin 
             addr <= `MEM_ADDR_WIDTH'd0;
         end 
-        else if (is_absolute_i == 1'b1) begin
+        else if (is_absolute_i === 1'b1) begin
             addr <= offset;
         end
         else begin

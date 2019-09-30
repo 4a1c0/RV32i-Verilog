@@ -25,14 +25,14 @@ module 	br (
 
     reg [`REG_DATA_WIDTH-1:0] offset;
 
-    assign new_pc_o = (is_conditional_i == 1'b0)? alu_d: offset;
+    assign new_pc_o = (is_conditional_i === 1'b0)? alu_d: offset;
 
 always @* begin
     case (BR_op_i)
-        `BR_EQ: offset = (ALU_zero_i == 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_NE: offset = (ALU_zero_i == 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_LT: offset = (ALU_zero_i == 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
-        `BR_GE: offset = (ALU_zero_i == 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4; 
+        `BR_EQ: offset = (ALU_zero_i === 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_NE: offset = (ALU_zero_i === 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_LT: offset = (ALU_zero_i === 1'd0)? new_pc_i: `REG_DATA_WIDTH'd4;
+        `BR_GE: offset = (ALU_zero_i === 1'd1)? new_pc_i: `REG_DATA_WIDTH'd4; 
     endcase
 end
 

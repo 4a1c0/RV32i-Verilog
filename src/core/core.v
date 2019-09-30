@@ -54,7 +54,7 @@ module core(
     wire [`DATA_ORIGIN_WIDTH-1:0] data_origin_t;
     wire is_load_store_t;
     wire is_branch_t;
-    // wire is_absolute_t;
+    wire is_absolute_t;
     // wire is_conditional_t;
     //wire mem_w_t;
     wire mem_to_reg_t;
@@ -87,7 +87,7 @@ module core(
         .ALU_op (ALU_op_t),
         .LIS_op (LIS_op_t),
         .BR_op_o (BR_op_t),
-        .data_origin_o (data_origin_t), //TODO
+        .data_origin_o (data_origin_t),
         .is_branch_o (is_branch_t),        
         .is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (we_mem_data_o),

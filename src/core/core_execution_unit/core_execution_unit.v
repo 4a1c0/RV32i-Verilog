@@ -63,7 +63,7 @@ module executionUnit(
 		is_conditional = 1'b0;
 		is_absolute_o = 1'b0;
 
-		if (is_branch_i == 1'b0) begin
+		if (is_branch_i === 1'b0) begin
 			// Define Inputs
 			case (data_origin_i)
 				`REGS: begin
@@ -85,15 +85,16 @@ module executionUnit(
 				end
 			endcase
 			// Define Outputs
-			d_o = (is_loadstore == 1'b0) ? alu_o : mem_o;  // mux at the end
+			d_o = (is_loadstore === 1'b0) ? alu_o : mem_o;  // mux at the end
 		end
-		else begin // in Branch condition
+		else if (is_branch_i === 1'b1) begin // in Branch condition
 			// Define Inputs
 			case (data_origin_i)
 				`REGS: begin
 					s1_ALU = rs1_i;
 					s2_ALU = rs2_i;
 					is_conditional = 1'b1;
+					
 				end
 				`RS2IMM_RS1: begin
 					s1_ALU = rs1_i;
@@ -103,6 +104,7 @@ module executionUnit(
 				`RS2IMM_RS1PC: begin
 					s1_ALU = old_pc_i;
 					s2_ALU = imm_val_i;
+					is_absolute_o = 1'b1;
 				end
 				
 				default: begin
@@ -142,7 +144,7 @@ module executionUnit(
 		.BR_op_i (BR_op),
 		.alu_d (alu_o),
 		.old_pc_i ({{`REG_DATA_WIDTH - `MEM_ADDR_WIDTH{1'b0}},old_pc_i}),
-		.new_pc_i (s2_ALU),
+		.new_pc_i (imm_val_i),
 		.new_pc_o (new_pc_offset_o),
 		.is_conditional_i (is_conditional),
 		.ALU_zero_i (zero_alu_result)

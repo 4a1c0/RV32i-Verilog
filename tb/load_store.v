@@ -31,10 +31,12 @@ module load_store_test();
 		//test_auipc;
 		//test_load;
 		//test_store;
-		TB.test_jal;
+		TB.test_load;
 		TB.rst_n = 1'b0;
 		#100
-		TB.test_beq;
+		//Load data from memory
+		$readmemh("data/dataMem_h.mem", TB.package_inst.mem_data_inst.dataArray, 0, 3);
+		TB.test_store;
 
 	$finish;
 end

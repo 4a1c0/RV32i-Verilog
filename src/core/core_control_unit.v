@@ -36,7 +36,7 @@ module controlUnit (
     output [`LIS_OP_WIDTH-1:0] LIS_op;
     output [`BR_OP_WIDTH-1:0]  BR_op_o;
     output [`DATA_ORIGIN_WIDTH-1:0]  data_origin_o;  // To indicate what data to use by the execution unit 
-    output is_imm_o;
+    //output is_imm_o;
     //output is_imm_rs2_o;
     output [`MEM_DATA_WIDTH-1:0] imm_val_o;
     //output [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
@@ -224,7 +224,7 @@ module controlUnit (
             is_branch_o = 1'b1;
             data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
 
-            r1_addr = `REG_ADDR_WIDTH'd0;
+            //r1_addr = `REG_ADDR_WIDTH'd0;
 
             imm_val_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
 

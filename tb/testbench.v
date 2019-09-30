@@ -194,31 +194,52 @@ endtask
 
 task test_load;
     begin
+        $display ("LOAD Test");
         pc = 32'b0;
         encodeLB(5'h0, 5'h3, 12'h1);
         encodeLH(5'h0, 5'h4, 12'h1);
         encodeLW(5'h0, 5'h5, 12'h1);
         encodeLHU(5'h0, 5'h6, 12'h1);
         encodeLBU(5'h0, 5'h7, 12'h1);
+        //TEST
+        rst_n		= 1'b1;
+        #600;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be hf04a1c0f but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+
     end
 endtask
 
 task test_store;
-  begin
-   pc = 32'b0;
-   //Load data from memory to reg file
-   encodeLW(5'h0, 5'h1, 12'h0);
-   encodeLW(5'h0, 5'h2, 12'h1);
-   encodeLW(5'h0, 5'h3, 12'h2);
-   encodeLW(5'h0, 5'h4, 12'h3);
+    begin
+        pc = 32'b0;
+        
+        $display ("STORE Test");
+        encodeLW(5'h0, 5'h1, 12'h0);
+        encodeLW(5'h0, 5'h2, 12'h1);
+        encodeLW(5'h0, 5'h3, 12'h2);
+        encodeLW(5'h0, 5'h4, 12'h3);
 
-   encodeSH(5'h0, 5'h1, 12'd10);
-   encodeSB(5'h0, 5'h2, 12'd11);
-   encodeSB(5'h0, 5'h3, 12'd12);
-   encodeSW(5'h0, 5'h4, 12'd13);
+        encodeSW(5'h0, 5'h1, 12'd10);
+        encodeSH(5'h0, 5'h2, 12'd11);
+        encodeSB(5'h0, 5'h3, 12'd12);
+        encodeSW(5'h0, 5'h4, 12'd13);
 
-   encodeLW(5'h0, 5'h5, 12'd10);
-  end
+        encodeLW(5'h0, 5'h5, 12'd10);
+
+        //TEST
+        rst_n		= 1'b1;
+        #1100;
+        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h10101010 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+
+    end
 endtask
 
 task test_jal;  // Not sure if the JAL works as intended
@@ -227,7 +248,7 @@ task test_jal;  // Not sure if the JAL works as intended
         pc = 32'b0;
         encodeAddi(5'h0, 5'h3, 12'hFFF); 
         encodeAddi(5'h0, 5'h4, 12'hFFF);
-        encodeJal(5'h5, {20'hFFFF4}); // -12
+        encodeJal(5'h5, {21'h1FFFF4}); // -12
         rst_n		= 1'b1;
         #400;
         if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("  OK: PC is: %d", package_inst.core_inst.program_counter_inst.addr);
@@ -245,7 +266,7 @@ task test_beq;
         pc = 32'b0;
         encodeAddi(5'h0, 5'h3, 12'hFFF);
         encodeAddi(5'h0, 5'h4, 12'hFFF);
-        encodeBeq(5'h3, 5'h4, 13'h00F0);
+        encodeBeq(5'h3, 5'h4, 13'hF0);
         
         rst_n		= 1'b1;
         #400;
