@@ -138,4 +138,12 @@
 `define BR_LT		2
 `define BR_GE 		3
 
+// Data origins 
+`define DATA_ORIGIN_WIDTH		2
+
+`define REGS		    0		
+`define RS2IMM_RS1		1
+`define RS2IMM_RS1PC	2
+`define UNUSED 		3
+
 `endif

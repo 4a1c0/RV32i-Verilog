@@ -6,14 +6,16 @@
 // Module Declaration
 module controlUnit (
     instruction,
-    pc_i,
+    //pc_i,
     ALU_op,
     LIS_op,
     BR_op_o,
-    is_imm_rs1_o,  //execution unit imm rs1
-    imm_val_rs1_o,  //execution unit imm val rs1
-    is_imm_rs2_o,  //execution unit imm rs2
-    imm_val_rs2_o,  //execution unit imm val rs2
+    data_origin_o,
+    is_branch_o,  // branch indicator
+    //is_imm_rs1_o,  //execution unit imm rs1 // TODO Change the the way to indicate inmm or reg to a 2 bit bus
+    
+    //is_imm_rs2_o,  //execution unit imm rs2
+    //imm_val_rs2_o,  //execution unit imm val rs2
     is_load_store,  // execution_unit 
     mem_w,  // mem_write
     mem_to_reg,
@@ -21,20 +23,23 @@ module controlUnit (
     r1_addr,
     r2_addr,
     reg_addr,
-    is_branch_o,  // branch indicator
-    is_absolute_o,  // 
-    is_conditional_o,
+    imm_val_o  //execution unit imm val rs1
+    
+    
+    //is_absolute_o,  // 
+    //is_conditional_o,
     );
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
-    input [`MEM_ADDR_WIDTH-1:0] pc_i;
+    //input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [`ALU_OP_WIDTH-1:0] ALU_op;
     output [`LIS_OP_WIDTH-1:0] LIS_op;
     output [`BR_OP_WIDTH-1:0]  BR_op_o;
-    output is_imm_rs1_o;
-    output is_imm_rs2_o;
-    output [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
-    output [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
+    output [`DATA_ORIGIN_WIDTH-1:0]  data_origin_o;  // To indicate what data to use by the execution unit 
+    output is_imm_o;
+    //output is_imm_rs2_o;
+    output [`MEM_DATA_WIDTH-1:0] imm_val_o;
+    //output [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     output is_load_store;
     output mem_w;
     output mem_to_reg;
@@ -43,19 +48,19 @@ module controlUnit (
     output [`REG_ADDR_WIDTH-1:0]r2_addr;
     output [`REG_ADDR_WIDTH-1:0]reg_addr;
     output is_branch_o;  // branch indicator
-    output is_absolute_o;
-    output is_conditional_o;
+    //output is_absolute_o;
+    //output is_conditional_o;
 
 
-    reg is_imm_rs1_o;
-    reg is_imm_rs2_o;
+    //reg is_imm_rs1_o;
+    //reg is_imm_rs2_o;
 
     reg mem_w;
     reg mem_to_reg;
 
     reg reg_r;
-    reg [`MEM_DATA_WIDTH-1:0] imm_val_rs1_o;
-    reg [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
+    reg [`MEM_DATA_WIDTH-1:0] imm_val_o;
+    //reg [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     reg [`REG_ADDR_WIDTH-1:0]r1_addr;
     reg [`REG_ADDR_WIDTH-1:0]r2_addr;
     reg [`REG_ADDR_WIDTH-1:0]reg_addr;
@@ -81,7 +86,7 @@ module controlUnit (
     //  Type U
 
     reg[19:0]	imm20;
-    reg is_absolute_o;
+    //reg is_absolute_o;
 
     
 
@@ -96,7 +101,7 @@ module controlUnit (
 
     // Type B
 
-    reg is_conditional_o;
+    //reg is_conditional_o;
 
     
 
@@ -114,20 +119,26 @@ module controlUnit (
 
 
 
-    reg[`ALU_OP_WIDTH-1:0] ALU_op;
-    reg[`LIS_OP_WIDTH-1:0] LIS_op;
-    reg[`BR_OP_WIDTH-1:0] BR_op_o;
+    reg [`ALU_OP_WIDTH-1:0] ALU_op;
+    reg [`LIS_OP_WIDTH-1:0] LIS_op;
+    reg [`BR_OP_WIDTH-1:0] BR_op_o;
+    reg [`DATA_ORIGIN_WIDTH-1:0]  data_origin_o;
     
     always@(*) begin
-        is_imm_rs1_o = 1'b0;
-        is_imm_rs2_o = 1'b0;
         mem_w = 1'b0;
         mem_to_reg = 1'b0;
         is_load_store = 1'b0;
         reg_r = 1'b0;
         is_branch_o = 1'b0;
-        is_absolute_o =1'b0;
-        is_conditional_o = 1'b0;
+        data_origin_o = `REGS;  // Dafault value 0
+        ALU_op = `ALU_OP_ADD;  // Dafault value 0
+        BR_op_o = `BR_EQ;  // Dafault value 0
+        LIS_op = `LIS_LB;  // Dafault value 0
+        imm_val_o = `MEM_DATA_WIDTH'd0;
+        reg_addr = `REG_ADDR_WIDTH'd0;
+        r1_addr = `REG_ADDR_WIDTH'd0;
+        r2_addr = `REG_ADDR_WIDTH'd0;
+
         
 
     
@@ -168,13 +179,14 @@ module controlUnit (
 
         `OPCODE_U_LUI: begin  // Set and sign extend the 20-bit immediate (shited 12 bits left) and zero the bottom 12 bits into rd
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
-            reg_r = 1'b1;
+            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value, in dis case 0
+            imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+            
+            reg_r = 1'b1;  // Write the resut in RD
             reg_addr = rd;
 
-            ALU_op = `ALU_OP_ADD;
-            r1_addr = 5'd0;
+            ALU_op = `ALU_OP_ADD;  // Sum with 0
+            r1_addr = `REG_ADDR_WIDTH'd0;
 
         end
 
@@ -182,19 +194,21 @@ module controlUnit (
 
         `OPCODE_U_AUIPC: begin  // Place the PC plus the 20-bit signed immediate (shited 12 bits left) into rd (used before JALR)
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+            data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
+            imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+
+            reg_r = 1'b1;  // Write the resut in RD
+            reg_addr = rd;
 
 
             // Need to output 2 imm vals of the control unit to add the PC and a imm val
 
-            is_imm_rs1_o = 1'b1;
-            imm_val_rs1_o = pc_i;
+            //is_imm_rs1_o = 1'b1;  // no PC in the control unit 
+            //imm_val_rs1_o = pc_i;
 
-            ALU_op = `ALU_OP_ADD;
+            ALU_op = `ALU_OP_ADD;  // Add the values
 
-            reg_r = 1'b1;
-            reg_addr = rd;
+
 
 
         end
@@ -208,13 +222,13 @@ module controlUnit (
             //imm_val_rs1_o = pc_i;
 
             is_branch_o = 1'b1;
+            data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
 
             r1_addr = `REG_ADDR_WIDTH'd0;
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
+            imm_val_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
 
-            reg_r = 1'b1;
+            reg_r = 1'b1; // Write the resut in RD
             reg_addr = rd;
 
             ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
@@ -226,15 +240,16 @@ module controlUnit (
 
         `OPCODE_I_JALR: begin  // jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
             is_branch_o = 1'b1;
-            is_absolute_o = 1'b1; 
+            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+            // Execution unit knows that also needs the PC
 
             r1_addr = rs1;
 
             ALU_op = `ALU_OP_ADD;  
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
-            reg_r = 1'b1;
+            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
+            
+            reg_r = 1'b1;  // Write the resut in RD
             reg_addr = rd;
       
 
@@ -244,10 +259,11 @@ module controlUnit (
 
         `OPCODE_B_BRANCH: begin
             is_branch_o = 1'b1;
-            is_conditional_o = 1'b1;
-
-            is_imm_rs2_o = 1'b1;    
-            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
+            data_origin_o = `REGS;  // Mantain RS2 value and RS1 value // DefaultValue
+            //is_conditional_o = 1'b1;
+            // Execution unit knows that also needs immideate value
+  
+            imm_val_o = {{`MEM_DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
 
             r1_addr = rs1;
             r2_addr = rs2;
@@ -290,8 +306,8 @@ module controlUnit (
 
             ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
+            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
 
             case(funct3)
                 `FUNCT3_LB: LIS_op = `LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
@@ -319,8 +335,8 @@ module controlUnit (
 
             ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
 
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = {{`MEM_DATA_WIDTH - 12 {imm12s[11]}},  imm12s[11:0]  };
+            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12s[11]}},  imm12s[11:0]  };
 
             mem_w = 1'b1;  // Set the bit to write to memory
 
@@ -337,8 +353,8 @@ module controlUnit (
       
 
         `OPCODE_I_IMM: begin
-            is_imm_rs2_o = 1'b1;
-            imm_val_rs2_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
+            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+            imm_val_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
             reg_r = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;

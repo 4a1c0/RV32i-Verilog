@@ -10,8 +10,8 @@ module arithmeticologic_test();
 	
 	initial begin 
 
-		$dumpfile("vcd/riscV.vcd");
-		$dumpvars(0, TB.package_inst);
+		//$dumpfile("vcd/riscV.vcd");
+		//$dumpvars(0, TB.package_inst);
 
 		
 		

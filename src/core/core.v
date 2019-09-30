@@ -51,20 +51,18 @@ module core(
     wire [`ALU_OP_WIDTH-1:0] ALU_op_t;
     wire [`LIS_OP_WIDTH-1:0] LIS_op_t;
     wire [`BR_OP_WIDTH-1:0] BR_op_t;
-    wire is_imm_rs2;
-    wire [`MEM_DATA_WIDTH-1:0] imm_val_rs2;
-    wire is_imm_rs1;
-    wire [`MEM_DATA_WIDTH-1:0] imm_val_rs1;
+    wire [`DATA_ORIGIN_WIDTH-1:0] data_origin_t;
     wire is_load_store_t;
     wire is_branch_t;
-    wire is_absolute_t;
-    wire is_conditional_t;
+    // wire is_absolute_t;
+    // wire is_conditional_t;
     //wire mem_w_t;
     wire mem_to_reg_t;
     //wire reg_r_t;
-    wire [`REG_ADDR_WIDTH-1:0]r1_addr_t;
-    wire [`REG_ADDR_WIDTH-1:0]r2_addr_t;
-    wire [`REG_ADDR_WIDTH-1:0]reg_addr_t;
+    wire [`REG_ADDR_WIDTH-1:0] r1_addr_t;
+    wire [`REG_ADDR_WIDTH-1:0] r2_addr_t;
+    wire [`REG_ADDR_WIDTH-1:0] reg_addr_t;
+    wire [`REG_DATA_WIDTH-1:0] imm_val_t;
 
     wire we_reg_file;  
 	wire [`REG_ADDR_WIDTH-1:0]	r1_num_read_reg_file;
@@ -78,8 +76,6 @@ module core(
 	wire [`REG_DATA_WIDTH-1:0]	rs2_reg_file;
 
 
-    wire [`REG_DATA_WIDTH-1:0]	rs2_exec_unit_t;
-    wire [`REG_DATA_WIDTH-1:0]	rs1_exec_unit_t;
 
     wire [DATA_WIDTH-1 : 0] new_pc;
 
@@ -88,14 +84,11 @@ module core(
 
     controlUnit controlUnit_inst(
         .instruction (val_mem_prog_i),
-        .pc_i (addr_mem_prog_o),
         .ALU_op (ALU_op_t),
         .LIS_op (LIS_op_t),
         .BR_op_o (BR_op_t),
-        .is_imm_rs1_o(is_imm_rs1),  //execution unit imm rs1
-        .imm_val_rs1_o(imm_val_rs1),  //execution unit imm val rs1
-        .is_imm_rs2_o (is_imm_rs2),  //execution unit imm rs2
-        .imm_val_rs2_o (imm_val_rs2),
+        .data_origin_o (data_origin_t), //TODO
+        .is_branch_o (is_branch_t),        
         .is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (we_mem_data_o),
         .mem_to_reg (mem_to_reg_t),
@@ -103,9 +96,7 @@ module core(
         .r1_addr (r1_num_read_reg_file),
         .r2_addr (r2_num_read_reg_file),
         .reg_addr (r_num_write_reg_file),
-        .is_branch_o (is_branch_t),
-        .is_absolute_o (is_absolute_t),
-        .is_conditional_o (is_conditional_t) 
+        .imm_val_o (imm_val_t)  //execution unit imm val
     );
 
     programCounter program_counter_inst (
@@ -135,10 +126,11 @@ module core(
         .ALU_op (ALU_op_t),
         .LIS_op (LIS_op_t),
         .BR_op (BR_op_t),
-        .s1 (rs1_exec_unit_t),
-        .s2 (rs2_exec_unit_t),
-        .rs2 (rs2_reg_file), // in use to store a value and add the immidiate value
-        .d (data_in_reg_file), // data_out_exec),//data_in_reg_file),
+        .data_origin_i(data_origin_t),
+        .rs1_i (rs1_reg_file),
+        .rs2_i (rs2_reg_file),
+        .imm_val_i (imm_val_t), // immidiate value
+        .d_o (data_in_reg_file), // data_out_exec),//data_in_reg_file),
         .val_mem_data_write_o (val_mem_data_write_o),
         .val_mem_data_read_i (val_mem_data_read_i),
         .addr_mem_data_o (addr_mem_data_o),
@@ -146,22 +138,22 @@ module core(
         .is_loadstore (is_load_store_t),
         .new_pc_offset_o (new_pc),
         .old_pc_i (addr_mem_prog_o),
-        .is_conditional_i (is_conditional_t)
+        .is_absolute_o (is_absolute_t)
     );
 
-    multiplexer2 mux_rs1_exec_inst(
-        .a(rs1_reg_file),
-        .b(imm_val_rs1),
-        .out(rs1_exec_unit_t),
-        .select(is_imm_rs1)
-    );
+    // multiplexer2 mux_rs1_exec_inst(
+    //     .a(rs1_reg_file),
+    //     .b(imm_val_rs1),
+    //     .out(rs1_exec_unit_t),
+    //     .select(is_imm_rs1)
+    // );
 
-    multiplexer2 mux_rs2_exec_inst(
-        .a(rs2_reg_file),
-        .b(imm_val_rs2),
-        .out(rs2_exec_unit_t),
-        .select(is_imm_rs2)
-    );
+    // multiplexer2 mux_rs2_exec_inst(
+    //     .a(rs2_reg_file),
+    //     .b(imm_val_rs2),
+    //     .out(rs2_exec_unit_t),
+    //     .select(is_imm_rs2)
+    // );
 
     // multiplexer2 mux_exec_mem_inst(
     //     .a(val_mem_data_write_o),
