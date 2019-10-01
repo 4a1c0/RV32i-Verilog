@@ -1,0 +1,34 @@
+digraph "package" {
+label="package";
+rankdir="LR";
+remincross=true;
+n1 [ shape=diamond, label="val_mem_prog", color="black", fontcolor="black" ];
+n2 [ shape=diamond, label="addr_mem_prog", color="black", fontcolor="black" ];
+n3 [ shape=diamond, label="val_mem_data_read", color="black", fontcolor="black" ];
+n4 [ shape=diamond, label="val_mem_data_write", color="black", fontcolor="black" ];
+n5 [ shape=diamond, label="addr_mem_data", color="black", fontcolor="black" ];
+n6 [ shape=diamond, label="we_mem_data", color="black", fontcolor="black" ];
+n7 [ shape=octagon, label="rst_n", color="black", fontcolor="black" ];
+n8 [ shape=octagon, label="clk", color="black", fontcolor="black" ];
+c11 [ shape=record, label="{{<p9> addr|<p8> clk|<p7> rst_n}|mem_prog_inst\nprogMem|{<p10> data_out}}" ];
+c14 [ shape=record, label="{{<p9> addr|<p8> clk|<p12> data_in|<p7> rst_n|<p13> we}|mem_data_inst\ndataMem|{<p10> data_out}}" ];
+c21 [ shape=record, label="{{<p8> clk|<p7> rst_n|<p15> val_mem_data_read_i|<p16> val_mem_prog_i}|core_inst\ncore|{<p17> addr_mem_data_o|<p18> addr_mem_prog_o|<p19> val_mem_data_write_o|<p20> we_mem_data_o}}" ];
+c11:p10:e -> n1:w [color="black", style="setlinewidth(3)", label="<32>"];
+n1:e -> c21:p16:w [color="black", style="setlinewidth(3)", label="<32>"];
+c21:p18:e -> n2:w [color="black", style="setlinewidth(3)", label="<10>"];
+n2:e -> c11:p9:w [color="black", style="setlinewidth(3)", label="<10>"];
+c14:p10:e -> n3:w [color="black", style="setlinewidth(3)", label="<32>"];
+n3:e -> c21:p15:w [color="black", style="setlinewidth(3)", label="<32>"];
+c21:p19:e -> n4:w [color="black", style="setlinewidth(3)", label="<32>"];
+n4:e -> c14:p12:w [color="black", style="setlinewidth(3)", label="<32>"];
+c21:p17:e -> n5:w [color="black", style="setlinewidth(3)", label="<10>"];
+n5:e -> c14:p9:w [color="black", style="setlinewidth(3)", label="<10>"];
+c21:p20:e -> n6:w [color="black", label=""];
+n6:e -> c14:p13:w [color="black", label=""];
+n7:e -> c11:p7:w [color="black", label=""];
+n7:e -> c14:p7:w [color="black", label=""];
+n7:e -> c21:p7:w [color="black", label=""];
+n8:e -> c11:p8:w [color="black", label=""];
+n8:e -> c14:p8:w [color="black", label=""];
+n8:e -> c21:p8:w [color="black", label=""];
+}

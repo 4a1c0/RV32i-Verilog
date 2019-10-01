@@ -56,7 +56,7 @@ module core(
     wire is_absolute_t;
     // wire is_conditional_t;
     //wire mem_w_t;
-    wire mem_to_reg_t;
+    //wire mem_to_reg_t;
     //wire reg_r_t;
     wire [`REG_ADDR_WIDTH-1:0] r1_addr_t;
     wire [`REG_ADDR_WIDTH-1:0] r2_addr_t;
@@ -82,29 +82,28 @@ module core(
 
 
     controlUnit controlUnit_inst(
-        .instruction (val_mem_prog_i),
-        .ALU_op (ALU_op_t),
-        .LIS_op (LIS_op_t),
-        .BR_op_o (BR_op_t),
-        .data_origin_o (data_origin_t),
-        .is_branch_o (is_branch_t),        
+        .instruction (val_mem_prog_i),  // Instruction from prog mem input
+        .ALU_op (ALU_op_t),  // ALU operation output
+        .LIS_op (LIS_op_t),  // Load Store Operation output
+        .BR_op_o (BR_op_t),  // Branch operation output
+        .data_origin_o (data_origin_t),  // Data origin output (Rs2 or imm or pc)
+        .is_branch_o (is_branch_t),  // Branch indicator output
         .is_load_store (is_load_store_t),  // execution_unit 
-        .mem_w (we_mem_data_o),
-        .mem_to_reg (mem_to_reg_t),
-        .reg_r (we_reg_file),
-        .r1_addr (r1_num_read_reg_file),
-        .r2_addr (r2_num_read_reg_file),
-        .reg_addr (r_num_write_reg_file),
+        .mem_w (we_mem_data_o),  // LoadStore indicator output
+        .reg_w (we_reg_file),  // RegFile write enable
+        .r1_addr (r1_num_read_reg_file),  // RS1 addr
+        .r2_addr (r2_num_read_reg_file),  // RS2 addr
+        .reg_addr (r_num_write_reg_file),  // RD addr
         .imm_val_o (imm_val_t)  //execution unit imm val
     );
 
     programCounter program_counter_inst (
         .rst_n (rst_n),
         .clk (clk),
-        .is_branch_i (is_branch_t),
-        .is_absolute_i (is_absolute_t),
-        .offset_i (new_pc[ADDR_WIDTH-1:0]),
-        .addr (addr_mem_prog_o)
+        .is_branch_i (is_branch_t),  // Branch indicator
+        .is_absolute_i (is_absolute_t),  // Absolute or relative branch
+        .offset_i (new_pc[ADDR_WIDTH-1:0]),  // new pc or offset
+        .addr (addr_mem_prog_o)  // next addr
     );
 
     regFile reg_file_inst(
@@ -122,22 +121,22 @@ module core(
 
 //assign data_in_reg_file = 32'h55555555;
     executionUnit exec_unit_inst(
-        .ALU_op (ALU_op_t),
-        .LIS_op (LIS_op_t),
-        .BR_op (BR_op_t),
-        .data_origin_i(data_origin_t),
-        .rs1_i (rs1_reg_file),
-        .rs2_i (rs2_reg_file),
+        .ALU_op (ALU_op_t),  // ALU operation input
+        .LIS_op (LIS_op_t),  // Load Store Operation input
+        .BR_op (BR_op_t),  // Branch operation input 
+        .data_origin_i(data_origin_t),  // Data origin input (Rs2 or imm or pc)
+        .rs1_i (rs1_reg_file),  // RS1
+        .rs2_i (rs2_reg_file),  // RS2
         .imm_val_i (imm_val_t), // immidiate value
-        .d_o (data_in_reg_file), // data_out_exec),//data_in_reg_file),
-        .val_mem_data_write_o (val_mem_data_write_o),
-        .val_mem_data_read_i (val_mem_data_read_i),
-        .addr_mem_data_o (addr_mem_data_o),
-        .is_branch_i (is_branch_t),
-        .is_loadstore (is_load_store_t),
-        .new_pc_offset_o (new_pc),
-        .old_pc_i (addr_mem_prog_o),
-        .is_absolute_o (is_absolute_t)
+        .d_o (data_in_reg_file),  // output data to data_in_reg_file),
+        .val_mem_data_write_o (val_mem_data_write_o),  // output to data mem 
+        .val_mem_data_read_i (val_mem_data_read_i),  // input from data mem
+        .addr_mem_data_o (addr_mem_data_o),  // output address to data mem
+        .is_branch_i (is_branch_t),  // Branch indicator input
+        .is_loadstore (is_load_store_t),  // LoadStore indicator input
+        .new_pc_offset_o (new_pc),  // new offset or new pc
+        .old_pc_i (addr_mem_prog_o),  // Actual PC 
+        .is_absolute_o (is_absolute_t)  // Rewrite the current value to PC
     );
 
 

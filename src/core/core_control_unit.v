@@ -18,8 +18,7 @@ module controlUnit (
     //imm_val_rs2_o,  //execution unit imm val rs2
     is_load_store,  // execution_unit 
     mem_w,  // mem_write
-    mem_to_reg,
-    reg_r,
+    reg_w,
     r1_addr,
     r2_addr,
     reg_addr,
@@ -42,8 +41,7 @@ module controlUnit (
     //output [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     output is_load_store;
     output mem_w;
-    output mem_to_reg;
-    output reg_r;
+    output reg_w;
     output [`REG_ADDR_WIDTH-1:0]r1_addr;
     output [`REG_ADDR_WIDTH-1:0]r2_addr;
     output [`REG_ADDR_WIDTH-1:0]reg_addr;
@@ -56,9 +54,8 @@ module controlUnit (
     //reg is_imm_rs2_o;
 
     reg mem_w;
-    reg mem_to_reg;
 
-    reg reg_r;
+    reg reg_w;
     reg [`MEM_DATA_WIDTH-1:0] imm_val_o;
     //reg [`MEM_DATA_WIDTH-1:0] imm_val_rs2_o;
     reg [`REG_ADDR_WIDTH-1:0]r1_addr;
@@ -126,9 +123,8 @@ module controlUnit (
     
     always@(*) begin
         mem_w = 1'b0;
-        mem_to_reg = 1'b0;
         is_load_store = 1'b0;
-        reg_r = 1'b0;
+        reg_w = 1'b0;
         is_branch_o = 1'b0;
         data_origin_o = `REGS;  // Dafault value 0
         ALU_op = `ALU_OP_ADD;  // Dafault value 0
@@ -182,7 +178,7 @@ module controlUnit (
             data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value, in dis case 0
             imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
             
-            reg_r = 1'b1;  // Write the resut in RD
+            reg_w = 1'b1;  // Write the resut in RD
             reg_addr = rd;
 
             ALU_op = `ALU_OP_ADD;  // Sum with 0
@@ -197,7 +193,7 @@ module controlUnit (
             data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
             imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
 
-            reg_r = 1'b1;  // Write the resut in RD
+            reg_w = 1'b1;  // Write the resut in RD
             reg_addr = rd;
 
 
@@ -228,7 +224,7 @@ module controlUnit (
 
             imm_val_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
 
-            reg_r = 1'b1; // Write the resut in RD
+            reg_w = 1'b1; // Write the resut in RD
             reg_addr = rd;
 
             ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
@@ -249,7 +245,7 @@ module controlUnit (
 
             imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
             
-            reg_r = 1'b1;  // Write the resut in RD
+            reg_w = 1'b1;  // Write the resut in RD
             reg_addr = rd;
       
 
@@ -298,9 +294,8 @@ module controlUnit (
         `OPCODE_I_LOAD: begin  // Loads
 
             is_load_store = 1'b1;
-            mem_to_reg = 1'b1;  // not in use
 
-            reg_r = 1'b1;
+            reg_w = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;
 
@@ -355,7 +350,7 @@ module controlUnit (
         `OPCODE_I_IMM: begin
             data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
             imm_val_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
-            reg_r = 1'b1;
+            reg_w = 1'b1;
             r1_addr = rs1;
             reg_addr = rd;
             case(funct3)
@@ -377,7 +372,7 @@ module controlUnit (
       
 
         `OPCODE_R_ALU: begin
-            reg_r = 1'b1;
+            reg_w = 1'b1;
             r1_addr = rs1;
             r2_addr = rs2;
             reg_addr = rd;
