@@ -401,7 +401,19 @@ module controlUnit (
 
       
 
-        `OPCODE_I_SYSTEM: begin
+        `OPCODE_I_SYSTEM: begin  // SYSTEM + CSR  // TODO Add control signals to enable CSR unit
+            reg_w = 1'b1;
+            reg_addr = rd;
+            case(funct3)
+                `FUNCT3_ECALL_EBREAK: ;
+                `FUNCT3_CSRRW:     r1_addr = rs1;  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
+                `FUNCT3_CSRRS:     r1_addr = rs1;  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                `FUNCT3_CSRRC:     r1_addr = rs1;  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
+                `FUNCT3_CSRRWI:     ALU_op = `ALU_OP_XOR;  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
+                `FUNCT3_CSRRSI: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL;  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
+                `FUNCT3_CSRRCI:      ALU_op = `ALU_OP_OR;  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
+            endcase
+
 
       
 

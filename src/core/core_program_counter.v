@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-
+`default_nettype none
 `include "src/defines.vh"
 
 // Module Declaration
@@ -37,3 +37,4 @@ module programCounter (
         end
     end
 endmodule
+`default_nettype wire
