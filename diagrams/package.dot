@@ -1,5 +1,5 @@
-digraph "package" {
-label="package";
+digraph "top" {
+label="top";
 rankdir="LR";
 remincross=true;
 n1 [ shape=diamond, label="val_mem_prog", color="black", fontcolor="black" ];

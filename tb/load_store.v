@@ -11,7 +11,7 @@ module load_store_test();
 	initial begin 
 
 		//$dumpfile("vcd/riscV.vcd");
-		//$dumpvars(0, TB.package_inst);
+		//$dumpvars(0, TB.top_inst);
 
 		
 		
@@ -35,7 +35,7 @@ module load_store_test();
 		TB.rst_n = 1'b0;
 		#100
 		//Load data from memory
-		$readmemh("data/dataMem_h.mem", TB.package_inst.mem_data_inst.dataArray, 0, 3);
+		$readmemh("data/dataMem_h.mem", TB.top_inst.mem_data_inst.dataArray, 0, 3);
 		TB.test_store;
 
 	$finish;
