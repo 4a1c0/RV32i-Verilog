@@ -424,7 +424,7 @@ module controlUnit (
             reg_w = 1'b1;
             reg_addr = rd;
             case(funct3)
-                `FUNCT3_ECALL_EBREAK: ;
+                `FUNCT3_ECALL_EBREAK: ;  // NOP
                 `FUNCT3_CSRRW:     r1_addr = rs1;  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
                 `FUNCT3_CSRRS:     r1_addr = rs1;  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
                 `FUNCT3_CSRRC:     r1_addr = rs1;  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
