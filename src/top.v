@@ -5,13 +5,14 @@
 `include "src/mem/mem_data.v"
 `include "src/core/core.v"
 
-module package(
+module top(
         clk,
         rst_n,
     );
 
     parameter ADDR_WIDTH = 10;
     parameter DATA_WITDTH = 32;
+    parameter TRANSFER_WIDTH = 4;
 
     input 	clk;
     input 	rst_n;
@@ -24,6 +25,8 @@ module package(
     wire [ADDR_WIDTH-1 : 0] addr_mem_prog;
     wire [DATA_WITDTH-1 : 0] val_mem_prog;
 
+    wire  [TRANSFER_WIDTH-1:0] write_transfer;
+
 
 core core_inst(
         .clk (clk),
@@ -33,7 +36,8 @@ core core_inst(
         .val_mem_data_read_i (val_mem_data_read),
         .val_mem_data_write_o (val_mem_data_write),
         .addr_mem_prog_o (addr_mem_prog),
-        .val_mem_prog_i (val_mem_prog)
+        .val_mem_prog_i (val_mem_prog),
+        .write_transfer_mem_data_o ()
     );
 
 dataMem mem_data_inst (
@@ -42,7 +46,8 @@ dataMem mem_data_inst (
         .we			(we_mem_data)	,  // Write Enable
         .addr		(addr_mem_data)	,  // Address
         .data_in	(val_mem_data_write),  //  Data in
-        .data_out   (val_mem_data_read)  //data out
+        .data_out   (val_mem_data_read),  //data out
+        .write_transfer_i (write_transfer) // write Byte mask
     );
 
 progMem mem_prog_inst (

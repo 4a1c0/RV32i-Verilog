@@ -22,12 +22,17 @@ module controlUnit (
     r1_addr,
     r2_addr,
     reg_addr,
-    imm_val_o  //execution unit imm val rs1
+    imm_val_o,  //execution unit imm val rs1
+    write_transfer_o
+    
     
     
     //is_absolute_o,  // 
     //is_conditional_o,
     );
+
+    parameter TRANSFER_WIDTH = 4;
+
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
     //input [`MEM_ADDR_WIDTH-1:0] pc_i;
@@ -48,7 +53,7 @@ module controlUnit (
     output is_branch_o;  // branch indicator
     //output is_absolute_o;
     //output is_conditional_o;
-
+    output [TRANSFER_WIDTH-1:0] write_transfer_o;
 
     //reg is_imm_rs1_o;
     //reg is_imm_rs2_o;
@@ -120,9 +125,14 @@ module controlUnit (
     reg [`LIS_OP_WIDTH-1:0] LIS_op;
     reg [`BR_OP_WIDTH-1:0] BR_op_o;
     reg [`DATA_ORIGIN_WIDTH-1:0]  data_origin_o;
+
+
+    reg [TRANSFER_WIDTH-1:0] write_transfer_o;
+
     
     always@(*) begin
         mem_w = 1'b0;
+        write_transfer_o = {TRANSFER_WIDTH{1'b0}};
         is_load_store = 1'b0;
         reg_w = 1'b0;
         is_branch_o = 1'b0;
@@ -336,9 +346,18 @@ module controlUnit (
             mem_w = 1'b1;  // Set the bit to write to memory
 
             case(funct3)
-                `FUNCT3_SB: LIS_op = `LIS_SB;  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-                `FUNCT3_SH: LIS_op = `LIS_SH;  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-                `FUNCT3_SW: LIS_op = `LIS_SW;  // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                `FUNCT3_SB: begin  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                    LIS_op = `LIS_SB;
+                    write_transfer_o = 4'b0001;
+                end
+                `FUNCT3_SH: begin  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                    LIS_op = `LIS_SH;  
+                    write_transfer_o = 4'b0011;
+                end 
+                `FUNCT3_SW: begin // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                    LIS_op = `LIS_SW;  
+                    write_transfer_o = 4'b1111;
+                end 
             endcase
 
       

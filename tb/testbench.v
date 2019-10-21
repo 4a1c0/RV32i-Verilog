@@ -4,7 +4,7 @@
 
 `include "src/defines.vh"
 
-`include"src/package.v"
+`include"src/top.v"
 
 module tb();
 	
@@ -17,7 +17,7 @@ module tb();
 		reg [31:0] expectedResult;
 
 	
-	package package_inst(
+	top top_inst(
 		.clk				(clk),
 		.rst_n				(rst_n)
 	);
@@ -29,10 +29,10 @@ module tb();
 	// initial begin 
 
 	// 	$dumpfile("vcd/riscV.vcd");
-	// 	$dumpvars(0, package_inst);
+	// 	$dumpvars(0, top_inst);
 	// 	// Load memory
-	// 	$readmemb("data/programMem_b.mem", package_inst.mem_prog_inst.progArray, 0, 3);
-	// 	$readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
+	// 	$readmemb("data/programMem_b.mem", top_inst.mem_prog_inst.progArray, 0, 3);
+	// 	$readmemh("data/dataMem_h.mem", top_inst.mem_data_inst.dataArray, 0, 3);
 		
 	// 	pc = 32'b0;
 
@@ -41,8 +41,8 @@ module tb();
 	// 	rst_n = 1'b0;
 	// 	#100
 		
-    //     $readmemh("data/dataMem_h.mem", package_inst.mem_data_inst.dataArray, 0, 3);
-    //     //package_inst.mem_data_inst.dataArray[1] = 32'hff04a1c0;
+    //     $readmemh("data/dataMem_h.mem", top_inst.mem_data_inst.dataArray, 0, 3);
+    //     //top_inst.mem_data_inst.dataArray[1] = 32'hff04a1c0;
 	// 	//test_add;
 	// 	//test_lui;
 	// 	//test_auipc;
@@ -68,9 +68,9 @@ task test_andi;
 
         rst_n		= 1'b1;
         #300;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000404) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000404) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h0000404 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h0000404 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
 
@@ -86,9 +86,9 @@ task test_slli;
         
         rst_n		= 1'b1;
         #300;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h000000C but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h000000C but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
@@ -104,14 +104,14 @@ task test_slti;
         
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
-        if (package_inst.core_inst.reg_file_inst.regFile[6] == 32'h0000001) $display ("    OK: reg6 is : %h", package_inst.core_inst.reg_file_inst.regFile[6]);
+        if (top_inst.core_inst.reg_file_inst.regFile[6] == 32'h0000001) $display ("    OK: reg6 is : %h", top_inst.core_inst.reg_file_inst.regFile[6]);
         else begin
-            $display ("ERROR: reg6 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[6]);
+            $display ("ERROR: reg6 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[6]);
             $fatal;
         end
     end
@@ -127,14 +127,14 @@ task test_sltiu;
 
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
-        if (package_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000000) $display ("    OK: reg3 is : %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000000) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
-            $display ("ERROR: reg3 has to be h0000001 but is: %h", package_inst.core_inst.reg_file_inst.regFile[3]);
+            $display ("ERROR: reg3 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             $fatal;
         end
     end
@@ -150,9 +150,9 @@ task test_add;
 
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be 7 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be 7 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
@@ -168,9 +168,9 @@ task test_and;
         //TEST
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h000000FF but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h000000FF but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
@@ -204,9 +204,9 @@ task test_load;
         //TEST
         rst_n		= 1'b1;
         #600;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be hf04a1c0f but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be hf04a1c0f but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
 
@@ -233,9 +233,9 @@ task test_store;
         //TEST
         rst_n		= 1'b1;
         #1100;
-        if (package_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
-            $display ("ERROR: reg5 has to be h10101010 but is: %h", package_inst.core_inst.reg_file_inst.regFile[5]);
+            $display ("ERROR: reg5 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
 
@@ -251,9 +251,9 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeJal(5'h5, {21'h1FFFF4}); // -12
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.program_counter_inst.addr == 0) $display ("  OK: PC is: %d", package_inst.core_inst.program_counter_inst.addr);
+        if (top_inst.core_inst.program_counter_inst.addr == 0) $display ("  OK: PC is: %d", top_inst.core_inst.program_counter_inst.addr);
         else begin
-            $display ("ERROR: PC has to be 0 but is: %d", package_inst.core_inst.program_counter_inst.addr);
+            $display ("ERROR: PC has to be 0 but is: %d", top_inst.core_inst.program_counter_inst.addr);
             $fatal;
         end
     end
@@ -270,9 +270,9 @@ task test_beq;
         
         rst_n		= 1'b1;
         #400;
-        if (package_inst.core_inst.program_counter_inst.addr == 252) $display ("    OK: PC is: %d", package_inst.core_inst.program_counter_inst.addr);
+        if (top_inst.core_inst.program_counter_inst.addr == 252) $display ("    OK: PC is: %d", top_inst.core_inst.program_counter_inst.addr);
         else begin
-            $display ("ERROR: PC has to be 252 but is: %d", package_inst.core_inst.program_counter_inst.addr);
+            $display ("ERROR: PC has to be 252 but is: %d", top_inst.core_inst.program_counter_inst.addr);
             $fatal;
         end
     end
@@ -291,8 +291,8 @@ task encodeAddi;
 	input [11:0] immediate;
 	begin
 		instruction = {immediate, rs1, 3'b000, rd, `OPCODE_I_IMM};
-		package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+		top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 		pc = pc + 32'd4;
 	end
 endtask
@@ -303,8 +303,8 @@ task encodeAndi;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b111, rd, `OPCODE_I_IMM};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -315,8 +315,8 @@ task encodeSlti;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b010, rd, `OPCODE_I_IMM};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -327,8 +327,8 @@ task encodeSltiu;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b011, rd, `OPCODE_I_IMM};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -339,8 +339,8 @@ task encodeSlli;
     input [4:0] immediate;
     begin
         instruction = {7'h0, immediate, rs1, `FUNCT3_SLLI, rd, `OPCODE_I_IMM}; // 3'b001
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -351,8 +351,8 @@ task encodeAdd;
 	input [4:0] rd;
 	begin
 	 instruction = {7'b0, rs2, rs1, 3'b000, rd, `OPCODE_R_ALU};
-	 package_inst.mem_prog_inst.progArray[pc] = instruction;
-	 $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+	 top_inst.mem_prog_inst.progArray[pc] = instruction;
+	 $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 	 pc = pc + 32'd4;
 	end
 endtask
@@ -363,8 +363,8 @@ task encodeAnd;
     input [4:0] rd;
     begin
         instruction = {7'b0, rs2, rs1, 3'b111, rd, `OPCODE_R_ALU};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-	    $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+	    $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -375,8 +375,8 @@ task encodeSlt;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b010, rd, `OPCODE_R_ALU};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -387,8 +387,8 @@ task encodeSltu;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b011, rd, `OPCODE_R_ALU};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -399,8 +399,8 @@ task encodeSll;
     input [4:0] immediate;
     begin
         instruction = {7'h0, immediate, rs1, 3'b001, rd, `OPCODE_R_ALU};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-		$display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -410,8 +410,8 @@ task encodeLui;
 	input [19:0] immediate;
 	begin
 	instruction = {immediate[19:0], rd, `OPCODE_U_LUI};
-	package_inst.mem_prog_inst.progArray[pc] = instruction;
-    $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+	top_inst.mem_prog_inst.progArray[pc] = instruction;
+    $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 	pc = pc + 32'd4;
 	end
 endtask
@@ -421,8 +421,8 @@ task encodeAuipc;
     input [19:0] immediate;
     begin
         instruction = {immediate[19:0], rd, `OPCODE_U_AUIPC};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -433,8 +433,8 @@ task encodeLB;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LB, rd, `OPCODE_I_LOAD};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
  endtask
@@ -445,8 +445,8 @@ task encodeLH;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LH, rd, `OPCODE_I_LOAD};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
  endtask
@@ -457,8 +457,8 @@ task encodeLW;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LW, rd, `OPCODE_I_LOAD};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -469,8 +469,8 @@ task encodeLBU;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LBU, rd, `OPCODE_I_LOAD};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -481,8 +481,8 @@ task encodeLHU;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LHU, rd, `OPCODE_I_LOAD};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -493,8 +493,8 @@ task encodeSB;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SB, offset[4:0], `OPCODE_S_STORE};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
  endtask
@@ -505,8 +505,8 @@ task encodeSH;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SH, offset[4:0], `OPCODE_S_STORE};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
  endtask
@@ -517,8 +517,8 @@ task encodeSW;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SW, offset[4:0], `OPCODE_S_STORE};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -528,8 +528,8 @@ task encodeJal;
     input [20:0] immediate;
     begin
         instruction = {immediate[20], immediate[10:1], immediate[11], immediate[19:12], rd, `OPCODE_J_JAL};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -541,8 +541,8 @@ task encodeBeq;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b0, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -553,8 +553,8 @@ task encodeBne;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b1, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -565,8 +565,8 @@ task encodeBlt;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b100, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -577,8 +577,8 @@ task encodeBge;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b101, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -589,8 +589,8 @@ task encodeBltu;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b110, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
@@ -601,25 +601,25 @@ task encodeBgeu;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b11, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        package_inst.mem_prog_inst.progArray[pc] = instruction;
-        $display("mem[%d] = %b", pc, package_inst.mem_prog_inst.progArray[pc]);
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
 endtask
 
 
 //always @ (negedge clk) begin
-		// $display("reg5 = %d\npc = %d\ninst = %b", package_inst.reg_file_inst.regFile[5], package_inst.addr_progMem, package_inst.instruction_progmem);
-		// $display("reg1 = %h", package_inst.core_inst.reg_file_inst.regFile[1]);
-        // $display("reg2 = %h", package_inst.core_inst.reg_file_inst.regFile[2]);
-        //$display("reg3 = %h", package_inst.core_inst.reg_file_inst.regFile[3]);
-        // $display("reg4 = %h", package_inst.core_inst.reg_file_inst.regFile[4]);
-        //$display("reg5 = %h", package_inst.core_inst.reg_file_inst.regFile[5]);
-		// $display("rs2_exec_unit_t = %d", package_inst.rs2_exec_unit_t);
-		// $display("ALU_op_t = %d", package_inst.ALU_op_t);
-		//$display("is_imm_t = %d", package_inst.is_imm_t);
-		// $display("r_num_write_reg_file = %d", package_inst.r_num_write_reg_file);
-        //$display("pc = %d", package_inst.core_inst.program_counter_inst.addr);
+		// $display("reg5 = %d\npc = %d\ninst = %b", top_inst.reg_file_inst.regFile[5], top_inst.addr_progMem, top_inst.instruction_progmem);
+		// $display("reg1 = %h", top_inst.core_inst.reg_file_inst.regFile[1]);
+        // $display("reg2 = %h", top_inst.core_inst.reg_file_inst.regFile[2]);
+        //$display("reg3 = %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+        // $display("reg4 = %h", top_inst.core_inst.reg_file_inst.regFile[4]);
+        //$display("reg5 = %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+		// $display("rs2_exec_unit_t = %d", top_inst.rs2_exec_unit_t);
+		// $display("ALU_op_t = %d", top_inst.ALU_op_t);
+		//$display("is_imm_t = %d", top_inst.is_imm_t);
+		// $display("r_num_write_reg_file = %d", top_inst.r_num_write_reg_file);
+        //$display("pc = %d", top_inst.core_inst.program_counter_inst.addr);
 
 //end
 

@@ -51,10 +51,10 @@ module crs_unit (
 
     reg [CSR_XLEN-1:0] csr_o;
 
-        timer timer_inst (
-    .rst_n (rst_n),
-    .clk (clk),
-    .val_o (timer_val_o)
+    timer timer_inst (
+        .rst_n (rst_n),
+        .clk (clk),
+        .val_o (timer_val_o)
     );
 
 
@@ -64,13 +64,15 @@ module crs_unit (
 			cycle_csr <= {CSR_XLEN{1'b0}}; //reset array
             instret_csr <= {CSR_XLEN{1'b0}}; //reset array
 		end 
-        else if (csr_op_i !== {CSR_OP_WIDTH{1'b0}}) begin
+        else if (csr_op_i !== {CSR_OP_WIDTH{1'b0}}) begin 
 
             case(csr_op_i)
-                CSRRW:     begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
+                CSRRW: begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
                     csr_to_write <= {{CSR_XLEN-32{1'b0}},csr_val_i};
                 end
-                CSRRS:     ;  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                    
+                end
                 CSRRC:     ;  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
                 CSRRWI:     ;  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
                 CSRRSI: ;  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
@@ -79,7 +81,8 @@ module crs_unit (
             endcase
 
             case (csr_addr_i)
-                CYCLE_ADDR: csr_o <= timer_val_o;
+                CYCLE_ADDR: csr_o <= timer_val_o[31:0];
+                CYCLEH_ADDR: csr_o <= timer_val_o[64:32];
                 
             endcase
     

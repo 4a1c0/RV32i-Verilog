@@ -20,11 +20,13 @@ module core(
     val_mem_data_read_i,
     val_mem_data_write_o,
     addr_mem_prog_o,
-    val_mem_prog_i
+    val_mem_prog_i,
+    write_transfer_mem_data_o
     );
     
     parameter ADDR_WIDTH = 10;
     parameter DATA_WIDTH = 32;
+    parameter TRANSFER_WIDTH = 4;
 
     input 	clk;
     input 	rst_n;
@@ -35,6 +37,8 @@ module core(
     output [DATA_WIDTH-1 : 0] val_mem_data_write_o;
     output [ADDR_WIDTH-1 : 0] addr_mem_prog_o;
     input [DATA_WIDTH-1 : 0] val_mem_prog_i;
+
+    output [TRANSFER_WIDTH-1:0] write_transfer_mem_data_o;
 
 
     wire is_load_store; 
@@ -94,7 +98,8 @@ module core(
         .r1_addr (r1_num_read_reg_file),  // RS1 addr
         .r2_addr (r2_num_read_reg_file),  // RS2 addr
         .reg_addr (r_num_write_reg_file),  // RD addr
-        .imm_val_o (imm_val_t)  //execution unit imm val
+        .imm_val_o (imm_val_t),  //execution unit imm val
+        .write_transfer_o (write_transfer_mem_data_o)
     );
 
     programCounter program_counter_inst (
@@ -119,7 +124,6 @@ module core(
         .rs2	(rs2_reg_file)		   // Output register 2
     );
 
-//assign data_in_reg_file = 32'h55555555;
     executionUnit exec_unit_inst(
         .ALU_op (ALU_op_t),  // ALU operation input
         .LIS_op (LIS_op_t),  // Load Store Operation input
