@@ -37,7 +37,7 @@ core core_inst(
         .val_mem_data_write_o (val_mem_data_write),
         .addr_mem_prog_o (addr_mem_prog),
         .val_mem_prog_i (val_mem_prog),
-        .write_transfer_mem_data_o ()
+        .write_transfer_mem_data_o (write_transfer)
     );
 
 dataMem mem_data_inst (

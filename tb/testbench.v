@@ -196,11 +196,11 @@ task test_load;
     begin
         $display ("LOAD Test");
         pc = 32'b0;
-        encodeLB(5'h0, 5'h3, 12'h1);
-        encodeLH(5'h0, 5'h4, 12'h1);
-        encodeLW(5'h0, 5'h5, 12'h1);
-        encodeLHU(5'h0, 5'h6, 12'h1);
-        encodeLBU(5'h0, 5'h7, 12'h1);
+        encodeLB(5'h0, 5'h3, 12'h4);
+        encodeLH(5'h0, 5'h4, 12'h4);
+        encodeLW(5'h0, 5'h5, 12'h4);
+        encodeLHU(5'h0, 5'h6, 12'h4);
+        encodeLBU(5'h0, 5'h7, 12'h4);
         //TEST
         rst_n		= 1'b1;
         #600;
@@ -219,16 +219,16 @@ task test_store;
         
         $display ("STORE Test");
         encodeLW(5'h0, 5'h1, 12'h0);
-        encodeLW(5'h0, 5'h2, 12'h1);
-        encodeLW(5'h0, 5'h3, 12'h2);
-        encodeLW(5'h0, 5'h4, 12'h3);
+        encodeLW(5'h0, 5'h2, 12'h4);
+        encodeLW(5'h0, 5'h3, 12'h8);
+        encodeLW(5'h0, 5'h4, 12'hC);
 
-        encodeSW(5'h0, 5'h1, 12'd10);
-        encodeSH(5'h0, 5'h2, 12'd11);
-        encodeSB(5'h0, 5'h3, 12'd12);
-        encodeSW(5'h0, 5'h4, 12'd13);
+        encodeSW(5'h0, 5'h1, 12'h10);
+        encodeSH(5'h0, 5'h2, 12'h14);
+        encodeSB(5'h0, 5'h3, 12'h18);
+        encodeSW(5'h0, 5'h4, 12'h1C);
 
-        encodeLW(5'h0, 5'h5, 12'd10);
+        encodeLW(5'h0, 5'h5, 12'h10);
 
         //TEST
         rst_n		= 1'b1;
