@@ -229,13 +229,25 @@ task test_store;
         encodeSW(5'h0, 5'h4, 12'h1C);
 
         encodeLW(5'h0, 5'h5, 12'h10);
+        encodeLW(5'h0, 5'h6, 12'h14);
+        encodeLW(5'h0, 5'h7, 12'h18);
 
         //TEST
         rst_n		= 1'b1;
-        #1100;
+        #1200;
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+        if (top_inst.core_inst.reg_file_inst.regFile[6] == 32'h00001c0f) $display ("    OK: reg6 is : %h", top_inst.core_inst.reg_file_inst.regFile[6]);
+        else begin
+            $display ("ERROR: reg5 has to be h00001c0f but is: %h", top_inst.core_inst.reg_file_inst.regFile[6]);
+            $fatal;
+        end
+        if (top_inst.core_inst.reg_file_inst.regFile[7] == 32'h00000011) $display ("    OK: reg7 is : %h", top_inst.core_inst.reg_file_inst.regFile[7]);
+        else begin
+            $display ("ERROR: reg5 has to be h00000011 but is: %h", top_inst.core_inst.reg_file_inst.regFile[7]);
             $fatal;
         end
 
