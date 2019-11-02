@@ -146,4 +146,14 @@
 `define RS2IMM_RS1PC	2
 `define UNUSED 		3
 
+// CSR
+`define CSR_OP_WIDTH     3
+
+`define CSRRW    1;
+`define CSRRS    2;
+`define CSRRC    3;
+`define CSRRWI    4;
+`define CSRRSI    5;
+`define CSRRCI    6;
+
 `endif

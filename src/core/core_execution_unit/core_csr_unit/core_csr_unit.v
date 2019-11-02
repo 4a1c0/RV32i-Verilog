@@ -2,16 +2,16 @@
 `default_nettype none
 `include "src/defines.vh"
 
-`include "src/core/core_csr_unit/core_csr_unit_timer.v"
+`include "src/core/core_execution_unit/core_csr_unit/core_csr_unit_timer.v"
 
 // Module Declaration
 module crs_unit (
     rst_n,
     clk,
-    csr_addr_i,
-    csr_val_i,
-    csr_val_o,
-    csr_op_i
+    csr_addr_i, // Adr 
+    csr_val_i,  // Val in
+    csr_val_o,  // Val Out
+    csr_op_i  // Op In
     
 
     );
