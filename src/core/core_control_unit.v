@@ -10,6 +10,7 @@ module controlUnit (
     ALU_op,
     LIS_op,
     BR_op_o,
+    csr_op_o,
     data_origin_o,
     is_branch_o,  // branch indicator
     //is_imm_rs1_o,  //execution unit imm rs1 // TODO Change the the way to indicate inmm or reg to a 2 bit bus
@@ -23,7 +24,8 @@ module controlUnit (
     r2_addr,
     reg_addr,
     imm_val_o,  //execution unit imm val rs1
-    write_transfer_o
+    write_transfer_o,
+    csr_addr_o
     
     
     
@@ -32,7 +34,15 @@ module controlUnit (
     );
 
     parameter TRANSFER_WIDTH = 4;
+    parameter CSR_OP_WIDTH = `CSR_OP_WIDTH;  // 3
+    parameter CSR_ADDR = 12;
 
+    localparam CSRRW = 1;
+    localparam CSRRS = 2;
+    localparam CSRRC = 3;
+    localparam CSRRWI = 4;
+    localparam CSRRSI = 5;
+    localparam CSRRCI = 6;
 
     input [`MEM_DATA_WIDTH-1:0] instruction;
     //input [`MEM_ADDR_WIDTH-1:0] pc_i;
@@ -54,6 +64,9 @@ module controlUnit (
     //output is_absolute_o;
     //output is_conditional_o;
     output [TRANSFER_WIDTH-1:0] write_transfer_o;
+
+    output [CSR_OP_WIDTH-1 : 0] csr_op_o;
+    output [CSR_ADDR-1 : 0] csr_addr_o;
 
     //reg is_imm_rs1_o;
     //reg is_imm_rs2_o;
@@ -128,9 +141,12 @@ module controlUnit (
 
 
     reg [TRANSFER_WIDTH-1:0] write_transfer_o;
+    reg [CSR_OP_WIDTH-1 : 0] csr_op_o;
+    reg [CSR_ADDR-1 : 0] csr_addr_o;
 
     
     always@(*) begin
+
         mem_w = 1'b0;
         write_transfer_o = {TRANSFER_WIDTH{1'b0}};
         is_load_store = 1'b0;
@@ -140,16 +156,19 @@ module controlUnit (
         ALU_op = `ALU_OP_ADD;  // Dafault value 0
         BR_op_o = `BR_EQ;  // Dafault value 0
         LIS_op = `LIS_LB;  // Dafault value 0
+        csr_op_o = {CSR_OP_WIDTH{1'b0}};  // Zero value to deactivate acces to CSR
+        csr_addr_o = {CSR_ADDR{1'b0}};
         imm_val_o = `MEM_DATA_WIDTH'd0;
         reg_addr = `REG_ADDR_WIDTH'd0;
         r1_addr = `REG_ADDR_WIDTH'd0;
         r2_addr = `REG_ADDR_WIDTH'd0;
+        
 
         
 
     
 
-    // Decode
+        // Decode
 
         opcode 	= instruction[6:0]; 
 
@@ -176,276 +195,285 @@ module controlUnit (
         rd = instruction[11:7];
 
   
-    case(opcode)
+        case(opcode)
+            // fence      "Order device I/O and memory accesses viewed by other threads and devices"
+            // fence.i    "Synchronize the instruction and data streams
 
+            `OPCODE_U_LUI: begin  // Set and sign extend the 20-bit immediate (shited 12 bits left) and zero the bottom 12 bits into rd
 
+                data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value, in dis case 0
+                imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+                
+                reg_w = 1'b1;  // Write the resut in RD
+                reg_addr = rd;
 
-// fence      "Order device I/O and memory accesses viewed by other threads and devices"
-// fence.i    "Synchronize the instruction and data streams
+                ALU_op = `ALU_OP_ADD;  // Sum with 0
+                r1_addr = `REG_ADDR_WIDTH'd0;
 
-        `OPCODE_U_LUI: begin  // Set and sign extend the 20-bit immediate (shited 12 bits left) and zero the bottom 12 bits into rd
+            end
 
-            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value, in dis case 0
-            imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
-            
-            reg_w = 1'b1;  // Write the resut in RD
-            reg_addr = rd;
 
-            ALU_op = `ALU_OP_ADD;  // Sum with 0
-            r1_addr = `REG_ADDR_WIDTH'd0;
+            `OPCODE_U_AUIPC: begin  // Place the PC plus the 20-bit signed immediate (shited 12 bits left) into rd (used before JALR)
 
-        end
+                data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
+                imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
 
-      
+                reg_w = 1'b1;  // Write the resut in RD
+                reg_addr = rd;
 
-        `OPCODE_U_AUIPC: begin  // Place the PC plus the 20-bit signed immediate (shited 12 bits left) into rd (used before JALR)
 
-            data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
-            imm_val_o = { imm20[19:0], {`MEM_DATA_WIDTH - 20 {1'b0}} };
+                // Need to output 2 imm vals of the control unit to add the PC and a imm val
 
-            reg_w = 1'b1;  // Write the resut in RD
-            reg_addr = rd;
+                //is_imm_rs1_o = 1'b1;  // no PC in the control unit 
+                //imm_val_rs1_o = pc_i;
 
+                ALU_op = `ALU_OP_ADD;  // Add the values
 
-            // Need to output 2 imm vals of the control unit to add the PC and a imm val
 
-            //is_imm_rs1_o = 1'b1;  // no PC in the control unit 
-            //imm_val_rs1_o = pc_i;
 
-            ALU_op = `ALU_OP_ADD;  // Add the values
 
+            end
 
+        
 
+            `OPCODE_J_JAL: begin  // Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd
 
-        end
 
-      
+                //is_imm_rs1_o = 1'b1;
+                //imm_val_rs1_o = pc_i;
 
-        `OPCODE_J_JAL: begin  // Jump to the PC plus 20-bit signed immediate while saving PC+4 into rd
+                is_branch_o = 1'b1;
+                data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
 
+                //r1_addr = `REG_ADDR_WIDTH'd0;
 
-            //is_imm_rs1_o = 1'b1;
-            //imm_val_rs1_o = pc_i;
+                imm_val_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
 
-            is_branch_o = 1'b1;
-            data_origin_o = `RS2IMM_RS1PC;  // Send the immediate value and PC at the execution unit
+                reg_w = 1'b1; // Write the resut in RD
+                reg_addr = rd;
 
-            //r1_addr = `REG_ADDR_WIDTH'd0;
+                ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
 
-            imm_val_o = {{`MEM_DATA_WIDTH - 21 {imm20j[19]}},  imm20j[19:0], 1'b0  }; // TODO last bit is used? or is always 0
 
-            reg_w = 1'b1; // Write the resut in RD
-            reg_addr = rd;
+            end
 
-            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the PC
+        
 
+            `OPCODE_I_JALR: begin  // jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
+                is_branch_o = 1'b1;
+                data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+                // Execution unit knows that also needs the PC
 
-        end
+                r1_addr = rs1;
 
-      
+                ALU_op = `ALU_OP_ADD;  
 
-        `OPCODE_I_JALR: begin  // jalr       "Jump to rs1 plus the 12-bit signed immediate while saving PC+4 into rd"
-            is_branch_o = 1'b1;
-            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
-            // Execution unit knows that also needs the PC
+                imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
+                
+                reg_w = 1'b1;  // Write the resut in RD
+                reg_addr = rd;
+        
 
-            r1_addr = rs1;
+            end
 
-            ALU_op = `ALU_OP_ADD;  
+        
 
-            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0] }; // no ^2
-            
-            reg_w = 1'b1;  // Write the resut in RD
-            reg_addr = rd;
-      
+            `OPCODE_B_BRANCH: begin
+                is_branch_o = 1'b1;
+                data_origin_o = `REGS;  // Mantain RS2 value and RS1 value // DefaultValue
+                //is_conditional_o = 1'b1;
+                // Execution unit knows that also needs immideate value
+    
+                imm_val_o = {{`MEM_DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
 
-        end
+                r1_addr = rs1;
+                r2_addr = rs2;
+                ALU_op = `ALU_OP_SUB;
 
-      
+                case(funct3)
+                    `FUNCT3_BEQ: BR_op_o = `BR_EQ; // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
+                    `FUNCT3_BNE: BR_op_o = `BR_NE;  // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
+                    `FUNCT3_BLT:begin  // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
+                        ALU_op = `ALU_OP_SLT;
+                        BR_op_o = `BR_LT;  
+                    end
+                    `FUNCT3_BGE: begin  // bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
+                        ALU_op = `ALU_OP_SLT;
+                        BR_op_o = `BR_GE; 
+                    end 
+                    `FUNCT3_BLTU: begin  // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
+                        ALU_op = `ALU_OP_SLTU;
+                        BR_op_o = `BR_LT;
+                    end
+                    `FUNCT3_BGEU:begin  // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
+                        ALU_op = `ALU_OP_SLTU;
+                        BR_op_o = `BR_GE;
+                    end            
+                endcase
+        
+
+            end
+
+        
+
+            `OPCODE_I_LOAD: begin  // Loads
+
+                is_load_store = 1'b1;
+
+                reg_w = 1'b1;
+                r1_addr = rs1;
+                reg_addr = rd;
+
+                ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
+
+                data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+                imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
+
+                case(funct3)
+                    `FUNCT3_LB: LIS_op = `LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                    `FUNCT3_LH: LIS_op = `LIS_LH;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                    `FUNCT3_LW: LIS_op = `LIS_LW;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
+                    `FUNCT3_LBU: LIS_op = `LIS_LBU;  // lbu        "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
+                    `FUNCT3_LHU: LIS_op = `LIS_LHU;  // lhu        "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
+                                    
+                endcase
 
-        `OPCODE_B_BRANCH: begin
-            is_branch_o = 1'b1;
-            data_origin_o = `REGS;  // Mantain RS2 value and RS1 value // DefaultValue
-            //is_conditional_o = 1'b1;
-            // Execution unit knows that also needs immideate value
-  
-            imm_val_o = {{`MEM_DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
+        
 
-            r1_addr = rs1;
-            r2_addr = rs2;
-            ALU_op = `ALU_OP_SUB;
-
-            case(funct3)
-                `FUNCT3_BEQ: BR_op_o = `BR_EQ; // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
-                `FUNCT3_BNE: BR_op_o = `BR_NE;  // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
-                `FUNCT3_BLT:begin  // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
-                    ALU_op = `ALU_OP_SLT;
-                    BR_op_o = `BR_LT;  
-                 end
-                `FUNCT3_BGE: begin  // bge        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (signed)"
-                    ALU_op = `ALU_OP_SLT;
-                    BR_op_o = `BR_GE; 
-                end 
-                `FUNCT3_BLTU: begin  // bltu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (unsigned)"
-                    ALU_op = `ALU_OP_SLTU;
-                    BR_op_o = `BR_LT;
-                end
-                `FUNCT3_BGEU:begin  // bgeu       "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 >= rs2 (unsigned)"
-                    ALU_op = `ALU_OP_SLTU;
-                    BR_op_o = `BR_GE;
-                end            
-            endcase
-      
-
-         end
-
-      
-
-        `OPCODE_I_LOAD: begin  // Loads
-
-            is_load_store = 1'b1;
-
-            reg_w = 1'b1;
-            r1_addr = rs1;
-            reg_addr = rd;
-
-            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
-
-            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
-            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
-
-            case(funct3)
-                `FUNCT3_LB: LIS_op = `LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                `FUNCT3_LH: LIS_op = `LIS_LH;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                `FUNCT3_LW: LIS_op = `LIS_LW;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
-                `FUNCT3_LBU: LIS_op = `LIS_LBU;  // lbu        "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
-                `FUNCT3_LHU: LIS_op = `LIS_LHU;  // lhu        "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place zero-extended result into rd"
-                                
-            endcase
-
-      
-
-        end
-
-      
-
-        `OPCODE_S_STORE: begin  // Store
-
-            is_load_store = 1'b1;
-
-
-            r1_addr = rs1;
-            r2_addr = rs2;
-
-
-            ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
-
-            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
-            imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12s[11]}},  imm12s[11:0]  };
-
-            mem_w = 1'b1;  // Set the bit to write to memory
-
-            case(funct3)
-                `FUNCT3_SB: begin  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-                    LIS_op = `LIS_SB;
-                    write_transfer_o = 4'b0001;
-                end
-                `FUNCT3_SH: begin  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-                    LIS_op = `LIS_SH;  
-                    write_transfer_o = 4'b0011;
-                end 
-                `FUNCT3_SW: begin // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-                    LIS_op = `LIS_SW;  
-                    write_transfer_o = 4'b1111;
-                end 
-            endcase
-
-      
-
-        end
-
-      
-
-        `OPCODE_I_IMM: begin
-            data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
-            imm_val_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
-            reg_w = 1'b1;
-            r1_addr = rs1;
-            reg_addr = rd;
-            case(funct3)
-                `FUNCT3_ADD_SUB: ALU_op = `ALU_OP_ADD;// addi       "Add sign-extended 12-bit immediate to register rs1 and place the result in rd"
-                `FUNCT3_SLL:     ALU_op = `ALU_OP_SLL;  // slli       "Shift rs1 left by the 5 or 6 (RV32/64) bit (RV64) immediate and place the result into rd"
-                `FUNCT3_SLT:     ALU_op = `ALU_OP_SLT;  // slti       "Set rd to 1 if rs1 is less than the sign-extended 12-bit immediate, otherwise set rd to 0 (signed)"
-                `FUNCT3_SLTU:    ALU_op = `ALU_OP_SLTU;  // sltiu      "Set rd to 1 if rs1 is less than the sign-extended 12-bit immediate, otherwise set rd to 0 (unsigned)"
-                `FUNCT3_XOR:     ALU_op = `ALU_OP_XOR;  // xori       "Set rd to the bitwise xor of rs1 with the sign-extended 12-bit immediate"
-                `FUNCT3_SRL_SRA: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL; // srli       "Shift rs1 right by the 5 or 6 (RV32/64) bit immediate and place the result into rd" 
-                                                                                         // srai       "Shift rs1 right by the 5 or 6 (RV32/64) bit immediate and place the result into rd while retaining the sign"
-                `FUNCT3_OR:      ALU_op = `ALU_OP_OR;  // ori        "Set rd to the bitwise or of rs1 with the sign-extended 12-bit immediate"
-                `FUNCT3_AND:     ALU_op = `ALU_OP_AND;  // andi       "Set rd to the bitwise and of rs1 with the sign-extended 12-bit immediate"
-            endcase
-
-      
-
-        end
-
-      
-
-        `OPCODE_R_ALU: begin
-            reg_w = 1'b1;
-            r1_addr = rs1;
-            r2_addr = rs2;
-            reg_addr = rd;
-            case(funct3)
-                `FUNCT3_ADD_SUB: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SUB : `ALU_OP_ADD;
-                `FUNCT3_SLL:     ALU_op = `ALU_OP_SLL;
-                `FUNCT3_SLT:     ALU_op = `ALU_OP_SLT;
-                `FUNCT3_SLTU:    ALU_op = `ALU_OP_SLTU;
-                `FUNCT3_XOR:     ALU_op = `ALU_OP_XOR;
-                `FUNCT3_SRL_SRA: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL;
-                `FUNCT3_OR:      ALU_op = `ALU_OP_OR;
-                `FUNCT3_AND:     ALU_op = `ALU_OP_AND;
-            endcase
-
-      
-
-        end
-
-      
-
-        `OPCODE_I_FENCE: begin
-
-      
-
-        end
-
-      
-
-        `OPCODE_I_SYSTEM: begin  // SYSTEM + CSR  // TODO Add control signals to enable CSR unit
-            reg_w = 1'b1;
-            reg_addr = rd;
-            case(funct3)
-                `FUNCT3_ECALL_EBREAK: ;  // NOP
-                `FUNCT3_CSRRW:     r1_addr = rs1;  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
-                `FUNCT3_CSRRS:     r1_addr = rs1;  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
-                `FUNCT3_CSRRC:     r1_addr = rs1;  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
-                `FUNCT3_CSRRWI:     ALU_op = `ALU_OP_XOR;  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
-                `FUNCT3_CSRRSI: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL;  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
-                `FUNCT3_CSRRCI:      ALU_op = `ALU_OP_OR;  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
-            endcase
-
-
-      
-
-      
-
-        end
-
-      
-
-     endcase
+            end
+
+        
+
+            `OPCODE_S_STORE: begin  // Store
+
+                is_load_store = 1'b1;
+
+
+                r1_addr = rs1;
+                r2_addr = rs2;
+
+
+                ALU_op = `ALU_OP_ADD;  // to add the immideate value to the addr
+
+                data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+                imm_val_o = {{`MEM_DATA_WIDTH - 12 {imm12s[11]}},  imm12s[11:0]  };
+
+                mem_w = 1'b1;  // Set the bit to write to memory
+
+                case(funct3)
+                    `FUNCT3_SB: begin  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                        LIS_op = `LIS_SB;
+                        write_transfer_o = 4'b0001;
+                    end
+                    `FUNCT3_SH: begin  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                        LIS_op = `LIS_SH;  
+                        write_transfer_o = 4'b0011;
+                    end 
+                    `FUNCT3_SW: begin // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
+                        LIS_op = `LIS_SW;  
+                        write_transfer_o = 4'b1111;
+                    end 
+                endcase
+
+        
+
+            end
+
+        
+
+            `OPCODE_I_IMM: begin
+                data_origin_o = `RS2IMM_RS1;  // Send the immediate value and mantain RS1 the value
+                imm_val_o = { {`MEM_DATA_WIDTH - 12 {imm12[11]}}, imm12[11:0] };
+                reg_w = 1'b1;
+                r1_addr = rs1;
+                reg_addr = rd;
+                case(funct3)
+                    `FUNCT3_ADD_SUB: ALU_op = `ALU_OP_ADD;// addi       "Add sign-extended 12-bit immediate to register rs1 and place the result in rd"
+                    `FUNCT3_SLL:     ALU_op = `ALU_OP_SLL;  // slli       "Shift rs1 left by the 5 or 6 (RV32/64) bit (RV64) immediate and place the result into rd"
+                    `FUNCT3_SLT:     ALU_op = `ALU_OP_SLT;  // slti       "Set rd to 1 if rs1 is less than the sign-extended 12-bit immediate, otherwise set rd to 0 (signed)"
+                    `FUNCT3_SLTU:    ALU_op = `ALU_OP_SLTU;  // sltiu      "Set rd to 1 if rs1 is less than the sign-extended 12-bit immediate, otherwise set rd to 0 (unsigned)"
+                    `FUNCT3_XOR:     ALU_op = `ALU_OP_XOR;  // xori       "Set rd to the bitwise xor of rs1 with the sign-extended 12-bit immediate"
+                    `FUNCT3_SRL_SRA: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL; // srli       "Shift rs1 right by the 5 or 6 (RV32/64) bit immediate and place the result into rd" 
+                                                                                            // srai       "Shift rs1 right by the 5 or 6 (RV32/64) bit immediate and place the result into rd while retaining the sign"
+                    `FUNCT3_OR:      ALU_op = `ALU_OP_OR;  // ori        "Set rd to the bitwise or of rs1 with the sign-extended 12-bit immediate"
+                    `FUNCT3_AND:     ALU_op = `ALU_OP_AND;  // andi       "Set rd to the bitwise and of rs1 with the sign-extended 12-bit immediate"
+                endcase
+
+        
+
+            end
+
+        
+
+            `OPCODE_R_ALU: begin
+                reg_w = 1'b1;
+                r1_addr = rs1;
+                r2_addr = rs2;
+                reg_addr = rd;
+                case(funct3)
+                    `FUNCT3_ADD_SUB: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SUB : `ALU_OP_ADD;
+                    `FUNCT3_SLL:     ALU_op = `ALU_OP_SLL;
+                    `FUNCT3_SLT:     ALU_op = `ALU_OP_SLT;
+                    `FUNCT3_SLTU:    ALU_op = `ALU_OP_SLTU;
+                    `FUNCT3_XOR:     ALU_op = `ALU_OP_XOR;
+                    `FUNCT3_SRL_SRA: ALU_op = funct7[5] == 1'b1 ? `ALU_OP_SRA : `ALU_OP_SRL;
+                    `FUNCT3_OR:      ALU_op = `ALU_OP_OR;
+                    `FUNCT3_AND:     ALU_op = `ALU_OP_AND;
+                endcase
+
+        
+
+            end
+
+        
+
+            `OPCODE_I_FENCE: begin
+
+        
+    
+
+            end
+
+        
+
+            `OPCODE_I_SYSTEM: begin  // SYSTEM + CSR  // TODO Add control signals to enable CSR unit
+                reg_w = 1'b1;
+                reg_addr = rd;
+                csr_addr_o = imm12;
+                
+                
+                case(funct3)
+                    `FUNCT3_ECALL_EBREAK: ;  // NOP
+                    `FUNCT3_CSRRW:begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
+                        csr_op_o = CSRRW;
+                        r1_addr = rs1;
+                    end
+                    `FUNCT3_CSRRS:begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                        csr_op_o = CSRRS;
+                        r1_addr = rs1;
+                    end
+                    `FUNCT3_CSRRC:begin  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
+                        csr_op_o = CSRRC;
+                        r1_addr = rs1;
+                    end
+                    `FUNCT3_CSRRWI:begin  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
+                        csr_op_o = CSRRWI;
+                        imm_val_o = rs1;
+                    end
+                    `FUNCT3_CSRRSI:begin  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
+                        csr_op_o = CSRRSI;
+                        imm_val_o = rs1;
+                    end
+                    `FUNCT3_CSRRCI:begin  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
+                        csr_op_o = CSRRCI;
+                        imm_val_o = rs1;
+                    end
+                endcase
+
+            end
+        endcase
 
     end
-
- 
 endmodule
+
 `default_nettype wire

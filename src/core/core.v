@@ -9,6 +9,7 @@
 `include "src/core/core_program_counter.v"
 `include "src/core/core_regfile.v"
 `include "src/core/core_execution_unit/core_execution_unit.v"
+`include "src/core/core_csr_unit/core_csr_unit.v"
 
 
 
@@ -27,6 +28,8 @@ module core(
     parameter ADDR_WIDTH = 10;
     parameter DATA_WIDTH = 32;
     parameter TRANSFER_WIDTH = 4;
+    parameter CSR_OP_WIDTH = `CSR_OP_WIDTH;  // 3
+    parameter CSR_ADDR = 12;
 
     input 	clk;
     input 	rst_n;
@@ -82,7 +85,10 @@ module core(
 
     wire [DATA_WIDTH-1 : 0] new_pc;
 
-
+    wire [CSR_ADDR-1 : 0]csr_addr_t;
+    wire [CSR_OP_WIDTH-1 : 0] csr_op_t;
+    wire [`MEM_DATA_WIDTH-1 : 0] csr_val_r;
+    wire [`MEM_DATA_WIDTH-1 : 0] csr_val_w;
 
 
     controlUnit controlUnit_inst(
@@ -90,6 +96,7 @@ module core(
         .ALU_op (ALU_op_t),  // ALU operation output
         .LIS_op (LIS_op_t),  // Load Store Operation output
         .BR_op_o (BR_op_t),  // Branch operation output
+        .csr_op_o(csr_op_t),  // CSR OP
         .data_origin_o (data_origin_t),  // Data origin output (Rs2 or imm or pc)
         .is_branch_o (is_branch_t),  // Branch indicator output
         .is_load_store (is_load_store_t),  // execution_unit 
@@ -99,7 +106,8 @@ module core(
         .r2_addr (r2_num_read_reg_file),  // RS2 addr
         .reg_addr (r_num_write_reg_file),  // RD addr
         .imm_val_o (imm_val_t),  //execution unit imm val
-        .write_transfer_o (write_transfer_mem_data_o)
+        .write_transfer_o (write_transfer_mem_data_o),
+        .csr_addr_o(csr_addr_t)
     );
 
     programCounter program_counter_inst (
@@ -128,6 +136,7 @@ module core(
         .ALU_op (ALU_op_t),  // ALU operation input
         .LIS_op (LIS_op_t),  // Load Store Operation input
         .BR_op (BR_op_t),  // Branch operation input 
+        .csr_op_i(csr_op_t),
         .data_origin_i(data_origin_t),  // Data origin input (Rs2 or imm or pc)
         .rs1_i (rs1_reg_file),  // RS1
         .rs2_i (rs2_reg_file),  // RS2
@@ -140,7 +149,18 @@ module core(
         .is_loadstore (is_load_store_t),  // LoadStore indicator input
         .new_pc_offset_o (new_pc),  // new offset or new pc
         .old_pc_i (addr_mem_prog_o),  // Actual PC 
-        .is_absolute_o (is_absolute_t)  // Rewrite the current value to PC
+        .is_absolute_o (is_absolute_t),  // Rewrite the current value to PC
+        .csr_val_i(csr_val_r),  // CSR Val in READ
+        .csr_val_o(csr_val_w)  // CSR Val Out WRITE
+    );
+
+    crs_unit crs_unit_inst(
+        .rst_n(rst_n),
+        .clk(clk),
+        .csr_addr_i(csr_addr_t), // Adr 
+        .csr_val_i(csr_val_w),  // Val in
+        .csr_val_o(csr_val_r),  // Val Out
+        .csr_op_i(csr_op_t)  // Op In
     );
 
 

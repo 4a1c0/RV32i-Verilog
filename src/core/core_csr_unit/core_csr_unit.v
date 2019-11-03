@@ -2,7 +2,7 @@
 `default_nettype none
 `include "src/defines.vh"
 
-`include "src/core/core_execution_unit/core_csr_unit/core_csr_unit_timer.v"
+`include "src/core/core_csr_unit/core_csr_unit_timer.v"
 
 // Module Declaration
 module crs_unit (
@@ -12,8 +12,6 @@ module crs_unit (
     csr_val_i,  // Val in
     csr_val_o,  // Val Out
     csr_op_i  // Op In
-    
-
     );
 
     parameter CSR_ADDR = 12;
@@ -71,32 +69,18 @@ module crs_unit (
 		end 
         else begin
             instret_csr <= instret_csr + 1;
+            timer_we_o <= 1'b0;
             if (csr_op_i !== {CSR_OP_WIDTH{1'b0}}) begin 
                 case (csr_addr_i) // CSR Addr
                     CYCLE_ADDR: begin
                         //- For this address different actions -//
                         case(csr_op_i) // Operation Type
-                            CSRRW: begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
-                                csr_o <= timer_val_i[31:0];
-                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
-                                    timer_we_o <= 1;
-                                    timer_val_o [31:0] <= csr_val_i;
-                                end
-                            end 
                             CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
-                                
-                            end
-                            CSRRC: begin  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
-
-                            end 
-                            CSRRWI: begin  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
-                                
-                            end
-                            CSRRSI: begin  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
-                                
-                            end
-                            CSRRCI: begin  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
-                                
+                                csr_val_o <= timer_val_i[31:0];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [31:0] <= timer_val_i[31:0] & csr_val_i ;
+                                end
                             end
                             default: begin
                                 $display("Ilegal CSR");  // TODO Throw interruption
@@ -108,7 +92,7 @@ module crs_unit (
                         //- For this address different actions -//
                         case(csr_op_i) // Operation Type
                             CSRRW: begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
-                                csr_o <= timer_val_i[64:32];
+                                csr_val_o <= timer_val_i[64:32];
                                 if (csr_val_i !== {REG_XLEN{1'b0}}) begin   // WARN Ilegal Operation
                                     timer_we_o <= 1;
                                     timer_val_o[64:32] <= csr_val_i;

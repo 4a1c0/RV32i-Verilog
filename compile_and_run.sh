@@ -16,3 +16,9 @@ read -p "press [Enter] for next test"
 iverilog -o bin/br tb/branch.v
 bin/br
 rm bin/br
+
+read -p "press [Enter] for next test"
+
+iverilog -o bin/br tb/csr.v
+bin/br
+rm bin/br

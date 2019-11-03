@@ -291,6 +291,23 @@ task test_beq;
 endtask
 
 
+task test_csr;
+    begin
+        $display ("CSR Test");
+        pc = 32'b0;
+        encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h1);
+        encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h2);
+        encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h3);
+        rst_n		= 1'b1;
+        #400;
+        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000001) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+        else begin
+            $display ("ERROR: reg3 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            $fatal;
+        end
+    end
+endtask
+
 
 
 
@@ -618,6 +635,21 @@ task encodeBgeu;
         pc = pc + 32'd4;
     end
 endtask
+
+task encodeCsr;
+    input [11:0] addr;
+    input [4:0] rs1;
+    input [2:0] FUNCT3_OP;
+    input [4:0] rd;
+    
+    begin
+        instruction = {addr, rs1, FUNCT3_OP, rd, `OPCODE_I_SYSTEM};
+        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
+        pc = pc + 32'd4;
+    end
+endtask
+
 
 
 //always @ (negedge clk) begin
