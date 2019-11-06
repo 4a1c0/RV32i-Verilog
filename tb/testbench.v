@@ -296,13 +296,13 @@ task test_csr;
         $display ("CSR Test");
         pc = 32'b0;
         encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h1);
-        encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h2);
-        encodeCsr(12'hC00, 5'h0, `FUNCT3_CSRRS, 5'h3);
+        encodeCsr(12'hC01, 5'h0, `FUNCT3_CSRRS, 5'h2);
+        encodeCsr(12'hC02, 5'h0, `FUNCT3_CSRRS, 5'h3);
         rst_n		= 1'b1;
         #400;
-        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000001) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
-            $display ("ERROR: reg3 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            $display ("ERROR: reg3 has to be h0000002 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             $fatal;
         end
     end

@@ -29,6 +29,12 @@ module crs_unit (
     localparam CYCLE_ADDR = 12'hC00;
     localparam CYCLEH_ADDR = 12'hC80;
 
+    localparam TIME_ADDR = 12'hC01;
+    localparam TIMEH_ADDR = 12'hC81;
+
+    localparam INSTRET_ADDR = 12'hC02;
+    localparam INSTRETH_ADDR = 12'hC82;
+
 
     input rst_n;
     input clk;
@@ -52,7 +58,7 @@ module crs_unit (
 
     reg [CSR_XLEN-1:0] csr_o;
 
-    timer timer_inst (
+    timer timer_inst ( // Cycle, time and instret timer, because only one hart and unicycle core
         .rst_n (rst_n),
         .clk (clk),
         .val_o (timer_val_i),
@@ -66,10 +72,13 @@ module crs_unit (
 		if ( !rst_n ) begin
 			cycle_csr <= {CSR_XLEN{1'b0}}; //reset array
             instret_csr <= {CSR_XLEN{1'b0}}; //reset array
+            csr_val_o <= {REG_XLEN{1'b0}};
+            timer_val_o <= {REG_XLEN{1'b0}};
+            timer_we_o <= 1'b0;
 		end 
         else begin
             instret_csr <= instret_csr + 1;
-            timer_we_o <= 1'b0;
+            
             if (csr_op_i !== {CSR_OP_WIDTH{1'b0}}) begin 
                 case (csr_addr_i) // CSR Addr
                     CYCLE_ADDR: begin
@@ -91,27 +100,12 @@ module crs_unit (
                     CYCLEH_ADDR: begin
                         //- For this address different actions -//
                         case(csr_op_i) // Operation Type
-                            CSRRW: begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
-                                csr_val_o <= timer_val_i[64:32];
-                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin   // WARN Ilegal Operation
-                                    timer_we_o <= 1;
-                                    timer_val_o[64:32] <= csr_val_i;
-                                end
-                            end 
                             CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
-                                
-                            end
-                            CSRRC: begin  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
-
-                            end 
-                            CSRRWI: begin  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
-                                
-                            end
-                            CSRRSI: begin  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
-                                
-                            end
-                            CSRRCI: begin  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
-                                
+                                csr_val_o <= timer_val_i[63:32];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [63:32] <= timer_val_i[63:32] & csr_val_i ;
+                                end
                             end
                             default: begin
                                 $display("Ilegal CSR");  // TODO Throw interruption
@@ -119,7 +113,71 @@ module crs_unit (
                         endcase  // Operation Type
                         //--//                   
                     end        
-                endcase // CSR Addr
+                    TIME_ADDR: begin
+                        //- For this address different actions -//
+                        case(csr_op_i) // Operation Type
+                            CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                                csr_val_o <= timer_val_i[31:0];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [31:0] <= timer_val_i[31:0] & csr_val_i ;
+                                end
+                            end
+                            default: begin
+                                $display("Ilegal CSR");  // TODO Throw interruption
+                            end
+                        endcase  // Operation Type
+                        //--//
+                    end
+                    TIMEH_ADDR: begin
+                        //- For this address different actions -//
+                        case(csr_op_i) // Operation Type
+                            CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                                csr_val_o <= timer_val_i[63:32];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [63:32] <= timer_val_i[63:32] & csr_val_i ;
+                                end
+                            end
+                            default: begin
+                                $display("Ilegal CSR");  // TODO Throw interruption
+                            end
+                        endcase  // Operation Type
+                        //--//                   
+                    end
+                    INSTRET_ADDR: begin
+                        //- For this address different actions -//
+                        case(csr_op_i) // Operation Type
+                            CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                                csr_val_o <= timer_val_i[31:0];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [31:0] <= timer_val_i[31:0] & csr_val_i ;
+                                end
+                            end
+                            default: begin
+                                $display("Ilegal CSR");  // TODO Throw interruption
+                            end
+                        endcase  // Operation Type
+                        //--//
+                    end
+                    INSTRETH_ADDR: begin
+                        //- For this address different actions -//
+                        case(csr_op_i) // Operation Type
+                            CSRRS: begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
+                                csr_val_o <= timer_val_i[63:32];
+                                if (csr_val_i !== {REG_XLEN{1'b0}}) begin  // WARN Ilegal Operation
+                                    timer_we_o <= 1'b1;
+                                    timer_val_o [63:32] <= timer_val_i[63:32] & csr_val_i ;
+                                end
+                            end
+                            default: begin
+                                $display("Ilegal CSR");  // TODO Throw interruption
+                            end
+                        endcase  // Operation Type
+                        //--//                   
+                    end
+                endcase // CSR Addrs
             end
         end
 	end

@@ -23,7 +23,7 @@ module timer (
     output [CSR_XLEN-1:0] val_o;
     input [CSR_XLEN-1:0] val_i;
 
-    reg [CSR_XLEN-1:0] val_o;  
+    reg [CSR_XLEN-1:0] val_o; 
 
 
     always @ (posedge clk or negedge rst_n) begin
