@@ -4,12 +4,12 @@
 `timescale 1ns/1ps
 
 
-`include "src/defines.vh"
-`include "src/core/core_control_unit.v"
-`include "src/core/core_program_counter.v"
-`include "src/core/core_regfile.v"
-`include "src/core/core_execution_unit/core_execution_unit.v"
-`include "src/core/core_csr_unit/core_csr_unit.v"
+`include "../defines.vh"
+`include "core_control_unit.v"
+`include "core_program_counter.v"
+`include "core_regfile.v"
+`include "core_execution_unit/core_execution_unit.v"
+`include "core_csr_unit/core_csr_unit.v"
 
 
 

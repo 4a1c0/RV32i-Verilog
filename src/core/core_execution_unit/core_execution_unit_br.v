@@ -3,7 +3,7 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
+`include "../../defines.vh"
 
 module 	br (
 		BR_op_i,

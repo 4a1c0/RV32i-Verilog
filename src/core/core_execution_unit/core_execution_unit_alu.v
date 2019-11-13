@@ -1,7 +1,7 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
+`include "../../defines.vh"
 
 module alu (
 	input [`ALU_OP_WIDTH-1:0]       ALU_op,

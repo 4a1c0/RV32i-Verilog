@@ -1,7 +1,7 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
+`include "../defines.vh"
 
 // Module Declaration
 module controlUnit (

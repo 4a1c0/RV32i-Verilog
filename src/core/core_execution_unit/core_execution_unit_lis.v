@@ -3,7 +3,7 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
+`include "../../defines.vh"
 
 module lis (
         input [`LIS_OP_WIDTH-1:0]       LIS_op,

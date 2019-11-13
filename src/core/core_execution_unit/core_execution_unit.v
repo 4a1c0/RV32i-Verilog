@@ -1,10 +1,10 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
-`include "src/core/core_execution_unit/core_execution_unit_alu.v" 
-`include "src/core/core_execution_unit/core_execution_unit_lis.v" 
-`include "src/core/core_execution_unit/core_execution_unit_br.v" 
+`include "../../defines.vh"
+`include "core_execution_unit_alu.v" 
+`include "core_execution_unit_lis.v" 
+`include "core_execution_unit_br.v" 
 
 module executionUnit(
 		ALU_op,

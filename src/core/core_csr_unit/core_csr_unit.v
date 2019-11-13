@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 `default_nettype none
-`include "src/defines.vh"
+`include "../../defines.vh"
 
-`include "src/core/core_csr_unit/core_csr_unit_timer.v"
+`include "core_csr_unit_timer.v"
 
 // Module Declaration
 module crs_unit (
@@ -70,9 +70,9 @@ module crs_unit (
     always @ (posedge clk or negedge rst_n) begin
 		// Async Reset
 		if ( !rst_n ) begin
-			cycle_csr <= {CSR_XLEN{1'b0}}; //reset array
-            instret_csr <= {CSR_XLEN{1'b0}}; //reset array
-            csr_val_o <= {REG_XLEN{1'b0}};
+			//cycle_csr <= {CSR_XLEN{1'b0}}; //reset array
+            //instret_csr <= {CSR_XLEN{1'b0}}; //reset array
+            //csr_val_o <= {REG_XLEN{1'b0}};
             timer_val_o <= {REG_XLEN{1'b0}};
             timer_we_o <= 1'b0;
 		end 

@@ -2,9 +2,9 @@
 // or browse Examples
 `timescale 1ns/1ps
 
-`include "src/defines.vh"
+`include "../src/defines.vh"
 
-`include"src/top.v"
+`include"../src/top.v"
 
 module tb();
 	

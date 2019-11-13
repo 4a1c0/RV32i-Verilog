@@ -2,7 +2,7 @@
 // or browse Examples
 `timescale 1ns/1ps
 
-`include"tb/testbench.v"
+`include"testbench.v"
 
 module branch_test();
 

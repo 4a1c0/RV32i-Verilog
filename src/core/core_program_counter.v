@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 `default_nettype none
-`include "src/defines.vh"
+`include "../defines.vh"
 
 // Module Declaration
 module programCounter (

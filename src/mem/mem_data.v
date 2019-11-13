@@ -2,7 +2,7 @@
 
 // TODO 1 sol stream de dades
 
-`include "src/defines.vh"
+`include "../defines.vh"
 
 // Module Declaration
 module dataMem(

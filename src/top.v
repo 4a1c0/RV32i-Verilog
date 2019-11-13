@@ -1,9 +1,9 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "src/mem/mem_prog.v"
-`include "src/mem/mem_data.v"
-`include "src/core/core.v"
+`include "mem/mem_prog.v"
+`include "mem/mem_data.v"
+`include "core/core.v"
 
 module top(
         clk,
