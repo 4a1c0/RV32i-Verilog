@@ -1,5 +1,5 @@
 Analysis & Synthesis report for RV32i
-Wed Nov 13 19:08:15 2019
+Wed Nov 13 20:29:21 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Wed Nov 13 19:08:15 2019               ;
+; Analysis & Synthesis Status        ; Failed - Wed Nov 13 20:29:21 2019               ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; RV32i                                           ;
 ; Top-level Entity Name              ; top                                             ;
@@ -147,7 +147,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Nov 13 19:08:12 2019
+    Info: Processing started: Wed Nov 13 20:29:19 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RV32i -c RV32i
 Info (20029): Only one processor detected - disabling parallel compilation
 Warning (10274): Verilog HDL macro warning at defines.vh(3): overriding existing definition for macro "REG_DATA_WIDTH", which was defined in "../src/defines.vh", line 7
@@ -156,25 +156,25 @@ Warning (10274): Verilog HDL macro warning at defines.vh(5): overriding existing
 Warning (10274): Verilog HDL macro warning at defines.vh(8): overriding existing definition for macro "MEM_DATA_WIDTH", which was defined in "../src/defines.vh", line 12
 Warning (10274): Verilog HDL macro warning at defines.vh(9): overriding existing definition for macro "MEM_ADDR_WIDTH", which was defined in "../src/defines.vh", line 13
 Warning (10274): Verilog HDL macro warning at defines.vh(10): overriding existing definition for macro "MEM_DEPTH", which was defined in "../src/defines.vh", line 14
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(17) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 17
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(25) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 25
-Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(6) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 6
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(10) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(11) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 11
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(12) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 12
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(13) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 13
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(14) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 14
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(18) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 18
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(22) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 22
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(27) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 27
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(28) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 28
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(30) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 30
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(31) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 31
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(32) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 32
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(33) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 33
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(68) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 68
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(69) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 69
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(70) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 70
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(72) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 72
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(134) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 134
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(169) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 169
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/top.v
 Error (10170): Verilog HDL syntax error at core_csr_unit.v(43) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 43
 Error (10170): Verilog HDL syntax error at core_csr_unit.v(44) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 44
@@ -184,103 +184,40 @@ Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-
 Error (10228): Verilog HDL error at core_csr_unit_timer.v(6): module "timer" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v Line: 6
 Info (10499): HDL info at core_csr_unit_timer.v(6): see declaration for object "timer"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_csr_unit/core_csr_unit_timer.v
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(17) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 17
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(21): text macro "ALU_OP_ADD" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(21) near text ":";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 21
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(22): text macro "ALU_OP_SUB" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(22) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 22
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(23): text macro "ALU_OP_SLL" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(23) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 23
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(24): text macro "ALU_OP_SLT" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(25): text macro "ALU_OP_SLTU" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(25) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 25
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(26): text macro "ALU_OP_XOR" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(27): text macro "ALU_OP_SRL" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(27) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 27
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(28): text macro "ALU_OP_SRA" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(28) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 28
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(29): text macro "ALU_OP_OR" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(29) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 29
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(30): text macro "ALU_OP_AND" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(30) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 30
-Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(6) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 6
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(9): text macro "LIS_OP_WIDTH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(10) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(11) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 11
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(12) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 12
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(13) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 13
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(14) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 14
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 15
+Error (10228): Verilog HDL error at core_execution_unit_alu.v(7): module "alu" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
+Info (10499): HDL info at core_execution_unit_alu.v(7): see declaration for object "alu"
+Error (10112): Ignored design unit "lis" at core_execution_unit_lis.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
+Error (10112): Ignored design unit "br" at core_execution_unit_br.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
+Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(39): text macro "ALU_OP_WIDTH" is undefined
+Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(40): text macro "LIS_OP_WIDTH" is undefined
+Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(41): text macro "BR_OP_WIDTH" is undefined
+Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(42): text macro "CSR_OP_WIDTH" is undefined
+Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(43): text macro "DATA_ORIGIN_WIDTH" is undefined
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(68) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 68
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(69) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 69
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(70) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 70
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit.v
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(17) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 17
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(21): text macro "ALU_OP_ADD" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(21) near text ":";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 21
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(22): text macro "ALU_OP_SUB" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(22) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 22
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(23): text macro "ALU_OP_SLL" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(23) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 23
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(24): text macro "ALU_OP_SLT" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(25): text macro "ALU_OP_SLTU" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(25) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 25
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(26): text macro "ALU_OP_XOR" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(27): text macro "ALU_OP_SRL" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(27) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 27
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(28): text macro "ALU_OP_SRA" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(28) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 28
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(29): text macro "ALU_OP_OR" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(29) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 29
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_alu.v(30): text macro "ALU_OP_AND" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(30) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 30
-Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(6) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 6
+Error (10228): Verilog HDL error at core_execution_unit_alu.v(7): module "alu" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
+Info (10499): HDL info at core_execution_unit_alu.v(7): see declaration for object "alu"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_alu.v
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_br.v(18): text macro "BR_OP_WIDTH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(19) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 19
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(20) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 20
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(21) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 21
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(22) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 22
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(26) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 26
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_br.v(32): text macro "BR_EQ" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(32) near text ":";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 32
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(32) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 32
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_br.v(33): text macro "BR_NE" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(33) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 33
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_br.v(34): text macro "BR_LT" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(34) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 34
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_br.v(35): text macro "BR_GE" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_br.v(35) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 35
+Error (10228): Verilog HDL error at core_execution_unit_br.v(10): module "br" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
+Info (10499): HDL info at core_execution_unit_br.v(10): see declaration for object "br"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_br.v
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(9): text macro "LIS_OP_WIDTH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(10) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(11) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 11
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(12) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 12
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(13) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 13
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(14) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 14
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(18) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 18
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(22) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 22
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(27): text macro "LIS_LB" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(27) near text ":";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 27
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(27) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 27
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(28): text macro "LIS_LH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(28) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 28
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(29): text macro "LIS_LW" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(30): text macro "LIS_LBU" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(30) near text ":";  expecting "endcase" File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 30
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(30) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 30
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(31): text macro "LIS_LHU" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(31) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 31
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(32): text macro "LIS_SB" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(32) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 32
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(33): text macro "LIS_SH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(33) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 33
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit_lis.v(34): text macro "LIS_SW" is undefined
-Error (10112): Ignored design unit "lis" at core_execution_unit_lis.v(8) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 8
+Error (10228): Verilog HDL error at core_execution_unit_lis.v(10): module "lis" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
+Info (10499): HDL info at core_execution_unit_lis.v(10): see declaration for object "lis"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_lis.v
 Error (10228): Verilog HDL error at core_control_unit.v(7): module "controlUnit" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_control_unit.v Line: 7
 Info (10499): HDL info at core_control_unit.v(7): see declaration for object "controlUnit"
@@ -292,22 +229,22 @@ Warning (10274): Verilog HDL macro warning at defines.vh(8): overriding existing
 Warning (10274): Verilog HDL macro warning at defines.vh(9): overriding existing definition for macro "MEM_ADDR_WIDTH", which was defined in "../src/defines.vh", line 13
 Warning (10274): Verilog HDL macro warning at defines.vh(10): overriding existing definition for macro "MEM_DEPTH", which was defined in "../src/defines.vh", line 14
 Error (10112): Ignored design unit "regFile" at core_regfile.v(7) due to previous errors File: X:/RV32i-Verilog/src/core/core_regfile.v Line: 7
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(17) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 17
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(24) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 24
-Error (10170): Verilog HDL syntax error at core_execution_unit_alu.v(25) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 25
-Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(6) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 6
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(10) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(11) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 11
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(12) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 12
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(13) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 13
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(14) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 14
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(15) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 15
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(18) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 18
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(22) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 22
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(27) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 27
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(28) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 28
-Error (10170): Verilog HDL syntax error at core_execution_unit_lis.v(30) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 30
+Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(7) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
+Error (10112): Ignored design unit "lis" at core_execution_unit_lis.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
+Error (10112): Ignored design unit "br" at core_execution_unit_br.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
+Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core.v
 Error (10228): Verilog HDL error at core_control_unit.v(7): module "controlUnit" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_control_unit.v Line: 7
 Info (10499): HDL info at core_control_unit.v(7): see declaration for object "controlUnit"
@@ -318,16 +255,16 @@ Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-
 Error (10228): Verilog HDL error at core_regfile.v(7): module "regFile" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_regfile.v Line: 7
 Info (10499): HDL info at core_regfile.v(7): see declaration for object "regFile"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_regfile.v
-Error (10228): Verilog HDL error at mem_data.v(8): module "dataMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_data.v Line: 8
-Info (10499): HDL info at mem_data.v(8): see declaration for object "dataMem"
+Error (10228): Verilog HDL error at mem_data.v(10): module "dataMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_data.v Line: 10
+Info (10499): HDL info at mem_data.v(10): see declaration for object "dataMem"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/mem/mem_data.v
-Error (10228): Verilog HDL error at mem_prog.v(7): module "progMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_prog.v Line: 7
-Info (10499): HDL info at mem_prog.v(7): see declaration for object "progMem"
+Error (10228): Verilog HDL error at mem_prog.v(9): module "progMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_prog.v Line: 9
+Info (10499): HDL info at mem_prog.v(9): see declaration for object "progMem"
 Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/mem/mem_prog.v
 Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/RV32i.map.smsg
-Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 107 errors, 47 warnings
+Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 70 errors, 17 warnings
     Error: Peak virtual memory: 418 megabytes
-    Error: Processing ended: Wed Nov 13 19:08:15 2019
+    Error: Processing ended: Wed Nov 13 20:29:22 2019
     Error: Elapsed time: 00:00:03
     Error: Total CPU time (on all processors): 00:00:01
 

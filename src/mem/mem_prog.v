@@ -31,11 +31,11 @@ module progMem
 	input [ADDR_WIDTH-1:0]	addr;
 	
 	// Outputs
-	output [DATA_WIDTH-1:0]	data_out;
+	output reg [DATA_WIDTH-1:0] data_out;
 	
 	// Internal
 	reg [DATA_WIDTH-1:0] progArray[0:MEM_DEPTH-1];
-	reg [DATA_WIDTH-1:0] data_out ;
+	//reg [DATA_WIDTH-1:0] data_out ;  // Quartus
 	
 	// Code
 	

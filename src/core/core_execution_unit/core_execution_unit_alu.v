@@ -1,26 +1,27 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "../../defines.vh"
-
+`ifdef CUSTOM_DEFINE
+	`include "../../defines.vh"
+`endif
 module alu
 	`ifdef CUSTOM_DEFINE
 		#(parameter ALU_OPWIDTH = `ALU_OP_WIDTH, 
 		parameter DATA_WIDTH = `REG_DATA_WIDTH,
-		localparam ALU_OP_ADD = `ALU_OP_ADD,
-		localparam ALU_OP_SUB = `ALU_OP_SUB,
-		localparam ALU_OP_SLL = `ALU_OP_SLL,
-		localparam ALU_OP_SLT  = `ALU_OP_SLT,
-		localparam ALU_OP_SLTU = `ALU_OP_SLTU,
-		localparam ALU_OP_XOR = `ALU_OP_XOR,
-		localparam ALU_OP_SRL = `ALU_OP_SRL,
-		localparam ALU_OP_SRA = `ALU_OP_SRA,
-		localparam ALU_OP_OR  = `ALU_OP_OR,
-		localparam ALU_OP_AND = `ALU_OP_AND) 
+		parameter ALU_OP_ADD = `ALU_OP_ADD,
+		parameter ALU_OP_SUB = `ALU_OP_SUB,
+		parameter ALU_OP_SLL = `ALU_OP_SLL,
+		parameter ALU_OP_SLT  = `ALU_OP_SLT,
+		parameter ALU_OP_SLTU = `ALU_OP_SLTU,
+		parameter ALU_OP_XOR = `ALU_OP_XOR,
+		parameter ALU_OP_SRL = `ALU_OP_SRL,
+		parameter ALU_OP_SRA = `ALU_OP_SRA,
+		parameter ALU_OP_OR  = `ALU_OP_OR,
+		parameter ALU_OP_AND = `ALU_OP_AND) 
 	`else
 		#(parameter ALU_OPWIDTH = 4, 
 		parameter DATA_WIDTH = 32,
-		parameter ALU_OP_ADD = 0,  // No em deixa posar localparams
+		parameter ALU_OP_ADD = 0,  // TODO: Separar en localparams
 		parameter ALU_OP_SUB = 1,
 		parameter ALU_OP_SLL = 2,
 		parameter ALU_OP_SLT  = 3,
