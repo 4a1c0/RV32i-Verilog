@@ -4,7 +4,10 @@
 `timescale 1ns/1ps
 
 
-`include "../defines.vh"
+`ifdef CUSTOM_DEFINE
+    `include "../defines.vh"
+`endif
+
 `include "core_control_unit.v"
 `include "core_program_counter.v"
 `include "core_regfile.v"
@@ -13,23 +16,43 @@
 
 
 
-module core(
-    clk,
-    rst_n,
-    we_mem_data_o,
-    addr_mem_data_o,
-    val_mem_data_read_i,
-    val_mem_data_write_o,
-    addr_mem_prog_o,
-    val_mem_prog_i,
-    write_transfer_mem_data_o
+module core
+    `ifdef CUSTOM_DEFINE
+		#(parameter ADDR_WIDTH = `MEM_ADDR_WIDTH,
+        parameter DATA_WIDTH = `REG_DATA_WIDTH,
+        parameter TRANSFER_WIDTH = `MEM_TRANSFER_WIDTH,
+        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,
+        parameter CSR_ADDR_WIDTH = `CSR_ADDR_WIDTH,
+        parameter ALU_OP_WIDTH = `ALU_OP_WIDTH,
+        parameter LIS_OP_WIDTH = `LIS_OP_WIDTH,
+        parameter BR_OP_WIDTH = `BR_OP_WIDTH,
+        parameter DATA_ORIGIN_WIDTH = `DATA_ORIGIN_WIDTH,
+        parameter REG_ADDR_WIDTH = `REG_ADDR_WIDTH) 
+	`else
+		#(parameter ADDR_WIDTH = 10,
+        parameter DATA_WIDTH = 32,
+        parameter TRANSFER_WIDTH = 4,
+        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,  // 3
+        parameter CSR_ADDR_WIDTH = 12,
+        parameter ALU_OP_WIDTH = 4,
+        parameter LIS_OP_WIDTH = 3,
+        parameter BR_OP_WIDTH = 2,
+        parameter DATA_ORIGIN_WIDTH = 2,
+        parameter REG_ADDR_WIDTH = 5) 
+	`endif
+    (
+        clk,
+        rst_n,
+        we_mem_data_o,
+        addr_mem_data_o,
+        val_mem_data_read_i,
+        val_mem_data_write_o,
+        addr_mem_prog_o,
+        val_mem_prog_i,
+        write_transfer_mem_data_o
     );
     
-    parameter ADDR_WIDTH = 10;
-    parameter DATA_WIDTH = 32;
-    parameter TRANSFER_WIDTH = 4;
-    parameter CSR_OP_WIDTH = `CSR_OP_WIDTH;  // 3
-    parameter CSR_ADDR = 12;
+
 
     input 	clk;
     input 	rst_n;
@@ -54,10 +77,10 @@ module core(
     //wire[DATA_WIDTH-1 : 0] instruction_progmem;
     //wire[ADDR_WIDTH-1 : 0] addr_progMem;
 
-    wire [`ALU_OP_WIDTH-1:0] ALU_op_t;
-    wire [`LIS_OP_WIDTH-1:0] LIS_op_t;
-    wire [`BR_OP_WIDTH-1:0] BR_op_t;
-    wire [`DATA_ORIGIN_WIDTH-1:0] data_origin_t;
+    wire [ALU_OP_WIDTH-1:0] ALU_op_t;
+    wire [LIS_OP_WIDTH-1:0] LIS_op_t;
+    wire [BR_OP_WIDTH-1:0] BR_op_t;
+    wire [DATA_ORIGIN_WIDTH-1:0] data_origin_t;
     wire is_load_store_t;
     wire is_branch_t;
     wire is_absolute_t;
@@ -65,30 +88,30 @@ module core(
     //wire mem_w_t;
     //wire mem_to_reg_t;
     //wire reg_r_t;
-    wire [`REG_ADDR_WIDTH-1:0] r1_addr_t;
-    wire [`REG_ADDR_WIDTH-1:0] r2_addr_t;
-    wire [`REG_ADDR_WIDTH-1:0] reg_addr_t;
-    wire [`REG_DATA_WIDTH-1:0] imm_val_t;
+    wire [REG_ADDR_WIDTH-1:0] r1_addr_t;
+    wire [REG_ADDR_WIDTH-1:0] r2_addr_t;
+    wire [REG_ADDR_WIDTH-1:0] reg_addr_t;
+    wire [DATA_WIDTH-1:0] imm_val_t;
 
     wire we_reg_file;  
-	wire [`REG_ADDR_WIDTH-1:0]	r1_num_read_reg_file;
-	wire [`REG_ADDR_WIDTH-1:0]	r2_num_read_reg_file;
-	wire [`REG_ADDR_WIDTH-1:0]	r_num_write_reg_file;
+	wire [REG_ADDR_WIDTH-1:0]	r1_num_read_reg_file;
+	wire [REG_ADDR_WIDTH-1:0]	r2_num_read_reg_file;
+	wire [REG_ADDR_WIDTH-1:0]	r_num_write_reg_file;
 	
-	wire [`REG_DATA_WIDTH-1:0]	data_in_reg_file;
+	wire [DATA_WIDTH-1:0]	data_in_reg_file;
 	
 	// Outputs
-	wire [`REG_DATA_WIDTH-1:0]	rs1_reg_file;
-	wire [`REG_DATA_WIDTH-1:0]	rs2_reg_file;
+	wire [DATA_WIDTH-1:0]	rs1_reg_file;
+	wire [DATA_WIDTH-1:0]	rs2_reg_file;
 
 
 
     wire [DATA_WIDTH-1 : 0] new_pc;
 
-    wire [CSR_ADDR-1 : 0]csr_addr_t;
+    wire [CSR_ADDR_WIDTH-1 : 0]csr_addr_t;
     wire [CSR_OP_WIDTH-1 : 0] csr_op_t;
-    wire [`MEM_DATA_WIDTH-1 : 0] csr_val_r;
-    wire [`MEM_DATA_WIDTH-1 : 0] csr_val_w;
+    wire [DATA_WIDTH-1 : 0] csr_val_r;
+    wire [DATA_WIDTH-1 : 0] csr_val_w;
 
 
     controlUnit controlUnit_inst(

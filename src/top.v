@@ -1,29 +1,42 @@
 `default_nettype none
 `timescale 1ns/1ps
 
+`ifdef CUSTOM_DEFINE
+    `include "defines.vh"
+`endif
+
 `include "mem/mem_prog.v"
 `include "mem/mem_data.v"
 `include "core/core.v"
 
-module top(
+
+module top
+    `ifdef CUSTOM_DEFINE
+		#(parameter ADDR_WIDTH = `MEM_ADDR_WIDTH,
+        parameter DATA_WIDTH = `REG_DATA_WIDTH,
+        parameter TRANSFER_WIDTH = `MEM_TRANSFER_WIDTH) 
+	`else
+		#(parameter ADDR_WIDTH = 10,
+        parameter DATA_WIDTH = 32,
+        parameter TRANSFER_WIDTH = 4) 
+	`endif
+	(
         clk,
         rst_n,
     );
 
-    parameter ADDR_WIDTH = 10;
-    parameter DATA_WITDTH = 32;
-    parameter TRANSFER_WIDTH = 4;
+    
 
     input 	clk;
     input 	rst_n;
 
     wire we_mem_data;
     wire [ADDR_WIDTH-1 : 0] addr_mem_data;
-    wire [DATA_WITDTH-1 : 0] val_mem_data_write;
-    wire [DATA_WITDTH-1 : 0] val_mem_data_read;
+    wire [DATA_WIDTH-1 : 0] val_mem_data_write;
+    wire [DATA_WIDTH-1 : 0] val_mem_data_read;
 
     wire [ADDR_WIDTH-1 : 0] addr_mem_prog;
-    wire [DATA_WITDTH-1 : 0] val_mem_prog;
+    wire [DATA_WIDTH-1 : 0] val_mem_prog;
 
     wire  [TRANSFER_WIDTH-1:0] write_transfer;
 

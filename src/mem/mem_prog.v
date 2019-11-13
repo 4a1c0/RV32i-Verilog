@@ -1,10 +1,22 @@
 `timescale 1ns/1ps
 
 
-`include "../defines.vh"
+`ifdef CUSTOM_DEFINE
+    `include "../defines.vh"
+`endif
 
 // Module Declaration
-module progMem(
+module progMem
+	`ifdef CUSTOM_DEFINE
+		#(parameter ADDR_WIDTH = `MEM_ADDR_WIDTH,
+        parameter DATA_WIDTH = `MEM_DATA_WIDTH,
+        parameter MEM_DEPTH = `MEM_DEPTH) 
+	`else
+		#(parameter ADDR_WIDTH = 10,
+        parameter DATA_WIDTH = 32,
+        parameter MEM_DEPTH = 1024) 
+	`endif
+	(
         rst_n		,  // Reset Neg
         clk,             // Clk
         addr		,  // Address
@@ -16,14 +28,14 @@ module progMem(
 	input rst_n; 
 	input clk;
 	
-	input [`MEM_ADDR_WIDTH-1:0]	addr;
+	input [ADDR_WIDTH-1:0]	addr;
 	
 	// Outputs
-	output [`MEM_DATA_WIDTH-1:0]	data_out;
+	output [DATA_WIDTH-1:0]	data_out;
 	
 	// Internal
-	reg [`MEM_DATA_WIDTH-1:0] progArray[0:`MEM_DEPTH-1];
-	reg [`MEM_DATA_WIDTH-1:0] data_out ;
+	reg [DATA_WIDTH-1:0] progArray[0:MEM_DEPTH-1];
+	reg [DATA_WIDTH-1:0] data_out ;
 	
 	// Code
 	
@@ -37,7 +49,7 @@ module progMem(
 		integer j;
 		// Async Reset
 		if ( !rst_n ) begin
-			for (j=0; j < `MEM_DEPTH; j=j+1) begin
+			for (j=0; j < MEM_DEPTH; j=j+1) begin
 				progArray[j] <= 0; //reset array
 			end
 		end 

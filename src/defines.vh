@@ -12,7 +12,7 @@
 `define MEM_ADDR_WIDTH 10   // Address With
 `define MEM_DEPTH 1 << `MEM_ADDR_WIDTH  // Total number of positions (1024)
 
-
+`define MEM_TRANSFER_WIDTH 4  // Mask to store word, halfword or byte
 
 
 // Instrucitions types
@@ -157,5 +157,7 @@
 `define CSRRWI    4;
 `define CSRRSI    5;
 `define CSRRCI    6;
+
+`define CSR_ADDR_WIDTH = 12;
 
 `endif
