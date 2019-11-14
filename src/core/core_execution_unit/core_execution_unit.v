@@ -1,12 +1,51 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-`include "../../defines.vh"
+`ifdef CUSTOM_DEFINE
+	`include "../../defines.vh"
+`endif
+
 `include "core_execution_unit_alu.v" 
 `include "core_execution_unit_lis.v" 
 `include "core_execution_unit_br.v" 
 
-module executionUnit(
+module executionUnit
+	`ifdef CUSTOM_DEFINE
+		#(parameter MEM_ADDR_WIDTH = `MEM_ADDR_WIDTH,
+        parameter DATA_WIDTH = `REG_DATA_WIDTH,
+        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,
+        parameter ALU_OP_WIDTH = `ALU_OP_WIDTH,
+        parameter LIS_OP_WIDTH = `LIS_OP_WIDTH,
+        parameter BR_OP_WIDTH = `BR_OP_WIDTH,
+        parameter DATA_ORIGIN_WIDTH = `DATA_ORIGIN_WIDTH,
+		parameter CSRRW = `CSRRW,  // TODO: Separar en localparams
+		parameter CSRRS = `CSRRS,
+		parameter CSRRC = `CSRRC,
+		parameter CSRRWI = `CSRRWI,
+		parameter CSRRSI = `CSRRSI,
+		parameter CSRRCI = `CSRRCI,
+		parameter REGS = REGS,  // TODO: Separar en localparams
+		parameter RS2IMM_RS1 = RS2IMM_RS1,
+		parameter RS2IMM_RS1PC = RS2IMM_RS1PC) 
+	`else
+		#(parameter MEM_ADDR_WIDTH = 10,
+        parameter DATA_WIDTH = 32,
+        parameter CSR_OP_WIDTH = 3,  // 3
+        parameter ALU_OP_WIDTH = 4,
+        parameter LIS_OP_WIDTH = 3,
+        parameter BR_OP_WIDTH = 2,
+        parameter DATA_ORIGIN_WIDTH = 2,
+		parameter CSRRW = 1,  // TODO: Separar en localparams
+		parameter CSRRS = 2,
+		parameter CSRRC = 3,
+		parameter CSRRWI = 4,
+		parameter CSRRSI = 5,
+		parameter CSRRCI = 6,
+		parameter REGS = 0,  // TODO: Separar en localparams
+		parameter RS2IMM_RS1 = 1,
+		parameter RS2IMM_RS1PC = 2) 
+	`endif
+	(
 		ALU_op,
 		LIS_op,
 		BR_op,
@@ -27,49 +66,42 @@ module executionUnit(
         csr_val_o,
         csr_val_i
     );
-    parameter CSR_ADDR = 12;
 
-    localparam CSRRW = 1;
-    localparam CSRRS = 2;
-    localparam CSRRC = 3;
-    localparam CSRRWI = 4;
-    localparam CSRRSI = 5;
-    localparam CSRRCI = 6;
 
-	input [`ALU_OP_WIDTH-1:0]       ALU_op;
-	input [`LIS_OP_WIDTH-1:0]       LIS_op;
-	input [`BR_OP_WIDTH-1:0]        BR_op;
-	input [`CSR_OP_WIDTH-1:0]       csr_op_i;
-	input [`DATA_ORIGIN_WIDTH-1:0]  data_origin_i;
+	input [ALU_OP_WIDTH-1:0]       ALU_op;
+	input [LIS_OP_WIDTH-1:0]       LIS_op;
+	input [BR_OP_WIDTH-1:0]        BR_op;
+	input [CSR_OP_WIDTH-1:0]       csr_op_i;
+	input [DATA_ORIGIN_WIDTH-1:0]  data_origin_i;
 
-	input [`REG_DATA_WIDTH-1:0]      rs1_i;
-	input [`REG_DATA_WIDTH-1:0]      rs2_i;
-	input [`REG_DATA_WIDTH-1:0]      imm_val_i;
-	output[`REG_DATA_WIDTH-1:0]      d_o;
-    output[`REG_DATA_WIDTH-1:0]      val_mem_data_write_o;
-    input [`REG_DATA_WIDTH-1:0]      val_mem_data_read_i;
-    output[`MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
-	output[`REG_DATA_WIDTH-1:0]      new_pc_offset_o;
-	input [`MEM_ADDR_WIDTH-1:0]      old_pc_i;
+	input [DATA_WIDTH-1:0]      rs1_i;
+	input [DATA_WIDTH-1:0]      rs2_i;
+	input [DATA_WIDTH-1:0]      imm_val_i;
+	output[DATA_WIDTH-1:0]      d_o;
+    output[DATA_WIDTH-1:0]      val_mem_data_write_o;
+    input [DATA_WIDTH-1:0]      val_mem_data_read_i;
+    output[MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
+	output[DATA_WIDTH-1:0]      new_pc_offset_o;
+	input [MEM_ADDR_WIDTH-1:0]      old_pc_i;
 
-    input [`MEM_DATA_WIDTH-1 : 0] csr_val_i;
-    output [`MEM_DATA_WIDTH-1 : 0] csr_val_o;
+    input [DATA_WIDTH-1 : 0] csr_val_i;
+    output [DATA_WIDTH-1 : 0] csr_val_o;
 
 	input       is_branch_i;
 	input		is_loadstore;
 	output		is_absolute_o;
 
 
-    wire [`REG_DATA_WIDTH-1:0]      alu_o;
-    wire [`REG_DATA_WIDTH-1:0]      mem_o;
+    wire [DATA_WIDTH-1:0]      alu_o;
+    wire [DATA_WIDTH-1:0]      mem_o;
 
 	wire zero_alu_result;
 
-	reg [`REG_DATA_WIDTH-1:0]      d_o;
-	reg [`REG_DATA_WIDTH-1:0]      s2_ALU;
-	reg [`REG_DATA_WIDTH-1:0]      s1_ALU;
+	reg [DATA_WIDTH-1:0]      d_o;
+	reg [DATA_WIDTH-1:0]      s2_ALU;
+	reg [DATA_WIDTH-1:0]      s1_ALU;
 
-    reg [`MEM_DATA_WIDTH-1 : 0] csr_val_o;
+    reg [DATA_WIDTH-1 : 0] csr_val_o;
 
 	reg is_conditional;
 	reg is_absolute_o;
@@ -83,15 +115,15 @@ module executionUnit(
 		if (is_branch_i === 1'b0 && csr_op_i === 3'b0 ) begin
 			// Define Inputs
 			case (data_origin_i)
-				`REGS: begin
+				REGS: begin
 					s1_ALU = rs1_i;
 					s2_ALU = rs2_i;
 				end
-				`RS2IMM_RS1: begin
+				RS2IMM_RS1: begin
 					s1_ALU = rs1_i;
 					s2_ALU = imm_val_i;
 				end
-				`RS2IMM_RS1PC: begin
+				RS2IMM_RS1PC: begin
 					s1_ALU = old_pc_i;
 					s2_ALU = imm_val_i;
 				end
@@ -107,18 +139,18 @@ module executionUnit(
 		else if (is_branch_i === 1'b1) begin // in Branch condition
 			// Define Inputs
 			case (data_origin_i)
-				`REGS: begin
+				REGS: begin
 					s1_ALU = rs1_i;
 					s2_ALU = rs2_i;
 					is_conditional = 1'b1;
 					
 				end
-				`RS2IMM_RS1: begin
+				RS2IMM_RS1: begin
 					s1_ALU = rs1_i;
 					s2_ALU = imm_val_i;
 					is_absolute_o = 1'b1;
 				end
-				`RS2IMM_RS1PC: begin
+				RS2IMM_RS1PC: begin
 					s1_ALU = old_pc_i;
 					s2_ALU = imm_val_i;
 					is_absolute_o = 1'b1;
@@ -131,7 +163,7 @@ module executionUnit(
 				end
 			endcase
 			// Define Outputs
-			d_o = { {`REG_DATA_WIDTH - `MEM_ADDR_WIDTH{1'b0}}, old_pc_i};
+			d_o = { {DATA_WIDTH - MEM_ADDR_WIDTH{1'b0}}, old_pc_i};
 		end 
         else if (csr_op_i != 3'b0 ) begin
             if (csr_op_i === CSRRW || csr_op_i === CSRRS || csr_op_i === CSRRC) csr_val_o = rs1_i;
@@ -166,7 +198,7 @@ module executionUnit(
 	br BR (
 		.BR_op_i (BR_op),
 		.alu_d (alu_o),
-		.old_pc_i ({{`REG_DATA_WIDTH - `MEM_ADDR_WIDTH{1'b0}},old_pc_i}),
+		.old_pc_i ({{DATA_WIDTH - MEM_ADDR_WIDTH{1'b0}},old_pc_i}),
 		.new_pc_i (imm_val_i),
 		.new_pc_o (new_pc_offset_o),
 		.is_conditional_i (is_conditional),

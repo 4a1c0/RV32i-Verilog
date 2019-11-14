@@ -123,10 +123,10 @@
 // LIS_OPERATIONS
 `define LIS_OP_WIDTH		3
 
-`define LIS_LB		0		
+`define LIS_LB		0
 `define LIS_LH		1
 `define LIS_LW		2
-`define LIS_LBU 		3
+`define LIS_LBU		3
 `define LIS_LHU		4
 `define LIS_SB		5
 `define LIS_SH		6

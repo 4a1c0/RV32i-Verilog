@@ -5,19 +5,31 @@
 `include "core_csr_unit_timer.v"
 
 // Module Declaration
-module crs_unit (
-    rst_n,
-    clk,
-    csr_addr_i, // Adr 
-    csr_val_i,  // Val in
-    csr_val_o,  // Val Out
-    csr_op_i  // Op In
+module crs_unit 
+    `ifdef CUSTOM_DEFINE
+		#(parameter CSR_XLEN = 64,
+        parameter REG_XLEN = 32,
+        parameter DATA_WIDTH = `REG_DATA_WIDTH,
+        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,
+        parameter CSR_ADDR_WIDTH = `CSR_ADDR_WIDTH
+        ) 
+	`else
+		#(parameter CSR_XLEN = 64,
+        parameter REG_XLEN = 32,
+        parameter CSR_OP_WIDTH = 3,  // 3
+        parameter CSR_ADDR_WIDTH = 12
+        ) 
+	`endif
+    (
+        rst_n,
+        clk,
+        csr_addr_i, // Adr 
+        csr_val_i,  // Val in
+        csr_val_o,  // Val Out
+        csr_op_i  // Op In
     );
 
-    parameter CSR_ADDR = 12;
-    parameter CSR_OP_WIDTH = 3;
-    parameter CSR_XLEN = 64;
-    parameter REG_XLEN = 32;
+    
 
     localparam CSRRW = 1;
     localparam CSRRS = 2;
@@ -39,16 +51,16 @@ module crs_unit (
     input rst_n;
     input clk;
 
-    input [CSR_ADDR-1 : 0]csr_addr_i;
-    input [`MEM_DATA_WIDTH-1 : 0] csr_val_i;
-    output [`MEM_DATA_WIDTH-1 : 0] csr_val_o;
+    input [CSR_ADDR_WIDTH-1 : 0]csr_addr_i;
+    input [REG_XLEN-1 : 0] csr_val_i;
+    output [REG_XLEN-1 : 0] csr_val_o;
     input [CSR_OP_WIDTH-1 : 0] csr_op_i;
 
     wire [CSR_XLEN-1:0] timer_val_i;
     reg  [CSR_XLEN-1:0] timer_val_o;
     reg timer_we_o;
 
-    reg [`MEM_DATA_WIDTH-1 : 0] csr_val_o;
+    reg [REG_XLEN-1 : 0] csr_val_o;
 
     reg [CSR_XLEN-1:0] cycle_csr; // core 
     reg [CSR_XLEN-1:0] time_csr;  // hart // TODO Alias of core

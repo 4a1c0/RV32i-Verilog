@@ -18,7 +18,7 @@
 
 module core
     `ifdef CUSTOM_DEFINE
-		#(parameter ADDR_WIDTH = `MEM_ADDR_WIDTH,
+		#(parameter MEM_ADDR_WIDTH = `MEM_ADDR_WIDTH,
         parameter DATA_WIDTH = `REG_DATA_WIDTH,
         parameter TRANSFER_WIDTH = `MEM_TRANSFER_WIDTH,
         parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,
@@ -29,10 +29,10 @@ module core
         parameter DATA_ORIGIN_WIDTH = `DATA_ORIGIN_WIDTH,
         parameter REG_ADDR_WIDTH = `REG_ADDR_WIDTH) 
 	`else
-		#(parameter ADDR_WIDTH = 10,
+		#(parameter MEM_ADDR_WIDTH = 10,
         parameter DATA_WIDTH = 32,
         parameter TRANSFER_WIDTH = 4,
-        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,  // 3
+        parameter CSR_OP_WIDTH = 3,  // 3
         parameter CSR_ADDR_WIDTH = 12,
         parameter ALU_OP_WIDTH = 4,
         parameter LIS_OP_WIDTH = 3,
@@ -58,10 +58,10 @@ module core
     input 	rst_n;
 
     output we_mem_data_o;
-    output [ADDR_WIDTH-1 : 0] addr_mem_data_o;
+    output [MEM_ADDR_WIDTH-1 : 0] addr_mem_data_o;
     input [DATA_WIDTH-1 : 0] val_mem_data_read_i;
     output [DATA_WIDTH-1 : 0] val_mem_data_write_o;
-    output [ADDR_WIDTH-1 : 0] addr_mem_prog_o;
+    output [MEM_ADDR_WIDTH-1 : 0] addr_mem_prog_o;
     input [DATA_WIDTH-1 : 0] val_mem_prog_i;
 
     output [TRANSFER_WIDTH-1:0] write_transfer_mem_data_o;
@@ -138,7 +138,7 @@ module core
         .clk (clk),
         .is_branch_i (is_branch_t),  // Branch indicator
         .is_absolute_i (is_absolute_t),  // Absolute or relative branch
-        .offset_i (new_pc[ADDR_WIDTH-1:0]),  // new pc or offset
+        .offset_i (new_pc[MEM_ADDR_WIDTH-1:0]),  // new pc or offset
         .addr (addr_mem_prog_o)  // next addr
     );
 

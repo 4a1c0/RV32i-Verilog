@@ -1,5 +1,5 @@
 Analysis & Synthesis report for RV32i
-Wed Nov 13 20:29:21 2019
+Wed Nov 13 22:42:55 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -9,8 +9,26 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Messages
-  5. Analysis & Synthesis Suppressed Messages
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. User-Specified and Inferred Latches
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Parameter Settings for User Entity Instance: Top-level Entity: |core
+ 11. Parameter Settings for User Entity Instance: controlUnit:controlUnit_inst
+ 12. Parameter Settings for User Entity Instance: programCounter:program_counter_inst
+ 13. Parameter Settings for User Entity Instance: regFile:reg_file_inst
+ 14. Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst
+ 15. Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|alu:ALU
+ 16. Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|lis:LIS
+ 17. Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|br:BR
+ 18. Parameter Settings for User Entity Instance: crs_unit:crs_unit_inst
+ 19. Parameter Settings for User Entity Instance: crs_unit:crs_unit_inst|timer:timer_inst
+ 20. Port Connectivity Checks: "executionUnit:exec_unit_inst|br:BR"
+ 21. Port Connectivity Checks: "executionUnit:exec_unit_inst"
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
 
 
 
@@ -36,20 +54,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Wed Nov 13 20:29:21 2019               ;
+; Analysis & Synthesis Status        ; Successful - Wed Nov 13 22:42:54 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; RV32i                                           ;
-; Top-level Entity Name              ; top                                             ;
+; Top-level Entity Name              ; core                                            ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; N/A until Partition Merge                       ;
-;     Total combinational functions  ; N/A until Partition Merge                       ;
-;     Dedicated logic registers      ; N/A until Partition Merge                       ;
-; Total registers                    ; N/A until Partition Merge                       ;
-; Total pins                         ; N/A until Partition Merge                       ;
-; Total virtual pins                 ; N/A until Partition Merge                       ;
-; Total memory bits                  ; N/A until Partition Merge                       ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                       ;
-; Total PLLs                         ; N/A until Partition Merge                       ;
+; Total logic elements               ; 3,823                                           ;
+;     Total combinational functions  ; 2,831                                           ;
+;     Dedicated logic registers      ; 1,195                                           ;
+; Total registers                    ; 1195                                            ;
+; Total pins                         ; 123                                             ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -59,7 +77,7 @@ applicable agreement for further details.
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                     ; EP3C16F484C6       ;                    ;
-; Top-level entity name                                                      ; top                ; RV32i              ;
+; Top-level entity name                                                      ; core               ; RV32i              ;
 ; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
 ; Verilog Show LMF Mapping Messages                                          ; Off                ;                    ;
 ; Verilog Version                                                            ; SystemVerilog_2005 ; Verilog_2001       ;
@@ -141,137 +159,1079 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                         ;
++-----------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                          ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
++-----------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; ../src/core/core.v                                        ; yes             ; User Verilog HDL File        ; X:/RV32i-Verilog/src/core/core.v                                        ;         ;
+; ../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
+; ../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
+; ../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
+; ../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
+; ../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
+; ../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
+; ../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
+; ../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
+; ../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
+; /defines.vh                                               ; yes             ; Auto-Found Unspecified File  ; /defines.vh                                                             ;         ;
++-----------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 3,823     ;
+;                                             ;           ;
+; Total combinational functions               ; 2831      ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 1984      ;
+;     -- 3 input functions                    ; 656       ;
+;     -- <=2 input functions                  ; 191       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 2635      ;
+;     -- arithmetic mode                      ; 196       ;
+;                                             ;           ;
+; Total registers                             ; 1195      ;
+;     -- Dedicated logic registers            ; 1195      ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 123       ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 1195      ;
+; Total fan-out                               ; 15286     ;
+; Average fan-out                             ; 3.58      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                 ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
+; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                           ; Library Name ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
+; |core                                    ; 2831 (0)          ; 1195 (0)     ; 0           ; 0            ; 0       ; 0         ; 123  ; 0            ; |core                                         ; work         ;
+;    |controlUnit:controlUnit_inst|        ; 143 (143)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|controlUnit:controlUnit_inst            ; work         ;
+;    |crs_unit:crs_unit_inst|              ; 183 (119)         ; 161 (97)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|crs_unit:crs_unit_inst                  ; work         ;
+;       |timer:timer_inst|                 ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|crs_unit:crs_unit_inst|timer:timer_inst ; work         ;
+;    |executionUnit:exec_unit_inst|        ; 1139 (310)        ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|executionUnit:exec_unit_inst            ; work         ;
+;       |alu:ALU|                          ; 709 (709)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|executionUnit:exec_unit_inst|alu:ALU    ; work         ;
+;       |lis:LIS|                          ; 120 (120)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|executionUnit:exec_unit_inst|lis:LIS    ; work         ;
+;    |programCounter:program_counter_inst| ; 29 (29)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|programCounter:program_counter_inst     ; work         ;
+;    |regFile:reg_file_inst|               ; 1337 (1337)       ; 1024 (1024)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |core|regFile:reg_file_inst                   ; work         ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                              ;
++----------------------------------------------------------+----------------------------------------------+------------------------+
+; Latch Name                                               ; Latch Enable Signal                          ; Free of Timing Hazards ;
++----------------------------------------------------------+----------------------------------------------+------------------------+
+; executionUnit:exec_unit_inst|s1_ALU[0]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[0]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[31]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[31]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[30]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[30]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[29]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[29]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[28]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[28]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[27]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[27]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[26]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[26]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[25]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[25]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[24]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[24]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[23]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[23]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[22]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[22]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[21]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[21]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[20]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[20]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[19]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[19]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[18]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[18]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[17]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[17]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[16]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[16]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[15]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[15]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[14]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[14]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[13]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[13]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[12]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[12]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[11]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[11]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[10]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[10]                  ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[9]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[9]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[8]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[8]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[7]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[7]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[6]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[6]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[5]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[5]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[4]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[4]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[3]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[3]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[2]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[2]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s1_ALU[1]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|s2_ALU[1]                   ; executionUnit:exec_unit_inst|s2_ALU[0]       ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[0]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[1]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[2]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[3]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[4]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[5]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[6]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[7]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[8]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[9]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[10] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[11] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[12] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[13] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[14] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[15] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[16] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[17] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[18] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[19] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[20] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[21] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[22] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[23] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[24] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[25] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[26] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[27] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[28] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[29] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[30] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[31] ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[0]   ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[31]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[30]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[29]  ; executionUnit:exec_unit_inst|lis:LIS|WideOr0 ; yes                    ;
+; Number of user-specified and inferred latches = 160      ;                                              ;                        ;
++----------------------------------------------------------+----------------------------------------------+------------------------+
+Table restricted to first 100 entries. Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1195  ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 74    ;
+; Number of registers using Asynchronous Clear ; 1163  ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 1120  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |core|crs_unit:crs_unit_inst|timer_val_o[27]        ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |core|crs_unit:crs_unit_inst|timer_val_o[54]        ;
+; 5:1                ; 32 bits   ; 96 LEs        ; 32 LEs               ; 64 LEs                 ; Yes        ; |core|crs_unit:crs_unit_inst|csr_val_o[21]          ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |core|controlUnit:controlUnit_inst|Selector6        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |core|controlUnit:controlUnit_inst|Selector25       ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; No         ; |core|controlUnit:controlUnit_inst|Selector25       ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|lis:LIS|Mux38    ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|lis:LIS|Mux25    ;
+; 4:1                ; 22 bits   ; 44 LEs        ; 44 LEs               ; 0 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|d_o[21]          ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|d_o[1]           ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |core|controlUnit:controlUnit_inst|Selector11       ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|lis:LIS|Mux12    ;
+; 7:1                ; 6 bits    ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; No         ; |core|controlUnit:controlUnit_inst|Selector3        ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; No         ; |core|regFile:reg_file_inst|rs2[7]                  ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|lis:LIS|Mux1     ;
+; 6:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; No         ; |core|programCounter:program_counter_inst|offset[1] ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; No         ; |core|regFile:reg_file_inst|rs1[16]                 ;
+; 19:1               ; 8 bits    ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux18    ;
+; 20:1               ; 7 bits    ; 91 LEs        ; 56 LEs               ; 35 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux13    ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; No         ; |core|controlUnit:controlUnit_inst|Selector18       ;
+; 20:1               ; 4 bits    ; 52 LEs        ; 32 LEs               ; 20 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux27    ;
+; 21:1               ; 4 bits    ; 56 LEs        ; 36 LEs               ; 20 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux5     ;
+; 21:1               ; 2 bits    ; 28 LEs        ; 16 LEs               ; 12 LEs                 ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux29    ;
+; 22:1               ; 2 bits    ; 28 LEs        ; 20 LEs               ; 8 LEs                  ; No         ; |core|executionUnit:exec_unit_inst|alu:ALU|Mux3     ;
+; 134:1              ; 2 bits    ; 178 LEs       ; 16 LEs               ; 162 LEs                ; No         ; |core|controlUnit:controlUnit_inst|Selector31       ;
+; 135:1              ; 2 bits    ; 180 LEs       ; 20 LEs               ; 160 LEs                ; No         ; |core|controlUnit:controlUnit_inst|Selector36       ;
+; 13:1               ; 5 bits    ; 40 LEs        ; 10 LEs               ; 30 LEs                 ; No         ; |core|controlUnit:controlUnit_inst|Selector25       ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 16 LEs               ; 24 LEs                 ; No         ; |core|controlUnit:controlUnit_inst|Selector23       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+
+
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |core ;
++-------------------+-------+------------------------------------------+
+; Parameter Name    ; Value ; Type                                     ;
++-------------------+-------+------------------------------------------+
+; MEM_ADDR_WIDTH    ; 10    ; Signed Integer                           ;
+; DATA_WIDTH        ; 32    ; Signed Integer                           ;
+; TRANSFER_WIDTH    ; 4     ; Signed Integer                           ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                           ;
+; CSR_ADDR_WIDTH    ; 12    ; Signed Integer                           ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                           ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                           ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                           ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                           ;
+; REG_ADDR_WIDTH    ; 5     ; Signed Integer                           ;
++-------------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: controlUnit:controlUnit_inst ;
++-------------------+-------+-----------------------------------------------+
+; Parameter Name    ; Value ; Type                                          ;
++-------------------+-------+-----------------------------------------------+
+; MEM_ADDR_WIDTH    ; 10    ; Signed Integer                                ;
+; DATA_WIDTH        ; 32    ; Signed Integer                                ;
+; TRANSFER_WIDTH    ; 4     ; Signed Integer                                ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                                ;
+; CSR_ADDR_WIDTH    ; 12    ; Signed Integer                                ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                                ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                                ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                                ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                                ;
+; REG_ADDR_WIDTH    ; 5     ; Signed Integer                                ;
+; CSRRW             ; 1     ; Signed Integer                                ;
+; CSRRS             ; 2     ; Signed Integer                                ;
+; CSRRC             ; 3     ; Signed Integer                                ;
+; CSRRWI            ; 4     ; Signed Integer                                ;
+; CSRRSI            ; 5     ; Signed Integer                                ;
+; CSRRCI            ; 6     ; Signed Integer                                ;
+; ALU_OP_ADD        ; 0     ; Signed Integer                                ;
+; ALU_OP_SUB        ; 1     ; Signed Integer                                ;
+; ALU_OP_SLL        ; 2     ; Signed Integer                                ;
+; ALU_OP_SLT        ; 3     ; Signed Integer                                ;
+; ALU_OP_SLTU       ; 4     ; Signed Integer                                ;
+; ALU_OP_XOR        ; 5     ; Signed Integer                                ;
+; ALU_OP_SRL        ; 6     ; Signed Integer                                ;
+; ALU_OP_SRA        ; 7     ; Signed Integer                                ;
+; ALU_OP_OR         ; 8     ; Signed Integer                                ;
+; ALU_OP_AND        ; 9     ; Signed Integer                                ;
++-------------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: programCounter:program_counter_inst ;
++----------------+-------+---------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                    ;
++----------------+-------+---------------------------------------------------------+
+; MEM_ADDR_WIDTH ; 10    ; Signed Integer                                          ;
++----------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: regFile:reg_file_inst ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; DATA_WIDTH     ; 32    ; Signed Integer                            ;
+; REG_DEPTH      ; 32    ; Signed Integer                            ;
+; REG_ADDR_WIDTH ; 5     ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst ;
++-------------------+-------+-----------------------------------------------+
+; Parameter Name    ; Value ; Type                                          ;
++-------------------+-------+-----------------------------------------------+
+; MEM_ADDR_WIDTH    ; 10    ; Signed Integer                                ;
+; DATA_WIDTH        ; 32    ; Signed Integer                                ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                                ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                                ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                                ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                                ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                                ;
+; CSRRW             ; 1     ; Signed Integer                                ;
+; CSRRS             ; 2     ; Signed Integer                                ;
+; CSRRC             ; 3     ; Signed Integer                                ;
+; CSRRWI            ; 4     ; Signed Integer                                ;
+; CSRRSI            ; 5     ; Signed Integer                                ;
+; CSRRCI            ; 6     ; Signed Integer                                ;
+; REGS              ; 0     ; Signed Integer                                ;
+; RS2IMM_RS1        ; 1     ; Signed Integer                                ;
+; RS2IMM_RS1PC      ; 2     ; Signed Integer                                ;
++-------------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|alu:ALU ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; ALU_OPWIDTH    ; 4     ; Signed Integer                                           ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                           ;
+; ALU_OP_ADD     ; 0     ; Signed Integer                                           ;
+; ALU_OP_SUB     ; 1     ; Signed Integer                                           ;
+; ALU_OP_SLL     ; 2     ; Signed Integer                                           ;
+; ALU_OP_SLT     ; 3     ; Signed Integer                                           ;
+; ALU_OP_SLTU    ; 4     ; Signed Integer                                           ;
+; ALU_OP_XOR     ; 5     ; Signed Integer                                           ;
+; ALU_OP_SRL     ; 6     ; Signed Integer                                           ;
+; ALU_OP_SRA     ; 7     ; Signed Integer                                           ;
+; ALU_OP_OR      ; 8     ; Signed Integer                                           ;
+; ALU_OP_AND     ; 9     ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|lis:LIS ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; LIS_OP_WIDTH   ; 3     ; Signed Integer                                           ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                           ;
+; MEM_ADDR_WIDTH ; 10    ; Signed Integer                                           ;
+; LIS_LB         ; 0     ; Signed Integer                                           ;
+; LIS_LH         ; 1     ; Signed Integer                                           ;
+; LIS_LW         ; 2     ; Signed Integer                                           ;
+; LIS_LBU        ; 3     ; Signed Integer                                           ;
+; LIS_LHU        ; 4     ; Signed Integer                                           ;
+; LIS_SB         ; 5     ; Signed Integer                                           ;
+; LIS_SH         ; 6     ; Signed Integer                                           ;
+; LIS_SW         ; 7     ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: executionUnit:exec_unit_inst|br:BR ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; BR_OP_WIDTH    ; 2     ; Signed Integer                                         ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                         ;
+; BR_EQ          ; 0     ; Signed Integer                                         ;
+; BR_NE          ; 1     ; Signed Integer                                         ;
+; BR_LT          ; 2     ; Signed Integer                                         ;
+; BR_GE          ; 3     ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: crs_unit:crs_unit_inst ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; CSR_XLEN       ; 64    ; Signed Integer                             ;
+; REG_XLEN       ; 32    ; Signed Integer                             ;
+; CSR_OP_WIDTH   ; 3     ; Signed Integer                             ;
+; CSR_ADDR_WIDTH ; 12    ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: crs_unit:crs_unit_inst|timer:timer_inst ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; CSR_XLEN       ; 64    ; Signed Integer                                              ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "executionUnit:exec_unit_inst|br:BR" ;
++------------------+-------+----------+--------------------------+
+; Port             ; Type  ; Severity ; Details                  ;
++------------------+-------+----------+--------------------------+
+; old_pc_i[31..10] ; Input ; Info     ; Stuck at GND             ;
++------------------+-------+----------+--------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "executionUnit:exec_unit_inst"                                                                          ;
++-------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                    ; Type   ; Severity ; Details                                                                             ;
++-------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; new_pc_offset_o[31..10] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:14     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Nov 13 20:29:19 2019
+    Info: Processing started: Wed Nov 13 22:42:30 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RV32i -c RV32i
 Info (20029): Only one processor detected - disabling parallel compilation
-Warning (10274): Verilog HDL macro warning at defines.vh(3): overriding existing definition for macro "REG_DATA_WIDTH", which was defined in "../src/defines.vh", line 7
-Warning (10274): Verilog HDL macro warning at defines.vh(4): overriding existing definition for macro "REG_ADDR_WIDTH", which was defined in "../src/defines.vh", line 8
-Warning (10274): Verilog HDL macro warning at defines.vh(5): overriding existing definition for macro "REG_DEPTH", which was defined in "../src/defines.vh", line 9
-Warning (10274): Verilog HDL macro warning at defines.vh(8): overriding existing definition for macro "MEM_DATA_WIDTH", which was defined in "../src/defines.vh", line 12
-Warning (10274): Verilog HDL macro warning at defines.vh(9): overriding existing definition for macro "MEM_ADDR_WIDTH", which was defined in "../src/defines.vh", line 13
-Warning (10274): Verilog HDL macro warning at defines.vh(10): overriding existing definition for macro "MEM_DEPTH", which was defined in "../src/defines.vh", line 14
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(68) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 68
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(69) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 69
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(70) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 70
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(72) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 72
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(134) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 134
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(169) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 169
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/top.v
-Error (10170): Verilog HDL syntax error at core_csr_unit.v(43) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 43
-Error (10170): Verilog HDL syntax error at core_csr_unit.v(44) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 44
-Error (10170): Verilog HDL syntax error at core_csr_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 51
-Error (10112): Ignored design unit "crs_unit" at core_csr_unit.v(8) due to previous errors File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v Line: 8
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_csr_unit/core_csr_unit.v
-Error (10228): Verilog HDL error at core_csr_unit_timer.v(6): module "timer" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v Line: 6
-Info (10499): HDL info at core_csr_unit_timer.v(6): see declaration for object "timer"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_csr_unit/core_csr_unit_timer.v
-Error (10228): Verilog HDL error at core_execution_unit_alu.v(7): module "alu" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
-Info (10499): HDL info at core_execution_unit_alu.v(7): see declaration for object "alu"
-Error (10112): Ignored design unit "lis" at core_execution_unit_lis.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10112): Ignored design unit "br" at core_execution_unit_br.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(39): text macro "ALU_OP_WIDTH" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(40): text macro "LIS_OP_WIDTH" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(41): text macro "BR_OP_WIDTH" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(42): text macro "CSR_OP_WIDTH" is undefined
-Critical Warning (10191): Verilog HDL Compiler Directive warning at core_execution_unit.v(43): text macro "DATA_ORIGIN_WIDTH" is undefined
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(68) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 68
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(69) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 69
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(70) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 70
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit.v
-Error (10228): Verilog HDL error at core_execution_unit_alu.v(7): module "alu" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
-Info (10499): HDL info at core_execution_unit_alu.v(7): see declaration for object "alu"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_alu.v
-Error (10228): Verilog HDL error at core_execution_unit_br.v(10): module "br" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
-Info (10499): HDL info at core_execution_unit_br.v(10): see declaration for object "br"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_br.v
-Error (10228): Verilog HDL error at core_execution_unit_lis.v(10): module "lis" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Info (10499): HDL info at core_execution_unit_lis.v(10): see declaration for object "lis"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_execution_unit/core_execution_unit_lis.v
-Error (10228): Verilog HDL error at core_control_unit.v(7): module "controlUnit" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_control_unit.v Line: 7
-Info (10499): HDL info at core_control_unit.v(7): see declaration for object "controlUnit"
-Error (10112): Ignored design unit "programCounter" at core_program_counter.v(6) due to previous errors File: X:/RV32i-Verilog/src/core/core_program_counter.v Line: 6
-Warning (10274): Verilog HDL macro warning at defines.vh(3): overriding existing definition for macro "REG_DATA_WIDTH", which was defined in "../src/defines.vh", line 7
-Warning (10274): Verilog HDL macro warning at defines.vh(4): overriding existing definition for macro "REG_ADDR_WIDTH", which was defined in "../src/defines.vh", line 8
-Warning (10274): Verilog HDL macro warning at defines.vh(5): overriding existing definition for macro "REG_DEPTH", which was defined in "../src/defines.vh", line 9
-Warning (10274): Verilog HDL macro warning at defines.vh(8): overriding existing definition for macro "MEM_DATA_WIDTH", which was defined in "../src/defines.vh", line 12
-Warning (10274): Verilog HDL macro warning at defines.vh(9): overriding existing definition for macro "MEM_ADDR_WIDTH", which was defined in "../src/defines.vh", line 13
-Warning (10274): Verilog HDL macro warning at defines.vh(10): overriding existing definition for macro "MEM_DEPTH", which was defined in "../src/defines.vh", line 14
-Error (10112): Ignored design unit "regFile" at core_regfile.v(7) due to previous errors File: X:/RV32i-Verilog/src/core/core_regfile.v Line: 7
-Error (10112): Ignored design unit "alu" at core_execution_unit_alu.v(7) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v Line: 7
-Error (10112): Ignored design unit "lis" at core_execution_unit_lis.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v Line: 10
-Error (10112): Ignored design unit "br" at core_execution_unit_br.v(10) due to previous errors File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v Line: 10
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(45) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 45
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(46) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 46
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(47) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 47
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(48) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 48
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(49) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 49
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(50) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 50
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(51) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 51
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(52) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 52
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(53) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 53
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(55) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 55
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(56) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 56
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(63) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 63
-Error (10170): Verilog HDL syntax error at core_execution_unit.v(64) near text "=";  expecting an operand File: X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v Line: 64
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core.v
-Error (10228): Verilog HDL error at core_control_unit.v(7): module "controlUnit" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_control_unit.v Line: 7
-Info (10499): HDL info at core_control_unit.v(7): see declaration for object "controlUnit"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_control_unit.v
-Error (10228): Verilog HDL error at core_program_counter.v(6): module "programCounter" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_program_counter.v Line: 6
-Info (10499): HDL info at core_program_counter.v(6): see declaration for object "programCounter"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_program_counter.v
-Error (10228): Verilog HDL error at core_regfile.v(7): module "regFile" cannot be declared more than once File: X:/RV32i-Verilog/src/core/core_regfile.v Line: 7
-Info (10499): HDL info at core_regfile.v(7): see declaration for object "regFile"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/core/core_regfile.v
-Error (10228): Verilog HDL error at mem_data.v(10): module "dataMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_data.v Line: 10
-Info (10499): HDL info at mem_data.v(10): see declaration for object "dataMem"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/mem/mem_data.v
-Error (10228): Verilog HDL error at mem_prog.v(9): module "progMem" cannot be declared more than once File: X:/RV32i-Verilog/src/mem/mem_prog.v Line: 9
-Info (10499): HDL info at mem_prog.v(9): see declaration for object "progMem"
-Info (12021): Found 0 design units, including 0 entities, in source file /rv32i-verilog/src/mem/mem_prog.v
-Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/RV32i.map.smsg
-Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 70 errors, 17 warnings
-    Error: Peak virtual memory: 418 megabytes
-    Error: Processing ended: Wed Nov 13 20:29:22 2019
-    Error: Elapsed time: 00:00:03
-    Error: Total CPU time (on all processors): 00:00:01
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in X:/RV32i-Verilog/Quartus/RV32i.map.smsg.
+Info (12021): Found 10 design units, including 10 entities, in source file /rv32i-verilog/src/core/core.v
+    Info (12023): Found entity 1: controlUnit
+    Info (12023): Found entity 2: programCounter
+    Info (12023): Found entity 3: regFile
+    Info (12023): Found entity 4: alu
+    Info (12023): Found entity 5: lis
+    Info (12023): Found entity 6: br
+    Info (12023): Found entity 7: executionUnit
+    Info (12023): Found entity 8: timer
+    Info (12023): Found entity 9: crs_unit
+    Info (12023): Found entity 10: core
+Info (12127): Elaborating entity "core" for the top level hierarchy
+Info (12128): Elaborating entity "controlUnit" for hierarchy "controlUnit:controlUnit_inst"
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(338): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(344): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(352): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(364): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(380): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(389): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(398): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(403): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(417): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(425): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(428): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(429): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(431): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(432): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(435): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(436): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(439): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(440): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(443): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(444): truncated value with size 32 to match size of target (2)
+Warning (10270): Verilog HDL Case Statement warning at core_control_unit.v(427): incomplete case statement has no default case item
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(461): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(463): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(467): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(468): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(469): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(470): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(471): truncated value with size 32 to match size of target (3)
+Warning (10270): Verilog HDL Case Statement warning at core_control_unit.v(466): incomplete case statement has no default case item
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(490): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(492): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(499): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(503): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(507): truncated value with size 32 to match size of target (3)
+Warning (10270): Verilog HDL Case Statement warning at core_control_unit.v(497): incomplete case statement has no default case item
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(519): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(525): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(526): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(527): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(528): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(529): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(530): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(532): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(533): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(548): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(549): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(550): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(551): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(552): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(553): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(554): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(555): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(582): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(586): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(590): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(594): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(598): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(602): truncated value with size 32 to match size of target (3)
+Warning (10270): Verilog HDL Case Statement warning at core_control_unit.v(579): incomplete case statement has no default case item
+Warning (10270): Verilog HDL Case Statement warning at core_control_unit.v(332): incomplete case statement has no default case item
+Info (12128): Elaborating entity "programCounter" for hierarchy "programCounter:program_counter_inst"
+Info (12128): Elaborating entity "regFile" for hierarchy "regFile:reg_file_inst"
+Info (12128): Elaborating entity "executionUnit" for hierarchy "executionUnit:exec_unit_inst"
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit.v(112): inferring latch(es) for variable "s1_ALU", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit.v(112): inferring latch(es) for variable "s2_ALU", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit.v(112): inferring latch(es) for variable "d_o", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit.v(112): inferring latch(es) for variable "csr_val_o", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "csr_val_o[0]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[1]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[2]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[3]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[4]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[5]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[6]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[7]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[8]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[9]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[10]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[11]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[12]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[13]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[14]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[15]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[16]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[17]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[18]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[19]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[20]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[21]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[22]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[23]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[24]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[25]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[26]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[27]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[28]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[29]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[30]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "csr_val_o[31]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[0]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[1]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[2]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[3]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[4]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[5]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[6]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[7]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[8]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[9]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[10]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[11]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[12]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[13]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[14]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[15]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[16]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[17]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[18]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[19]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[20]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[21]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[22]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[23]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[24]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[25]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[26]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[27]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[28]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[29]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[30]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "d_o[31]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[0]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[1]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[2]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[3]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[4]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[5]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[6]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[7]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[8]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[9]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[10]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[11]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[12]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[13]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[14]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[15]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[16]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[17]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[18]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[19]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[20]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[21]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[22]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[23]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[24]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[25]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[26]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[27]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[28]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[29]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[30]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s2_ALU[31]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[0]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[1]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[2]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[3]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[4]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[5]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[6]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[7]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[8]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[9]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[10]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[11]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[12]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[13]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[14]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[15]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[16]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[17]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[18]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[19]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[20]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[21]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[22]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[23]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[24]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[25]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[26]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[27]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[28]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[29]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[30]" at core_execution_unit.v(139)
+Info (10041): Inferred latch for "s1_ALU[31]" at core_execution_unit.v(139)
+Info (12128): Elaborating entity "alu" for hierarchy "executionUnit:exec_unit_inst|alu:ALU"
+Warning (10230): Verilog HDL assignment warning at core_execution_unit_alu.v(47): truncated value with size 32 to match size of target (1)
+Info (12128): Elaborating entity "lis" for hierarchy "executionUnit:exec_unit_inst|lis:LIS"
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit_lis.v(53): inferring latch(es) for variable "val_mem_write_o", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at core_execution_unit_lis.v(53): inferring latch(es) for variable "val_mem_read_o", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "val_mem_read_o[0]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[1]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[2]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[3]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[4]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[5]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[6]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[7]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[8]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[9]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[10]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[11]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[12]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[13]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[14]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[15]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[16]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[17]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[18]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[19]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[20]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[21]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[22]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[23]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[24]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[25]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[26]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[27]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[28]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[29]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[30]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_read_o[31]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[0]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[1]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[2]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[3]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[4]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[5]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[6]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[7]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[8]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[9]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[10]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[11]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[12]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[13]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[14]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[15]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[16]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[17]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[18]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[19]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[20]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[21]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[22]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[23]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[24]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[25]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[26]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[27]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[28]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[29]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[30]" at core_execution_unit_lis.v(53)
+Info (10041): Inferred latch for "val_mem_write_o[31]" at core_execution_unit_lis.v(53)
+Info (12128): Elaborating entity "br" for hierarchy "executionUnit:exec_unit_inst|br:BR"
+Info (12128): Elaborating entity "crs_unit" for hierarchy "crs_unit:crs_unit_inst"
+Info (12128): Elaborating entity "timer" for hierarchy "crs_unit:crs_unit_inst|timer:timer_inst"
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[31]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[30]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[29]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[28]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[27]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[26]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[25]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[24]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[23]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[22]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[21]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[20]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[19]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[18]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[17]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[16]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[15]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[14]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[13]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[12]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[11]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[10]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[9]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[8]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[7]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[6]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[5]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[4]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[3]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[2]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[1]" is permanently enabled
+Warning (14026): LATCH primitive "executionUnit:exec_unit_inst|d_o[0]" is permanently enabled
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[31] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[31] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[30] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[30] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[29] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[29] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[28] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[28] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[27] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[27] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[26] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[26] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[25] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[25] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[24] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[24] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[23] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[23] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[22] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[22] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[21] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[21] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[20] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[20] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[19] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[19] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[18] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[18] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[17] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[17] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[15] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[15] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[14] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[14] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[9] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[9] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s1_ALU[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|s2_ALU[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[9] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[14] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[15] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[12]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[17] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[18] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[19] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[20] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[21] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[22] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[23] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[24] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[25] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[26] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[27] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[28] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[29] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[30] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_write_o[31] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[13]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[31] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[30] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[29] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[28] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[27] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[26] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[25] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[24] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[23] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[22] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[21] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[20] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[19] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[18] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[17] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[15] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[14] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[9] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|lis:LIS|val_mem_read_o[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[20] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[19] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[18] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[17] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[15] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[5]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[14] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[9] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[22] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[23] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[24] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[25] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[26] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[27] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[28] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[29] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[30] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[31] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[0]
+Warning (13012): Latch executionUnit:exec_unit_inst|csr_val_o[21] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal val_mem_prog_i[2]
+Warning (20013): Ignored assignments for entity "RV32i" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name LL_ROOT_REGION ON -entity RV32i -section_id "Root Region" was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name LL_MEMBER_STATE LOCKED -entity RV32i -section_id "Root Region" was ignored
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 3978 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 66 input pins
+    Info (21059): Implemented 57 output pins
+    Info (21061): Implemented 3855 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 406 warnings
+    Info: Peak virtual memory: 451 megabytes
+    Info: Processing ended: Wed Nov 13 22:42:55 2019
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:18
 
 
