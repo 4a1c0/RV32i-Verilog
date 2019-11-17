@@ -10,8 +10,8 @@ module csr_test();
 	
 	initial begin 
 
-		$dumpfile("vcd/riscV.vcd");
-		$dumpvars(0, TB.top_inst);
+		//$dumpfile("vcd/riscV.vcd");
+		//$dumpvars(0, TB.top_inst);
 
 		
 		

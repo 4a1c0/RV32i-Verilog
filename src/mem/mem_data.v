@@ -51,8 +51,7 @@ module dataMem
     
     // Tristate output
     assign data_out = (we == 1'b0) ? dataArray[addr >> 2] : {DATA_WIDTH{1'b0}};
-    
-    
+
     
     always @ (posedge clk or negedge rst_n)
     begin : MEM_WRITE
@@ -62,6 +61,10 @@ module dataMem
             for (j=0; j < MEM_DEPTH; j=j+1) begin
                 dataArray[j] <= 0; //reset array
             end
+            `ifdef LOAD_MEMS
+                // Load memory
+                $readmemh("../../data/dataMem_h.mem", dataArray, 0, 3);
+            `endif
         end 
         // Write Operation (we = 1, cs = 1)
         else if ( we  && |write_transfer_i && (addr >> 2) < MEM_DEPTH) begin
@@ -80,5 +83,6 @@ module dataMem
         // end
     end
     
+
     
 endmodule

@@ -44,7 +44,7 @@ module alu
 	wire [4:0] shift = s2[4:0];
 	//reg [DATA_WIDTH-1:0] d;
 
-	assign zero_o = (d == {DATA_WIDTH{1'b0}}) ? 1 : 0;
+	assign zero_o = (d == {DATA_WIDTH{1'b0}}) ? 1'b1 : 1'b0;
 
 	always @ *
 		case(ALU_op)

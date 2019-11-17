@@ -52,14 +52,18 @@ module progMem
 			for (j=0; j < MEM_DEPTH; j=j+1) begin
 				progArray[j] <= 0; //reset array
 			end
+			`ifdef LOAD_MEMS
+				// Load memory
+				$readmemb("../../data/programMem_b.mem", progArray, 0, 10);
+			`endif
 		end 
 		else begin  // output enable logic supressed
 			data_out = progArray[addr];
 		end
 	end
 	
+	
 endmodule
-
 	
 	
 	

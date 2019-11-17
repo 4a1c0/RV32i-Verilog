@@ -1,0 +1,1623 @@
+Analysis & Synthesis report for top
+Sun Nov 17 18:31:13 2019
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. General Register Statistics
+  8. Parameter Settings for User Entity Instance: Top-level Entity: |top
+  9. Parameter Settings for User Entity Instance: core:core_inst
+ 10. Parameter Settings for User Entity Instance: core:core_inst|controlUnit:controlUnit_inst
+ 11. Parameter Settings for User Entity Instance: core:core_inst|programCounter:program_counter_inst
+ 12. Parameter Settings for User Entity Instance: core:core_inst|regFile:reg_file_inst
+ 13. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst
+ 14. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|alu:ALU
+ 15. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|lis:LIS
+ 16. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|br:BR
+ 17. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst
+ 18. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst
+ 19. Parameter Settings for User Entity Instance: dataMem:mem_data_inst
+ 20. Parameter Settings for User Entity Instance: progMem:mem_prog_inst
+ 21. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst|br:BR"
+ 22. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst"
+ 23. Elapsed Time Per Partition
+ 24. Analysis & Synthesis Messages
+ 25. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Nov 17 18:31:12 2019           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; top                                             ;
+; Top-level Entity Name              ; top                                             ;
+; Family                             ; Cyclone III                                     ;
+; Total logic elements               ; 0                                               ;
+;     Total combinational functions  ; 0                                               ;
+;     Dedicated logic registers      ; 0                                               ;
+; Total registers                    ; 0                                               ;
+; Total pins                         ; 2                                               ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C6       ;                    ;
+; Top-level entity name                                                      ; top                ; top                ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Verilog Show LMF Mapping Messages                                          ; Off                ;                    ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                            ;
++--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
++--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; ../../src/top.v                                              ; yes             ; User Verilog HDL File        ; X:/RV32i-Verilog/src/top.v                                              ;         ;
+; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
+; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
+; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
+; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
+; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
+; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core.v                                        ;         ;
+; /rv32i-verilog/src/defines.vh                                ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/src/defines.vh                                           ;         ;
++--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+;                                             ;       ;
+; Total combinational functions               ; 0     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 2     ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 2     ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; |top                       ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 2    ; 0            ; |top                ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |top ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; ADDR_WIDTH     ; 5     ; Signed Integer                             ;
+; DATA_WIDTH     ; 32    ; Signed Integer                             ;
+; TRANSFER_WIDTH ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst ;
++-------------------+-------+---------------------------------+
+; Parameter Name    ; Value ; Type                            ;
++-------------------+-------+---------------------------------+
+; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                  ;
+; DATA_WIDTH        ; 32    ; Signed Integer                  ;
+; TRANSFER_WIDTH    ; 4     ; Signed Integer                  ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                  ;
+; CSR_ADDR_WIDTH    ; 12    ; Signed Integer                  ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                  ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                  ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                  ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                  ;
+; REG_ADDR_WIDTH    ; 5     ; Signed Integer                  ;
++-------------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|controlUnit:controlUnit_inst ;
++-------------------+-------+--------------------------------------------------------------+
+; Parameter Name    ; Value ; Type                                                         ;
++-------------------+-------+--------------------------------------------------------------+
+; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                                               ;
+; DATA_WIDTH        ; 32    ; Signed Integer                                               ;
+; TRANSFER_WIDTH    ; 4     ; Signed Integer                                               ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                                               ;
+; CSR_ADDR_WIDTH    ; 12    ; Signed Integer                                               ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                                               ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                                               ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                                               ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                                               ;
+; REG_ADDR_WIDTH    ; 5     ; Signed Integer                                               ;
+; CSRRW             ; 1     ; Signed Integer                                               ;
+; CSRRS             ; 2     ; Signed Integer                                               ;
+; CSRRC             ; 3     ; Signed Integer                                               ;
+; CSRRWI            ; 4     ; Signed Integer                                               ;
+; CSRRSI            ; 5     ; Signed Integer                                               ;
+; CSRRCI            ; 6     ; Signed Integer                                               ;
+; ALU_OP_ADD        ; 0     ; Signed Integer                                               ;
+; ALU_OP_SUB        ; 1     ; Signed Integer                                               ;
+; ALU_OP_SLL        ; 2     ; Signed Integer                                               ;
+; ALU_OP_SLT        ; 3     ; Signed Integer                                               ;
+; ALU_OP_SLTU       ; 4     ; Signed Integer                                               ;
+; ALU_OP_XOR        ; 5     ; Signed Integer                                               ;
+; ALU_OP_SRL        ; 6     ; Signed Integer                                               ;
+; ALU_OP_SRA        ; 7     ; Signed Integer                                               ;
+; ALU_OP_OR         ; 8     ; Signed Integer                                               ;
+; ALU_OP_AND        ; 9     ; Signed Integer                                               ;
++-------------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|programCounter:program_counter_inst ;
++----------------+-------+------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                   ;
++----------------+-------+------------------------------------------------------------------------+
+; MEM_ADDR_WIDTH ; 5     ; Signed Integer                                                         ;
++----------------+-------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|regFile:reg_file_inst ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; DATA_WIDTH     ; 32    ; Signed Integer                                           ;
+; REG_DEPTH      ; 32    ; Signed Integer                                           ;
+; REG_ADDR_WIDTH ; 5     ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst ;
++-------------------+-------+--------------------------------------------------------------+
+; Parameter Name    ; Value ; Type                                                         ;
++-------------------+-------+--------------------------------------------------------------+
+; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                                               ;
+; DATA_WIDTH        ; 32    ; Signed Integer                                               ;
+; CSR_OP_WIDTH      ; 3     ; Signed Integer                                               ;
+; ALU_OP_WIDTH      ; 4     ; Signed Integer                                               ;
+; LIS_OP_WIDTH      ; 3     ; Signed Integer                                               ;
+; BR_OP_WIDTH       ; 2     ; Signed Integer                                               ;
+; DATA_ORIGIN_WIDTH ; 2     ; Signed Integer                                               ;
+; CSRRW             ; 1     ; Signed Integer                                               ;
+; CSRRS             ; 2     ; Signed Integer                                               ;
+; CSRRC             ; 3     ; Signed Integer                                               ;
+; CSRRWI            ; 4     ; Signed Integer                                               ;
+; CSRRSI            ; 5     ; Signed Integer                                               ;
+; CSRRCI            ; 6     ; Signed Integer                                               ;
+; REGS              ; 0     ; Signed Integer                                               ;
+; RS2IMM_RS1        ; 1     ; Signed Integer                                               ;
+; RS2IMM_RS1PC      ; 2     ; Signed Integer                                               ;
++-------------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|alu:ALU ;
++----------------+-------+-------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                    ;
++----------------+-------+-------------------------------------------------------------------------+
+; ALU_OPWIDTH    ; 4     ; Signed Integer                                                          ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                                          ;
+; ALU_OP_ADD     ; 0     ; Signed Integer                                                          ;
+; ALU_OP_SUB     ; 1     ; Signed Integer                                                          ;
+; ALU_OP_SLL     ; 2     ; Signed Integer                                                          ;
+; ALU_OP_SLT     ; 3     ; Signed Integer                                                          ;
+; ALU_OP_SLTU    ; 4     ; Signed Integer                                                          ;
+; ALU_OP_XOR     ; 5     ; Signed Integer                                                          ;
+; ALU_OP_SRL     ; 6     ; Signed Integer                                                          ;
+; ALU_OP_SRA     ; 7     ; Signed Integer                                                          ;
+; ALU_OP_OR      ; 8     ; Signed Integer                                                          ;
+; ALU_OP_AND     ; 9     ; Signed Integer                                                          ;
++----------------+-------+-------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|lis:LIS ;
++----------------+-------+-------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                    ;
++----------------+-------+-------------------------------------------------------------------------+
+; LIS_OP_WIDTH   ; 3     ; Signed Integer                                                          ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                                          ;
+; MEM_ADDR_WIDTH ; 5     ; Signed Integer                                                          ;
+; LIS_LB         ; 0     ; Signed Integer                                                          ;
+; LIS_LH         ; 1     ; Signed Integer                                                          ;
+; LIS_LW         ; 2     ; Signed Integer                                                          ;
+; LIS_LBU        ; 3     ; Signed Integer                                                          ;
+; LIS_LHU        ; 4     ; Signed Integer                                                          ;
+; LIS_SB         ; 5     ; Signed Integer                                                          ;
+; LIS_SH         ; 6     ; Signed Integer                                                          ;
+; LIS_SW         ; 7     ; Signed Integer                                                          ;
++----------------+-------+-------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|br:BR ;
++----------------+-------+-----------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                  ;
++----------------+-------+-----------------------------------------------------------------------+
+; BR_OP_WIDTH    ; 2     ; Signed Integer                                                        ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                                        ;
+; BR_EQ          ; 0     ; Signed Integer                                                        ;
+; BR_NE          ; 1     ; Signed Integer                                                        ;
+; BR_LT          ; 2     ; Signed Integer                                                        ;
+; BR_GE          ; 3     ; Signed Integer                                                        ;
++----------------+-------+-----------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; CSR_XLEN       ; 64    ; Signed Integer                                            ;
+; REG_XLEN       ; 32    ; Signed Integer                                            ;
+; DATA_WIDTH     ; 32    ; Signed Integer                                            ;
+; CSR_OP_WIDTH   ; 3     ; Signed Integer                                            ;
+; CSR_ADDR_WIDTH ; 12    ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst ;
++----------------+-------+----------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                       ;
++----------------+-------+----------------------------------------------------------------------------+
+; CSR_XLEN       ; 64    ; Signed Integer                                                             ;
++----------------+-------+----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: dataMem:mem_data_inst ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; ADDR_WIDTH     ; 5     ; Signed Integer                            ;
+; DATA_WIDTH     ; 32    ; Signed Integer                            ;
+; MEM_DEPTH      ; 32    ; Signed Integer                            ;
+; TRANSFER_WIDTH ; 4     ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: progMem:mem_prog_inst ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; ADDR_WIDTH     ; 5     ; Signed Integer                            ;
+; DATA_WIDTH     ; 32    ; Signed Integer                            ;
+; MEM_DEPTH      ; 32    ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst|br:BR" ;
++-----------------+-------+----------+------------------------------------------+
+; Port            ; Type  ; Severity ; Details                                  ;
++-----------------+-------+----------+------------------------------------------+
+; old_pc_i[31..5] ; Input ; Info     ; Stuck at GND                             ;
++-----------------+-------+----------+------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst"                                                          ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                   ; Type   ; Severity ; Details                                                                             ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; new_pc_offset_o[31..5] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun Nov 17 18:30:57 2019
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top -c top
+Info (20029): Only one processor detected - disabling parallel compilation
+Warning (10238): Verilog Module Declaration warning at top.v(26): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "top"
+Info (12021): Found 13 design units, including 13 entities, in source file /rv32i-verilog/src/top.v
+    Info (12023): Found entity 1: progMem
+    Info (12023): Found entity 2: dataMem
+    Info (12023): Found entity 3: controlUnit
+    Info (12023): Found entity 4: programCounter
+    Info (12023): Found entity 5: regFile
+    Info (12023): Found entity 6: alu
+    Info (12023): Found entity 7: lis
+    Info (12023): Found entity 8: br
+    Info (12023): Found entity 9: executionUnit
+    Info (12023): Found entity 10: timer
+    Info (12023): Found entity 11: crs_unit
+    Info (12023): Found entity 12: core
+    Info (12023): Found entity 13: top
+Info (12127): Elaborating entity "top" for the top level hierarchy
+Info (12128): Elaborating entity "core" for hierarchy "core:core_inst"
+Info (12128): Elaborating entity "controlUnit" for hierarchy "core:core_inst|controlUnit:controlUnit_inst"
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(340): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(346): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(354): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(366): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(382): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(391): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(400): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(405): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(419): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(427): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(433): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(434): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(436): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(437): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(440): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(441): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(444): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(445): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(448): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(449): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(466): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(468): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(475): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(476): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(477): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(478): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(479): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(498): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(500): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(510): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(514): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(518): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(530): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(536): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(537): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(538): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(539): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(540): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(541): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(543): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(544): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(559): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(560): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(561): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(562): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(563): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(564): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(565): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(566): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(594): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(598): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(602): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(606): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(610): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at core_control_unit.v(614): truncated value with size 32 to match size of target (3)
+Info (12128): Elaborating entity "programCounter" for hierarchy "core:core_inst|programCounter:program_counter_inst"
+Info (12128): Elaborating entity "regFile" for hierarchy "core:core_inst|regFile:reg_file_inst"
+Info (12128): Elaborating entity "executionUnit" for hierarchy "core:core_inst|executionUnit:exec_unit_inst"
+Info (12128): Elaborating entity "alu" for hierarchy "core:core_inst|executionUnit:exec_unit_inst|alu:ALU"
+Info (12128): Elaborating entity "lis" for hierarchy "core:core_inst|executionUnit:exec_unit_inst|lis:LIS"
+Info (12128): Elaborating entity "br" for hierarchy "core:core_inst|executionUnit:exec_unit_inst|br:BR"
+Info (12128): Elaborating entity "crs_unit" for hierarchy "core:core_inst|crs_unit:crs_unit_inst"
+Info (12128): Elaborating entity "timer" for hierarchy "core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst"
+Info (12128): Elaborating entity "dataMem" for hierarchy "dataMem:mem_data_inst"
+Warning (10027): Verilog HDL or VHDL warning at the mem_data.v(53): index expression is not wide enough to address all of the elements in the array
+Info (12128): Elaborating entity "progMem" for hierarchy "progMem:mem_prog_inst"
+Info (10041): Inferred latch for "progArray[31][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[31][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[30][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[29][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[28][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[27][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[26][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[25][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[24][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[23][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[22][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[21][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[20][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[19][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[18][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[17][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[16][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[15][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[14][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[13][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[12][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[11][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[10][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[9][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[8][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[7][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[6][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[5][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[4][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[3][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[2][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[1][31]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][0]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][1]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][2]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][3]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][4]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][5]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][6]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][7]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][8]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][9]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][10]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][11]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][12]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][13]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][14]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][15]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][16]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][17]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][18]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][19]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][20]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][21]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][22]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][23]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][24]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][25]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][26]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][27]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][28]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][29]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][30]" at mem_prog.v(47)
+Info (10041): Inferred latch for "progArray[0][31]" at mem_prog.v(47)
+Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "clk"
+    Warning (15610): No output dependent on input pin "rst_n"
+Info (21057): Implemented 2 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 60 warnings
+    Info: Peak virtual memory: 4607 megabytes
+    Info: Processing ended: Sun Nov 17 18:31:13 2019
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:05
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in X:/RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg.
+
+

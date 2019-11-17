@@ -9,7 +9,7 @@
 
 
 `define MEM_DATA_WIDTH 32   // Word Width
-`define MEM_ADDR_WIDTH 10   // Address With
+`define MEM_ADDR_WIDTH 6   // Address With
 `define MEM_DEPTH 1 << `MEM_ADDR_WIDTH  // Total number of positions (1024)
 
 `define MEM_TRANSFER_WIDTH 4  // Mask to store word, halfword or byte
@@ -151,13 +151,14 @@
 // CSR
 `define CSR_OP_WIDTH     3
 
-`define CSRRW    1;
-`define CSRRS    2;
-`define CSRRC    3;
-`define CSRRWI    4;
-`define CSRRSI    5;
-`define CSRRCI    6;
+`define CSRRW    1
+`define CSRRS    2
+`define CSRRC    3
+`define CSRRWI    4
+`define CSRRSI    5
+`define CSRRCI    6
 
-`define CSR_ADDR_WIDTH = 12;
+`define CSR_ADDR_WIDTH 12
+
 
 `endif

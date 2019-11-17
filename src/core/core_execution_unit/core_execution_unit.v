@@ -24,9 +24,9 @@ module executionUnit
 		parameter CSRRWI = `CSRRWI,
 		parameter CSRRSI = `CSRRSI,
 		parameter CSRRCI = `CSRRCI,
-		parameter REGS = REGS,  // TODO: Separar en localparams
-		parameter RS2IMM_RS1 = RS2IMM_RS1,
-		parameter RS2IMM_RS1PC = RS2IMM_RS1PC) 
+		parameter REGS = `REGS,  // TODO: Separar en localparams
+		parameter RS2IMM_RS1 = `RS2IMM_RS1,
+		parameter RS2IMM_RS1PC = `RS2IMM_RS1PC) 
 	`else
 		#(parameter MEM_ADDR_WIDTH = 10,
         parameter DATA_WIDTH = 32,
@@ -111,6 +111,11 @@ module executionUnit
 	always @* begin
 		is_conditional = 1'b0;
 		is_absolute_o = 1'b0;
+		s1_ALU = {DATA_WIDTH{1'b0}};
+		s2_ALU = {DATA_WIDTH{1'b0}};
+		is_conditional = 1'b0;
+		csr_val_o = {DATA_WIDTH{1'b0}};
+		d_o = {DATA_WIDTH{1'b0}};
 
 		if (is_branch_i === 1'b0 && csr_op_i === 3'b0 ) begin
 			// Define Inputs
@@ -167,10 +172,12 @@ module executionUnit
 		end 
         else if (csr_op_i != 3'b0 ) begin
             if (csr_op_i === CSRRW || csr_op_i === CSRRS || csr_op_i === CSRRC) csr_val_o = rs1_i;
-            if (csr_op_i === CSRRWI || csr_op_i === CSRRSI || csr_op_i === CSRRCI) csr_val_o = imm_val_i;
+            else if (csr_op_i === CSRRWI || csr_op_i === CSRRSI || csr_op_i === CSRRCI) csr_val_o = imm_val_i;
+			else csr_val_o = {DATA_WIDTH{1'b0}};
             // Define Outputs
             d_o = csr_val_i;
 		end
+
 
 
 	end

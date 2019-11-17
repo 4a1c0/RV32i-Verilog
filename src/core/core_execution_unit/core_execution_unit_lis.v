@@ -49,7 +49,9 @@ module lis `ifdef CUSTOM_DEFINE
     //reg [DATA_WIDTH-1:0]      val_mem_write_o;  // Quartus
 
 
-	always @ *
+	always @ * begin
+        val_mem_read_o = {DATA_WIDTH{1'b0}};
+        val_mem_write_o = {DATA_WIDTH{1'b0}};
 		case(LIS_op)
 			LIS_LB:  val_mem_read_o = { {DATA_WIDTH - 8 {val_mem_read_i[7]}}, val_mem_read_i[7:0] };  // Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd
 			LIS_LH:  val_mem_read_o = { {DATA_WIDTH - 16 {val_mem_read_i[15]}}, val_mem_read_i[15:0] };  // Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd
@@ -59,8 +61,12 @@ module lis `ifdef CUSTOM_DEFINE
 			LIS_SB: val_mem_write_o = { {DATA_WIDTH - 8 {1'b0}}, val_mem_write_i[7:0] };  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
             LIS_SH: val_mem_write_o = { {DATA_WIDTH - 16 {1'b0}}, val_mem_write_i[15:0] };  // sh         "Store 16-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
             LIS_SW: val_mem_write_o = val_mem_write_i;  // sw         "Store 32-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
-            //default:   val_mem_read_o = 0; val_mem_write_o;
+            default: begin
+                val_mem_read_o = {DATA_WIDTH{1'b0}};
+                val_mem_write_o = {DATA_WIDTH{1'b0}};
+            end
 		endcase
+    end
 endmodule
 
 `default_nettype wire

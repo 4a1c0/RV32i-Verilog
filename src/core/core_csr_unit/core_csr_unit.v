@@ -89,8 +89,6 @@ module crs_unit
             timer_we_o <= 1'b0;
 		end 
         else begin
-            instret_csr <= instret_csr + 1;
-            
             if (csr_op_i !== {CSR_OP_WIDTH{1'b0}}) begin 
                 case (csr_addr_i) // CSR Addr
                     CYCLE_ADDR: begin

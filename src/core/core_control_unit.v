@@ -330,8 +330,10 @@ module controlUnit
 
   
         case(opcode)
-            // fence      "Order device I/O and memory accesses viewed by other threads and devices"
-            // fence.i    "Synchronize the instruction and data streams
+        
+            default: begin
+                $display("Ilegal OPCODE");  // TODO Throw interruption
+            end
 
             OPCODE_U_LUI: begin  // Set and sign extend the 20-bit immediate (shited 12 bits left) and zero the bottom 12 bits into rd
 
@@ -425,6 +427,9 @@ module controlUnit
                 ALU_op = ALU_OP_SUB;
 
                 case(funct3)
+                    default: begin
+                        $display("Ilegal BRANCH FUNCT3");  // TODO Throw interruption
+                    end
                     FUNCT3_BEQ: BR_op_o = BR_EQ; // beq        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 == rs2"
                     FUNCT3_BNE: BR_op_o = BR_NE;  // bne        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 != rs2"
                     FUNCT3_BLT:begin  // blt        "Branch to PC relative 12-bit signed immediate (shifted 1 bit left) if rs1 < rs2 (signed)"
@@ -464,6 +469,9 @@ module controlUnit
                 imm_val_o = {{DATA_WIDTH - 12 {imm12[11]}},  imm12[11:0]  };
 
                 case(funct3)
+                    default: begin
+                        $display("Ilegal LOAD FUNCT3");  // TODO Throw interruption
+                    end
                     FUNCT3_LB: LIS_op = LIS_LB;  // lb         "Load 8-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
                     FUNCT3_LH: LIS_op = LIS_LH;  // lh         "Load 16-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
                     FUNCT3_LW: LIS_op = LIS_LW;  // lw         "Load 32-bit value from addr in rs1 plus the 12-bit signed immediate and place sign-extended result into rd"
@@ -495,6 +503,9 @@ module controlUnit
                 mem_w = 1'b1;  // Set the bit to write to memory
 
                 case(funct3)
+                    default: begin
+                        $display("Ilegal STORE FUNCT3");  // TODO Throw interruption
+                    end
                     FUNCT3_SB: begin  // sb         "Store 8-bit value from the low bits of rs2 to addr in rs1 plus the 12-bit signed immediate"
                         LIS_op = LIS_SB;
                         write_transfer_o = 4'b0001;
@@ -562,10 +573,8 @@ module controlUnit
         
 
             OPCODE_I_FENCE: begin
-
-        
-    
-
+            // fence      "Order device I/O and memory accesses viewed by other threads and devices"
+            // fence.i    "Synchronize the instruction and data streams
             end
 
         
@@ -577,6 +586,9 @@ module controlUnit
                 
                 
                 case(funct3)
+                    default: begin
+                        $display("Ilegal SYSTEM FUNCT3");  // TODO Throw interruption
+                    end
                     FUNCT3_ECALL_EBREAK: ;  // NOP
                     FUNCT3_CSRRW:begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
                         csr_op_o = CSRRW;

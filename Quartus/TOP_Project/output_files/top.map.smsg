@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at mem_prog.v(47): always construct contains both blocking and non-blocking assignments
