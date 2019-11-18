@@ -39,7 +39,7 @@
 // Ver:| Author : Allen Wang  | Mod. Date : 2010/07/27 | Changes Made:
 // --------------------------------------------------------------------
 
-`include "../../src/top.v"
+//`include "../../src/top.v"
 
 
 module DE0_top
@@ -140,7 +140,7 @@ output			HEX2_DP;				//	Seven Segment Digit DP 2
 output	[6:0]	HEX3_D;					//	Seven Segment Digit 3
 output			HEX3_DP;				//	Seven Segment Digit DP 3
 ////////////////////////////	LED		////////////////////////////
-output	[9:0]	LEDG;					//	LED Green[9:0]
+output reg	[9:0]	LEDG;					//	LED Green[9:0]
 ////////////////////////////	UART	////////////////////////////
 output			UART_TXD;				//	UART Transmitter
 input			UART_RXD;				//	UART Receiver
@@ -341,13 +341,16 @@ progMem mem_prog_de0 (
 
 assign iDIG_0    = addr_mem_prog[3:0];
 assign iDIG_1    = {{2{1'b0}},addr_mem_prog[5:4]};
-assign iDIG_2    = val_mem_prog[3:0];
-assign iDIG_3    = val_mem_data_read[3:0];
+assign iDIG_2    = 4'd0;
+assign iDIG_3    = val_mem_prog[3:0];
 assign reset_n   = BUTTON[0]; 			 		 
 assign counter_1 = ((BUTTON[1] == 0) && (out_BUTTON_1 == 1)) ?1:0;
 assign counter_2 = ((BUTTON[2] == 0) && (out_BUTTON_2 == 1)) ?1:0;
-assign HEX0_DP = virtual_clk;
-assign LEDG[0] = ((addr_mem_data == 9'h014))? 1:0;
+assign HEX0_DP = !virtual_clk;
+assign HEX1_DP = (addr_mem_data == 9'h014 && we_mem_data)? 1'b0:1'b1;
+assign HEX2_DP = 1'b1;
+assign HEX3_DP = 1'b1;
+//assign LEDG[0] = ((addr_mem_data == 9'h014))? 1:0;
 
 //====================================================================
 // After debounce output with register
@@ -367,5 +370,10 @@ always @ (negedge out_BUTTON_2 )
 //====================================================================
 // Display process
 //====================================================================
-
+always @(posedge CLOCK_50 )
+  begin
+  if (addr_mem_data == 9'h014 && we_mem_data) begin
+    LEDG = val_mem_data_write[9:0];
+  end
+  end
 endmodule

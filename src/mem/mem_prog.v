@@ -58,7 +58,7 @@ module progMem
 			`endif
 		end 
 		else begin  // output enable logic supressed
-			data_out = progArray[addr];
+			data_out = progArray[addr >> 2];
 		end
 	end
 	

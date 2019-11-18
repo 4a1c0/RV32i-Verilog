@@ -16,7 +16,7 @@ module dataMem
 	`else
 		#(parameter ADDR_WIDTH = 10,
         parameter DATA_WIDTH = 32,
-        parameter MEM_DEPTH = 1 << ADDR_WIDTH,
+        parameter MEM_DEPTH = 1 << ADDR_WIDTH-2,
         parameter TRANSFER_WIDTH = 4) 
 	`endif(
         rst_n	,  // Reset Neg

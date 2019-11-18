@@ -320,7 +320,7 @@ task encodeAddi;
 	input [11:0] immediate;
 	begin
 		instruction = {immediate, rs1, 3'b000, rd, `OPCODE_I_IMM};
-		top_inst.mem_prog_inst.progArray[pc] = instruction;
+		top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 		pc = pc + 32'd4;
 	end
@@ -332,7 +332,7 @@ task encodeAndi;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b111, rd, `OPCODE_I_IMM};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -344,7 +344,7 @@ task encodeSlti;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b010, rd, `OPCODE_I_IMM};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -356,7 +356,7 @@ task encodeSltiu;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b011, rd, `OPCODE_I_IMM};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -368,7 +368,7 @@ task encodeSlli;
     input [4:0] immediate;
     begin
         instruction = {7'h0, immediate, rs1, `FUNCT3_SLLI, rd, `OPCODE_I_IMM}; // 3'b001
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -380,7 +380,7 @@ task encodeAdd;
 	input [4:0] rd;
 	begin
 	 instruction = {7'b0, rs2, rs1, 3'b000, rd, `OPCODE_R_ALU};
-	 top_inst.mem_prog_inst.progArray[pc] = instruction;
+	 top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 	 $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 	 pc = pc + 32'd4;
 	end
@@ -392,7 +392,7 @@ task encodeAnd;
     input [4:0] rd;
     begin
         instruction = {7'b0, rs2, rs1, 3'b111, rd, `OPCODE_R_ALU};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 	    $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -404,7 +404,7 @@ task encodeSlt;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b010, rd, `OPCODE_R_ALU};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -416,7 +416,7 @@ task encodeSltu;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, 3'b011, rd, `OPCODE_R_ALU};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -428,7 +428,7 @@ task encodeSll;
     input [4:0] immediate;
     begin
         instruction = {7'h0, immediate, rs1, 3'b001, rd, `OPCODE_R_ALU};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
 		$display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -439,7 +439,7 @@ task encodeLui;
 	input [19:0] immediate;
 	begin
 	instruction = {immediate[19:0], rd, `OPCODE_U_LUI};
-	top_inst.mem_prog_inst.progArray[pc] = instruction;
+	top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
     $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
 	pc = pc + 32'd4;
 	end
@@ -450,7 +450,7 @@ task encodeAuipc;
     input [19:0] immediate;
     begin
         instruction = {immediate[19:0], rd, `OPCODE_U_AUIPC};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -462,7 +462,7 @@ task encodeLB;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LB, rd, `OPCODE_I_LOAD};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -474,7 +474,7 @@ task encodeLH;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LH, rd, `OPCODE_I_LOAD};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -486,7 +486,7 @@ task encodeLW;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LW, rd, `OPCODE_I_LOAD};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -498,7 +498,7 @@ task encodeLBU;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LBU, rd, `OPCODE_I_LOAD};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -510,7 +510,7 @@ task encodeLHU;
     input [11:0] immediate;
     begin
         instruction = {immediate, rs1, `FUNCT3_LHU, rd, `OPCODE_I_LOAD};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -522,7 +522,7 @@ task encodeSB;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SB, offset[4:0], `OPCODE_S_STORE};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -534,7 +534,7 @@ task encodeSH;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SH, offset[4:0], `OPCODE_S_STORE};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -546,7 +546,7 @@ task encodeSW;
     input [11:0] offset;
     begin
         instruction = {offset[11:5], rs2, rs1, `FUNCT3_SW, offset[4:0], `OPCODE_S_STORE};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -557,7 +557,7 @@ task encodeJal;
     input [20:0] immediate;
     begin
         instruction = {immediate[20], immediate[10:1], immediate[11], immediate[19:12], rd, `OPCODE_J_JAL};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -570,7 +570,7 @@ task encodeBeq;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b0, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -582,7 +582,7 @@ task encodeBne;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b1, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -594,7 +594,7 @@ task encodeBlt;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b100, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -606,7 +606,7 @@ task encodeBge;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b101, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -618,7 +618,7 @@ task encodeBltu;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b110, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -630,7 +630,7 @@ task encodeBgeu;
     input [12:0] immediate;
     begin
         instruction = {immediate[12], immediate[10:5], rs2, rs1, 3'b11, immediate[4:1], immediate[11], `OPCODE_B_BRANCH};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end
@@ -644,7 +644,7 @@ task encodeCsr;
     
     begin
         instruction = {addr, rs1, FUNCT3_OP, rd, `OPCODE_I_SYSTEM};
-        top_inst.mem_prog_inst.progArray[pc] = instruction;
+        top_inst.mem_prog_inst.progArray[pc >> 2] = instruction;
         $display("mem[%d] = %b", pc, top_inst.mem_prog_inst.progArray[pc]);
         pc = pc + 32'd4;
     end

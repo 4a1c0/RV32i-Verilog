@@ -23,7 +23,7 @@ module branch_test();
 		#100
 		
 		// Load memory
-		$readmemb("data/programMem_b.mem", TB.top_inst.mem_prog_inst.progArray, 0, 3);
+		//$readmemb("data/programMem_b.mem", TB.top_inst.mem_prog_inst.progArray, 0, 3);
 		$readmemh("data/dataMem_h.mem", TB.top_inst.mem_data_inst.dataArray, 0, 3);
 		
 		TB.test_jal;

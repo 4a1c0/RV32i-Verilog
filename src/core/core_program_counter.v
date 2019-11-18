@@ -36,7 +36,7 @@ module programCounter
     always@(posedge clk or negedge rst_n)
     begin
         if (!rst_n) begin 
-            addr <= {MEM_ADDR_WIDTH{1'b0}};
+            addr <= {MEM_ADDR_WIDTH{1'b0}};  //{{MEM_ADDR_WIDTH-2{1'b1}}, 2'b00};
         end 
         else if (is_absolute_i === 1'b1) begin
             addr <= offset;
