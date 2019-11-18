@@ -55,7 +55,8 @@ module progMem
 			`ifdef LOAD_MEMS
 				// Load memory
 				//$readmemb("../../data/programMem_b.mem", progArray, 0, 10);
-				$readmemh("../../data/programMem_h.mem", progArray, 0, 23);
+				$readmemh("../../data/programMem_h.mem", progArray, 0, 24);
+				//$readmemh("../../data/programMem_h_complete.mem", progArray, 0, 342);
 			`endif
 		end 
 		else begin  // output enable logic supressed

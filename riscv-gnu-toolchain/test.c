@@ -9,10 +9,10 @@
 // }
 
 int main(){
-	int i;
+	int i = 0;
 	int* leds = (int*)0x14;
-	for(i=0; i<212; i++){
+	for(i=0; i<32; i++){
 		*leds = i;
 	}
-	*leds = 0525; 
+	*leds = 0777; 
 }

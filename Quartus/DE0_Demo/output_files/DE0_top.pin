@@ -325,7 +325,7 @@ GND                          : K12       : gnd    :                   :         
 GND                          : K13       : gnd    :                   :         :           :                
 VCCINT                       : K14       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : K15       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : K16       :        :                   :         : 6         :                
+GPIO0_D[22]                  : K16       : bidir  : 2.5 V             :         : 6         : N              
 VGA_G[2]                     : K17       : output : 2.5 V             :         : 6         : Y              
 VGA_B[3]                     : K18       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : K19       :        :                   :         : 6         :                
@@ -429,7 +429,7 @@ FL_OE_N                      : R6        : output : 2.5 V             :         
 FL_DQ[0]                     : R7        : bidir  : 2.5 V             :         : 2         : Y              
 FL_DQ[2]                     : R8        : bidir  : 2.5 V             :         : 2         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : R9        :        :                   :         : 3         :                
-GPIO0_D[22]                  : R10       : bidir  : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : R10       :        :                   :         : 3         :                
 GPIO1_D[22]                  : R11       : bidir  : 2.5 V             :         : 3         : Y              
 GPIO1_D[23]                  : R12       : bidir  : 2.5 V             :         : 3         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : R13       :        :                   :         : 4         :                
