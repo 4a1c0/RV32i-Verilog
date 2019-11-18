@@ -9,7 +9,7 @@
 
 
 `define MEM_DATA_WIDTH 32   // Word Width
-`define MEM_ADDR_WIDTH 6   // Address With
+`define MEM_ADDR_WIDTH 7   // Address With
 `define MEM_DEPTH 1 << `MEM_ADDR_WIDTH-2  // Total number of positions (1024)
 
 `define MEM_TRANSFER_WIDTH 4  // Mask to store word, halfword or byte

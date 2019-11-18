@@ -223,7 +223,10 @@ reg       		out_BUTTON_1;   		// Button1 Register output
 reg       		out_BUTTON_2;   		// Button2 Register output
 
 reg            virtual_clk;       // Virtual clock to slow the processor
-       
+wire           clock_to_core;
+
+reg [21:0] count_reg = 0;
+reg out_10hz = 0;
 //==================================================================
 //  Structural coding
 //==================================================================
@@ -310,7 +313,7 @@ SEG7_LUT	SEG3(
 
 
 core core_de0(
-        .clk (virtual_clk),
+        .clk (clock_to_core),
         .rst_n (reset_n),
         .we_mem_data_o (we_mem_data),
         .addr_mem_data_o (addr_mem_data),
@@ -323,7 +326,7 @@ core core_de0(
 //set LOAD_MEMS to true to load mems
 dataMem mem_data_de0 (
         .rst_n		(reset_n)			,  // Reset Neg
-        .clk		(virtual_clk)	,
+        .clk		(clock_to_core)	,
         .we			(we_mem_data)	,  // Write Enable
         .addr		(addr_mem_data)	,  // Address
         .data_in	(val_mem_data_write),  //  Data in
@@ -333,23 +336,24 @@ dataMem mem_data_de0 (
 
 progMem mem_prog_de0 (
         .rst_n (reset_n)		,  // Reset Neg
-        .clk (virtual_clk),             // Clk
+        .clk (clock_to_core),             // Clk
         .addr (addr_mem_prog)		,  // Address
         .data_out (val_mem_prog)	   // Output Data
     );
 
 
 assign iDIG_0    = addr_mem_prog[3:0];
-assign iDIG_1    = {{2{1'b0}},addr_mem_prog[5:4]};
+assign iDIG_1    = {{1{1'b0}},addr_mem_prog[6:4]};
 assign iDIG_2    = 4'd0;
 assign iDIG_3    = val_mem_prog[3:0];
 assign reset_n   = BUTTON[0]; 			 		 
 assign counter_1 = ((BUTTON[1] == 0) && (out_BUTTON_1 == 1)) ?1:0;
 assign counter_2 = ((BUTTON[2] == 0) && (out_BUTTON_2 == 1)) ?1:0;
-assign HEX0_DP = !virtual_clk;
+assign HEX0_DP = !clock_to_core;
 assign HEX1_DP = (addr_mem_data == 9'h014 && we_mem_data)? 1'b0:1'b1;
 assign HEX2_DP = 1'b1;
 assign HEX3_DP = 1'b1;
+assign clock_to_core = SW[0] ?  (SW[1])? out_10hz:CLOCK_50 :virtual_clk;
 //assign LEDG[0] = ((addr_mem_data == 9'h014))? 1:0;
 
 //====================================================================
@@ -370,10 +374,29 @@ always @ (negedge out_BUTTON_2 )
 //====================================================================
 // Display process
 //====================================================================
-always @(posedge CLOCK_50 )
+always @(posedge CLOCK_50 or negedge reset_n)
   begin
-  if (addr_mem_data == 9'h014 && we_mem_data) begin
-    LEDG = val_mem_data_write[9:0];
+  if (!reset_n) LEDG <= 10'd0;
+  else if (addr_mem_data == 9'h014 && we_mem_data) begin
+    LEDG <= val_mem_data_write[9:0];
   end
-  end
+end
+
+// generate 100 Hz from 50 MHz
+
+
+always @(posedge CLOCK_50 or negedge reset_n) begin
+    if (!reset_n) begin
+        count_reg <= 0;
+        out_10hz <= 0;
+    end else begin
+        if (count_reg < 2499999) begin
+            count_reg <= count_reg + 1;
+        end else begin
+            count_reg <= 0;
+            out_10hz <= ~out_10hz;
+        end
+    end
+end
+
 endmodule
