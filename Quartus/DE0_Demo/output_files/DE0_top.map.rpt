@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE0_top
-Mon Nov 18 19:01:48 2019
+Wed Nov 20 20:12:46 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -70,7 +70,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Nov 18 19:01:48 2019           ;
+; Analysis & Synthesis Status        ; Successful - Wed Nov 20 20:12:45 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; DE0_top                                         ;
 ; Top-level Entity Name              ; DE0_top                                         ;
@@ -175,21 +175,15 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 2           ;
-; Maximum allowed            ; 2           ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 2           ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-;     Processor 2            ; < 0.1%      ;
-+----------------------------+-------------+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -197,24 +191,24 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; DE0_top.v                                                    ; yes             ; User Verilog HDL File        ; X:/RV32i-Verilog/Quartus/DE0_Demo/DE0_top.v                             ;         ;
-; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
-; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
-; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
-; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
-; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
-; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core.v                                        ;         ;
+; DE0_top.v                                                    ; yes             ; User Verilog HDL File        ; D:/RV32i-Verilog/Quartus/DE0_Demo/DE0_top.v                             ;         ;
+; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
+; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
+; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
+; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
+; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
+; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core.v                                        ;         ;
 ; /rv32i-verilog/data/datamem_h.mem                            ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/data/datamem_h.mem                                       ;         ;
 ; /rv32i-verilog/src/defines.vh                                ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/src/defines.vh                                           ;         ;
 ; /rv32i-verilog/data/programmem_h.mem                         ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/data/programmem_h.mem                                    ;         ;
-; button_debouncer.v                                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/Quartus/DE0_Demo/button_debouncer.v                    ;         ;
-; seg7_lut.v                                                   ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/Quartus/DE0_Demo/seg7_lut.v                            ;         ;
+; button_debouncer.v                                           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/Quartus/DE0_Demo/button_debouncer.v                    ;         ;
+; seg7_lut.v                                                   ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/Quartus/DE0_Demo/seg7_lut.v                            ;         ;
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
 
 
@@ -830,7 +824,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:21     ;
+; Top            ; 00:00:19     ;
 +----------------+--------------+
 
 
@@ -840,9 +834,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Nov 18 19:01:05 2019
+    Info: Processing started: Wed Nov 20 20:12:22 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE0_top -c DE0_top
-Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Warning (20028): Parallel compilation is not licensed and has been disabled
 Warning (10238): Verilog Module Declaration warning at top.v(26): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "top"
 Info (12021): Found 13 design units, including 13 entities, in source file /rv32i-verilog/src/top.v
     Info (12023): Found entity 1: progMem
@@ -2203,7 +2197,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "GPIO1_CLKOUT[0]" is stuck at GND
     Warning (13410): Pin "GPIO1_CLKOUT[1]" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
-Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg
+Info (144001): Generated suppressed messages file D:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 18 input pin(s) that do not drive logic
@@ -2230,16 +2224,16 @@ Info (21057): Implemented 5390 device resources after synthesis - the final reso
     Info (21059): Implemented 118 output pins
     Info (21060): Implemented 111 bidirectional pins
     Info (21061): Implemented 5138 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 319 warnings
-    Info: Peak virtual memory: 4634 megabytes
-    Info: Processing ended: Mon Nov 18 19:01:49 2019
-    Info: Elapsed time: 00:00:44
-    Info: Total CPU time (on all processors): 00:00:27
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 320 warnings
+    Info: Peak virtual memory: 4633 megabytes
+    Info: Processing ended: Wed Nov 20 20:12:46 2019
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:22
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in X:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg.
+The suppressed messages can be found in D:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg.
 
 

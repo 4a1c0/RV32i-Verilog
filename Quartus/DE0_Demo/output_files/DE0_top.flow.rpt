@@ -1,5 +1,5 @@
 Flow report for DE0_top
-Mon Nov 18 19:03:49 2019
+Wed Nov 20 20:14:16 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Mon Nov 18 19:03:29 2019           ;
+; Flow Status                        ; Successful - Wed Nov 20 20:14:06 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; DE0_top                                         ;
 ; Top-level Entity Name              ; DE0_top                                         ;
@@ -64,29 +64,29 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/18/2019 19:01:09 ;
+; Start date & time ; 11/20/2019 20:12:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE0_top             ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                               ;
-+-------------------------------------+-------------------------------+---------------+-------------+------------+
-; Assignment Name                     ; Value                         ; Default Value ; Entity Name ; Section Id ;
-+-------------------------------------+-------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 8796763374030.157410006806824 ; --            ; --          ; --         ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                            ; --            ; --          ; --         ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                             ; --            ; --          ; --         ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                          ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; 16764057                      ; --            ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING         ; --            ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                        ; --            ; --          ; Top        ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                  ; --            ; --          ; --         ;
-; VERILOG_MACRO                       ; CUSTOM_DEFINE=1               ; --            ; --          ; --         ;
-; VERILOG_MACRO                       ; LOAD_MEMS=1                   ; --            ; --          ; --         ;
-; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                           ; --            ; --          ; --         ;
-+-------------------------------------+-------------------------------+---------------+-------------+------------+
++------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                 ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                           ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 180725258027704.157427714210204 ; --            ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                              ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                               ; --            ; --          ; --         ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                            ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                        ; --            ; --          ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING           ; --            ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                          ; --            ; --          ; Top        ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                    ; --            ; --          ; --         ;
+; VERILOG_MACRO                       ; CUSTOM_DEFINE=1                 ; --            ; --          ; --         ;
+; VERILOG_MACRO                       ; LOAD_MEMS=1                     ; --            ; --          ; --         ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                             ; --            ; --          ; --         ;
++-------------------------------------+---------------------------------+---------------+-------------+------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -94,11 +94,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:39     ; 1.0                     ; 4626 MB             ; 00:00:25                           ;
-; Fitter                    ; 00:01:27     ; 1.6                     ; 5082 MB             ; 00:01:27                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 4571 MB             ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:18     ; 1.2                     ; 4702 MB             ; 00:00:12                           ;
-; Total                     ; 00:02:27     ; --                      ; --                  ; 00:02:06                           ;
+; Analysis & Synthesis      ; 00:00:22     ; 1.0                     ; 4630 MB             ; 00:00:21                           ;
+; Fitter                    ; 00:01:13     ; 1.0                     ; 4999 MB             ; 00:01:10                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 4580 MB             ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:09     ; 1.0                     ; 4681 MB             ; 00:00:08                           ;
+; Total                     ; 00:01:46     ; --                      ; --                  ; 00:01:41                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -107,10 +107,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; pau-PC           ; Windows 7 ; 6.2        ; x86_64         ;
-; Fitter                    ; pau-PC           ; Windows 7 ; 6.2        ; x86_64         ;
-; Assembler                 ; pau-PC           ; Windows 7 ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; pau-PC           ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; DESKTOP-NSV570Q  ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; DESKTOP-NSV570Q  ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; DESKTOP-NSV570Q  ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; DESKTOP-NSV570Q  ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
