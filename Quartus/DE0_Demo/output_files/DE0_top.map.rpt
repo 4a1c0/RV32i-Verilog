@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE0_top
-Wed Nov 20 20:12:46 2019
+Sat Nov 23 20:07:07 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,8 +14,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Inverted Register Statistics
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
  11. Multiplexer Restructuring Statistics (Restructuring Performed)
  12. Parameter Settings for User Entity Instance: Top-level Entity: |DE0_top
  13. Parameter Settings for User Entity Instance: button_debouncer:button_debouncer_inst0
@@ -33,18 +33,19 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
  25. Parameter Settings for User Entity Instance: core:core_de0|crs_unit:crs_unit_inst|timer:timer_inst
  26. Parameter Settings for User Entity Instance: dataMem:mem_data_de0
  27. Parameter Settings for User Entity Instance: progMem:mem_prog_de0
- 28. Port Connectivity Checks: "core:core_de0|executionUnit:exec_unit_inst|br:BR"
- 29. Port Connectivity Checks: "core:core_de0|executionUnit:exec_unit_inst"
- 30. Port Connectivity Checks: "SEG7_LUT:SEG3"
- 31. Port Connectivity Checks: "SEG7_LUT:SEG2"
- 32. Port Connectivity Checks: "SEG7_LUT:SEG1"
- 33. Port Connectivity Checks: "SEG7_LUT:SEG0"
- 34. Port Connectivity Checks: "button_debouncer:button_debouncer_inst2"
- 35. Port Connectivity Checks: "button_debouncer:button_debouncer_inst1"
- 36. Port Connectivity Checks: "button_debouncer:button_debouncer_inst0"
- 37. Elapsed Time Per Partition
- 38. Analysis & Synthesis Messages
- 39. Analysis & Synthesis Suppressed Messages
+ 28. Port Connectivity Checks: "dataMem:mem_data_de0"
+ 29. Port Connectivity Checks: "core:core_de0|executionUnit:exec_unit_inst|br:BR"
+ 30. Port Connectivity Checks: "core:core_de0|executionUnit:exec_unit_inst"
+ 31. Port Connectivity Checks: "SEG7_LUT:SEG3"
+ 32. Port Connectivity Checks: "SEG7_LUT:SEG2"
+ 33. Port Connectivity Checks: "SEG7_LUT:SEG1"
+ 34. Port Connectivity Checks: "SEG7_LUT:SEG0"
+ 35. Port Connectivity Checks: "button_debouncer:button_debouncer_inst2"
+ 36. Port Connectivity Checks: "button_debouncer:button_debouncer_inst1"
+ 37. Port Connectivity Checks: "button_debouncer:button_debouncer_inst0"
+ 38. Elapsed Time Per Partition
+ 39. Analysis & Synthesis Messages
+ 40. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -70,15 +71,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Nov 20 20:12:45 2019           ;
+; Analysis & Synthesis Status        ; Successful - Sat Nov 23 20:07:07 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; DE0_top                                         ;
 ; Top-level Entity Name              ; DE0_top                                         ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 5,074                                           ;
-;     Total combinational functions  ; 3,127                                           ;
-;     Dedicated logic registers      ; 2,146                                           ;
-; Total registers                    ; 2146                                            ;
+; Total logic elements               ; 3,270                                           ;
+;     Total combinational functions  ; 2,267                                           ;
+;     Dedicated logic registers      ; 1,122                                           ;
+; Total registers                    ; 1122                                            ;
 ; Total pins                         ; 252                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -95,8 +96,8 @@ applicable agreement for further details.
 ; Device                                                                     ; EP3C16F484C6       ;                    ;
 ; Top-level entity name                                                      ; DE0_top            ; DE0_top            ;
 ; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; On                 ; Off                ;
 ; Verilog Show LMF Mapping Messages                                          ; Off                ;                    ;
-; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
 ; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
@@ -181,7 +182,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 4      ;
+; Number detected on machine ; 2      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -191,24 +192,24 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; DE0_top.v                                                    ; yes             ; User Verilog HDL File        ; D:/RV32i-Verilog/Quartus/DE0_Demo/DE0_top.v                             ;         ;
-; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
-; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
-; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
-; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
-; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
-; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/src/core/core.v                                        ;         ;
+; DE0_top.v                                                    ; yes             ; User Verilog HDL File        ; X:/RV32i-Verilog/Quartus/DE0_Demo/DE0_top.v                             ;         ;
+; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
+; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
+; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
+; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
+; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
+; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core.v                                        ;         ;
 ; /rv32i-verilog/data/datamem_h.mem                            ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/data/datamem_h.mem                                       ;         ;
 ; /rv32i-verilog/src/defines.vh                                ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/src/defines.vh                                           ;         ;
 ; /rv32i-verilog/data/programmem_h.mem                         ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/data/programmem_h.mem                                    ;         ;
-; button_debouncer.v                                           ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/Quartus/DE0_Demo/button_debouncer.v                    ;         ;
-; seg7_lut.v                                                   ; yes             ; Auto-Found Verilog HDL File  ; D:/RV32i-Verilog/Quartus/DE0_Demo/seg7_lut.v                            ;         ;
+; button_debouncer.v                                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/Quartus/DE0_Demo/button_debouncer.v                    ;         ;
+; seg7_lut.v                                                   ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/Quartus/DE0_Demo/seg7_lut.v                            ;         ;
 +--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
 
 
@@ -217,28 +218,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+--------------------------------------------------+
 ; Resource                                    ; Usage                                            ;
 +---------------------------------------------+--------------------------------------------------+
-; Estimated Total logic elements              ; 5,074                                            ;
+; Estimated Total logic elements              ; 3,270                                            ;
 ;                                             ;                                                  ;
-; Total combinational functions               ; 3127                                             ;
+; Total combinational functions               ; 2267                                             ;
 ; Logic element usage by number of LUT inputs ;                                                  ;
-;     -- 4 input functions                    ; 2490                                             ;
-;     -- 3 input functions                    ; 445                                              ;
-;     -- <=2 input functions                  ; 192                                              ;
+;     -- 4 input functions                    ; 1761                                             ;
+;     -- 3 input functions                    ; 417                                              ;
+;     -- <=2 input functions                  ; 89                                               ;
 ;                                             ;                                                  ;
 ; Logic elements by mode                      ;                                                  ;
-;     -- normal mode                          ; 2956                                             ;
+;     -- normal mode                          ; 2096                                             ;
 ;     -- arithmetic mode                      ; 171                                              ;
 ;                                             ;                                                  ;
-; Total registers                             ; 2146                                             ;
-;     -- Dedicated logic registers            ; 2146                                             ;
+; Total registers                             ; 1122                                             ;
+;     -- Dedicated logic registers            ; 1122                                             ;
 ;     -- I/O registers                        ; 0                                                ;
 ;                                             ;                                                  ;
 ; I/O pins                                    ; 252                                              ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                ;
 ; Maximum fan-out node                        ; button_debouncer:button_debouncer_inst0|data_out ;
-; Maximum fan-out                             ; 2113                                             ;
-; Total fan-out                               ; 20515                                            ;
-; Average fan-out                             ; 3.48                                             ;
+; Maximum fan-out                             ; 1089                                             ;
+; Total fan-out                               ; 13271                                            ;
+; Average fan-out                             ; 3.31                                             ;
 +---------------------------------------------+--------------------------------------------------+
 
 
@@ -247,20 +248,19 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                         ; Library Name ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------+--------------+
-; |DE0_top                                     ; 3127 (37)         ; 2146 (35)    ; 0           ; 0            ; 0       ; 0         ; 252  ; 0            ; |DE0_top                                                    ; work         ;
+; |DE0_top                                     ; 2267 (38)         ; 1122 (35)    ; 0           ; 0            ; 0       ; 0         ; 252  ; 0            ; |DE0_top                                                    ; work         ;
 ;    |SEG7_LUT:SEG0|                           ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|SEG7_LUT:SEG0                                      ; work         ;
 ;    |SEG7_LUT:SEG1|                           ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|SEG7_LUT:SEG1                                      ; work         ;
 ;    |SEG7_LUT:SEG3|                           ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|SEG7_LUT:SEG3                                      ; work         ;
 ;    |button_debouncer:button_debouncer_inst0| ; 43 (43)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|button_debouncer:button_debouncer_inst0            ; work         ;
 ;    |button_debouncer:button_debouncer_inst2| ; 0 (0)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|button_debouncer:button_debouncer_inst2            ; work         ;
-;    |core:core_de0|                           ; 2788 (0)          ; 1031 (0)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0                                      ; work         ;
-;       |controlUnit:controlUnit_inst|         ; 82 (82)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst         ; work         ;
-;       |executionUnit:exec_unit_inst|         ; 1987 (1168)       ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst         ; work         ;
-;          |alu:ALU|                           ; 783 (783)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU ; work         ;
-;          |lis:LIS|                           ; 36 (36)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|lis:LIS ; work         ;
-;       |programCounter:program_counter_inst|  ; 33 (33)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|programCounter:program_counter_inst  ; work         ;
-;       |regFile:reg_file_inst|                ; 686 (686)         ; 1024 (1024)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|regFile:reg_file_inst                ; work         ;
-;    |dataMem:mem_data_de0|                    ; 182 (182)         ; 1024 (1024)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|dataMem:mem_data_de0                               ; work         ;
+;    |core:core_de0|                           ; 2109 (0)          ; 1031 (0)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0                                      ; work         ;
+;       |controlUnit:controlUnit_inst|         ; 79 (79)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst         ; work         ;
+;       |executionUnit:exec_unit_inst|         ; 1679 (876)        ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst         ; work         ;
+;          |alu:ALU|                           ; 790 (790)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU ; work         ;
+;          |lis:LIS|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|lis:LIS ; work         ;
+;       |programCounter:program_counter_inst|  ; 30 (30)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|programCounter:program_counter_inst  ; work         ;
+;       |regFile:reg_file_inst|                ; 321 (321)         ; 1024 (1024)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|core:core_de0|regFile:reg_file_inst                ; work         ;
 ;    |progMem:mem_prog_de0|                    ; 57 (57)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_top|progMem:mem_prog_de0                               ; work         ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -271,6 +271,1032 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------+-----------------------------------------------------------------+
 ; Register name                                           ; Reason for Removal                                              ;
 +---------------------------------------------------------+-----------------------------------------------------------------+
+; dataMem:mem_data_de0|gnt_o                              ; Stuck at GND due to stuck port data_in                          ;
+; dataMem:mem_data_de0|data_out[0..31]                    ; Stuck at GND due to stuck port data_in                          ;
+; dataMem:mem_data_de0|dataArray[0][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[0][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[1][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[2][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[3][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[4][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[5][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[6][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[7][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[8][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][31]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][30]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][29]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][28]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][27]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][26]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][25]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][24]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][23]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][22]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][21]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][20]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][19]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][18]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][17]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][16]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][15]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][14]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][13]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][12]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][11]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][10]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][9]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][8]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][7]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][6]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][5]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][4]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][3]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][2]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][1]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[9][0]                    ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[10][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[11][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[12][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[13][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[14][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[15][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[16][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[17][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[18][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[19][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[20][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[21][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[22][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[23][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[24][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[25][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[26][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[27][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[28][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[29][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[30][0]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][31]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][30]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][29]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][28]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][27]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][26]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][25]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][24]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][23]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][22]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][21]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][20]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][19]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][18]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][17]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][16]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][15]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][14]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][13]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][12]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][11]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][10]                  ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][9]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][8]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][7]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][6]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][5]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][4]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][3]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][2]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][1]                   ; Lost fanout                                                     ;
+; dataMem:mem_data_de0|dataArray[31][0]                   ; Lost fanout                                                     ;
 ; progMem:mem_prog_de0|data_out[30,31]                    ; Merged with progMem:mem_prog_de0|data_out[29]                   ;
 ; progMem:mem_prog_de0|data_out[27,28]                    ; Merged with progMem:mem_prog_de0|data_out[26]                   ;
 ; progMem:mem_prog_de0|data_out[14]                       ; Merged with progMem:mem_prog_de0|data_out[12]                   ;
@@ -301,8 +1327,32 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; core:core_de0|crs_unit:crs_unit_inst|timer_val_o[0..63] ; Stuck at GND due to stuck port data_in                          ;
 ; core:core_de0|crs_unit:crs_unit_inst|timer_we_o         ; Stuck at GND due to stuck port data_in                          ;
 ; core:core_de0|crs_unit:crs_unit_inst|csr_val_o[1..31]   ; Stuck at GND due to stuck port data_in                          ;
-; Total Number of Removed Registers = 125                 ;                                                                 ;
+; Total Number of Removed Registers = 1182                ;                                                                 ;
 +---------------------------------------------------------+-----------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                    ;
++----------------------------+---------------------------+-----------------------------------------------------------------------+
+; Register name              ; Reason for Removal        ; Registers Removed due to This Register                                ;
++----------------------------+---------------------------+-----------------------------------------------------------------------+
+; dataMem:mem_data_de0|gnt_o ; Stuck at GND              ; dataMem:mem_data_de0|data_out[0], dataMem:mem_data_de0|data_out[31],  ;
+;                            ; due to stuck port data_in ; dataMem:mem_data_de0|data_out[30], dataMem:mem_data_de0|data_out[29], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[28], dataMem:mem_data_de0|data_out[27], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[26], dataMem:mem_data_de0|data_out[25], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[24], dataMem:mem_data_de0|data_out[23], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[22], dataMem:mem_data_de0|data_out[21], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[20], dataMem:mem_data_de0|data_out[19], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[18], dataMem:mem_data_de0|data_out[17], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[16], dataMem:mem_data_de0|data_out[15], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[14], dataMem:mem_data_de0|data_out[13], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[12], dataMem:mem_data_de0|data_out[11], ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[10], dataMem:mem_data_de0|data_out[9],  ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[8], dataMem:mem_data_de0|data_out[7],   ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[6], dataMem:mem_data_de0|data_out[5],   ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[4], dataMem:mem_data_de0|data_out[3],   ;
+;                            ;                           ; dataMem:mem_data_de0|data_out[2], dataMem:mem_data_de0|data_out[1]    ;
++----------------------------+---------------------------+-----------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -310,81 +1360,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2146  ;
+; Total registers                              ; 1122  ;
 ; Number of registers using Synchronous Clear  ; 22    ;
 ; Number of registers using Synchronous Load   ; 7     ;
-; Number of registers using Asynchronous Clear ; 2088  ;
+; Number of registers using Asynchronous Clear ; 1064  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 2084  ;
+; Number of registers using Clock Enable       ; 1061  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+---------------------------------------------------+
-; Inverted Register Statistics                      ;
-+-----------------------------------------+---------+
-; Inverted Register                       ; Fan out ;
-+-----------------------------------------+---------+
-; dataMem:mem_data_de0|dataArray[1][2]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][2]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][1]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][1]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][3]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][3]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][4]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[0][4]    ; 2       ;
-; dataMem:mem_data_de0|dataArray[3][4]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][0]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][0]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][0]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][31]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][31]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][15]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][7]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][30]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][30]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][29]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][29]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][28]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][28]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[0][28]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][28]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][27]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][26]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][25]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][24]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][24]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][23]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][22]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][22]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][21]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][20]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[0][20]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][20]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][19]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][19]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][18]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][17]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][17]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][12]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][12]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[0][12]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][12]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][11]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][11]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[1][10]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][10]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][9]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][16]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][16]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][14]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][13]   ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][6]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][5]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[2][8]    ; 1       ;
-; dataMem:mem_data_de0|dataArray[3][8]    ; 1       ;
-; Total number of inverted registers = 58 ;         ;
-+-----------------------------------------+---------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -392,95 +1375,25 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[31][19]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[31][3]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[30][28]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[30][3]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[29][13]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[29][3]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[28][28]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[28][3]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[27][24]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[27][6]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[26][11]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[26][6]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[25][23]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[25][2]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[24][9]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[24][2]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[23][19]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[23][5]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[22][20]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[22][7]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[21][15]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[21][4]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[20][20]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[20][2]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[19][20]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[19][3]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[18][8]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[18][2]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[17][25]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[17][6]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[16][12]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[16][5]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[15][13]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[15][7]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[14][18]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[14][7]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[13][12]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[13][6]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[12][31]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[12][1]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[11][8]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[11][1]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[10][30]                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[10][1]                       ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[9][19]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[9][3]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[8][8]                        ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[8][1]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[7][16]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[7][4]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[6][13]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[6][1]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[5][22]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[5][1]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[4][29]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[4][3]                        ;
-; 4:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[2][19]                       ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 0 LEs                ; 12 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[2][6]                        ;
-; 4:1                ; 14 bits   ; 28 LEs        ; 0 LEs                ; 28 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[1][14]                       ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[1][6]                        ;
-; 4:1                ; 21 bits   ; 42 LEs        ; 0 LEs                ; 42 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[0][13]                       ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 0 LEs                ; 14 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[0][6]                        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[3][26]                       ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[3][7]                        ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 0 LEs                ; 12 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[2][16]                       ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 0 LEs                ; 4 LEs                  ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[2][4]                        ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[1][10]                       ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[1][2]                        ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 0 LEs                ; 6 LEs                  ; Yes        ; |DE0_top|dataMem:mem_data_de0|dataArray[0][20]                       ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst|Selector2        ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|programCounter:program_counter_inst|offset[3] ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 38 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[8]        ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[20]       ;
-; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|regFile:reg_file_inst|rs2[22]                 ;
-; 33:1               ; 2 bits    ; 44 LEs        ; 44 LEs               ; 0 LEs                  ; No         ; |DE0_top|dataMem:mem_data_de0|data_out[15]                           ;
-; 8:1                ; 4 bits    ; 20 LEs        ; 16 LEs               ; 4 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[18]       ;
-; 19:1               ; 8 bits    ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux23    ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|d_o[27]          ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|programCounter:program_counter_inst|offset[5] ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[3]        ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|d_o[2]           ;
+; 33:1               ; 10 bits   ; 220 LEs       ; 220 LEs              ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|regFile:reg_file_inst|rs2[0]                  ;
+; 19:1               ; 8 bits    ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux16    ;
 ; 20:1               ; 7 bits    ; 91 LEs        ; 56 LEs               ; 35 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux13    ;
-; 19:1               ; 25 bits   ; 300 LEs       ; 275 LEs              ; 25 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s1_ALU[28]       ;
+; 19:1               ; 25 bits   ; 300 LEs       ; 275 LEs              ; 25 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s1_ALU[21]       ;
 ; 19:1               ; 7 bits    ; 84 LEs        ; 84 LEs               ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s1_ALU[5]        ;
-; 20:1               ; 4 bits    ; 52 LEs        ; 32 LEs               ; 20 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux24    ;
+; 35:1               ; 9 bits    ; 207 LEs       ; 207 LEs              ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[14]       ;
+; 20:1               ; 4 bits    ; 52 LEs        ; 32 LEs               ; 20 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux27    ;
 ; 21:1               ; 4 bits    ; 56 LEs        ; 36 LEs               ; 20 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux5     ;
 ; 12:1               ; 4 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; No         ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst|Selector29       ;
 ; 21:1               ; 2 bits    ; 28 LEs        ; 16 LEs               ; 12 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux29    ;
 ; 22:1               ; 2 bits    ; 28 LEs        ; 20 LEs               ; 8 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|alu:ALU|Mux3     ;
-; 38:1               ; 16 bits   ; 400 LEs       ; 384 LEs              ; 16 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|d_o[27]          ;
-; 37:1               ; 7 bits    ; 168 LEs       ; 161 LEs              ; 7 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|d_o[6]           ;
-; 14:1               ; 3 bits    ; 27 LEs        ; 12 LEs               ; 15 LEs                 ; No         ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst|Selector22       ;
-; 38:1               ; 7 bits    ; 175 LEs       ; 161 LEs              ; 14 LEs                 ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|d_o[10]          ;
+; 37:1               ; 5 bits    ; 120 LEs       ; 120 LEs              ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[23]       ;
+; 14:1               ; 3 bits    ; 27 LEs        ; 12 LEs               ; 15 LEs                 ; No         ; |DE0_top|core:core_de0|controlUnit:controlUnit_inst|Selector21       ;
+; 40:1               ; 4 bits    ; 104 LEs       ; 104 LEs              ; 0 LEs                  ; No         ; |DE0_top|core:core_de0|executionUnit:exec_unit_inst|s2_ALU[18]       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 
 
@@ -735,6 +1648,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "dataMem:mem_data_de0"                                                                                                                            ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                                                      ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; req_i    ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; gnt_o    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; rvalid_o ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "core:core_de0|executionUnit:exec_unit_inst|br:BR" ;
 +-----------------+-------+----------+-----------------------------------------+
@@ -824,7 +1748,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:19     ;
+; Top            ; 00:00:20     ;
 +----------------+--------------+
 
 
@@ -834,9 +1758,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Nov 20 20:12:22 2019
+    Info: Processing started: Sat Nov 23 20:06:34 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE0_top -c DE0_top
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Warning (10238): Verilog Module Declaration warning at mem_data.v(34): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "dataMem"
 Warning (10238): Verilog Module Declaration warning at top.v(26): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "top"
 Info (12021): Found 13 design units, including 13 entities, in source file /rv32i-verilog/src/top.v
     Info (12023): Found entity 1: progMem
@@ -1996,6 +2921,7 @@ Info (10041): Inferred latch for "progArray[0][31]" at mem_prog.v(47)
 Warning (19016): Clock multiplexers are found and protected
     Warning (19017): Found clock multiplexer clock_to_core
     Warning (19017): Found clock multiplexer clock_to_core~synth
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13039): The following bidir pins have no drivers
     Warning (13040): Bidir "DRAM_DQ[0]" has no driver
     Warning (13040): Bidir "DRAM_DQ[1]" has no driver
@@ -2108,8 +3034,6 @@ Warning (13039): The following bidir pins have no drivers
     Warning (13040): Bidir "GPIO1_D[29]" has no driver
     Warning (13040): Bidir "GPIO1_D[30]" has no driver
     Warning (13040): Bidir "GPIO1_D[31]" has no driver
-Info (13000): Registers with preset signals will power-up high
-Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX2_D[0]" is stuck at GND
     Warning (13410): Pin "HEX2_D[1]" is stuck at GND
@@ -2197,7 +3121,8 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "GPIO1_CLKOUT[0]" is stuck at GND
     Warning (13410): Pin "GPIO1_CLKOUT[1]" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
-Info (144001): Generated suppressed messages file D:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg
+Info (17049): 1024 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 18 input pin(s) that do not drive logic
@@ -2219,21 +3144,21 @@ Warning (21074): Design contains 18 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "GPIO0_CLKIN[1]"
     Warning (15610): No output dependent on input pin "GPIO1_CLKIN[0]"
     Warning (15610): No output dependent on input pin "GPIO1_CLKIN[1]"
-Info (21057): Implemented 5390 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 3554 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 23 input pins
     Info (21059): Implemented 118 output pins
     Info (21060): Implemented 111 bidirectional pins
-    Info (21061): Implemented 5138 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 320 warnings
-    Info: Peak virtual memory: 4633 megabytes
-    Info: Processing ended: Wed Nov 20 20:12:46 2019
-    Info: Elapsed time: 00:00:24
-    Info: Total CPU time (on all processors): 00:00:22
+    Info (21061): Implemented 3302 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 322 warnings
+    Info: Peak virtual memory: 4659 megabytes
+    Info: Processing ended: Sat Nov 23 20:07:07 2019
+    Info: Elapsed time: 00:00:33
+    Info: Total CPU time (on all processors): 00:00:26
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in D:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg.
+The suppressed messages can be found in X:/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.map.smsg.
 
 

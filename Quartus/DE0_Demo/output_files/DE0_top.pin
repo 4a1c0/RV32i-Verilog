@@ -87,7 +87,7 @@ HEX2_D[1]                    : A16       : output : 2.5 V             :         
 HEX2_D[4]                    : A17       : output : 2.5 V             :         : 7         : Y              
 HEX2_DP                      : A18       : output : 2.5 V             :         : 7         : Y              
 HEX3_D[2]                    : A19       : output : 2.5 V             :         : 7         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : A20       :        :                   :         : 7         :                
+GPIO0_D[22]                  : A20       : bidir  : 2.5 V             :         : 7         : N              
 VCCIO7                       : A21       : power  :                   : 2.5V    : 7         :                
 GND                          : A22       : gnd    :                   :         :           :                
 FL_BYTE_N                    : AA1       : output : 2.5 V             :         : 2         : Y              
@@ -325,7 +325,7 @@ GND                          : K12       : gnd    :                   :         
 GND                          : K13       : gnd    :                   :         :           :                
 VCCINT                       : K14       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : K15       :        :                   :         : 6         :                
-GPIO0_D[22]                  : K16       : bidir  : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : K16       :        :                   :         : 6         :                
 VGA_G[2]                     : K17       : output : 2.5 V             :         : 6         : Y              
 VGA_B[3]                     : K18       : output : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : K19       :        :                   :         : 6         :                
