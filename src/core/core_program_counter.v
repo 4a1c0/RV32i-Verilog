@@ -41,6 +41,10 @@ module programCounter
         else if (is_absolute_i === 1'b1) begin
             addr <= offset;
         end
+        else if (0) begin
+            // TODO: Stall signal
+            addr <= addr;
+        end
         else begin
             addr <= addr + offset;
         end

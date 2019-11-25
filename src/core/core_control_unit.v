@@ -456,6 +456,7 @@ module controlUnit
         
 
             OPCODE_I_LOAD: begin  // Loads
+                // TODO: Add stall if mem is not ready  
 
                 is_load_store = 1'b1;
 
@@ -487,7 +488,8 @@ module controlUnit
         
 
             OPCODE_S_STORE: begin  // Store
-
+                // TODO: Add stall if mem is not ready  
+                
                 is_load_store = 1'b1;
 
 
