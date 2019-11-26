@@ -203,7 +203,7 @@ task test_load;
         encodeLBU(5'h0, 5'h7, 12'h4);
         //TEST
         rst_n		= 1'b1;
-        #600;
+        #1600;  // 600
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be hf04a1c0f but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -234,7 +234,7 @@ task test_store;
 
         //TEST
         rst_n		= 1'b1;
-        #1200;
+        #2500; //1200
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);

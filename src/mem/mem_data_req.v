@@ -28,7 +28,7 @@ module dataMem
         write_transfer_i, // byte enable
         req_i,  // Request to make actiopn
         gnt_o,  // Action Granted //, wait until rvalid or cycle
-        rvalid_o, // Valid when write is ok // Write valid signal (OK to increase PC)
+        rvalid_o // Valid when write is ok // Write valid signal (OK to increase PC)
 
 
     );
