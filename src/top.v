@@ -6,7 +6,7 @@
 `endif
 
 `include "mem/mem_prog.v"
-`include "mem/mem_data_req.v"
+`include "mem/mem_data.v"
 `include "core/core.v"
 
 
@@ -52,9 +52,9 @@ core core_inst(
         .addr_mem_data_o (addr_mem_data),
         .val_mem_data_read_i (val_mem_data_read),
         .val_mem_data_write_o (val_mem_data_write),
-        .req_mem_data_o(req_mem_data_t),  // Request to make actiopn
-        .gnt_mem_data_i(gnt_mem_data_t),  // Action Granted 
-        .rvalid_mem_data_i(rvalid_mem_data_t), // Valid when write is ok
+        //.req_mem_data_o(req_mem_data_t),  // Request to make actiopn
+        //.gnt_mem_data_i(gnt_mem_data_t),  // Action Granted 
+        //.rvalid_mem_data_i(rvalid_mem_data_t), // Valid when write is ok
         .addr_mem_prog_o (addr_mem_prog),
         .val_mem_prog_i (val_mem_prog),
         .write_transfer_mem_data_o (write_transfer)
@@ -67,10 +67,10 @@ dataMem mem_data_inst (
         .addr		(addr_mem_data)	,  // Address
         .data_in	(val_mem_data_write),  //  Data in
         .data_out   (val_mem_data_read),  //data out
-        .write_transfer_i (write_transfer), // write Byte mask
-        .req_i(req_mem_data_t),  // Request to make actiopn
-        .gnt_o(gnt_mem_data_t),  // Action Granted 
-        .rvalid_o(rvalid_mem_data_t) // Valid when write is ok
+        .write_transfer_i (write_transfer) // write Byte mask
+        //.req_i(req_mem_data_t),  // Request to make actiopn
+        //.gnt_o(gnt_mem_data_t),  // Action Granted 
+        //.rvalid_o(rvalid_mem_data_t) // Valid when write is ok
     );
 
 progMem mem_prog_inst (
