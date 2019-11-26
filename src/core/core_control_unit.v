@@ -83,8 +83,11 @@ module controlUnit
         reg_addr,
         imm_val_o,  //execution unit imm val rs1
         write_transfer_o,
-        csr_addr_o
-    
+        csr_addr_o,
+        is_stall_o,
+        mem_req_o,  // Request to make actiopn
+        mem_gnt_i,  // Action Granted //, wait until rvalid or cycle
+        mem_rvalid_i // Valid when write is ok // Write valid signal (OK to increase PC)
     
     
     //is_absolute_o,  // 
@@ -202,6 +205,13 @@ module controlUnit
     output [CSR_OP_WIDTH-1 : 0] csr_op_o;
     output [CSR_ADDR_WIDTH-1 : 0] csr_addr_o;
 
+    output is_stall_o;
+    output mem_req_o;  // Request to make actiopn
+    input mem_gnt_i;  // Action Granted //, wait until rvalid or cycle
+    input mem_rvalid_i;
+    reg is_stall_o;
+    reg mem_req_o;
+
     //reg is_imm_rs1_o;
     //reg is_imm_rs2_o;
 
@@ -296,6 +306,8 @@ module controlUnit
         reg_addr = {REG_ADDR_WIDTH{1'b0}};
         r1_addr = {REG_ADDR_WIDTH{1'b0}};
         r2_addr = {REG_ADDR_WIDTH{1'b0}};
+        is_stall_o = 1'b0;
+        mem_req_o = 1'b0;
         
 
         
@@ -457,6 +469,11 @@ module controlUnit
 
             OPCODE_I_LOAD: begin  // Loads
                 // TODO: Add stall if mem is not ready  
+                mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
+                
+                if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
+                //else is_stall_o = 1'b0;
+
 
                 is_load_store = 1'b1;
 
@@ -489,6 +506,13 @@ module controlUnit
 
             OPCODE_S_STORE: begin  // Store
                 // TODO: Add stall if mem is not ready  
+                mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
+                
+                if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
+                else begin
+                    if (!mem_rvalid_i) is_stall_o = 1'b1;  // Stall core until rvalid signal is detected
+                    else is_stall_o = 1'b0;
+                end 
                 
                 is_load_store = 1'b1;
 

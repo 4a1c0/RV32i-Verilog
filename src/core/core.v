@@ -47,6 +47,9 @@ module core
         addr_mem_data_o,
         val_mem_data_read_i,
         val_mem_data_write_o,
+        req_mem_data_o,  // Request to make actiopn
+        gnt_mem_data_i,  // Action Granted 
+        rvalid_mem_data_i, // Valid when write is ok
         addr_mem_prog_o,
         val_mem_prog_i,
         write_transfer_mem_data_o
@@ -61,11 +64,15 @@ module core
     output [MEM_ADDR_WIDTH-1 : 0] addr_mem_data_o;
     input [DATA_WIDTH-1 : 0] val_mem_data_read_i;
     output [DATA_WIDTH-1 : 0] val_mem_data_write_o;
+    output req_mem_data_o;  // Request to make actiopn
+    input gnt_mem_data_i;  // Action Granted 
+    input rvalid_mem_data_i; // Valid when write is ok // Write valid signal (OK to increase PC)
     output [MEM_ADDR_WIDTH-1 : 0] addr_mem_prog_o;
     input [DATA_WIDTH-1 : 0] val_mem_prog_i;
 
     output [TRANSFER_WIDTH-1:0] write_transfer_mem_data_o;
 
+    wire is_stall_t;
 
     wire is_load_store; 
     //wire we_dataMem;
@@ -130,7 +137,11 @@ module core
         .reg_addr (r_num_write_reg_file),  // RD addr
         .imm_val_o (imm_val_t),  //execution unit imm val
         .write_transfer_o (write_transfer_mem_data_o),
-        .csr_addr_o(csr_addr_t)
+        .csr_addr_o(csr_addr_t),
+        .is_stall_o(is_stall_t),
+        .mem_req_o(req_mem_data_o),  // Request to make actiopn
+        .mem_gnt_i(gnt_mem_data_i),  // Action Granted //, wait until rvalid or cycle
+        .mem_rvalid_i(rvalid_mem_data_i) // Valid when write is ok // Write valid signal (OK to increase PC)
     );
 
     programCounter program_counter_inst (
@@ -138,6 +149,7 @@ module core
         .clk (clk),
         .is_branch_i (is_branch_t),  // Branch indicator
         .is_absolute_i (is_absolute_t),  // Absolute or relative branch
+        .is_stall_i(is_stall_t),  // Stall the PC
         .offset_i (new_pc[MEM_ADDR_WIDTH-1:0]),  // new pc or offset
         .addr (addr_mem_prog_o)  // next addr
     );
