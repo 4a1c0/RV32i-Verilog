@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Sun Nov 17 18:31:13 2019
+Fri Nov 29 06:20:39 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -9,28 +9,29 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Source Files Read
-  5. Analysis & Synthesis Resource Usage Summary
-  6. Analysis & Synthesis Resource Utilization by Entity
-  7. General Register Statistics
-  8. Parameter Settings for User Entity Instance: Top-level Entity: |top
-  9. Parameter Settings for User Entity Instance: core:core_inst
- 10. Parameter Settings for User Entity Instance: core:core_inst|controlUnit:controlUnit_inst
- 11. Parameter Settings for User Entity Instance: core:core_inst|programCounter:program_counter_inst
- 12. Parameter Settings for User Entity Instance: core:core_inst|regFile:reg_file_inst
- 13. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst
- 14. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|alu:ALU
- 15. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|lis:LIS
- 16. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|br:BR
- 17. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst
- 18. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst
- 19. Parameter Settings for User Entity Instance: dataMem:mem_data_inst
- 20. Parameter Settings for User Entity Instance: progMem:mem_prog_inst
- 21. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst|br:BR"
- 22. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst"
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
- 25. Analysis & Synthesis Suppressed Messages
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Parameter Settings for User Entity Instance: Top-level Entity: |top
+ 10. Parameter Settings for User Entity Instance: core:core_inst
+ 11. Parameter Settings for User Entity Instance: core:core_inst|controlUnit:controlUnit_inst
+ 12. Parameter Settings for User Entity Instance: core:core_inst|programCounter:program_counter_inst
+ 13. Parameter Settings for User Entity Instance: core:core_inst|regFile:reg_file_inst
+ 14. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst
+ 15. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|alu:ALU
+ 16. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|lis:LIS
+ 17. Parameter Settings for User Entity Instance: core:core_inst|executionUnit:exec_unit_inst|br:BR
+ 18. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst
+ 19. Parameter Settings for User Entity Instance: core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst
+ 20. Parameter Settings for User Entity Instance: dataMem:mem_data_inst
+ 21. Parameter Settings for User Entity Instance: progMem:mem_prog_inst
+ 22. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst|br:BR"
+ 23. Port Connectivity Checks: "core:core_inst|executionUnit:exec_unit_inst"
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
+ 26. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -56,7 +57,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 17 18:31:12 2019           ;
+; Analysis & Synthesis Status        ; Successful - Fri Nov 29 06:20:39 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; top                                             ;
 ; Top-level Entity Name              ; top                                             ;
@@ -161,26 +162,37 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                            ;
-+--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
-+--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; ../../src/top.v                                              ; yes             ; User Verilog HDL File        ; X:/RV32i-Verilog/src/top.v                                              ;         ;
-; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
-; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
-; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
-; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
-; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
-; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
-; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
-; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; X:/RV32i-Verilog/src/core/core.v                                        ;         ;
-; /rv32i-verilog/src/defines.vh                                ; yes             ; Auto-Found Unspecified File  ; /rv32i-verilog/src/defines.vh                                           ;         ;
-+--------------------------------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                      ;
++--------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                             ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                      ; Library ;
++--------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------+---------+
+; ../../src/top.v                                              ; yes             ; User Verilog HDL File        ; //Mac/Shared/RV32i-Verilog/src/top.v                                              ;         ;
+; ../../src/mem/mem_prog.v                                     ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/mem/mem_prog.v                                     ;         ;
+; ../../src/mem/mem_data.v                                     ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/mem/mem_data.v                                     ;         ;
+; ../../src/core/core_control_unit.v                           ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_control_unit.v                           ;         ;
+; ../../src/core/core_program_counter.v                        ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_program_counter.v                        ;         ;
+; ../../src/core/core_regfile.v                                ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_regfile.v                                ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_alu.v ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_lis.v ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit_br.v  ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v  ;         ;
+; ../../src/core/core_execution_unit/core_execution_unit.v     ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v     ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit_timer.v           ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v           ;         ;
+; ../../src/core/core_csr_unit/core_csr_unit.v                 ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v                 ;         ;
+; ../../src/core/core.v                                        ; yes             ; Auto-Found Verilog HDL File  ; //Mac/Shared/RV32i-Verilog/src/core/core.v                                        ;         ;
+; //mac/shared/rv32i-verilog/src/defines.vh                    ; yes             ; Auto-Found Unspecified File  ; //mac/shared/rv32i-verilog/src/defines.vh                                         ;         ;
++--------------------------------------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -242,7 +254,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+-------+--------------------------------------------+
 ; Parameter Name ; Value ; Type                                       ;
 +----------------+-------+--------------------------------------------+
-; ADDR_WIDTH     ; 5     ; Signed Integer                             ;
+; ADDR_WIDTH     ; 7     ; Signed Integer                             ;
 ; DATA_WIDTH     ; 32    ; Signed Integer                             ;
 ; TRANSFER_WIDTH ; 4     ; Signed Integer                             ;
 +----------------+-------+--------------------------------------------+
@@ -254,7 +266,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------+-------+---------------------------------+
 ; Parameter Name    ; Value ; Type                            ;
 +-------------------+-------+---------------------------------+
-; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                  ;
+; MEM_ADDR_WIDTH    ; 7     ; Signed Integer                  ;
 ; DATA_WIDTH        ; 32    ; Signed Integer                  ;
 ; TRANSFER_WIDTH    ; 4     ; Signed Integer                  ;
 ; CSR_OP_WIDTH      ; 3     ; Signed Integer                  ;
@@ -273,7 +285,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------+-------+--------------------------------------------------------------+
 ; Parameter Name    ; Value ; Type                                                         ;
 +-------------------+-------+--------------------------------------------------------------+
-; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                                               ;
+; MEM_ADDR_WIDTH    ; 7     ; Signed Integer                                               ;
 ; DATA_WIDTH        ; 32    ; Signed Integer                                               ;
 ; TRANSFER_WIDTH    ; 4     ; Signed Integer                                               ;
 ; CSR_OP_WIDTH      ; 3     ; Signed Integer                                               ;
@@ -308,7 +320,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                   ;
 +----------------+-------+------------------------------------------------------------------------+
-; MEM_ADDR_WIDTH ; 5     ; Signed Integer                                                         ;
+; MEM_ADDR_WIDTH ; 7     ; Signed Integer                                                         ;
 +----------------+-------+------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -330,7 +342,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------+-------+--------------------------------------------------------------+
 ; Parameter Name    ; Value ; Type                                                         ;
 +-------------------+-------+--------------------------------------------------------------+
-; MEM_ADDR_WIDTH    ; 5     ; Signed Integer                                               ;
+; MEM_ADDR_WIDTH    ; 7     ; Signed Integer                                               ;
 ; DATA_WIDTH        ; 32    ; Signed Integer                                               ;
 ; CSR_OP_WIDTH      ; 3     ; Signed Integer                                               ;
 ; ALU_OP_WIDTH      ; 4     ; Signed Integer                                               ;
@@ -378,7 +390,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-------------------------------------------------------------------------+
 ; LIS_OP_WIDTH   ; 3     ; Signed Integer                                                          ;
 ; DATA_WIDTH     ; 32    ; Signed Integer                                                          ;
-; MEM_ADDR_WIDTH ; 5     ; Signed Integer                                                          ;
+; MEM_ADDR_WIDTH ; 7     ; Signed Integer                                                          ;
 ; LIS_LB         ; 0     ; Signed Integer                                                          ;
 ; LIS_LH         ; 1     ; Signed Integer                                                          ;
 ; LIS_LW         ; 2     ; Signed Integer                                                          ;
@@ -435,7 +447,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-------------------------------------------+
 ; Parameter Name ; Value ; Type                                      ;
 +----------------+-------+-------------------------------------------+
-; ADDR_WIDTH     ; 5     ; Signed Integer                            ;
+; ADDR_WIDTH     ; 7     ; Signed Integer                            ;
 ; DATA_WIDTH     ; 32    ; Signed Integer                            ;
 ; MEM_DEPTH      ; 32    ; Signed Integer                            ;
 ; TRANSFER_WIDTH ; 4     ; Signed Integer                            ;
@@ -448,7 +460,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-------------------------------------------+
 ; Parameter Name ; Value ; Type                                      ;
 +----------------+-------+-------------------------------------------+
-; ADDR_WIDTH     ; 5     ; Signed Integer                            ;
+; ADDR_WIDTH     ; 7     ; Signed Integer                            ;
 ; DATA_WIDTH     ; 32    ; Signed Integer                            ;
 ; MEM_DEPTH      ; 32    ; Signed Integer                            ;
 +----------------+-------+-------------------------------------------+
@@ -460,7 +472,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------+-------+----------+------------------------------------------+
 ; Port            ; Type  ; Severity ; Details                                  ;
 +-----------------+-------+----------+------------------------------------------+
-; old_pc_i[31..5] ; Input ; Info     ; Stuck at GND                             ;
+; old_pc_i[31..7] ; Input ; Info     ; Stuck at GND                             ;
 +-----------------+-------+----------+------------------------------------------+
 
 
@@ -469,7 +481,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port                   ; Type   ; Severity ; Details                                                                             ;
 +------------------------+--------+----------+-------------------------------------------------------------------------------------+
-; new_pc_offset_o[31..5] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; new_pc_offset_o[31..7] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -488,11 +500,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Nov 17 18:30:57 2019
+    Info: Processing started: Fri Nov 29 06:20:31 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top -c top
-Info (20029): Only one processor detected - disabling parallel compilation
+Warning (20028): Parallel compilation is not licensed and has been disabled
 Warning (10238): Verilog Module Declaration warning at top.v(26): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "top"
-Info (12021): Found 13 design units, including 13 entities, in source file /rv32i-verilog/src/top.v
+Info (12021): Found 13 design units, including 13 entities, in source file //mac/shared/rv32i-verilog/src/top.v
     Info (12023): Found entity 1: progMem
     Info (12023): Found entity 2: dataMem
     Info (12023): Found entity 3: controlUnit
@@ -573,7 +585,6 @@ Info (12128): Elaborating entity "br" for hierarchy "core:core_inst|executionUni
 Info (12128): Elaborating entity "crs_unit" for hierarchy "core:core_inst|crs_unit:crs_unit_inst"
 Info (12128): Elaborating entity "timer" for hierarchy "core:core_inst|crs_unit:crs_unit_inst|timer:timer_inst"
 Info (12128): Elaborating entity "dataMem" for hierarchy "dataMem:mem_data_inst"
-Warning (10027): Verilog HDL or VHDL warning at the mem_data.v(53): index expression is not wide enough to address all of the elements in the array
 Info (12128): Elaborating entity "progMem" for hierarchy "progMem:mem_prog_inst"
 Info (10041): Inferred latch for "progArray[31][0]" at mem_prog.v(47)
 Info (10041): Inferred latch for "progArray[31][1]" at mem_prog.v(47)
@@ -1599,7 +1610,7 @@ Info (10041): Inferred latch for "progArray[0][28]" at mem_prog.v(47)
 Info (10041): Inferred latch for "progArray[0][29]" at mem_prog.v(47)
 Info (10041): Inferred latch for "progArray[0][30]" at mem_prog.v(47)
 Info (10041): Inferred latch for "progArray[0][31]" at mem_prog.v(47)
-Info (144001): Generated suppressed messages file X:/RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg
+Info (144001): Generated suppressed messages file /RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
@@ -1609,15 +1620,15 @@ Info (21057): Implemented 2 device resources after synthesis - the final resourc
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 0 output pins
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 60 warnings
-    Info: Peak virtual memory: 4607 megabytes
-    Info: Processing ended: Sun Nov 17 18:31:13 2019
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:05
+    Info: Peak virtual memory: 4653 megabytes
+    Info: Processing ended: Fri Nov 29 06:20:39 2019
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:04
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in X:/RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg.
+The suppressed messages can be found in /RV32i-Verilog/Quartus/TOP_Project/output_files/top.map.smsg.
 
 

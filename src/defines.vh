@@ -18,7 +18,7 @@
 // Instrucitions types
 
 // OPCODES
-`define OPCODE_U_LUI		7'b0110111
+`define OPCODE_U_LUI		7'b0110111  
 `define OPCODE_U_AUIPC		7'b0010111
 `define OPCODE_J_JAL		7'b1101111
 `define OPCODE_I_JALR   	7'b1100111
@@ -26,7 +26,7 @@
 `define OPCODE_I_LOAD		7'b0000011  //
 `define OPCODE_S_STORE		7'b0100011  //
 `define OPCODE_I_IMM		7'b0010011
-`define OPCODE_R_ALU		7'b0110011  // PROV NAME
+`define OPCODE_R_ALU		7'b0110011  
 `define OPCODE_I_FENCE		7'b0001111  //
 `define OPCODE_I_SYSTEM		7'b1110011
 

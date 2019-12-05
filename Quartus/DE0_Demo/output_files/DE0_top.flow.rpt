@@ -1,5 +1,5 @@
 Flow report for DE0_top
-Sat Nov 23 20:21:13 2019
+Thu Dec 05 21:10:53 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,20 +40,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Sat Nov 23 20:20:56 2019           ;
+; Flow Status                        ; Successful - Thu Dec 05 21:09:58 2019           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; DE0_top                                         ;
 ; Top-level Entity Name              ; DE0_top                                         ;
 ; Family                             ; Cyclone III                                     ;
 ; Device                             ; EP3C16F484C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 4,218 / 15,408 ( 27 % )                         ;
-;     Total combinational functions  ; 3,127 / 15,408 ( 20 % )                         ;
-;     Dedicated logic registers      ; 2,146 / 15,408 ( 14 % )                         ;
-; Total registers                    ; 2146                                            ;
+; Total logic elements               ; 3,254 / 15,408 ( 21 % )                         ;
+;     Total combinational functions  ; 2,897 / 15,408 ( 19 % )                         ;
+;     Dedicated logic registers      ; 1,258 / 15,408 ( 8 % )                          ;
+; Total registers                    ; 1258                                            ;
 ; Total pins                         ; 252 / 347 ( 73 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0 / 516,096 ( 0 % )                             ;
+; Total memory bits                  ; 2,048 / 516,096 ( < 1 % )                       ;
 ; Embedded Multiplier 9-bit elements ; 0 / 112 ( 0 % )                                 ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
 +------------------------------------+-------------------------------------------------+
@@ -64,31 +64,43 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/23/2019 20:17:52 ;
+; Start date & time ; 12/05/2019 21:03:49 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE0_top             ;
 +-------------------+---------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                              ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
-; Assignment Name                     ; Value                        ; Default Value ; Entity Name ; Section Id ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 121376807403.157453667207048 ; --            ; --          ; --         ;
-; FLOW_ENABLE_RTL_VIEWER              ; On                           ; Off           ; --          ; --         ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                           ; --            ; --          ; --         ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                            ; --            ; --          ; --         ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                         ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; 16764057                     ; --            ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING        ; --            ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                       ; --            ; --          ; Top        ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                 ; --            ; --          ; --         ;
-; SMART_RECOMPILE                     ; On                           ; Off           ; --          ; --         ;
-; VERILOG_MACRO                       ; CUSTOM_DEFINE=1              ; --            ; --          ; --         ;
-; VERILOG_MACRO                       ; LOAD_MEMS=1                  ; --            ; --          ; --         ;
-; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                          ; --            ; --          ; --         ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                       ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 121376807403.157557622913116          ; --            ; --          ; --         ;
+; FLOW_ENABLE_RTL_VIEWER              ; On                                    ; Off           ; --          ; --         ;
+; IP_TOOL_NAME                        ; RAM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; RAM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
+; MISC_FILE                           ; ram_bb.v                              ; --            ; --          ; --         ;
+; MISC_FILE                           ; data_bb.v                             ; --            ; --          ; --         ;
+; MISC_FILE                           ; prog_bb.v                             ; --            ; --          ; --         ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                  ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                          ; --            ; --          ; --         ;
+; SMART_RECOMPILE                     ; On                                    ; Off           ; --          ; --         ;
+; VERILOG_MACRO                       ; CUSTOM_DEFINE=1                       ; --            ; --          ; --         ;
+; VERILOG_MACRO                       ; LOAD_MEMS=1                           ; --            ; --          ; --         ;
+; VERILOG_MACRO                       ; MEM=1                                 ; --            ; --          ; --         ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                   ; --            ; --          ; --         ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -96,11 +108,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:42     ; 1.0                     ; 4649 MB             ; 00:00:35                           ;
-; Fitter                    ; 00:02:08     ; 1.0                     ; 4941 MB             ; 00:01:57                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 4593 MB             ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:15     ; 1.0                     ; 4678 MB             ; 00:00:14                           ;
-; Total                     ; 00:03:08     ; --                      ; --                  ; 00:02:48                           ;
+; Analysis & Synthesis      ; 00:01:05     ; 1.0                     ; 4660 MB             ; 00:00:47                           ;
+; Fitter                    ; 00:04:25     ; 1.0                     ; 4987 MB             ; 00:03:30                           ;
+; Assembler                 ; 00:00:11     ; 1.0                     ; 4590 MB             ; 00:00:07                           ;
+; TimeQuest Timing Analyzer ; 00:00:52     ; 1.0                     ; 4725 MB             ; 00:00:37                           ;
+; Total                     ; 00:06:33     ; --                      ; --                  ; 00:05:01                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

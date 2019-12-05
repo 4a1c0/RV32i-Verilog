@@ -12,7 +12,7 @@ RUN cd /root/source && ./configure --prefix=/root/riscv --with-arch=rv32i && mak
 FROM buildpack-deps:bionic
 COPY --from=builder /root/riscv /riscv
 COPY --from=builder /root/REVISION /riscv/REVISION
-RUN apt-get update && apt-get install -y autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev ruby-full cmake && apt-get clean
+RUN apt-get update && apt-get install -y autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev ruby-full cmake srecord && apt-get clean
 ENV RISCV /riscv
 ENV PATH "${PATH}:${RISCV}/bin"
 CMD ["riscv32-unknown-elf-gcc", "--version"]

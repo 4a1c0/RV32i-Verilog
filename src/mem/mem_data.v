@@ -74,9 +74,9 @@ module dataMem
             if (write_transfer_i[2]) dataArray[addr >> 2][23:16] <= data_in[23:16];
             if (write_transfer_i[3]) dataArray[addr >> 2][31:24] <= data_in[31:24];
         end
-        else if ( we  && !write_transfer_i && (addr >> 2) < MEM_DEPTH) begin
-            dataArray[addr >> 2] <= data_in;
-        end
+        // else if ( we  && !write_transfer_i && (addr >> 2) < MEM_DEPTH) begin
+        //     dataArray[addr >> 2] <= data_in;
+        // end
         // Read Operation
         // else if ( !we ) begin
         //     data_out <= dataArray[addr];

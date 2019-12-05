@@ -22,7 +22,7 @@ module top
 	`endif
 	(
         clk,
-        rst_n,
+        rst_n
     );
 
     

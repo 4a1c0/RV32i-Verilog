@@ -1,12 +1,3 @@
-// int main(){
-// 	int a;
-// 	int b;
-// 	int c;
-// 	a = 1;
-// 	b = 0;
-// 	c = a+b;
-// 	return 0;
-// }
 
 int main(){
 	int i = 0;

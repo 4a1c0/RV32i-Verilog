@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP3C16F484) Path("X:/RV32i-Verilog/Quartus/DE0_Demo/output_files/") File("DE0_top.sof") MfrSpec(OpMask(1));
+		Device PartName(EP3C16F484) Path("/RV32i-Verilog/Quartus/DE0_Demo/output_files/") File("DE0_top.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

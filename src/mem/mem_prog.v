@@ -47,6 +47,7 @@ module progMem
 	always @ (posedge clk or negedge rst_n)
 	begin : MEM_READ
 		integer j;
+		data_out = 0;
 		// Async Reset
 		if ( !rst_n ) begin
 			for (j=0; j < MEM_DEPTH; j=j+1) begin
