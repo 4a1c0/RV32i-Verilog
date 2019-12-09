@@ -1,36 +1,37 @@
-
+`default_nettype none
+`timescale 1ns/1ps
 module ram_mux
   #(
     parameter ADDR_WIDTH = 32,
     parameter OUT_WIDTH = 32,
     parameter IN0_WIDTH = 32,     parameter IN1_WIDTH = 32
   )(
-    input wire clk,
-    input wire rst_n,
+    input logic clk,
+    input logic rst_n,
 
-    input wire port0_req_i,
+    input logic port0_req_i,
     output logic                    port0_gnt_o,
     output logic                    port0_rvalid_o,
-    input wire [ADDR_WIDTH-1:0]   port0_addr_i,
-    input wire port0_we_i,
-    input wire [IN0_WIDTH/8-1:0]  port0_be_i,
+    input logic [ADDR_WIDTH-1:0]   port0_addr_i,
+    input logic port0_we_i,
+    input logic [IN0_WIDTH/8-1:0]  port0_be_i,
     output [IN0_WIDTH-1:0]    port0_rdata_o,
-    input wire [IN0_WIDTH-1:0]    port0_wdata_i,
+    input logic [IN0_WIDTH-1:0]    port0_wdata_i,
 
-    input wire port1_req_i,
+    input logic port1_req_i,
     output logic                    port1_gnt_o,
     output logic                    port1_rvalid_o,
-    input wire [ADDR_WIDTH-1:0]   port1_addr_i,
-    input wire port1_we_i,
-    input wire [IN1_WIDTH/8-1:0]  port1_be_i,
+    input logic [ADDR_WIDTH-1:0]   port1_addr_i,
+    input logic port1_we_i,
+    input logic [IN1_WIDTH/8-1:0]  port1_be_i,
     output  [IN1_WIDTH-1:0]    port1_rdata_o,
-    input wire [IN1_WIDTH-1:0]    port1_wdata_i,
+    input logic [IN1_WIDTH-1:0]    port1_wdata_i,
 
         output                     ram_en_o,
     output  [ADDR_WIDTH-1:0]   ram_addr_o,
     output                     ram_we_o,
     output  [OUT_WIDTH/8-1:0]  ram_be_o,
-    input wire [OUT_WIDTH-1:0]    ram_rdata_i,
+    input logic [OUT_WIDTH-1:0]    ram_rdata_i,
     output  [OUT_WIDTH-1:0]    ram_wdata_o
   );
 
@@ -45,8 +46,8 @@ module ram_mux
     if (IN0_ADDR_HIGH >= IN0_ADDR_LOW)
     begin
 
-      reg                                port0_addr_q;
-      wire [IN0_RATIO-1:0][IN0_WIDTH-1:0] port0_rdata;
+      logic                                port0_addr_q;
+      logic [IN0_RATIO-1:0][IN0_WIDTH-1:0] port0_rdata;
 
       always @(posedge clk, negedge rst_n)
       begin
@@ -66,7 +67,7 @@ module ram_mux
 
       assign port0_rdata_o = port0_rdata[port0_addr_q];
     end else begin
-            assign port0_be = port0_be_i;
+      assign port0_be = port0_be_i;
       assign port0_rdata_o = ram_rdata_i;
     end
   endgenerate
@@ -82,8 +83,8 @@ module ram_mux
   generate
     if (IN1_ADDR_HIGH >= IN1_ADDR_LOW)
     begin
-      reg                                port1_addr_q;
-      wire [IN1_RATIO-1:0][IN1_WIDTH-1:0] port1_rdata;
+      logic                                port1_addr_q;
+      logic [IN1_RATIO-1:0][IN1_WIDTH-1:0] port1_rdata;
 
       always @(posedge clk, negedge rst_n)
       begin
@@ -110,12 +111,12 @@ module ram_mux
   endgenerate
 
 
-  always @(*)
+  always @*
   begin
     port0_gnt_o = 1'b0;
     port1_gnt_o = 1'b0;
 
-        if(port0_req_i)
+    if(port0_req_i)
       port0_gnt_o   = 1'b1;
     else if(port1_req_i)
       port1_gnt_o   = 1'b1;
@@ -142,3 +143,5 @@ module ram_mux
   end
 
 endmodule
+
+`default_nettype wire

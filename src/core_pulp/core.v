@@ -16,7 +16,7 @@
 
 
 
-module core
+module corep
     `ifdef CUSTOM_DEFINE
 		#(parameter MEM_ADDR_WIDTH = `MEM_ADDR_WIDTH,
         parameter DATA_WIDTH = `REG_DATA_WIDTH,
@@ -52,6 +52,8 @@ module core
         rvalid_mem_data_i, // Valid when write is ok
         addr_mem_prog_o,
         val_mem_prog_i,
+        req_mem_prog_o,  // Request to make actiopn
+        gnt_mem_prog_i,  // Action Granted 
         write_transfer_mem_data_o
     );
     
@@ -69,6 +71,8 @@ module core
     input rvalid_mem_data_i; // Valid when write is ok // Write valid signal (OK to increase PC)
     output [MEM_ADDR_WIDTH-1 : 0] addr_mem_prog_o;
     input [DATA_WIDTH-1 : 0] val_mem_prog_i;
+    output req_mem_prog_o;  // Request to make actiopn
+    input gnt_mem_prog_i;  // Action Granted 
 
     output [TRANSFER_WIDTH-1:0] write_transfer_mem_data_o;
 
@@ -151,7 +155,9 @@ module core
         .is_absolute_i (is_absolute_t),  // Absolute or relative branch
         .is_stall_i(is_stall_t),  // Stall the PC
         .offset_i (new_pc[MEM_ADDR_WIDTH-1:0]),  // new pc or offset
-        .addr (addr_mem_prog_o)  // next addr
+        .addr (addr_mem_prog_o),  // next addr
+        .req_mem_prog_o(req_mem_prog_o),  // Request to make actiopn
+        .gnt_mem_prog_i(gnt_mem_prog_i)  // Action Granted 
     );
 
     regFile reg_file_inst(

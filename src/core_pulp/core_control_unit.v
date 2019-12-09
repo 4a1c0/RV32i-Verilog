@@ -290,6 +290,8 @@ module controlUnit
 
     reg [1:0] data_acces;
 
+
+
     
     always@(*) begin
 
@@ -474,9 +476,10 @@ module controlUnit
             OPCODE_I_LOAD: begin  // Loads
                 // TODO: Add stall if mem is not ready  
                 mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
-                
+                is_stall_o = 1'b1;
+                #1
                 if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
-                //else is_stall_o = 1'b0;
+                else is_stall_o = 1'b0;
 
 
                 is_load_store = 1'b1;
@@ -510,8 +513,9 @@ module controlUnit
 
             OPCODE_S_STORE: begin  // Store
                 // TODO: Add stall if mem is not ready  
-                //mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
-                
+                mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
+                is_stall_o = 1'b1;
+                #1
                 case (data_acces)
                     2'd0: begin
                         mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
@@ -521,6 +525,7 @@ module controlUnit
                     2'd1: begin
                         if (mem_gnt_i) data_acces = 2'd2;
                         else data_acces = 2'd1;
+                        is_stall_o = 1'b1;
                     end
                     2'd2: begin
                         if (mem_rvalid_i) begin 

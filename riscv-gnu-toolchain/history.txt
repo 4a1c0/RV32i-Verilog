@@ -1,0 +1,190 @@
+    1  cd test
+    2  readelf
+    3  readelf -e test
+    4  riscv32-unknown-elf-gcc -Ttext=0x0000 test.c -o test
+    5  readelf -e test
+    6  riscv32-unknown-elf-objdump -d test
+    7  riscv32-unknown-elf-objdump -d test > test.dump
+    8  riscv32-unknown-elf-gcc -e0x0000 -Ttext=0x0000 test.c -o test
+    9  readelf -e test
+   10  riscv32-unknown-elf-gcc -e0 test.c -o test
+   11  readelf -e test
+   12  riscv32-unknown-elf-objdump -d test
+   13  riscv32-unknown-elf-gcc -Ttext=0x0000 test.c -o test
+   14  riscv32-unknown-elf-objdump -d test
+   15  riscv32-unknown-elf-objcopy -O ihex test test.hex
+   16  riscv32-unknown-elf-gcc -Tstart=0x0000 test.c -o test
+   17  riscv32-unknown-elf-gcc -T_start=0x0000 test.c -o test
+   18  riscv32-unknown-elf-gcc -Ttext=0x0000 test.c -o test
+   19  riscv32-unknown-elf-gcc -Wl,--section-start=.start=0x0 test.c -o test
+   20  riscv32-unknown-elf-objdump -d test
+   21  riscv32-unknown-elf-gcc -Wl,--section-start=.text=0x0 test.c -o test
+   22  riscv32-unknown-elf-objdump -d test
+   23  readelf -e test
+   24  000007b7          luia5,0x0
+   25  elf2hex
+   26  riscv32-unknown-elf2hex
+   27  riscv32-unknown-elf-gcc -Ttext=0x0000 test.c -o test
+   28  readelf -e test
+   29  riscv32-unknown-elf-objdump -d test
+   30  riscv32-unknown-elf-gcc -Ttext=0x0000 -entry=0x0 test.c -o test
+   31  riscv32-unknown-elf-gcc -Ttext=0x0000 -e0 test.c -o test
+   32  riscv32-unknown-elf-gcc -Ttext=0x0000 -e0x0 test.c -o test
+   33  riscv32-unknown-elf-objdump -d test
+   34  readelf -e test
+   35  riscv32-unknown-elf-gcc -Ttext=0x0000 -T_start=0x00 test.c -o test
+   36* riscv32-unknown-elf-gcc -Ttext=0x0000 -T test.c -o test
+   37  riscv32-unknown-elf-gcc -Ttext=0x0000 --start-secion=_start=0x0 test.c -o test
+   38  riscv32-unknown-elf-gcc -Ttext=0x0000 --section_start=_start=0x0 test.c -o test
+   39  riscv32-unknown-elf-gcc --section-start=_start=0x0 --section_start=_start=0x0 test.c -o test
+   40  riscv32-unknown-elf-gcc --section-start=.text=0x0  test.c -o test
+   41  riscv32-unknown-elf-gcc --section-start=.text=0  test.c -o test
+   42  riscv32-unknown-elf-gcc -Ttext-segment=org=0  test.c -o test
+   43  riscv32-unknown-elf-gcc -Ttext-segment=0 test.c -o test
+   44  riscv32-unknown-elf-gcc -Ttext-segment=_start test.c -o test
+   45  riscv32-unknown-elf-gcc -Text=0 -Ttext-segment=_start test.c -o test
+   46  riscv32-unknown-elf-gcc -Ttext=0 -Ttext-segment=_start test.c -o test
+   47  riscv32-unknown-elf-gcc -Ttext=0 --sort-section=name test.c -o test
+   48  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib test.c -o test
+   49  riscv32-unknown-elf-objdump -d test
+   50  riscv32-unknown-elf-gcc -Tmain=0 -nostdlib test.c -o test
+   51  riscv32-unknown-elf-gcc  -nostdlib test.c -o test
+   52  riscv32-unknown-elf-objdump -d test
+   53  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib test.c -o test
+   54  riscv32-unknown-elf-objdump -d test
+   55  riscv32-unknown-elf-objdump -d test > test.dump
+   56  readelf -e test
+   57  riscv32-unknown-elf-gcc -Wl,--section-start=.text=0 -nostdlib test.c -o test
+   58  riscv32-unknown-elf-objcopy -O ihex test test.hex
+   59  riscv32-unknown-elf-objcopy -O ihex binary test.bin
+   60  riscv32-unknown-elf-objcopy -O binary test test.bin
+   61  riscv32-unknown-elf-objcopy -O verilog test test.vh
+   62  riscv32-unknown-elf-objcopy -O ihex --record=32/8 test test_rec.hex
+   63  riscv32-unknown-elf-objcopy -O ihex -F elf32-littleriscv test  test_rec.hex
+   64  riscv32-unknown-elf-objcopy -O ihex -F elf32-little test  test_rec.hex
+   65  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib -EB test.c -o test
+   66  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib -EL test.c -o test
+   67  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib test.c -o test
+   68  compgen -ac | grep searchstr
+   69  compgen -ac 
+   70  compgen -ac | grep elf
+   71  riscv32-unknown-elf-objcopy -O ihex --endian=little test test_rec.hex
+   72  riscv32-unknown-elf-objcopy -O ihex -b8 test test_rec.hex
+   73  riscv32-unknown-elf-objcopy -O ihex --srec-len 4 test test_rec.hex
+   74  riscv32-unknown-elf-objcopy -O ihex --srec-len 16 test test_rec.hex
+   75  riscv32-unknown-elf-objcopy -O ihex --file-alignment 4 test test_rec.hex
+   76  riscv32-unknown-elf-objcopy -F elf32-big -O ihex test test_rec.hex
+   77  riscv32-unknown-elf-objcopy --reverse-bytes=4 -O ihex test test_rec.hex
+   78  riscv32-unknown-elf-objcopy --reverse-bytes=2 -O ihex test test_rec.hex
+   79  riscv32-unknown-elf-objcopy --reverse-bytes=1 -O ihex test test_rec.hex
+   80  riscv32-unknown-elf-objcopy -O ihex test test_rec.hex
+   81  riscv32-unknown-elf-gcc -V
+   82  riscv32-unknown-elf-gcc -v
+   83  compgen -ac 
+   84  compgen -ac | grep hex
+   85  riscv32-unknown-elf-objcopy -O ihex test test_rec.hex
+   86  riscv32-unknown-elf-objcopy -O ihex test test.hex
+   87  elf2hex
+   88  compgen -ac | grep srec
+   89  sudo add-apt-repository ppa:pmiller-opensource/ppa
+   90  add-apt-repository ppa:pmiller-opensource/ppa
+   91  tar xzf srecord-1.64.tar 
+   92  tar -xvf srecord-1.64.tar 
+   93  cd srecord-1.64
+   94  ls
+   95  ./configure --prefix=$HOME
+   96  make
+   97  make install
+   98  ls
+   99  ./install-sh 
+  100  ./srec_cat
+  101  cd srec
+  102  cd srec_cat/
+  103  ls
+  104  cd ..
+  105  ls
+  106  riscv32-unknown-elf-objdump -d test
+  107  riscv32-unknown-elf-objcopy -O elf32-littleriscv test test_rec.hex
+  108  riscv32-unknown-elf-objcopy -O mif test test_rec.hex
+  109  riscv32-unknown-elf-objcopy -O mif test test_rec.mif
+  110  riscv32-unknown-elf-objcopy
+  111  riscv32-unknown-elf-objcopy -O srec test test_rec.txt
+  112  riscv32-unknown-elf-objcopy -O plugin test test_rec.txt
+  113  riscv32-unknown-elf-objcopy -O elf32-little test test_rec.txt
+  114  riscv32-unknown-elf-objcopy -O binary test test_rec.txt
+  115  riscv32-unknown-elf-objcopy -I elf32-littleriscv -O hex test test_rec.txt
+  116  riscv32-unknown-elf-objcopy -I elf32-littleriscv -O ihex test test_rec.txt
+  117  apt-get
+  118  apt-get update
+  119  apt-get install srecord
+  120  srec_cat test -o test_4.hex -address-length=2
+  121  srec_cat test.hex -o test_4.hex -address-length=2
+  122  riscv32-unknown-elf-objcopy -O ihex test test.hex
+  123  srec_cat test.hex -o test_4.hex -address-length=2
+  124  srec_cat test.hex -o test_4.hex --address-length=2
+  125  srec_cat test.hex -o test_4.hex --address-length=4
+  126  srec_cat test.hex -intel -o test_4.hex --address-length=4
+  127  srec_cat test.hex -intel -o test_4.hex -intel --address-length=4
+  128  srec_cat test.hex -intel -o test_4.hex -intel --address-length=2
+  129  srec_cat test.hex -intel -o test_4.hex -intel --address-length=1
+  130  srec_cat test.hex -intel -o test_4.hex -intel
+  131  srec_cat 
+  132  man srec_cat
+  133  srec_cat -h
+  134  srec_cat --help
+  135  srec_cat -Help
+  136  srec_cat --Help
+  137  cat
+  138  cat test.hex 
+  139  srec_cat --Help
+  140  srec_cat
+  141  srec_cat test.hex -o test_4.hex -intel
+  142  srec_cat test -o test_4.hex -intel
+  143  srec_cat test -elf -o test_4.hex -intel
+  144* srec_cat 
+  145  srec_cat test.hex -intel -o test_4.hex -intel --address-length=1
+  146  srec_cat test.hex -intel -o test_4.hex -intel --address-length=5
+  147  srec_cat test.hex -intel -o test_4.hex -intel --address-length=2
+  148  srec_cat test.hex -intel -o test_4.hex -intel --address-length=3
+  149  srec_cat test.bin -binary -o test_4.hex -intel --address-length=3
+  150  srec_cat test.bin -binary -o test_4.hex -intel -address-length=2
+  151  srec_cat test.bin -binary -o test_4.hex -intel -address-length=4
+  152  srec_cat test.bin -binary -o test_4.hex -intel -address-length=1
+  153  srec_cat test.bin -binary -o test_4.hex -mif
+  154  srec_cat test.bin -binary -o test.mif -mif
+  155  srec_cat test.bin -binary -o test.mif -mif -line-length=32
+  156  riscv32-unknown-elf-objcopy -O binary --reverse-bytes=2 test test_rec.txt
+  157  riscv32-unknown-elf-gcc -Ttext=0 -nostdlib test2.c -o test2
+  158  riscv32-unknown-elf-objdump -d test2 > test2.dump
+  159  riscv32-unknown-elf-objcopy -O binary test2 test2.bin
+  160  srec_cat test2.bin -binary -o test2.mif -mif
+  161  riscv32-unknown-elf-objcopy -O ihex test2 test2.hex
+  162  apt-get install elf2mif
+  163  apt-get install nios
+  164  cd ..
+  165  git clone git://github.com/sifive/elf2hex.git
+  166  cd elf2hex/
+  167  autoreconf -i
+  168  ./configure --target=riscv32-unknown-elf
+  169  make
+  170  make install
+  171  cd..
+  172  cd ..
+  173  cd test
+  174  elf2hex
+  175  cd ../elf2hex/
+  176  ls
+  177  pwd
+  178  export PATH=$PATH:/elf2hex/elf2hex
+  179  cd ../test/
+  180  elf2hex
+  181  cd ../elf2hex/
+  182  ./elf2hex
+  183  export PATH=$PATH:/elf2hex
+  184  elf2hex
+  185  cd ..
+  186  cd test
+  187  elf2hex -h
+  188  elf2hex --bit-width 32 --input test --output test_e2h.hex
+  189  hystory > hystory.txt
+  190  history > history.txt
