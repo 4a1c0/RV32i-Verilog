@@ -477,7 +477,7 @@ module controlUnit
                 // TODO: Add stall if mem is not ready  
                 mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
                 is_stall_o = 1'b1;
-                #1
+                
                 if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
                 else is_stall_o = 1'b0;
 
@@ -515,7 +515,7 @@ module controlUnit
                 // TODO: Add stall if mem is not ready  
                 mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
                 is_stall_o = 1'b1;
-                #1
+                
                 case (data_acces)
                     2'd0: begin
                         mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)

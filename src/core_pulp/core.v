@@ -124,6 +124,12 @@ module corep
     wire [DATA_WIDTH-1 : 0] csr_val_r;
     wire [DATA_WIDTH-1 : 0] csr_val_w;
 
+    reg req_mem_data_o;
+    wire req_mem_data_o_intern;
+
+    reg req_mem_prog_o;
+    wire req_mem_prog_o_intern;
+
 
     controlUnit controlUnit_inst(
         .instruction (val_mem_prog_i),  // Instruction from prog mem input
@@ -143,7 +149,7 @@ module corep
         .write_transfer_o (write_transfer_mem_data_o),
         .csr_addr_o(csr_addr_t),
         .is_stall_o(is_stall_t),
-        .mem_req_o(req_mem_data_o),  // Request to make actiopn
+        .mem_req_o(req_mem_data_o_intern),  // Request to make actiopn
         .mem_gnt_i(gnt_mem_data_i),  // Action Granted //, wait until rvalid or cycle
         .mem_rvalid_i(rvalid_mem_data_i) // Valid when write is ok // Write valid signal (OK to increase PC)
     );
@@ -156,7 +162,7 @@ module corep
         .is_stall_i(is_stall_t),  // Stall the PC
         .offset_i (new_pc[MEM_ADDR_WIDTH-1:0]),  // new pc or offset
         .addr (addr_mem_prog_o),  // next addr
-        .req_mem_prog_o(req_mem_prog_o),  // Request to make actiopn
+        .req_mem_prog_o(req_mem_prog_o_intern),  // Request to make actiopn
         .gnt_mem_prog_i(gnt_mem_prog_i)  // Action Granted 
     );
 
@@ -204,6 +210,19 @@ module corep
         .csr_op_i(csr_op_t)  // Op In
     );
 
+    // Register the memory requests
+    always @ (posedge clk or negedge rst_n) begin
+        req_mem_data_o <= 1'b0;
+        req_mem_prog_o <= 1'b0;
+        if (!rst_n) begin
+            req_mem_data_o <= 1'b0;
+            req_mem_prog_o <= 1'b0;
+        end
+        else begin
+            req_mem_data_o <= req_mem_data_o_intern;
+            req_mem_prog_o <= req_mem_prog_o_intern;
+        end
+    end
 
 
 

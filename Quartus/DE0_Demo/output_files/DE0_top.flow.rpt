@@ -1,5 +1,5 @@
 Flow report for DE0_top
-Thu Dec 05 21:10:53 2019
+Mon Dec 09 16:39:28 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -112,7 +112,8 @@ applicable agreement for further details.
 ; Fitter                    ; 00:04:25     ; 1.0                     ; 4987 MB             ; 00:03:30                           ;
 ; Assembler                 ; 00:00:11     ; 1.0                     ; 4590 MB             ; 00:00:07                           ;
 ; TimeQuest Timing Analyzer ; 00:00:52     ; 1.0                     ; 4725 MB             ; 00:00:37                           ;
-; Total                     ; 00:06:33     ; --                      ; --                  ; 00:05:01                           ;
+; TimeQuest Timing Analyzer ; 00:00:12     ; 1.0                     ; 4687 MB             ; 00:00:09                           ;
+; Total                     ; 00:06:45     ; --                      ; --                  ; 00:05:10                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -125,6 +126,7 @@ applicable agreement for further details.
 ; Fitter                    ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
 ; Assembler                 ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
 ; TimeQuest Timing Analyzer ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
@@ -134,6 +136,7 @@ applicable agreement for further details.
 quartus_map --read_settings_files=on --write_settings_files=off DE0_top -c DE0_top
 quartus_fit --read_settings_files=off --write_settings_files=off DE0_top -c DE0_top
 quartus_asm --read_settings_files=off --write_settings_files=off DE0_top -c DE0_top
+quartus_sta DE0_top -c DE0_top
 quartus_sta DE0_top -c DE0_top
 
 

@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for DE0_top
-Thu Dec 05 21:10:54 2019
+Mon Dec 09 16:39:28 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -3631,9 +3631,12 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 05 21:10:01 2019
+    Info: Processing started: Mon Dec 09 16:39:16 2019
 Info: Command: quartus_sta DE0_top -c DE0_top
 Info: qsta_default_script.tcl version: #1
+Info (293032): Detected changes in source files.
+    Info (293027): Source file: //Mac/Shared/RV32i-Verilog/src/mem/mem_prog.v has changed.
+    Info (293027): Source file: //mac/shared/rv32i-verilog/src/defines.vh has changed.
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (21077): Core supply voltage is 1.2V
 Info (21077): Low junction temperature is 0 degrees C
@@ -3673,8 +3676,6 @@ Info (332146): Worst-case minimum pulse width slack is -3.000
     Info (332119):    -3.000     -1275.218 CLOCK_50 
     Info (332119):    -1.000        -1.000 out_BUTTON_2 
 Info: Analyzing Slow 1200mV 0C Model
-Info (334003): Started post-fitting delay annotation
-Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the TimeQuest Timing Analyzer.
@@ -3731,9 +3732,9 @@ Info (332146): Worst-case minimum pulse width slack is -3.000
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 4725 megabytes
-    Info: Processing ended: Thu Dec 05 21:10:54 2019
-    Info: Elapsed time: 00:00:53
-    Info: Total CPU time (on all processors): 00:00:37
+    Info: Peak virtual memory: 4687 megabytes
+    Info: Processing ended: Mon Dec 09 16:39:28 2019
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:10
 
 

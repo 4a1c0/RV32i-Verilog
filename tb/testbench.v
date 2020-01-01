@@ -4,7 +4,7 @@
 
 `include "../src/defines.vh"
 
-`include"../src/top.v"
+`include"../src/top_pulp.v"
 
 module tb();
 	
