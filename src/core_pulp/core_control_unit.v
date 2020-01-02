@@ -516,29 +516,29 @@ module controlUnit
                 mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
                 is_stall_o = 1'b1;
                 
-                case (data_acces)
-                    2'd0: begin
-                        mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
-                        is_stall_o = 1'b1;  // Stall core until grant signal is detected
-                        data_acces = 2'd1;
-                    end
-                    2'd1: begin
-                        if (mem_gnt_i) data_acces = 2'd2;
-                        else data_acces = 2'd1;
-                        is_stall_o = 1'b1;
-                    end
-                    2'd2: begin
-                        if (mem_rvalid_i) begin 
-                            data_acces = 2'd3;  // Stall core until rvalid signal is detected
-                            is_stall_o = 1'b0; // increment the PC
-                        end
-                        else data_acces = 2'd2;
-                    end
-                    2'd3: begin
-                        is_stall_o = 1'b0; // increment the PC
-                        data_acces = 2'd0;
-                    end
-                endcase
+                // case (data_acces)
+                //     2'd0: begin
+                //         mem_req_o = 1'b1; // QUESTION: Request acces to mem (maybe same as is_load_store)
+                //         is_stall_o = 1'b1;  // Stall core until grant signal is detected
+                //         data_acces = 2'd1;
+                //     end
+                //     2'd1: begin
+                //         if (mem_gnt_i) data_acces = 2'd2;
+                //         else data_acces = 2'd1;
+                //         is_stall_o = 1'b1;
+                //     end
+                //     2'd2: begin
+                //         if (mem_rvalid_i) begin 
+                //             data_acces = 2'd3;  // Stall core until rvalid signal is detected
+                //             is_stall_o = 1'b0; // increment the PC
+                //         end
+                //         else data_acces = 2'd2;
+                //     end
+                //     2'd3: begin
+                //         is_stall_o = 1'b0; // increment the PC
+                //         data_acces = 2'd0;
+                //     end
+                // endcase
                 if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
                 else begin
                     if (!mem_rvalid_i) is_stall_o = 1'b1;  // Stall core until rvalid signal is detected

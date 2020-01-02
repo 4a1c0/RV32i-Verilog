@@ -66,8 +66,6 @@ module top
     wire [31:0]  P1core_data_rdata;
     wire [31:0]  P1core_data_wdata;
 
-    assign P1core_data_req=1'b0;
-
 
     wire         core_prog_req;
     wire         core_prog_gnt;
@@ -87,7 +85,9 @@ module top
     wire [31:0]  P1core_prog_rdata;
     //wire [31:0]  P1core_prog_wdata;
 
-
+    assign P1core_data_req=1'b0;
+    assign P1core_prog_req=1'b0;
+    assign P1core_prog_addr=10'b0;
 
     corep core_inst(
             .clk (clk),
@@ -248,7 +248,7 @@ module top
         .port1_wdata_i  ( P1core_prog_wdata  ),
 
         //.ram_en_o       ( prog_mem_en      ),
-        .ram_addr_o     ( prog_mem_addr    ),
+        .ram_addr_o     ( core_instr_addr    ),
         //.ram_we_o       ( prog_mem_we      ),
         //.ram_be_o       ( prog_mem_be      ),
         .ram_rdata_i    ( prog_mem_rdata   )
@@ -258,7 +258,7 @@ module top
     progMem mem_prog_inst (
         .rst_n (rst_n)		,  // Reset Neg
         .clk (clk),             // Clk
-        .addr (prog_mem_addr)		,  // Address
+        .addr (core_instr_addr)		,  // Address
         .data_out (prog_mem_rdata)	   // Output Data
     );
 

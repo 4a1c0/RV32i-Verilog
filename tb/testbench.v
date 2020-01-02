@@ -57,6 +57,45 @@ module tb();
 	// end
 
 
+// ARITHMETICOLOGIC
+
+task test_add; 
+    begin
+        $display ("ADD Test");
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'd5);
+        encodeAddi(5'h0, 5'h4, 12'd2);
+        encodeAdd(5'h3, 5'h4, 5'h5);
+
+        rst_n		= 1'b1;
+        #500; //400
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be 7 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+    end
+endtask
+
+task test_and;
+    begin
+        $display ("AND Test");
+        pc = 32'b0;
+        encodeAddi(5'h0, 5'h3, 12'hFFF);
+        encodeAddi(5'h0, 5'h4, 12'hFF);
+        encodeAnd(5'h3, 5'h4, 5'h5);
+        //TEST
+        rst_n		= 1'b1;
+        #500; //400
+        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+        else begin
+            $display ("ERROR: reg5 has to be h000000FF but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
+            $fatal;
+        end
+    end
+endtask
+
+
 task test_andi;
     begin
         $display ("ANDI Test");
@@ -67,7 +106,7 @@ task test_andi;
         encodeAndi(5'h3, 5'h5, 12'hF0F);
 
         rst_n		= 1'b1;
-        #300;
+        #400; //300
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000404) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000404 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -85,7 +124,7 @@ task test_slli;
         encodeSlli(5'h3, 5'h5, 5'h2);
         
         rst_n		= 1'b1;
-        #300;
+        #400; //300
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h000000C but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -103,7 +142,7 @@ task test_slti;
         encodeSlti(5'h3, 5'h6, 12'hFFF); //-1
         
         rst_n		= 1'b1;
-        #400;
+        #500; //400
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -126,7 +165,7 @@ task test_sltiu;
         encodeSltiu(5'h3, 5'h3, 12'h8);  // 8
 
         rst_n		= 1'b1;
-        #400;
+        #500; //400
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -135,42 +174,6 @@ task test_sltiu;
         if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000000) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
             $display ("ERROR: reg3 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
-            $fatal;
-        end
-    end
-endtask
-
-task test_add; 
-    begin
-        $display ("ADD Test");
-        pc = 32'b0;
-        encodeAddi(5'h0, 5'h3, 12'd5);
-        encodeAddi(5'h0, 5'h4, 12'd2);
-        encodeAdd(5'h3, 5'h4, 5'h5);
-
-        rst_n		= 1'b1;
-        #400;
-        if (top_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
-        else begin
-            $display ("ERROR: reg5 has to be 7 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
-            $fatal;
-        end
-    end
-endtask
-
-task test_and;
-    begin
-        $display ("AND Test");
-        pc = 32'b0;
-        encodeAddi(5'h0, 5'h3, 12'hFFF);
-        encodeAddi(5'h0, 5'h4, 12'hFF);
-        encodeAnd(5'h3, 5'h4, 5'h5);
-        //TEST
-        rst_n		= 1'b1;
-        #400;
-        if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
-        else begin
-            $display ("ERROR: reg5 has to be h000000FF but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
             $fatal;
         end
     end
@@ -192,6 +195,8 @@ task test_auipc;
   end
 endtask
 
+
+// LOAD_STORE
 task test_load;
     begin
         $display ("LOAD Test");
@@ -262,7 +267,7 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeAddi(5'h0, 5'h4, 12'hFFF);
         encodeJal(5'h5, {21'h1FFFF4}); // -12
         rst_n		= 1'b1;
-        #400;
+        #500; //400
         if (top_inst.core_inst.program_counter_inst.addr == 0) $display ("  OK: PC is: %d", top_inst.core_inst.program_counter_inst.addr);
         else begin
             $display ("ERROR: PC has to be 0 but is: %d", top_inst.core_inst.program_counter_inst.addr);
@@ -281,7 +286,7 @@ task test_beq;
         encodeBeq(5'h3, 5'h4, 13'hF0);
         
         rst_n		= 1'b1;
-        #400;
+        #500; //400
         if (top_inst.core_inst.program_counter_inst.addr == 252) $display ("    OK: PC is: %d", top_inst.core_inst.program_counter_inst.addr);
         else begin
             $display ("ERROR: PC has to be 252 but is: %d", top_inst.core_inst.program_counter_inst.addr);
@@ -299,7 +304,7 @@ task test_csr;
         encodeCsr(12'hC01, 5'h0, `FUNCT3_CSRRS, 5'h2);
         encodeCsr(12'hC02, 5'h0, `FUNCT3_CSRRS, 5'h3);
         rst_n		= 1'b1;
-        #400;
+        #500; //400
         if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
             $display ("ERROR: reg3 has to be h0000002 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
