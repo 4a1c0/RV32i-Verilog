@@ -305,7 +305,7 @@ task test_csr;
         encodeCsr(12'hC02, 5'h0, `FUNCT3_CSRRS, 5'h3);
         rst_n		= 1'b1;
         #500; //400
-        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000003) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
             $display ("ERROR: reg3 has to be h0000002 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             $fatal;
