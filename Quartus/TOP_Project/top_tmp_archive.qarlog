@@ -1,0 +1,34 @@
+Quartus II Archive log --	E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/top_tmp_archive.qarlog
+
+Archive:	E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/top_tmp_archive.qar
+Date:		Fri Jan 03 16:41:28 2020
+Quartus II 64-Bit		13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/incremental_db/compiled_partitions/top.db_info
+E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/top.qpf
+E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/top.qsf
+E:/GitRepos/RV32i-Verilog/src/core/core.v
+E:/GitRepos/RV32i-Verilog/src/core/core_control_unit.v
+E:/GitRepos/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit.v
+E:/GitRepos/RV32i-Verilog/src/core/core_csr_unit/core_csr_unit_timer.v
+E:/GitRepos/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit.v
+E:/GitRepos/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_alu.v
+E:/GitRepos/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_br.v
+E:/GitRepos/RV32i-Verilog/src/core/core_execution_unit/core_execution_unit_lis.v
+E:/GitRepos/RV32i-Verilog/src/core/core_program_counter.v
+E:/GitRepos/RV32i-Verilog/src/core/core_regfile.v
+E:/GitRepos/RV32i-Verilog/src/mem/mem_data.v
+E:/GitRepos/RV32i-Verilog/src/mem/mem_prog.v
+E:/GitRepos/RV32i-Verilog/src/top.v
+c:/altera/13.0sp1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 17 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
+
+
+******* Archived project restoration attempt on Fri Jan 03 16:41:29 2020
+Source archive file:	E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project/top_tmp_archive.qar
+Archive was extracted into	E:/GitRepos/RV32i-Verilog/Quartus/TOP_Project_copy/
+		 - successfully.

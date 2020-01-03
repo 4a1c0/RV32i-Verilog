@@ -1,5 +1,5 @@
 Flow report for DE0_top
-Mon Dec 09 16:39:28 2019
+Fri Jan 03 19:13:27 2020
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,22 +40,22 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu Dec 05 21:09:58 2019           ;
+; Flow Status                        ; Successful - Fri Jan 03 19:13:22 2020           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; DE0_top                                         ;
 ; Top-level Entity Name              ; DE0_top                                         ;
 ; Family                             ; Cyclone III                                     ;
 ; Device                             ; EP3C16F484C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 3,254 / 15,408 ( 21 % )                         ;
-;     Total combinational functions  ; 2,897 / 15,408 ( 19 % )                         ;
-;     Dedicated logic registers      ; 1,258 / 15,408 ( 8 % )                          ;
-; Total registers                    ; 1258                                            ;
+; Total logic elements               ; 4,380 / 15,408 ( 28 % )                         ;
+;     Total combinational functions  ; 3,056 / 15,408 ( 20 % )                         ;
+;     Dedicated logic registers      ; 3,142 / 15,408 ( 20 % )                         ;
+; Total registers                    ; 3142                                            ;
 ; Total pins                         ; 252 / 347 ( 73 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 2,048 / 516,096 ( < 1 % )                       ;
+; Total memory bits                  ; 1,088 / 516,096 ( < 1 % )                       ;
 ; Embedded Multiplier 9-bit elements ; 0 / 112 ( 0 % )                                 ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                                  ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/05/2019 21:03:49 ;
+; Start date & time ; 01/03/2020 19:12:45 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE0_top             ;
 +-------------------+---------------------+
@@ -75,11 +75,13 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 121376807403.157557622913116          ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 180725258027703.157807516504852       ; --            ; --          ; --         ;
 ; FLOW_ENABLE_RTL_VIEWER              ; On                                    ; Off           ; --          ; --         ;
 ; IP_TOOL_NAME                        ; RAM: 1-PORT                           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; RAM: 1-PORT                           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; ALTPLL                                ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 13.0                                  ; --            ; --          ; --         ;
@@ -88,6 +90,8 @@ applicable agreement for further details.
 ; MISC_FILE                           ; ram_bb.v                              ; --            ; --          ; --         ;
 ; MISC_FILE                           ; data_bb.v                             ; --            ; --          ; --         ;
 ; MISC_FILE                           ; prog_bb.v                             ; --            ; --          ; --         ;
+; MISC_FILE                           ; PLL_bb.v                              ; --            ; --          ; --         ;
+; MISC_FILE                           ; PLL.ppf                               ; --            ; --          ; --         ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                  ; --            ; --          ; --         ;
 ; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top        ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
@@ -98,7 +102,6 @@ applicable agreement for further details.
 ; SMART_RECOMPILE                     ; On                                    ; Off           ; --          ; --         ;
 ; VERILOG_MACRO                       ; CUSTOM_DEFINE=1                       ; --            ; --          ; --         ;
 ; VERILOG_MACRO                       ; LOAD_MEMS=1                           ; --            ; --          ; --         ;
-; VERILOG_MACRO                       ; MEM=1                                 ; --            ; --          ; --         ;
 ; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                   ; --            ; --          ; --         ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 
@@ -108,12 +111,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:05     ; 1.0                     ; 4660 MB             ; 00:00:47                           ;
-; Fitter                    ; 00:04:25     ; 1.0                     ; 4987 MB             ; 00:03:30                           ;
-; Assembler                 ; 00:00:11     ; 1.0                     ; 4590 MB             ; 00:00:07                           ;
-; TimeQuest Timing Analyzer ; 00:00:52     ; 1.0                     ; 4725 MB             ; 00:00:37                           ;
-; TimeQuest Timing Analyzer ; 00:00:12     ; 1.0                     ; 4687 MB             ; 00:00:09                           ;
-; Total                     ; 00:06:45     ; --                      ; --                  ; 00:05:10                           ;
+; Analysis & Synthesis      ; 00:00:16     ; 1.0                     ; 4684 MB             ; 00:00:17                           ;
+; Fitter                    ; 00:00:15     ; 2.1                     ; 5963 MB             ; 00:00:20                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 4586 MB             ; 00:00:01                           ;
+; TimeQuest Timing Analyzer ; 00:00:04     ; 1.7                     ; 4807 MB             ; 00:00:05                           ;
+; Total                     ; 00:00:36     ; --                      ; --                  ; 00:00:43                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -122,11 +124,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; DESKTOP-NSV570Q  ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; ryzentosh        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; ryzentosh        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; ryzentosh        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; ryzentosh        ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
@@ -136,7 +137,6 @@ applicable agreement for further details.
 quartus_map --read_settings_files=on --write_settings_files=off DE0_top -c DE0_top
 quartus_fit --read_settings_files=off --write_settings_files=off DE0_top -c DE0_top
 quartus_asm --read_settings_files=off --write_settings_files=off DE0_top -c DE0_top
-quartus_sta DE0_top -c DE0_top
 quartus_sta DE0_top -c DE0_top
 
 

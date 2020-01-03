@@ -1,5 +1,5 @@
 Assembler report for DE0_top
-Thu Dec 05 21:09:58 2019
+Fri Jan 03 19:13:22 2020
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,7 +10,7 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: /RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof
+  5. Assembler Device Options: E:/GitRepos/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Dec 05 21:09:58 2019 ;
+; Assembler Status      ; Successful - Fri Jan 03 19:13:22 2020 ;
 ; Revision Name         ; DE0_top                               ;
 ; Top-level Entity Name ; DE0_top                               ;
 ; Family                ; Cyclone III                           ;
@@ -77,24 +77,24 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+----------------------------------------------------------+
-; Assembler Generated Files                                ;
-+----------------------------------------------------------+
-; File Name                                                ;
-+----------------------------------------------------------+
-; /RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof ;
-+----------------------------------------------------------+
++---------------------------------------------------------------------+
+; Assembler Generated Files                                           ;
++---------------------------------------------------------------------+
+; File Name                                                           ;
++---------------------------------------------------------------------+
+; E:/GitRepos/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof ;
++---------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Assembler Device Options: /RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof ;
-+----------------+-------------------------------------------------------------------+
-; Option         ; Setting                                                           ;
-+----------------+-------------------------------------------------------------------+
-; Device         ; EP3C16F484C6                                                      ;
-; JTAG usercode  ; 0x0034DF55                                                        ;
-; Checksum       ; 0x0034DF55                                                        ;
-+----------------+-------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------+
+; Assembler Device Options: E:/GitRepos/RV32i-Verilog/Quartus/DE0_Demo/output_files/DE0_top.sof ;
++----------------+------------------------------------------------------------------------------+
+; Option         ; Setting                                                                      ;
++----------------+------------------------------------------------------------------------------+
+; Device         ; EP3C16F484C6                                                                 ;
+; JTAG usercode  ; 0x003985A0                                                                   ;
+; Checksum       ; 0x003985A0                                                                   ;
++----------------+------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -103,14 +103,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 05 21:09:47 2019
+    Info: Processing started: Fri Jan 03 19:13:21 2020
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off DE0_top -c DE0_top
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4598 megabytes
-    Info: Processing ended: Thu Dec 05 21:09:58 2019
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:07
+    Info: Peak virtual memory: 4594 megabytes
+    Info: Processing ended: Fri Jan 03 19:13:22 2020
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 

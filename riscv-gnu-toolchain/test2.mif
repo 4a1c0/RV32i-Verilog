@@ -1,41 +1,37 @@
--- http://srecord.sourceforge.net/
---
--- Generated automatically by srec_cat -o --mif
---
-DEPTH = 31;
-WIDTH = 32;
-ADDRESS_RADIX = DEC;
-DATA_RADIX = HEX;
+-- Copyright (C) 1991-2013 Altera Corporation
+-- Your use of Altera Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Altera Program License 
+-- Subscription Agreement, Altera MegaCore Function License 
+-- Agreement, or other applicable license agreement, including, 
+-- without limitation, that your use is for the sole purpose of 
+-- programming logic devices manufactured by Altera and sold by 
+-- Altera or its authorized distributors.  Please refer to the 
+-- applicable agreement for further details.
+
+-- Quartus II generated Memory Initialization File (.mif)
+
+WIDTH=32;
+DEPTH=13;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
 CONTENT BEGIN
-00:	fe010113;
-01:	00812e23;
-02:	02010413;
-03:	fe042623;
-04:	01400793;
-05:	fef42423;
-06:	fe842783;
-07:	1ff00713;
-08:	00e7a023;
-09:	fe842783;
-10:	1c700713;
-11:	00e7a023;
-12:	fe842783;
-13:	00100713;
-14:	00e7a023;
-15:	fe842783;
-16:	0007a783;
-17:	fef42623;
-18:	fec42783;
-19:	00279793;
-20:	fef42623;
-21:	fe842783;
-22:	fec42703;
-23:	00e7a023;
-24:	fe842783;
-25:	0007a023;
-26:	00000793;
-27:	00078513;
-28:	01c12403;
-29:	02010113;
-30:	00008067;
+	0  :   FE010113;
+	1  :   00812E23;
+	2  :   02010413;
+	3  :   FE042623;
+	4  :   01400793;
+	5  :   FEF42423;
+	6  :   FE842783;
+	7  :   FEC42703;
+	8  :   00E7A023;
+	9  :   FEC42783;
+	A  :   00178793;
+	B  :   FEF42623;
+	C  :   FE9FF06F;
 END;
