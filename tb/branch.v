@@ -10,8 +10,8 @@ module branch_test();
 	
 	initial begin 
 
-		//$dumpfile("vcd/riscV.vcd");
-		//$dumpvars(0, TB.top_inst);
+		$dumpfile("vcd/riscV.vcd");
+		$dumpvars(0, TB.top_inst);
 
 		
 		
@@ -30,9 +30,6 @@ module branch_test();
 		TB.rst_n = 1'b0;
 		#100
 		
-		TB.test_and;
-		TB.rst_n = 1'b0;
-		#100
 
 		TB.test_beq;
 		TB.rst_n = 1'b0;

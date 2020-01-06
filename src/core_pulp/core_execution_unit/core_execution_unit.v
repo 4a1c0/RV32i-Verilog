@@ -62,7 +62,7 @@ module executionUnit
 		addr_mem_data_o,
 		old_pc_i,
 		new_pc_offset_o,
-		is_absolute_o,
+		//is_absolute_o,
         csr_val_o,
         csr_val_i
     );
@@ -82,14 +82,14 @@ module executionUnit
     input [DATA_WIDTH-1:0]      val_mem_data_read_i;
     output[MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
 	output[DATA_WIDTH-1:0]      new_pc_offset_o;
-	input [MEM_ADDR_WIDTH-1:0]      old_pc_i;
+	input [DATA_WIDTH-1:0]      old_pc_i;
 
     input [DATA_WIDTH-1 : 0] csr_val_i;
     output [DATA_WIDTH-1 : 0] csr_val_o;
 
 	input       is_branch_i;
 	input		is_loadstore;
-	output		is_absolute_o;
+	//output		is_absolute_o;
 
 
     wire [DATA_WIDTH-1:0]      alu_o;
@@ -203,10 +203,11 @@ module executionUnit
     );
 
 	br BR (
+		.is_branch_i(is_branch_i),
 		.BR_op_i (BR_op),
 		.alu_d (alu_o),
-		.old_pc_i ({{DATA_WIDTH - MEM_ADDR_WIDTH{1'b0}},old_pc_i}),
-		.new_pc_i (imm_val_i),
+		.old_pc_i (old_pc_i),
+		.imm_i (imm_val_i),
 		.new_pc_o (new_pc_offset_o),
 		.is_conditional_i (is_conditional),
 		.ALU_zero_i (zero_alu_result)
