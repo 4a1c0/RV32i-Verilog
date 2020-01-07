@@ -47,6 +47,7 @@ module progMem
 	always @ (posedge clk or negedge rst_n)
 	begin : MEM_READ
 		integer j;
+		data_out <= 0;
 		//data_out = 0;
 		// Async Reset
 		if ( !rst_n ) begin
@@ -61,7 +62,7 @@ module progMem
 			`endif
 		end 
 		else begin  // output enable logic supressed
-			data_out = progArray[addr >> 2];
+			data_out <= progArray[addr >> 2];
 		end
 	end
 	
