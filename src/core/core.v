@@ -107,13 +107,14 @@ module core
 
     wire [DATA_WIDTH-1 : 0] pc;
     wire [DATA_WIDTH-1 : 0] new_pc;
+    wire [DATA_WIDTH-1 : 0] reg_pc;
 
     wire [CSR_ADDR_WIDTH-1 : 0]csr_addr_t;
     wire [CSR_OP_WIDTH-1 : 0] csr_op_t;
     wire [DATA_WIDTH-1 : 0] csr_val_r;
     wire [DATA_WIDTH-1 : 0] csr_val_w;
 
-    assign addr_mem_prog_o = new_pc[MEM_ADDR_WIDTH-1:0]; // Assign lower bits of PC to prog ADDR
+    assign addr_mem_prog_o = pc[MEM_ADDR_WIDTH-1:0]; // Assign lower bits of PC to prog ADDR
 
 
     controlUnit controlUnit_inst(
@@ -141,6 +142,7 @@ module core
         //.is_branch_i (is_branch_t),  // Branch indicator
         //.is_absolute_i (is_absolute_t),  // Absolute or relative branch
         .new_pc_i (new_pc),  // new pc or offset
+        .reg_pc_o (reg_pc),
         .pc (pc)  // next addr
     );
 
@@ -173,7 +175,8 @@ module core
         .is_branch_i (is_branch_t),  // Branch indicator input
         .is_loadstore (is_load_store_t),  // LoadStore indicator input
         .new_pc_offset_o (new_pc),  // new offset or new pc
-        .old_pc_i (pc),  // Actual PC 
+        .reg_pc_i (reg_pc),  // Actual PC 
+        .pc_i(pc),
         //.is_absolute_o (is_absolute_t),  // Rewrite the current value to PC
         .csr_val_i(csr_val_r),  // CSR Val in READ
         .csr_val_o(csr_val_w)  // CSR Val Out WRITE

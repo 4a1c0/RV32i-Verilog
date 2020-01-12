@@ -60,7 +60,8 @@ module executionUnit
 		val_mem_data_write_o,
 		val_mem_data_read_i,
 		addr_mem_data_o,
-		old_pc_i,
+		reg_pc_i,
+		pc_i,
 		new_pc_offset_o,
 		//is_absolute_o,
         csr_val_o,
@@ -82,7 +83,8 @@ module executionUnit
     input [DATA_WIDTH-1:0]      val_mem_data_read_i;
     output[MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
 	output[DATA_WIDTH-1:0]      new_pc_offset_o;
-	input [DATA_WIDTH-1:0]      old_pc_i;
+	input [DATA_WIDTH-1:0]      reg_pc_i;
+	input [DATA_WIDTH-1:0]      pc_i;
 
     input [DATA_WIDTH-1 : 0] csr_val_i;
     output [DATA_WIDTH-1 : 0] csr_val_o;
@@ -129,7 +131,7 @@ module executionUnit
 					s2_ALU = imm_val_i;
 				end
 				RS2IMM_RS1PC: begin
-					s1_ALU = old_pc_i;
+					s1_ALU = reg_pc_i;
 					s2_ALU = imm_val_i;
 				end
 				
@@ -156,7 +158,7 @@ module executionUnit
 					is_absolute_o = 1'b1;
 				end
 				RS2IMM_RS1PC: begin
-					s1_ALU = old_pc_i;
+					s1_ALU = reg_pc_i;
 					s2_ALU = imm_val_i;
 					is_absolute_o = 1'b1;
 				end
@@ -168,7 +170,7 @@ module executionUnit
 				end
 			endcase
 			// Define Outputs
-			d_o = { {DATA_WIDTH - MEM_ADDR_WIDTH{1'b0}}, old_pc_i};
+			d_o = {pc_i}; // Insytruction PC + 4
 		end 
         else if (csr_op_i != 3'b0 ) begin
             if (csr_op_i === CSRRW || csr_op_i === CSRRS || csr_op_i === CSRRC) csr_val_o = rs1_i;
@@ -206,7 +208,8 @@ module executionUnit
 		.is_branch_i(is_branch_i),
 		.BR_op_i (BR_op),
 		.alu_d (alu_o),
-		.old_pc_i (old_pc_i),
+		.reg_pc_i (reg_pc_i),
+		.pc_i (pc_i),
 		.imm_i (imm_val_i),
 		.new_pc_o (new_pc_offset_o),
 		.is_conditional_i (is_conditional),

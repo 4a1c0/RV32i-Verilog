@@ -4,7 +4,7 @@
 
 `include "../src/defines.vh"
 
-`include"../src/top_pulp.v"
+`include"../src/top.v"
 
 module tb();
 	
@@ -267,7 +267,7 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeAddi(5'h0, 5'h4, 12'hFFF);
         encodeJal(5'h5, {21'h1FFFF8}); // -8
         rst_n		= 1'b1;
-        #500; //400
+        #400; //400
         if (top_inst.core_inst.program_counter_inst.pc == 0) $display ("  OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
             $display ("ERROR: PC has to be 0 but is: %d", top_inst.core_inst.program_counter_inst.pc);
@@ -286,7 +286,7 @@ task test_beq;
         encodeBeq(5'h3, 5'h4, 13'hF0);
         
         rst_n		= 1'b1;
-        #500; //400
+        #400; //400
         if (top_inst.core_inst.program_counter_inst.pc == 248) $display ("    OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
             $display ("ERROR: PC has to be 248 but is: %d", top_inst.core_inst.program_counter_inst.pc);
@@ -304,8 +304,8 @@ task test_csr;
         encodeCsr(12'hC01, 5'h0, `FUNCT3_CSRRS, 5'h2);
         encodeCsr(12'hC02, 5'h0, `FUNCT3_CSRRS, 5'h3);
         rst_n		= 1'b1;
-        #500; //400
-        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000003) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+        #400; //400
+        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
         else begin
             $display ("ERROR: reg3 has to be h0000003 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             $fatal;
