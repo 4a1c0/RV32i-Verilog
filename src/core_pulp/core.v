@@ -15,6 +15,7 @@
 `include "core_csr_unit/core_csr_unit.v"
 
 
+`define RAM_MUX_CORE
 
 module corep
     `ifdef CUSTOM_DEFINE
@@ -57,7 +58,7 @@ module corep
         write_transfer_mem_data_o
     );
     
-
+    localparam DATA_TARGET_WIDTH = 2;
 
     input 	clk;
     input 	rst_n;
@@ -92,10 +93,11 @@ module corep
     wire [LIS_OP_WIDTH-1:0] LIS_op_t;
     wire [BR_OP_WIDTH-1:0] BR_op_t;
     wire [DATA_ORIGIN_WIDTH-1:0] data_origin_t;
+   wire [DATA_TARGET_WIDTH-1:0]  data_target_t;
     wire is_load_store_t;
     wire is_branch_t;
     wire is_absolute_t;
-    // wire is_conditional_t;
+    wire is_conditional_t;
     //wire mem_w_t;
     //wire mem_to_reg_t;
     //wire reg_r_t;
@@ -118,6 +120,7 @@ module corep
 
     wire [DATA_WIDTH-1 : 0] pc;
     wire [DATA_WIDTH-1 : 0] new_pc;
+    wire [DATA_WIDTH-1 : 0] reg_pc;
 
     wire [CSR_ADDR_WIDTH-1 : 0]csr_addr_t;
     wire [CSR_OP_WIDTH-1 : 0] csr_op_t;
@@ -130,7 +133,7 @@ module corep
     reg req_mem_prog_o;
     wire req_mem_prog_o_intern;
 
-    assign addr_mem_prog_o = new_pc[MEM_ADDR_WIDTH-1:0]; // Assign lower bits of PC to prog ADDR
+    assign addr_mem_prog_o = pc[MEM_ADDR_WIDTH-1:0]; // Assign lower bits of PC to prog ADDR
 
 
     controlUnit controlUnit_inst(
@@ -140,7 +143,9 @@ module corep
         .BR_op_o (BR_op_t),  // Branch operation output
         .csr_op_o(csr_op_t),  // CSR OP
         .data_origin_o (data_origin_t),  // Data origin output (Rs2 or imm or pc)
+        .data_target_o (data_target_t),  // Data target output (ALU or LIS or PC4 or CSR)
         .is_branch_o (is_branch_t),  // Branch indicator output
+        .is_conditional_o (is_conditional_t),  // Conditional branch indicator
         .is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (we_mem_data_o),  // LoadStore indicator output
         .reg_w (we_reg_file),  // RegFile write enable
@@ -150,6 +155,7 @@ module corep
         .imm_val_o (imm_val_t),  //execution unit imm val
         .write_transfer_o (write_transfer_mem_data_o),
         .csr_addr_o(csr_addr_t),
+        .csr_data_o(csr_val_w),  // CSR Val Out WRITE
         .is_stall_o(is_stall_t),
         .mem_req_o(req_mem_data_o_intern),  // Request to make actiopn
         .mem_gnt_i(gnt_mem_data_i),  // Action Granted //, wait until rvalid or cycle
@@ -163,6 +169,7 @@ module corep
         //.is_absolute_i (is_absolute_t),  // Absolute or relative branch
         .is_stall_i(is_stall_t),  // Stall the PC
         .new_pc_i (new_pc),  // new pc or offset
+        .reg_pc_o (reg_pc),
         .pc (pc),  // next addr
         .req_mem_prog_o(req_mem_prog_o_intern),  // Request to make actiopn
         .gnt_mem_prog_i(gnt_mem_prog_i)  // Action Granted 
@@ -187,6 +194,7 @@ module corep
         .BR_op (BR_op_t),  // Branch operation input 
         .csr_op_i(csr_op_t),
         .data_origin_i(data_origin_t),  // Data origin input (Rs2 or imm or pc)
+        .data_target_i(data_target_t),
         .rs1_i (rs1_reg_file),  // RS1
         .rs2_i (rs2_reg_file),  // RS2
         .imm_val_i (imm_val_t), // immidiate value
@@ -197,10 +205,11 @@ module corep
         .is_branch_i (is_branch_t),  // Branch indicator input
         .is_loadstore (is_load_store_t),  // LoadStore indicator input
         .new_pc_offset_o (new_pc),  // new offset or new pc
-        .old_pc_i (pc),  // Actual PC 
-        //.is_absolute_o (is_absolute_t),  // Rewrite the current value to PC
-        .csr_val_i(csr_val_r),  // CSR Val in READ
-        .csr_val_o(csr_val_w)  // CSR Val Out WRITE
+        .reg_pc_i (reg_pc),  // Actual PC 
+        .pc_i(pc),
+        .is_conditional_i (is_conditional_t),  // Rewrite the current value to PC
+        .csr_val_i(csr_val_r)  // CSR Val in READ
+        //.csr_val_o(csr_val_w)  // CSR Val Out WRITE
     );
 
     crs_unit crs_unit_inst(

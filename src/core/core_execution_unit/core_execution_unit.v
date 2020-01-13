@@ -76,7 +76,6 @@ module executionUnit
 	localparam DATA_TARGET_CSR = 3;
 
 
-
 	input [ALU_OP_WIDTH-1:0]       ALU_op;
 	input [LIS_OP_WIDTH-1:0]       LIS_op;
 	input [BR_OP_WIDTH-1:0]        BR_op;
@@ -115,19 +114,18 @@ module executionUnit
 
     //reg [DATA_WIDTH-1 : 0] csr_val_o;
 
-	//reg is_conditional;  //TODO: To control unit
+	//reg is_conditional;
 	//reg is_absolute_o;
 
 
     //assign d = (is_loadstore == 1'b0) ? alu_o : mem_o;  // mux at the end
 	always @* begin
 		// is_conditional = 1'b0;
-		//is_absolute_o = 1'b0;
+		// is_absolute_o = 1'b0;
 		s1_ALU = {DATA_WIDTH{1'b0}};
 		s2_ALU = {DATA_WIDTH{1'b0}};
-		//csr_val_o = {DATA_WIDTH{1'b0}};
+		// csr_val_o = {DATA_WIDTH{1'b0}};
 		d_o = {DATA_WIDTH{1'b0}};
-
 
 		case (data_origin_i)
 			REGS: begin

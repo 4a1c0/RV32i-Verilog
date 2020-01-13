@@ -54,7 +54,6 @@ module core
     
     localparam DATA_TARGET_WIDTH = 2;
 
-
     input 	clk;
     input 	rst_n;
 

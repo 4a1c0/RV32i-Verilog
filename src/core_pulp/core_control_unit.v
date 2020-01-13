@@ -70,12 +70,14 @@ module controlUnit
         BR_op_o,
         csr_op_o,
         data_origin_o,
+        data_target_o,
         is_branch_o,  // branch indicator
         //is_imm_rs1_o,  //execution unit imm rs1 // TODO Change the the way to indicate inmm or reg to a 2 bit bus
         
         //is_imm_rs2_o,  //execution unit imm rs2
         //imm_val_rs2_o,  //execution unit imm val rs2
         is_load_store,  // execution_unit 
+        is_conditional_o,  // execution unit BR
         mem_w,  // mem_write
         reg_w,
         r1_addr,
@@ -84,14 +86,13 @@ module controlUnit
         imm_val_o,  //execution unit imm val rs1
         write_transfer_o,
         csr_addr_o,
+        csr_data_o,
         is_stall_o,
         mem_req_o,  // Request to make actiopn
         mem_gnt_i,  // Action Granted //, wait until rvalid or cycle
         mem_rvalid_i // Valid when write is ok // Write valid signal (OK to increase PC)
     
-    
     //is_absolute_o,  // 
-    //is_conditional_o,
     );
 
     localparam OPCODE_U_LUI = 7'b0110111;
@@ -180,13 +181,21 @@ module controlUnit
     localparam LIS_SH = 6;
     localparam LIS_SW = 7;
 
+    // DATA TARGET
+	localparam DATA_TARGET_WIDTH = 2;
+	localparam DATA_TARGET_ALU_O = 0; //{DATA_TARGET_WIDTH{1'b0}};
+	localparam DATA_TARGET_MEM_WR = 1;
+    localparam DATA_TARGET_PC_4 = 2;
+	localparam DATA_TARGET_CSR = 3;
+
 
     input [DATA_WIDTH-1:0] instruction;
     //input [`MEM_ADDR_WIDTH-1:0] pc_i;
     output [ALU_OP_WIDTH-1:0] ALU_op;
     output [LIS_OP_WIDTH-1:0] LIS_op;
     output [BR_OP_WIDTH-1:0]  BR_op_o;
-    output [DATA_ORIGIN_WIDTH-1:0]  data_origin_o;  // To indicate what data to use by the execution unit 
+    output [DATA_ORIGIN_WIDTH-1:0] data_origin_o;  // To indicate what data to use by the execution unit 
+    output [DATA_TARGET_WIDTH-1:0] data_target_o;
     //output is_imm_o;
     //output is_imm_rs2_o;
     output [DATA_WIDTH-1:0] imm_val_o;
@@ -199,11 +208,12 @@ module controlUnit
     output [REG_ADDR_WIDTH-1:0]reg_addr;
     output is_branch_o;  // branch indicator
     //output is_absolute_o;
-    //output is_conditional_o;
+    output is_conditional_o;
     output [TRANSFER_WIDTH-1:0] write_transfer_o;
 
     output [CSR_OP_WIDTH-1 : 0] csr_op_o;
     output [CSR_ADDR_WIDTH-1 : 0] csr_addr_o;
+    output [DATA_WIDTH-1 : 0] csr_data_o;
 
     output is_stall_o;
     output mem_req_o;  // Request to make actiopn
@@ -260,7 +270,7 @@ module controlUnit
 
     // Type B
 
-    //reg is_conditional_o;
+    reg is_conditional_o;
 
     
 
@@ -281,12 +291,14 @@ module controlUnit
     reg [ALU_OP_WIDTH-1:0] ALU_op;
     reg [LIS_OP_WIDTH-1:0] LIS_op;
     reg [BR_OP_WIDTH-1:0] BR_op_o;
-    reg [DATA_ORIGIN_WIDTH-1:0]  data_origin_o;
+    reg [DATA_ORIGIN_WIDTH-1:0] data_origin_o;
+    reg [DATA_TARGET_WIDTH-1:0] data_target_o;
 
 
     reg [TRANSFER_WIDTH-1:0] write_transfer_o;
     reg [CSR_OP_WIDTH-1 : 0] csr_op_o;
     reg [CSR_ADDR_WIDTH-1 : 0] csr_addr_o;
+    reg [DATA_WIDTH-1 : 0] csr_data_o;
 
     reg [1:0] data_acces;
 
@@ -300,12 +312,15 @@ module controlUnit
         is_load_store = 1'b0;
         reg_w = 1'b0;
         is_branch_o = 1'b0;
-        data_origin_o = 0;  //`REGS;  // Dafault value 0
+        is_conditional_o = 1'b0;
+        data_origin_o = 0;  //REGS;  // Dafault value 0
+        data_target_o = {DATA_TARGET_WIDTH{1'b0}};  //DATA_TARGET_ALU_O;  // Dafault value 0
         ALU_op = 0;  //`ALU_OP_ADD;  // Dafault value 0
         BR_op_o = 0;  //`BR_EQ;  // Dafault value 0
         LIS_op = 0;  //`LIS_LB;  // Dafault value 0
         csr_op_o = {CSR_OP_WIDTH{1'b0}};  // Zero value to deactivate acces to CSR
         csr_addr_o = {CSR_ADDR_WIDTH{1'b0}};
+        csr_data_o = {DATA_WIDTH{1'b0}};
         imm_val_o = {DATA_WIDTH{1'b0}};
         reg_addr = {REG_ADDR_WIDTH{1'b0}};
         r1_addr = {REG_ADDR_WIDTH{1'b0}};
@@ -364,6 +379,8 @@ module controlUnit
                 ALU_op = ALU_OP_ADD;  // Sum with 0
                 r1_addr = {REG_ADDR_WIDTH{1'b0}};
 
+                data_target_o = DATA_TARGET_ALU_O;  // Use the output from the ALU
+
             end
 
 
@@ -383,7 +400,7 @@ module controlUnit
 
                 ALU_op = ALU_OP_ADD;  // Add the values
 
-
+                data_target_o = DATA_TARGET_ALU_O;  // Use the output from the ALU
 
 
             end
@@ -408,6 +425,7 @@ module controlUnit
 
                 ALU_op = ALU_OP_ADD;  // to add the immideate value to the PC
 
+                data_target_o = DATA_TARGET_PC_4;  // Save PC+4 to rd
 
             end
 
@@ -427,6 +445,7 @@ module controlUnit
                 reg_w = 1'b1;  // Write the resut in RD
                 reg_addr = rd;
         
+                data_target_o = DATA_TARGET_PC_4;  // Save PC+4 to rd
 
             end
 
@@ -435,7 +454,7 @@ module controlUnit
             OPCODE_B_BRANCH: begin
                 is_branch_o = 1'b1;
                 data_origin_o = REGS;  // Mantain RS2 value and RS1 value // DefaultValue
-                //is_conditional_o = 1'b1;
+                is_conditional_o = 1'b1;
                 // Execution unit knows that also needs immideate value
     
                 imm_val_o = {{DATA_WIDTH - 13 {imm12b[11]}},  imm12b[11:0], 1'b0  }; // TODO last bit is used? or is always 0
@@ -505,7 +524,7 @@ module controlUnit
                                     
                 endcase
 
-        
+                data_target_o = DATA_TARGET_MEM_WR;  // Load the value from memory to rd
 
             end
 
@@ -578,7 +597,6 @@ module controlUnit
                 endcase
 
         
-
             end
 
         
@@ -601,7 +619,7 @@ module controlUnit
                     FUNCT3_AND:     ALU_op = ALU_OP_AND;  // andi       "Set rd to the bitwise and of rs1 with the sign-extended 12-bit immediate"
                 endcase
 
-        
+                data_target_o = DATA_TARGET_ALU_O;  // Use the output from the ALU
 
             end
 
@@ -623,7 +641,7 @@ module controlUnit
                     FUNCT3_AND:     ALU_op = ALU_OP_AND;
                 endcase
 
-        
+                data_target_o = DATA_TARGET_ALU_O;  // Use the output from the ALU
 
             end
 
@@ -649,29 +667,31 @@ module controlUnit
                     FUNCT3_ECALL_EBREAK: ;  // NOP
                     FUNCT3_CSRRW:begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
                         csr_op_o = CSRRW;
-                        r1_addr = rs1;
+                        csr_data_o = rs1;
                     end
                     FUNCT3_CSRRS:begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
                         csr_op_o = CSRRS;
-                        r1_addr = rs1;
+                        csr_data_o = rs1;
                     end
                     FUNCT3_CSRRC:begin  // CSRRC – for CSR reading and clearing (CSR content is read to the destination register and then its content is cleared according to the source register bit-mask);
                         csr_op_o = CSRRC;
-                        r1_addr = rs1;
+                        csr_data_o = rs1;
                     end
                     FUNCT3_CSRRWI:begin  // CSRRWI – the CSR content is read to the destination register and then the immediate constant is written into the CSR;
                         csr_op_o = CSRRWI;
-                        imm_val_o = rs1;
+                        csr_data_o = rs1;
                     end
                     FUNCT3_CSRRSI:begin  // CSRRSI – the CSR content is read to the destination register and then set according to the immediate constant;
                         csr_op_o = CSRRSI;
-                        imm_val_o = rs1;
+                        csr_data_o = rs1;
                     end
                     FUNCT3_CSRRCI:begin  // CSRRCI – the CSR content is read to the destination register and then cleared according to the immediate constant;
                         csr_op_o = CSRRCI;
-                        imm_val_o = rs1;
+                        csr_data_o = rs1;
                     end
                 endcase
+
+                data_target_o = DATA_TARGET_CSR;  // Use the output from the ALU
 
             end
         endcase

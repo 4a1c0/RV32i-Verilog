@@ -20,9 +20,23 @@ jobs:
     - stage: Unit Tests                # naming the Tests stage
       name: "CSR Tests"     # names the second Tests stage job
       script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -o bin/br tb/csr.v ; bin/br| tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+
+    - stage: Unit Tests                # naming the Tests stage
+      name: "Arithmeticologic Tests RAM_MUX"            # names the first Tests stage job
+      script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -DRAM_MUX_CORE -o bin/al tb/arithmeticologic.v ; bin/al| tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+    - stage: Unit Tests                # naming the Tests stage
+      name: "Load-Store Tests RAM_MUX"     # names the second Tests stage job
+      script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -DRAM_MUX_CORE -o bin/ls tb/load_store.v ; bin/ls| tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+    - stage: Unit Tests                # naming the Tests stage
+      name: "Branch Tests RAM_MUX"     # names the second Tests stage job
+      script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -DRAM_MUX_CORE -o bin/br tb/branch.v ; bin/br| tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+    - stage: Unit Tests                # naming the Tests stage
+      name: "CSR Tests RAM_MUX"     # names the second Tests stage job
+      script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -DRAM_MUX_CORE -o bin/br tb/csr.v ; bin/br| tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+
       # - stage: Unit Tests                # naming the Tests stage
     #   name: "Error example"     # names the second Tests stage job
-    #   script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include -o bin/er tb/error_test.v ; bin/er | tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
+    #   script: docker run icarus-verilog_rv32i /bin/sh -c "iverilog -grelative-include  -DCUSTOM_DEFINE -DRAM_MUX_CORE -o bin/er tb/error_test.v ; bin/er | tee /dev/fd/2 | grep -q 'FATAL' && exit 1 || exit 0;"
     
     - stage: build docker image
       script:

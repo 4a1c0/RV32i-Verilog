@@ -4,7 +4,11 @@
 
 `include "../src/defines.vh"
 
-`include"../src/top.v"
+`ifdef RAM_MUX_CORE
+    `include"../src/top_pulp.v"
+`else
+    `include"../src/top.v"
+`endif
 
 module tb();
 	
@@ -69,6 +73,9 @@ task test_add;
 
         rst_n		= 1'b1;
         #500; //400
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 7) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be 7 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -87,6 +94,9 @@ task test_and;
         //TEST
         rst_n		= 1'b1;
         #500; //400
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000FF) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h000000FF but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -107,6 +117,9 @@ task test_andi;
 
         rst_n		= 1'b1;
         #400; //300
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000404) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000404 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -125,6 +138,9 @@ task test_slli;
         
         rst_n		= 1'b1;
         #400; //300
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h000000C) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h000000C but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -143,6 +159,9 @@ task test_slti;
         
         rst_n		= 1'b1;
         #500; //400
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -166,6 +185,9 @@ task test_sltiu;
 
         rst_n		= 1'b1;
         #500; //400
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h0000001) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -208,7 +230,10 @@ task test_load;
         encodeLBU(5'h0, 5'h7, 12'h4);
         //TEST
         rst_n		= 1'b1;
-        #800;  // 600
+        #600;  // 600
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be hf04a1c0f but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -239,7 +264,10 @@ task test_store;
 
         //TEST
         rst_n		= 1'b1;
-        #1500; //1200
+        #1300; //1200
+        `ifdef RAM_MUX_CORE
+            #100
+        `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
             $display ("ERROR: reg5 has to be h10101010 but is: %h", top_inst.core_inst.reg_file_inst.regFile[5]);
@@ -268,6 +296,9 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeJal(5'h5, {21'h1FFFF8}); // -8
         rst_n		= 1'b1;
         #400; //400
+        `ifdef RAM_MUX_CORE
+            #200
+        `endif
         if (top_inst.core_inst.program_counter_inst.pc == 0) $display ("  OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
             $display ("ERROR: PC has to be 0 but is: %d", top_inst.core_inst.program_counter_inst.pc);
@@ -287,6 +318,9 @@ task test_beq;
         
         rst_n		= 1'b1;
         #400; //400
+        `ifdef RAM_MUX_CORE
+            #200
+        `endif
         if (top_inst.core_inst.program_counter_inst.pc == 248) $display ("    OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
             $display ("ERROR: PC has to be 248 but is: %d", top_inst.core_inst.program_counter_inst.pc);
@@ -305,11 +339,20 @@ task test_csr;
         encodeCsr(12'hC02, 5'h0, `FUNCT3_CSRRS, 5'h3);
         rst_n		= 1'b1;
         #400; //400
-        if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
-        else begin
-            $display ("ERROR: reg3 has to be h0000003 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
-            $fatal;
-        end
+        `ifdef RAM_MUX_CORE
+            #200
+            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000004) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            else begin
+                $display ("ERROR: reg3 has to be h0000004 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+                $fatal;
+            end
+        `else
+            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            else begin
+                $display ("ERROR: reg3 has to be h0000002 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+                $fatal;
+            end
+        `endif
     end
 endtask
 

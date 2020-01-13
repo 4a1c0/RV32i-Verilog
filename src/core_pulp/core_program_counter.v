@@ -15,26 +15,25 @@ module programCounter
     (
     rst_n,
     clk,
-    new_pc_i, // NEW PC
-    //is_branch_i,
-    //is_absolute_i,
-    is_stall_i,
+    new_pc_i,  // New PC
     pc, // PC
+    reg_pc_o,
+    is_stall_i,
     req_mem_prog_o,  // Request to make action
     gnt_mem_prog_i  // Action Granted 
     );
 
     input rst_n, clk;
-    //input is_branch_i;
-    //input is_absolute_i;
     input is_stall_i;
     input [REG_DATA_WIDTH-1:0] new_pc_i;
     output [REG_DATA_WIDTH-1:0] pc;
+    output [REG_DATA_WIDTH-1:0] reg_pc_o;
     output req_mem_prog_o;  // Request to make action
     input gnt_mem_prog_i;  // Action Granted 
 
     wire [REG_DATA_WIDTH-1:0] new_pc;
     reg [REG_DATA_WIDTH-1:0] pc;
+    reg [REG_DATA_WIDTH-1:0] reg_pc_o;
     reg req_mem_prog_o;
 
     assign new_pc = (is_stall_i || ~gnt_mem_prog_i)? pc : new_pc_i; 
@@ -43,10 +42,14 @@ module programCounter
     begin
         req_mem_prog_o <= 1'b1;
         if (!rst_n) begin 
-            pc <= {REG_DATA_WIDTH{1'b0}};  //{{MEM_ADDR_WIDTH-2{1'b1}}, 2'b00};
+            pc <= {REG_DATA_WIDTH{1'b0}};  //{{REG_DATA_WIDTH-2{1'b1}}, 2'b00};
+            reg_pc_o <= {REG_DATA_WIDTH{1'b0}};
             req_mem_prog_o <= 1'b0;
         end 
-        else pc <= new_pc;
+        else begin
+            pc <= new_pc;
+            reg_pc_o <= pc;
+        end 
 
         
     end

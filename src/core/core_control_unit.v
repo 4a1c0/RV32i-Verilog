@@ -88,8 +88,6 @@ module controlUnit
         csr_addr_o,
         csr_data_o
 
-    
-    
     //is_absolute_o,  // 
     );
 
@@ -186,7 +184,6 @@ module controlUnit
     localparam DATA_TARGET_PC_4 = 2;
 	localparam DATA_TARGET_CSR = 3;
     
-
 
     input [DATA_WIDTH-1:0] instruction;
     //input [`MEM_ADDR_WIDTH-1:0] pc_i;
@@ -411,7 +408,6 @@ module controlUnit
 
                 data_target_o = DATA_TARGET_PC_4;  // Save PC+4 to rd
 
-
             end
 
         
@@ -432,7 +428,6 @@ module controlUnit
 
                 data_target_o = DATA_TARGET_PC_4;  // Save PC+4 to rd
         
-
             end
 
         
@@ -615,7 +610,6 @@ module controlUnit
                     FUNCT3_CSRRW:begin  // CSRRW – for CSR reading and writing (CSR content is read to a destination register and source-register content is then copied to the CSR);
                         csr_op_o = CSRRW;
                         csr_data_o = rs1;
-                        // TODO: DEFINE DATA_ORIGINS TO REMOVE EXECUTION UNIT IF
                     end
                     FUNCT3_CSRRS:begin  // CSRRS – for CSR reading and setting (CSR content is read to the destination register and then its content is set according to the source register bit-mask);
                         csr_op_o = CSRRS;

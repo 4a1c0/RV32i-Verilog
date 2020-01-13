@@ -47,8 +47,9 @@ module 	br
 
     reg [DATA_WIDTH-1:0] offset;
 
-    //assign new_pc_o = (is_conditional_i === 1'b0)? alu_d: offset;
+
 	assign new_pc_o = (is_branch_i) ? ( (is_conditional_i === 1'b0)? alu_d: (reg_pc_i + offset) ) : ( pc_i + {{DATA_WIDTH-3{1'b0}},3'd4} ); // +4
+
 always @* begin
     case (BR_op_i)
         BR_EQ: offset = (ALU_zero_i === 1'd1)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};       
