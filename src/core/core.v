@@ -52,6 +52,7 @@ module core
         write_transfer_mem_data_o
     );
     
+    localparam DATA_TARGET_WIDTH = 2;
 
 
     input 	clk;
@@ -81,10 +82,11 @@ module core
     wire [LIS_OP_WIDTH-1:0] LIS_op_t;
     wire [BR_OP_WIDTH-1:0] BR_op_t;
     wire [DATA_ORIGIN_WIDTH-1:0] data_origin_t;
+    wire [DATA_TARGET_WIDTH-1:0]  data_target_t;
     wire is_load_store_t;
     wire is_branch_t;
     wire is_absolute_t;
-    // wire is_conditional_t;
+    wire is_conditional_t;
     //wire mem_w_t;
     //wire mem_to_reg_t;
     //wire reg_r_t;
@@ -124,7 +126,9 @@ module core
         .BR_op_o (BR_op_t),  // Branch operation output
         .csr_op_o(csr_op_t),  // CSR OP
         .data_origin_o (data_origin_t),  // Data origin output (Rs2 or imm or pc)
+        .data_target_o (data_target_t),  // Data target output (ALU or LIS or PC4 or CSR)
         .is_branch_o (is_branch_t),  // Branch indicator output
+        .is_conditional_o (is_conditional_t),  // Conditional branch indicator
         .is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (we_mem_data_o),  // LoadStore indicator output
         .reg_w (we_reg_file),  // RegFile write enable
@@ -133,7 +137,8 @@ module core
         .reg_addr (r_num_write_reg_file),  // RD addr
         .imm_val_o (imm_val_t),  //execution unit imm val
         .write_transfer_o (write_transfer_mem_data_o),
-        .csr_addr_o(csr_addr_t)
+        .csr_addr_o(csr_addr_t),
+        .csr_data_o(csr_val_w)  // CSR Val Out WRITE
     );
 
     programCounter program_counter_inst (
@@ -165,6 +170,7 @@ module core
         .BR_op (BR_op_t),  // Branch operation input 
         .csr_op_i(csr_op_t),
         .data_origin_i(data_origin_t),  // Data origin input (Rs2 or imm or pc)
+        .data_target_i(data_target_t),
         .rs1_i (rs1_reg_file),  // RS1
         .rs2_i (rs2_reg_file),  // RS2
         .imm_val_i (imm_val_t), // immidiate value
@@ -177,9 +183,9 @@ module core
         .new_pc_offset_o (new_pc),  // new offset or new pc
         .reg_pc_i (reg_pc),  // Actual PC 
         .pc_i(pc),
-        //.is_absolute_o (is_absolute_t),  // Rewrite the current value to PC
-        .csr_val_i(csr_val_r),  // CSR Val in READ
-        .csr_val_o(csr_val_w)  // CSR Val Out WRITE
+        .is_conditional_i (is_conditional_t),  // Rewrite the current value to PC
+        .csr_val_i(csr_val_r)  // CSR Val in READ
+        //.csr_val_o(csr_val_w)  // CSR Val Out WRITE
     );
 
     crs_unit crs_unit_inst(
@@ -190,8 +196,6 @@ module core
         .csr_val_o(csr_val_r),  // Val Out
         .csr_op_i(csr_op_t)  // Op In
     );
-
-
 
 
 endmodule   
