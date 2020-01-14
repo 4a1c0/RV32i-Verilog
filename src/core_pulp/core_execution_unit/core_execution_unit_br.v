@@ -47,7 +47,7 @@ module 	br
 
     reg [DATA_WIDTH-1:0] offset;
 
-	//QUESTION: Use PC or REG_PC to inmcrement?
+
 	assign new_pc_o = (is_branch_i) ? ( (is_conditional_i === 1'b0)? alu_d: (reg_pc_i + offset) ) : ( pc_i + {{DATA_WIDTH-3{1'b0}},3'd4} ); // +4 
 
 always @* begin
