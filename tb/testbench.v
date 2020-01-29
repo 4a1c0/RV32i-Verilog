@@ -4,6 +4,8 @@
 
 `include "../src/defines.vh"
 
+//`define RAM_MUX_CORE;
+
 `ifdef RAM_MUX_CORE
     `include"../src/top_pulp.v"
 `else
@@ -295,9 +297,9 @@ task test_jal;  // Not sure if the JAL works as intended
         encodeAddi(5'h0, 5'h4, 12'hFFF);
         encodeJal(5'h5, {21'h1FFFF8}); // -8
         rst_n		= 1'b1;
-        #400; //400
+        #300; //400
         `ifdef RAM_MUX_CORE
-            #200
+            #300
         `endif
         if (top_inst.core_inst.program_counter_inst.pc == 0) $display ("  OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
@@ -317,9 +319,9 @@ task test_beq;
         encodeBeq(5'h3, 5'h4, 13'hF0);
         
         rst_n		= 1'b1;
-        #400; //400
+        #300; //400
         `ifdef RAM_MUX_CORE
-            #200
+            #300
         `endif
         if (top_inst.core_inst.program_counter_inst.pc == 248) $display ("    OK: PC is: %d", top_inst.core_inst.program_counter_inst.pc);
         else begin
@@ -341,15 +343,15 @@ task test_csr;
         #400; //400
         `ifdef RAM_MUX_CORE
             #200
-            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000004) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000003) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             else begin
-                $display ("ERROR: reg3 has to be h0000004 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+                $display ("ERROR: reg3 has to be h0000003 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
                 $fatal;
             end
         `else
-            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000002) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+            if (top_inst.core_inst.reg_file_inst.regFile[3] == 32'h0000001) $display ("    OK: reg3 is : %h", top_inst.core_inst.reg_file_inst.regFile[3]);
             else begin
-                $display ("ERROR: reg3 has to be h0000002 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
+                $display ("ERROR: reg3 has to be h0000001 but is: %h", top_inst.core_inst.reg_file_inst.regFile[3]);
                 $fatal;
             end
         `endif

@@ -31,7 +31,7 @@ module progMem
 	input [ADDR_WIDTH-1:0]	addr;
 	
 	// Outputs
-	output reg [DATA_WIDTH-1:0] data_out;
+	output [DATA_WIDTH-1:0] data_out;
 	
 	// Internal
 	reg [DATA_WIDTH-1:0] progArray[0:MEM_DEPTH-1];
@@ -40,14 +40,14 @@ module progMem
 	// Code
 	
 	// Tristate output
-	//assign data_out = (cs && oe && !we) ? data_out : MEM_DATA_WIDTH'bz;
+	assign data_out = progArray[addr >> 2];
 	
 
 	// Read Operation (we = 0, oe = 1, cs = 1)
 	always @ (posedge clk or negedge rst_n)
 	begin : MEM_READ
 		integer j;
-		data_out <= 0;
+		//data_out <= 0;
 		//data_out = 0;
 		// Async Reset
 		if ( !rst_n ) begin
@@ -61,9 +61,9 @@ module progMem
 				//$readmemh("../../data/programMem_h_complete.mem", progArray, 0, 342);
 			`endif
 		end 
-		else begin  // output enable logic supressed
-			data_out <= progArray[addr >> 2];
-		end
+		// else begin  // output enable logic supressed
+		// 	data_out <= progArray[addr >> 2];
+		// end
 	end
 	
 	
