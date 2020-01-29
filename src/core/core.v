@@ -167,7 +167,6 @@ module core
         .ALU_op (ALU_op_t),  // ALU operation input
         .LIS_op (LIS_op_t),  // Load Store Operation input
         .BR_op (BR_op_t),  // Branch operation input 
-        .csr_op_i(csr_op_t),
         .data_origin_i(data_origin_t),  // Data origin input (Rs2 or imm or pc)
         .data_target_i(data_target_t),
         .rs1_i (rs1_reg_file),  // RS1

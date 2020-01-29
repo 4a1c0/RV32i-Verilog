@@ -13,34 +13,20 @@ module executionUnit
 	`ifdef CUSTOM_DEFINE
 		#(parameter MEM_ADDR_WIDTH = `MEM_ADDR_WIDTH,
         parameter DATA_WIDTH = `REG_DATA_WIDTH,
-        parameter CSR_OP_WIDTH = `CSR_OP_WIDTH,
         parameter ALU_OP_WIDTH = `ALU_OP_WIDTH,
         parameter LIS_OP_WIDTH = `LIS_OP_WIDTH,
         parameter BR_OP_WIDTH = `BR_OP_WIDTH,
         parameter DATA_ORIGIN_WIDTH = `DATA_ORIGIN_WIDTH,
-		parameter CSRRW = `CSRRW,  // TODO: Separar en localparams
-		parameter CSRRS = `CSRRS,
-		parameter CSRRC = `CSRRC,
-		parameter CSRRWI = `CSRRWI,
-		parameter CSRRSI = `CSRRSI,
-		parameter CSRRCI = `CSRRCI,
 		parameter REGS = `REGS,  // TODO: Separar en localparams
 		parameter RS2IMM_RS1 = `RS2IMM_RS1,
 		parameter RS2IMM_RS1PC = `RS2IMM_RS1PC) 
 	`else
 		#(parameter MEM_ADDR_WIDTH = 10,
         parameter DATA_WIDTH = 32,
-        parameter CSR_OP_WIDTH = 3,  // 3
         parameter ALU_OP_WIDTH = 4,
         parameter LIS_OP_WIDTH = 3,
         parameter BR_OP_WIDTH = 2,
         parameter DATA_ORIGIN_WIDTH = 2,
-		parameter CSRRW = 1,  // TODO: Separar en localparams
-		parameter CSRRS = 2,
-		parameter CSRRC = 3,
-		parameter CSRRWI = 4,
-		parameter CSRRSI = 5,
-		parameter CSRRCI = 6,
 		parameter REGS = 0,  // TODO: Separar en localparams
 		parameter RS2IMM_RS1 = 1,
 		parameter RS2IMM_RS1PC = 2) 
@@ -49,7 +35,6 @@ module executionUnit
 		ALU_op,
 		LIS_op,
 		BR_op,
-		csr_op_i,
 		data_origin_i,
 		data_target_i,
 		rs1_i,  // rs1
@@ -79,7 +64,6 @@ module executionUnit
 	input [ALU_OP_WIDTH-1:0]       ALU_op;
 	input [LIS_OP_WIDTH-1:0]       LIS_op;
 	input [BR_OP_WIDTH-1:0]        BR_op;
-	input [CSR_OP_WIDTH-1:0]       csr_op_i;
 	input [DATA_ORIGIN_WIDTH-1:0]  data_origin_i;
 	input [DATA_TARGET_WIDTH-1:0]  data_target_i;
 
