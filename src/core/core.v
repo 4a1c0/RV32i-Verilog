@@ -128,7 +128,7 @@ module core
         .data_target_o (data_target_t),  // Data target output (ALU or LIS or PC4 or CSR)
         .is_branch_o (is_branch_t),  // Branch indicator output
         .is_conditional_o (is_conditional_t),  // Conditional branch indicator
-        .is_load_store (is_load_store_t),  // execution_unit 
+        //.is_load_store (is_load_store_t),  // execution_unit 
         .mem_w (we_mem_data_o),  // LoadStore indicator output
         .reg_w (we_reg_file),  // RegFile write enable
         .r1_addr (r1_num_read_reg_file),  // RS1 addr
@@ -177,7 +177,7 @@ module core
         .val_mem_data_read_i (val_mem_data_read_i),  // input from data mem
         .addr_mem_data_o (addr_mem_data_o),  // output address to data mem
         .is_branch_i (is_branch_t),  // Branch indicator input
-        .is_loadstore (is_load_store_t),  // LoadStore indicator input
+        //.is_loadstore (is_load_store_t),  // LoadStore indicator input
         .new_pc_offset_o (new_pc),  //  new pc 
         .pc_i(pc),  // Actual PC 
         .is_conditional_i (is_conditional_t),  // Rewrite the current value to PC

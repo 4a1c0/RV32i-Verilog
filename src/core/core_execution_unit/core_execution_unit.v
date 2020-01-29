@@ -42,7 +42,7 @@ module executionUnit
 		imm_val_i,  // in use to store a value and add the immidiate value
 		d_o,
 		is_branch_i,
-		is_loadstore,
+		//is_loadstore,
 		val_mem_data_write_o,
 		val_mem_data_read_i,
 		addr_mem_data_o,
@@ -80,7 +80,7 @@ module executionUnit
     //output [DATA_WIDTH-1 : 0] csr_val_o;
 
 	input       is_branch_i;
-	input		is_loadstore;
+	//input		is_loadstore;
 	input	 	is_conditional_i;
 	//output		is_absolute_o;
 
