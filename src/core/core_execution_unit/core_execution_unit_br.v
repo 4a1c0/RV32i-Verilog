@@ -27,7 +27,7 @@ module 	br
 		is_branch_i,
 		BR_op_i,
 		alu_d,
-		reg_pc_i,
+		pc_4_o,
 		pc_i,
 		imm_i,
 		new_pc_o,
@@ -38,7 +38,7 @@ module 	br
 	input is_branch_i;
     input [BR_OP_WIDTH-1:0] BR_op_i;
     input [DATA_WIDTH-1:0] alu_d;
-    input [DATA_WIDTH-1:0] reg_pc_i;
+    output [DATA_WIDTH-1:0] pc_4_o;
 	input [DATA_WIDTH-1:0] pc_i;
     output [DATA_WIDTH-1:0] new_pc_o;
     input [DATA_WIDTH-1:0] imm_i;
@@ -47,8 +47,8 @@ module 	br
 
     reg [DATA_WIDTH-1:0] offset;
 
-
-	assign new_pc_o = (is_branch_i) ? ( (is_conditional_i === 1'b0)? alu_d: (reg_pc_i + offset) ) : ( pc_i + {{DATA_WIDTH-3{1'b0}},3'd4} ); // +4
+	assign pc_4_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
+	assign new_pc_o = (is_branch_i) ? ( (is_conditional_i === 1'b0)? alu_d: (pc_i + offset) ) : ( pc_4_o ); // +4
 
 always @* begin
     case (BR_op_i)

@@ -178,9 +178,8 @@ module core
         .addr_mem_data_o (addr_mem_data_o),  // output address to data mem
         .is_branch_i (is_branch_t),  // Branch indicator input
         .is_loadstore (is_load_store_t),  // LoadStore indicator input
-        .new_pc_offset_o (new_pc),  // new offset or new pc
-        .reg_pc_i (pc),  //reg_pc),  // Actual PC 
-        .pc_i(pc),
+        .new_pc_offset_o (new_pc),  //  new pc 
+        .pc_i(pc),  // Actual PC 
         .is_conditional_i (is_conditional_t),  // Rewrite the current value to PC
         .csr_val_i(csr_val_r)  // CSR Val in READ
         //.csr_val_o(csr_val_w)  // CSR Val Out WRITE

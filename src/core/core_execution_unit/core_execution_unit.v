@@ -46,7 +46,6 @@ module executionUnit
 		val_mem_data_write_o,
 		val_mem_data_read_i,
 		addr_mem_data_o,
-		reg_pc_i,
 		pc_i,
 		new_pc_offset_o,
 		is_conditional_i,
@@ -75,7 +74,6 @@ module executionUnit
     input [DATA_WIDTH-1:0]      val_mem_data_read_i;
     output[MEM_ADDR_WIDTH-1:0]      addr_mem_data_o;
 	output[DATA_WIDTH-1:0]      new_pc_offset_o;
-	input [DATA_WIDTH-1:0]      reg_pc_i;
 	input [DATA_WIDTH-1:0]      pc_i;
 
     input [DATA_WIDTH-1 : 0] csr_val_i;
@@ -86,6 +84,7 @@ module executionUnit
 	input	 	is_conditional_i;
 	//output		is_absolute_o;
 
+	wire [DATA_WIDTH-1:0]      pc_4;
 
     wire [DATA_WIDTH-1:0]      alu_o;
     wire [DATA_WIDTH-1:0]      mem_o;
@@ -122,7 +121,7 @@ module executionUnit
 				s2_ALU = imm_val_i;
 			end
 			RS2IMM_RS1PC: begin
-				s1_ALU = reg_pc_i;
+				s1_ALU = pc_i;
 				s2_ALU = imm_val_i;
 			end
 			
@@ -140,7 +139,7 @@ module executionUnit
 				d_o = mem_o;
 			end
 			DATA_TARGET_PC_4: begin
-				d_o = pc_i; // Instruction PC + 4
+				d_o = pc_4; // Instruction PC + 4
 			end
 			DATA_TARGET_CSR: begin
 				d_o = csr_val_i;
@@ -244,7 +243,7 @@ module executionUnit
 		.is_branch_i(is_branch_i),
 		.BR_op_i (BR_op),
 		.alu_d (alu_o),
-		.reg_pc_i (reg_pc_i),
+		.pc_4_o (pc_4),
 		.pc_i (pc_i),
 		.imm_i (imm_val_i),
 		.new_pc_o (new_pc_offset_o),
