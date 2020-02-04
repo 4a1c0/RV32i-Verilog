@@ -35,12 +35,14 @@ module programCounter
     reg [REG_DATA_WIDTH-1:0] pc;
     reg [REG_DATA_WIDTH-1:0] reg_pc_o;
     reg req_mem_prog_o;
+    reg exec;
 
     assign new_pc = (is_stall_i || ~gnt_mem_prog_i)? pc : new_pc_i; 
 
     always@(posedge clk or negedge rst_n)
     begin
         req_mem_prog_o <= 1'b1;
+        exec <= 1'b0;
         if (!rst_n) begin 
             pc <= {REG_DATA_WIDTH{1'b0}};  //{{REG_DATA_WIDTH-2{1'b1}}, 2'b00};
             reg_pc_o <= {REG_DATA_WIDTH{1'b0}};

@@ -90,7 +90,9 @@ module controlUnit
         is_stall_o,
         mem_req_o,  // Request to make actiopn
         mem_gnt_i,  // Action Granted //, wait until rvalid or cycle
-        mem_rvalid_i // Valid when write is ok // Write valid signal (OK to increase PC)
+        mem_rvalid_i, // Valid when write is ok // Write valid signal (OK to increase PC)
+        load_wait_i,
+        load_wait_o
     
     //is_absolute_o,  // 
     );
@@ -219,6 +221,8 @@ module controlUnit
     output mem_req_o;  // Request to make actiopn
     input mem_gnt_i;  // Action Granted //, wait until rvalid or cycle
     input mem_rvalid_i;
+    input load_wait_i;
+    output load_wait_o;
     reg is_stall_o;
     reg mem_req_o;
 
@@ -302,6 +306,8 @@ module controlUnit
 
     reg [1:0] data_acces;
 
+    reg load_wait_o;
+
 
 
     
@@ -329,6 +335,7 @@ module controlUnit
         mem_req_o = 1'b0;
         
         data_acces = 2'd0;
+        load_wait_o = 1'b0;
         
 
         
@@ -498,7 +505,18 @@ module controlUnit
                 is_stall_o = 1'b1;
                 
                 if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
-                else is_stall_o = 1'b0;
+                else begin
+                    if(!load_wait_i) begin
+                        is_stall_o = 1'b1;
+                        load_wait_o = 1'b1;
+                    end 
+                    else begin
+                        mem_req_o = 1'b0;
+                        is_stall_o = 1'b0;
+                        load_wait_o = 1'b0;
+                    end
+                    
+                end 
 
 
                 is_load_store = 1'b1;
@@ -561,7 +579,10 @@ module controlUnit
                 if (!mem_gnt_i) is_stall_o = 1'b1;  // Stall core until grant signal is detected
                 else begin
                     if (!mem_rvalid_i) is_stall_o = 1'b1;  // Stall core until rvalid signal is detected
-                    else is_stall_o = 1'b0;
+                    else begin
+                        is_stall_o = 1'b0;
+                        mem_req_o = 1'b0;
+                    end 
                 end 
                 
                 is_load_store = 1'b1;

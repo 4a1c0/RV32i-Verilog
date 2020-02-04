@@ -133,6 +133,9 @@ module corep
     reg req_mem_prog_o;
     wire req_mem_prog_o_intern;
 
+    reg load_wait;  // Slave returns the requested data on the rdata line, exactly one cycle after the grant.
+    wire load_wait_intern;  // Slave returns the requested data on the rdata line, exactly one cycle after the grant.
+
     assign addr_mem_prog_o = pc[MEM_ADDR_WIDTH-1:0]; // Assign lower bits of PC to prog ADDR
 
 
@@ -159,7 +162,9 @@ module corep
         .is_stall_o(is_stall_t),
         .mem_req_o(req_mem_data_o_intern),  // Request to make actiopn
         .mem_gnt_i(gnt_mem_data_i),  // Action Granted //, wait until rvalid or cycle
-        .mem_rvalid_i(rvalid_mem_data_i) // Valid when write is ok // Write valid signal (OK to increase PC)
+        .mem_rvalid_i(rvalid_mem_data_i), // Valid when write is ok // Write valid signal (OK to increase PC)
+        .load_wait_i(load_wait),
+        .load_wait_o(load_wait_intern)
     );
 
     programCounter program_counter_inst (
@@ -225,13 +230,16 @@ module corep
     always @ (posedge clk or negedge rst_n) begin
         req_mem_data_o <= 1'b0;
         req_mem_prog_o <= 1'b0;
+        load_wait <= 1'b0;
         if (!rst_n) begin
             req_mem_data_o <= 1'b0;
             req_mem_prog_o <= 1'b0;
+            load_wait <= 1'b0;
         end
         else begin
             req_mem_data_o <= req_mem_data_o_intern;
             req_mem_prog_o <= req_mem_prog_o_intern;
+            load_wait <= load_wait_intern;
         end
     end
 

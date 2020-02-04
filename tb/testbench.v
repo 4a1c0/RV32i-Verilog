@@ -4,7 +4,7 @@
 
 `include "../src/defines.vh"
 
-//`define RAM_MUX_CORE;
+`define RAM_MUX_CORE;
 
 `ifdef RAM_MUX_CORE
     `include"../src/top_pulp.v"
@@ -234,7 +234,7 @@ task test_load;
         rst_n		= 1'b1;
         #600;  // 600
         `ifdef RAM_MUX_CORE
-            #100
+            #400
         `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'hf04a1c0f) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
@@ -268,7 +268,7 @@ task test_store;
         rst_n		= 1'b1;
         #1300; //1200
         `ifdef RAM_MUX_CORE
-            #100
+            #2000
         `endif
         if (top_inst.core_inst.reg_file_inst.regFile[5] == 32'h10101010) $display ("    OK: reg5 is : %h", top_inst.core_inst.reg_file_inst.regFile[5]);
         else begin
