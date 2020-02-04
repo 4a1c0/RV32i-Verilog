@@ -231,9 +231,14 @@ reg out_10hz = 0;
 //  Structural coding
 //==================================================================
 
+PLL PLL_instance(
+	.inclk0(CLOCK_50),
+	.c0(PLL_1MHzclock));
+
+
 // This is BUTTON[0] Debounce Circuit //
 button_debouncer	button_debouncer_inst0(
-	.clk     (CLOCK_50),
+	.clk     (PLL_1MHzclock),
 	.rst_n   (1'b1),
 	.data_in (ORG_BUTTON[0]),
 	.data_out(BUTTON[0])			
@@ -241,7 +246,7 @@ button_debouncer	button_debouncer_inst0(
 	
 // This is BUTTON[1] Debounce Circuit //
 button_debouncer	button_debouncer_inst1(
-	.clk     (CLOCK_50),
+	.clk     (PLL_1MHzclock),
 	.rst_n   (1'b1),
 	.data_in (ORG_BUTTON[1]),
 	.data_out(BUTTON[1])			
@@ -249,7 +254,7 @@ button_debouncer	button_debouncer_inst1(
 	
 // This is BUTTON[2] Debounce Circuit //
 button_debouncer	button_debouncer_inst2(
-	.clk     (CLOCK_50),
+	.clk     (PLL_1MHzclock),
 	.rst_n   (1'b1),
 	.data_in (ORG_BUTTON[2]),
 	.data_out(BUTTON[2])			
@@ -327,6 +332,8 @@ core core_de0(
     );
 //set LOAD_MEMS to true to load mems
 
+`define MEM
+
 `ifdef MEM
 
 ram mem_data_de0 (
@@ -334,7 +341,7 @@ ram mem_data_de0 (
         .wren			(we_mem_data)	,  // Write Enable
         .address		(addr_mem_data[ADDR_WIDTH-1 : 2])	,  // Address
         .data	(val_mem_data_write),  //  Data in
-        //.byteena (write_transfer), // write Byte mask
+        .byteena (write_transfer), // write Byte mask
 		  .q   (val_mem_data_read)  //data out
     );
 
@@ -376,19 +383,19 @@ assign iDIG_1    = addr_mem_prog[6:4];
 assign iDIG_2    = val_mem_prog[27:24];
 assign iDIG_3    = val_mem_prog[31:28];
 assign reset_n   = BUTTON[0]; 			 		 
-assign counter_1 = ((BUTTON[1] == 0) && (out_BUTTON_1 == 1)) ?1:0;
-assign counter_2 = ((BUTTON[2] == 0) && (out_BUTTON_2 == 1)) ?1:0;
+//assign counter_1 = ((BUTTON[1] == 0) && (out_BUTTON_1 == 1)) ?1:0;
+//assign counter_2 = ((BUTTON[2] == 0) && (out_BUTTON_2 == 1)) ?1:0;
 assign HEX0_DP = !clock_to_core;
-assign HEX1_DP = (addr_mem_data == 9'h014 && we_mem_data)? 1'b0:1'b1;
-assign HEX2_DP = !we_mem_data;
-assign HEX3_DP = !write_transfer[0];
-assign clock_to_core = SW[0] ? out_10hz:PLL_1MHzclock;  //SW[0] ?  (SW[1])? out_10hz:PLL_1MHzclock :virtual_clk;
+//assign HEX1_DP = (addr_mem_data == 9'h014 && we_mem_data)? 1'b0:1'b1;
+//assign HEX2_DP = !we_mem_data;
+//assign HEX3_DP = !write_transfer[0];
+assign clock_to_core = SW[0] ? CLOCK_50:PLL_1MHzclock;  //SW[0] ?  (SW[1])? out_10hz:PLL_1MHzclock :virtual_clk;
 //assign LEDG[0] = ((addr_mem_data == 9'h014))? 1:0;
 
 //====================================================================
 // After debounce output with register
 //====================================================================
-always @ (posedge CLOCK_50 )
+always @ (posedge PLL_1MHzclock )
 	begin
 		out_BUTTON_1 <= BUTTON[1];
 		out_BUTTON_2 <= BUTTON[2];
@@ -403,7 +410,7 @@ always @ (negedge out_BUTTON_2 )
 //====================================================================
 // Display process
 //====================================================================
-always @(posedge CLOCK_50 or negedge reset_n)
+always @(posedge PLL_1MHzclock or negedge reset_n)
   begin
   if (!reset_n) LEDG <= 10'd0;
   else if (addr_mem_data == 7'h14 && we_mem_data) begin
@@ -413,23 +420,19 @@ end
 
 // generate 100 Hz from 50 MHz
 
-PLL PLL_instance(
-	.inclk0(CLOCK_50),
-	.c0(PLL_1MHzclock));
 
-
-always @(posedge PLL_1MHzclock or negedge reset_n) begin
-    if (!reset_n) begin
-        count_reg <= 0;
-        out_10hz <= 0;
-    end else begin
-        if (count_reg < 599999) begin
-            count_reg <= count_reg + 1;
-        end else begin
-            count_reg <= 0;
-            out_10hz <= ~out_10hz;
-        end
-    end
-end
+//always @(posedge PLL_1MHzclock or negedge reset_n) begin
+//    if (!reset_n) begin
+//        count_reg <= 0;
+//        out_10hz <= 0;
+//    end else begin
+//        if (count_reg < 599999) begin
+//            count_reg <= count_reg + 1;
+//        end else begin
+//            count_reg <= 0;
+//            out_10hz <= ~out_10hz;
+//        end
+//    end
+//end
 
 endmodule
