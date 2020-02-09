@@ -46,33 +46,35 @@ module 	br
     input ALU_zero_i;
 
     reg [DATA_WIDTH-1:0] offset;
+	wire [DATA_WIDTH-1:0] new_pc;
 	reg [DATA_WIDTH-1:0] new_pc_o;
-	reg [DATA_WIDTH-1:0] pc_4_o;
 
-	// assign pc_4_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
-	// assign new_pc_o = (is_branch_i) ? ( (is_conditional_i === 1'b0)? alu_d: (pc_i + offset) ) : ( pc_4_o ); // +4
+	assign new_pc = pc_i + offset;
+
+	assign pc_4_o = new_pc;
+	//assign new_pc_o = (is_branch_i) ? ( (is_conditional_i)? new_pc : alu_d ) : ( new_pc); // +4
 
 always @* begin
-	pc_4_o = {DATA_WIDTH{1'b0}};
-    case (BR_op_i)
-        BR_EQ: offset = (ALU_zero_i === 1'd1)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};       
-        BR_NE: offset = (ALU_zero_i === 1'd0)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};
-        BR_LT: offset = (ALU_zero_i === 1'd0)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};
-        BR_GE: offset = (ALU_zero_i === 1'd1)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00}; 
-    endcase
-
+	//pc_4_o = {DATA_WIDTH{1'b0}};
+	offset = {{DATA_WIDTH-3{1'b0}},3'd4};
 	if (is_branch_i) begin
 		if (is_conditional_i) begin
-			new_pc_o = pc_i + offset;
+		    case (BR_op_i)
+				BR_EQ: offset = (ALU_zero_i === 1'd1)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};       
+				BR_NE: offset = (ALU_zero_i === 1'd0)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};
+				BR_LT: offset = (ALU_zero_i === 1'd0)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00};
+				BR_GE: offset = (ALU_zero_i === 1'd1)? imm_i: {{DATA_WIDTH-3{1'b0}},1'b0,2'b00}; 
+			endcase
+			new_pc_o = new_pc;
 		end
 		else begin
 			new_pc_o = alu_d;
-			pc_4_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
+			//pc_4_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
 		end
 	end 
 	else begin
 		//pc_4_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
-		new_pc_o = pc_i + {{DATA_WIDTH-3{1'b0}},3'd4};
+		new_pc_o = new_pc;
 	end
 end
 
