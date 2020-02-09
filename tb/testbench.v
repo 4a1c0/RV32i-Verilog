@@ -4,7 +4,7 @@
 
 `include "../src/defines.vh"
 
-`define RAM_MUX_CORE;
+//`define RAM_MUX_CORE;
 
 `ifdef RAM_MUX_CORE
     `include"../src/top_pulp.v"
