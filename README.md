@@ -15,3 +15,8 @@ The Repository is organized as follows:
   * [tb](tb): this directory contains the Verilog Testbenchs.
   * [vcd](vcd): this directory contains Vcd dumps to analyze the core internal signals.
   
+ En aquest directori trobem:
+   * [.vscode](.vscode): configuracions del Visual Studio Code generats automàticament.
+   * [.travis.yml](.travis.yml): especifica quin fluxe ha de segir el sistema d'integració contínua per a aixecar un entorn on poder passar els tests i indcar en el build stattus si s'han passat correctament els tests. 
+   * [Dockerfile](Dockerfile): defineix una imatge que inclou el disseny del nucli i l'entorn amb icarus verilog per a poder executar els tests.
+   * [compile_and_run.sh](compile_and_run.sh): script escrit en bash que permet passar els tests en local o en un entorn on icarus verilog estigui disponible.
