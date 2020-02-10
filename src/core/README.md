@@ -3,10 +3,10 @@ Implementació del core.
 
 Unitats declarades:
 
-  * [core_control_unit.v](Control Unit)
-  * [core_program_counter.v](Program Counter)
-  * [core_regfile.v](Register File)
-  * [core.v](Nucli)
-  * [core_execution_unit] (Unitat d'execució)
-  * [core_csr_unit] (Unitat de CSR)
+  * [Control Unit](core_control_unit.v)
+  * [Program Counter](core_program_counter.v)
+  * [Register File](core_regfile.v)
+  * [Nucli](core.v)
+  * [Unitat d'Execució](core_execution_unit)
+  * [Unitat de CSR](core_csr_unit)
 
