@@ -332,7 +332,7 @@ core core_de0(
     );
 //set LOAD_MEMS to true to load mems
 
-`define MEM
+//`define MEM
 
 `ifdef MEM
 
@@ -389,7 +389,7 @@ assign HEX0_DP = !clock_to_core;
 //assign HEX1_DP = (addr_mem_data == 9'h014 && we_mem_data)? 1'b0:1'b1;
 //assign HEX2_DP = !we_mem_data;
 //assign HEX3_DP = !write_transfer[0];
-assign clock_to_core = SW[0] ? CLOCK_50:PLL_1MHzclock;  //SW[0] ?  (SW[1])? out_10hz:PLL_1MHzclock :virtual_clk;
+assign clock_to_core = SW[0] ?  (SW[1])? out_10hz:PLL_1MHzclock :virtual_clk;  // SW[0] ? CLOCK_50:PLL_1MHzclock;  //
 //assign LEDG[0] = ((addr_mem_data == 9'h014))? 1:0;
 
 //====================================================================
@@ -410,6 +410,7 @@ always @ (negedge out_BUTTON_2 )
 //====================================================================
 // Display process
 //====================================================================
+// GPIO
 always @(posedge PLL_1MHzclock or negedge reset_n)
   begin
   if (!reset_n) LEDG <= 10'd0;
@@ -421,18 +422,18 @@ end
 // generate 100 Hz from 50 MHz
 
 
-//always @(posedge PLL_1MHzclock or negedge reset_n) begin
-//    if (!reset_n) begin
-//        count_reg <= 0;
-//        out_10hz <= 0;
-//    end else begin
-//        if (count_reg < 599999) begin
-//            count_reg <= count_reg + 1;
-//        end else begin
-//            count_reg <= 0;
-//            out_10hz <= ~out_10hz;
-//        end
-//    end
-//end
+always @(posedge PLL_1MHzclock or negedge reset_n) begin
+    if (!reset_n) begin
+        count_reg <= 0;
+        out_10hz <= 0;
+    end else begin
+        if (count_reg < 599999) begin
+            count_reg <= count_reg + 1;
+        end else begin
+            count_reg <= 0;
+            out_10hz <= ~out_10hz;
+        end
+    end
+end
 
 endmodule
