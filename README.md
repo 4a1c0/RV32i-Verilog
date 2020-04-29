@@ -6,6 +6,7 @@ Simple RiscV core for academic purpose.
 [![Build Status](https://travis-ci.com/4a1c0/RV32i-Verilog.svg?branch=master)](https://travis-ci.com/4a1c0/RV32i-Verilog)
 
 The Repository is organized as follows:
+  * [Documentation](Documentation) (Documentation About this project): this directory contains the Bachelor's Thesis and Poster
   * [Quartus](Quartus) (FPGA Implementation with Quartus software): this directory contains the projects that implement the core in an FPGA.
   * [Data](data): this directory contains memory initializations for the simulations.
   * [Diagrams](diagrams): this directory contains several diagrams of the architecture.
